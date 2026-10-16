@@ -1,0 +1,40 @@
+# Web frontend: Deployment + Service
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+  labels: &labels
+    app: web
+    tier: frontend
+spec:
+  replicas: 2 # scaled by HPA in prod
+  selector:
+    matchLabels: *labels
+  template:
+    metadata:
+      labels: *labels
+    spec:
+      containers:
+        - name: web
+          image: nginx:1.27.2 # pinned
+          ports:
+            - containerPort: 80
+          resources: &res
+            limits:
+              cpu: 500m
+              memory: 256Mi
+        - name: log-shipper
+          image: fluent/fluent-bit:3.1
+          resources: *res
+---
+# Service exposing the frontend
+apiVersion: v1
+kind: Service
+metadata:
+  name: web
+spec:
+  selector:
+    app: web
+  ports:
+    - port: 80
+      targetPort: 80

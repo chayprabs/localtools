@@ -1,0 +1,11 @@
+[
+  { "goto": "/" },
+  { "setInputFiles": { "selector": "#file", "files": ["k8s-app.yaml"] }, "pause": 600 },
+  { "fill": { "selector": "#expr", "text": ".spec.template.spec.containers[].image" } },
+  { "click": "#go" },
+  { "waitFor": { "selector": "#out" }, "pause": 1200 },
+  { "fill": { "selector": "#expr", "text": "(select(.kind == \"Deployment\") | .spec.replicas) = 4" } },
+  { "click": "#go" },
+  { "waitFor": { "text": "replicas: 4 # scaled by HPA in prod" }, "pause": 600 },
+  { "scrollIntoView": "#out-l", "pause": 2500 }
+]

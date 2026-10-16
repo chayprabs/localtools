@@ -1,0 +1,10 @@
+{
+  "path": "/api/query",
+  "fields": {
+    "expr": "(select(.kind == \"Deployment\") | .spec.replicas) = 4"
+  },
+  "files": {
+    "file": "k8s-app.yaml"
+  },
+  "expect": "replicas: 4 # scaled by HPA in prod"
+}

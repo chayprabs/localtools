@@ -1,0 +1,16 @@
+{
+  "slug": "yaml-json-query",
+  "name": "YAML JSON Query",
+  "command": "localtools-yaml-json-query",
+  "version": "1.0.0",
+  "port": 47110,
+  "kind": "bin",
+  "registries": {
+    "brew": true,
+    "scoop": true,
+    "winget": true,
+    "npm": null,
+    "pypi": null,
+    "ghcr": null
+  }
+}
