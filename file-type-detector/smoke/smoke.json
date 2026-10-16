@@ -1,0 +1,8 @@
+{
+  "path": "/api/detect",
+  "fields": {},
+  "files": {
+    "file": "sample.pdf"
+  },
+  "expect": "application/pdf"
+}

@@ -9,7 +9,9 @@ Browse all tools, with docs and how-tos: **https://tools.chaitanyaprabuddha.com*
 ## Tools
 
 <!-- tools -->
-_First releases are on their way._
+| Tool | What it does | Command |
+|---|---|---|
+| [File Type Detector](file-type-detector/) | Detect real file types from magic bytes and flag extension/MIME mismatches, macros and polyglot files across folders. | `localtools-file-type-detector` |
 <!-- /tools -->
 
 ## Install

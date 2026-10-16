@@ -1,0 +1,6 @@
+[
+  { "goto": "/" },
+  { "setInputFiles": { "selector": "#file", "files": ["sample.pdf", "holiday.png", "budget.xlsm", "polyglot.pdf", "invoice.pdf", "notes.md"] }, "pause": 900 },
+  { "click": "#go" },
+  { "waitFor": { "selector": "#out tbody tr" }, "pause": 2500 }
+]
