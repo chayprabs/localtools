@@ -1,0 +1,171 @@
+name: clean-install
+
+on:
+  workflow_dispatch:
+    inputs:
+      slug:
+        description: Tool slug (folder name)
+        required: true
+  push:
+    branches: [main]
+    paths: ["*/**", "!.github/**"]
+
+permissions:
+  contents: read
+
+jobs:
+  detect:
+    runs-on: ubuntu-latest
+    outputs:
+      slugs: ${{ steps.d.outputs.slugs }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - id: d
+        env:
+          INPUT: ${{ inputs.slug }}
+          BEFORE: ${{ github.event.before }}
+        run: |
+          if [ -n "$INPUT" ]; then dirs="$INPUT"
+          else dirs=$(git diff --name-only "$BEFORE" HEAD 2>/dev/null || git diff --name-only HEAD~1 HEAD); fi
+          slugs=$(for d in $(echo "$dirs" | cut -d/ -f1 | sort -u); do [ -f "$d/tool.json" ] && echo "$d"; done | jq -R . | jq -cs .)
+          echo "slugs=$slugs" | tee -a "$GITHUB_OUTPUT"
+          [ -n "$INPUT" ] && [ "$slugs" = "[]" ] && { echo "::error::no $INPUT/tool.json"; exit 1; } || true
+      - name: wait for raw.githubusercontent.com to serve this commit
+        env:
+          SLUGS: ${{ steps.d.outputs.slugs }}
+        run: |
+          for s in $(echo "$SLUGS" | jq -r '.[]'); do
+            for f in install.sh install.ps1; do
+              for i in $(seq 40); do
+                curl -fsSL "https://raw.githubusercontent.com/chayprabs/localtools/main/$s/$f?nocache=$RANDOM" | cmp -s - "$s/$f" && break
+                [ "$i" = 40 ] && { echo "::error::raw $s/$f still stale"; exit 1; }
+                sleep 10
+              done
+            done
+          done
+
+  install:
+    needs: detect
+    if: needs.detect.outputs.slugs != '[]'
+    strategy:
+      fail-fast: false
+      matrix:
+        slug: ${{ fromJSON(needs.detect.outputs.slugs) }}
+        os: [windows-latest, macos-latest, ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    env:
+      LOCALTOOLS_NO_OPEN: "1"
+      SLUG: ${{ matrix.slug }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - name: read tool.json
+        run: |
+          kind=$(jq -r .kind "$SLUG/tool.json")
+          full=true; [ "$kind" = docker ] && [ "$RUNNER_OS" != Linux ] && full=false
+          { echo "KIND=$kind"; echo "FULL=$full"
+            echo "PORT=$(jq -r .port "$SLUG/tool.json")"; echo "NAME=$(jq -r .name "$SLUG/tool.json")"
+            echo "VERSION=$(jq -r .version "$SLUG/tool.json")"; } >> "$GITHUB_ENV"
+
+      - name: install (Windows PowerShell 5.1)
+        if: runner.os == 'Windows' && env.FULL == 'true'
+        shell: powershell
+        run: irm https://raw.githubusercontent.com/chayprabs/localtools/main/${{ matrix.slug }}/install.ps1 | iex
+      - name: install (bash)
+        if: runner.os != 'Windows' && env.FULL == 'true'
+        run: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/${{ matrix.slug }}/install.sh | bash
+
+      - name: docker preflight fails clearly (Windows)
+        if: runner.os == 'Windows' && env.FULL == 'false'
+        shell: powershell
+        run: |
+          $msg = ''
+          try { irm https://raw.githubusercontent.com/chayprabs/localtools/main/${{ matrix.slug }}/install.ps1 | iex } catch { $msg = $_.Exception.Message }
+          "installer said: $msg"
+          if ($msg -notmatch 'Docker') { throw 'expected a Docker preflight failure' }
+      - name: docker preflight fails clearly (macOS)
+        if: runner.os == 'macOS' && env.FULL == 'false'
+        run: |
+          if out=$(curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/${{ matrix.slug }}/install.sh | bash 2>&1); then echo "expected failure"; exit 1; fi
+          echo "installer said: $out"; grep -q Docker <<<"$out"
+
+      - name: shim, launcher, health, smoke, version, update, uninstall
+        if: env.FULL == 'true'
+        run: |
+          home=~; T=localtools-$SLUG; R=~/.localtools
+          case "$RUNNER_OS" in
+            Windows) T=$T.cmd; L="$(cygpath "$APPDATA")/Microsoft/Windows/Start Menu/Programs/localtools/$NAME.lnk"
+                     onpath() { reg query 'HKCU\Environment' //v Path | grep -qi '\.localtools\\bin'; } ;;
+            macOS)   L="$home/Applications/localtools $NAME.app/Contents/MacOS/launcher"; onpath() { grep -qs '# localtools$' ~/.profile; } ;;
+            Linux)   L="$home/.local/share/applications/localtools-$SLUG.desktop"; onpath() { grep -qs '# localtools$' ~/.profile; } ;;
+          esac
+          export PATH="$R/bin:$PATH"
+          test -f "$R/bin/$T"; test -e "$L"; onpath; echo "shim, launcher, PATH: ok"
+
+          health() {
+            for _ in $(seq 90); do
+              curl -fs "http://127.0.0.1:$PORT/api/health" | grep -Eq "\"tool\": *\"$SLUG\"" && { echo "health ok"; return 0; }
+              sleep 2
+            done
+            cat server.log; return 1
+          }
+          start() { nohup "$T" --no-open > server.log 2>&1 & health; }
+          until_changed() { for _ in $(seq 120); do [ "$(cat "$1" 2>/dev/null)" != "$2" ] && return 0; sleep 2; done; return 1; }
+
+          start
+          S="$SLUG/smoke/smoke.json"; args=()
+          while IFS= read -r k; do [ -n "$k" ] && args+=(--form-string "$k=$(jq -r --arg k "$k" '.fields[$k]' "$S")"); done < <(jq -r '.fields|keys[]' "$S")
+          while IFS= read -r k; do [ -n "$k" ] && args+=(-F "$k=@$SLUG/smoke/$(jq -r --arg k "$k" '.files[$k]' "$S")"); done < <(jq -r '.files|keys[]' "$S")
+          curl -fsS "${args[@]}" "http://127.0.0.1:$PORT$(jq -r .path "$S")" -o smoke.out
+          grep -aqF -- "$(jq -r .expect "$S")" smoke.out; echo "smoke ok ($(wc -c < smoke.out) bytes)"
+
+          "$T" --version | tee version.out; grep -qF "$VERSION" version.out
+
+          before=$(cat "$R/$SLUG/installed.txt")
+          "$T" update
+          until_changed "$R/$SLUG/installed.txt" "$before"; echo "update ok"
+          sleep 3; start
+
+          "$T" uninstall || true
+          for _ in $(seq 60); do [ -e "$R/$SLUG" ] || break; sleep 2; done
+          for p in "$R/$SLUG" "$R/bin/$T" "$L"; do [ ! -e "$p" ] || { echo "left behind: $p"; exit 1; }; done
+          if onpath; then echo "PATH entry left behind"; exit 1; fi; echo "uninstall ok"
+
+  registries:
+    needs: detect
+    if: needs.detect.outputs.slugs != '[]'
+    strategy:
+      fail-fast: false
+      matrix:
+        slug: ${{ fromJSON(needs.detect.outputs.slugs) }}
+        os: [windows-latest, macos-latest, ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    env:
+      SLUG: ${{ matrix.slug }}
+    steps:
+      - uses: actions/checkout@v4
+      - shell: bash
+        run: |
+          { echo "BREW=$(jq -r .registries.brew "$SLUG/tool.json")"; echo "SCOOP=$(jq -r .registries.scoop "$SLUG/tool.json")"
+            echo "VERSION=$(jq -r .version "$SLUG/tool.json")"; } >> "$GITHUB_ENV"
+      - name: brew install
+        if: runner.os != 'Windows' && env.BREW == 'true'
+        shell: bash
+        run: |
+          [ "$RUNNER_OS" = Linux ] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+          brew install "chayprabs/localtools/localtools-$SLUG"
+          "localtools-$SLUG" --version | grep -F "$VERSION"
+      - name: scoop install
+        if: runner.os == 'Windows' && env.SCOOP == 'true'
+        shell: powershell
+        run: |
+          iex "& {$(irm get.scoop.sh)} -RunAsAdmin"
+          scoop bucket add localtools https://github.com/chayprabs/scoop-localtools
+          scoop install "localtools-$env:SLUG"
+          $v = & "localtools-$env:SLUG" --version
+          "version: $v"
+          if ("$v" -notmatch [regex]::Escape($env:VERSION)) { throw "unexpected version" }

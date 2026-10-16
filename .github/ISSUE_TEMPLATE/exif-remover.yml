@@ -1,0 +1,52 @@
+name: "EXIF Remover"
+description: "Report a bug in EXIF Remover (localtools-exif-remover)"
+title: "[exif-remover] "
+labels: ["bug", "exif-remover"]
+body:
+  - type: markdown
+    attributes:
+      value: "Thanks for reporting. Everything runs on your machine, so the details below are all we have to reproduce it."
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: "Output of `localtools-exif-remover --version`"
+    validations:
+      required: true
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating system
+      options: ["Windows", "macOS (Apple Silicon)", "macOS (Intel)", "Linux"]
+    validations:
+      required: true
+  - type: dropdown
+    id: install
+    attributes:
+      label: Installed with
+      options: ["install script", "Homebrew", "Scoop", "winget", "npm", "PyPI (pipx/uv)", "Docker"]
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: "1. Open the tool\n2. Upload ...\n3. Click ..."
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected result
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual result
+      description: Error message or terminal output, if any.
+    validations:
+      required: true
+  - type: textarea
+    id: files
+    attributes:
+      label: Files
+      description: Drag a sample input file here if you can share one (remove anything private first).
