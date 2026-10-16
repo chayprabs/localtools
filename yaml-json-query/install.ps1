@@ -1,4 +1,4 @@
-# localtools installer for YAML JSON Query (yaml-json-query 1.0.0). Windows PowerShell 5.1+, no admin.
+# localtools installer for YAML JSON Query (yaml-json-query 1.0.1). Windows PowerShell 5.1+, no admin.
 # Usage: irm https://raw.githubusercontent.com/chayprabs/localtools/main/yaml-json-query/install.ps1 | iex
 # Re-running updates. Set $env:LOCALTOOLS_NO_OPEN='1' to skip launching the tool afterwards.
 # Wrapped in a script block so `irm | iex` never leaks settings into, or exits, the caller's session.
@@ -7,8 +7,8 @@ $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 
-$Slug = 'yaml-json-query'; $Name = 'YAML JSON Query'; $Version = '1.0.0'; $Port = 47110; $Kind = 'bin'
-$Url = 'https://github.com/chayprabs/localtools/releases/download/yaml-json-query-v1.0.0/yaml-json-query-1.0.0-windows-x64.zip'; $Sha = 'a9cbbf98c71bb4dd963543c64f006e2db29bc2f0ea0aafd3cc0832dc588a8674'; $Image = ''
+$Slug = 'yaml-json-query'; $Name = 'YAML JSON Query'; $Version = '1.0.1'; $Port = 47110; $Kind = 'bin'
+$Url = 'https://github.com/chayprabs/localtools/releases/download/yaml-json-query-v1.0.1/yaml-json-query-1.0.1-windows-x64.zip'; $Sha = '220724891ded6ed22e5cedfa421c3a2174f9ec79a07c3cc84a5511b9cb90b50b'; $Image = ''
 $Cmd = "localtools-$Slug"
 $Root = if ($env:LOCALTOOLS_HOME) { $env:LOCALTOOLS_HOME } else { Join-Path $env:USERPROFILE '.localtools' }
 $Dir = Join-Path $Root $Slug
