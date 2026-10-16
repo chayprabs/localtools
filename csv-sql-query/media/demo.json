@@ -1,0 +1,9 @@
+[
+  {"goto": "/"},
+  {"setInputFiles": {"selector": "#file", "files": ["orders.csv", "customers.tsv", "access.log"]}, "pause": 900},
+  {"waitFor": {"selector": "#examples button"}},
+  {"fill": {"selector": "#sql", "text": "SELECT c.name, count(*) AS orders, sum(o.quantity * o.unit_price)::DECIMAL(10,2) AS total\nFROM orders o JOIN customers c USING (customer_id)\nGROUP BY ALL ORDER BY total DESC"}, "pause": 600},
+  {"click": "#go"},
+  {"waitFor": {"selector": "#out table"}, "pause": 800},
+  {"scrollIntoView": "#sql-l", "pause": 2500}
+]

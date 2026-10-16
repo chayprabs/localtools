@@ -1,0 +1,11 @@
+{
+  "path": "/api/query",
+  "fields": {
+    "sql": "SELECT c.name, count(*) AS n FROM orders o JOIN customers c USING (customer_id) GROUP BY ALL ORDER BY n DESC, c.name LIMIT 1"
+  },
+  "files": {
+    "file": "orders.csv",
+    "file2": "customers.tsv"
+  },
+  "expect": "\"rows\":[[\"Ada Lovelace\",2]]"
+}

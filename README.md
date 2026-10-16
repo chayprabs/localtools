@@ -12,6 +12,7 @@ Browse all tools, with docs and how-tos: **https://tools.chaitanyaprabuddha.com*
 | Tool | What it does | Command |
 |---|---|---|
 | [File Type Detector](file-type-detector/) | Detect real file types from magic bytes and flag extension/MIME mismatches, macros and polyglot files across folders. | `localtools-file-type-detector` |
+| [CSV SQL Query](csv-sql-query/) | Run SQL on CSV, TSV, JSON, Parquet and log files (nginx, Apache, syslog) with DuckDB. | `localtools-csv-sql-query` |
 | [JSON to Excel](json-to-excel/) | Convert JSON or JSONL into formatted .xlsx workbooks with typed columns and multiple sheets. | `localtools-json-to-excel` |
 | [YAML JSON Query](yaml-json-query/) | Query and edit YAML, JSON, XML, TOML and INI with yq expressions and apply RFC 6902 JSON Patch, keeping comments. | `localtools-yaml-json-query` |
 | [OpenAPI Diff](openapi-diff/) | Diff two OpenAPI 3 or Swagger specs and list breaking changes with severity. | `localtools-openapi-diff` |

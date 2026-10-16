@@ -1,0 +1,12 @@
+203.0.113.7 - - [10/Mar/2024:13:55:36 +0000] "GET /index.html HTTP/1.1" 200 2326 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0 Safari/537.36"
+203.0.113.7 - - [10/Mar/2024:13:55:37 +0000] "GET /static/app.css HTTP/1.1" 200 18230 "https://example.com/index.html" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0 Safari/537.36"
+198.51.100.23 - alice [10/Mar/2024:13:56:01 +0000] "POST /api/login HTTP/1.1" 302 0 "https://example.com/login" "curl/8.5.0"
+198.51.100.23 - alice [10/Mar/2024:13:56:02 +0000] "GET /dashboard HTTP/2.0" 200 5120 "https://example.com/login" "curl/8.5.0"
+192.0.2.44 - - [10/Mar/2024:14:02:11 +0000] "GET /wp-login.php HTTP/1.1" 404 153 "-" "python-requests/2.31.0"
+192.0.2.44 - - [10/Mar/2024:14:02:12 +0000] "GET /.env HTTP/1.1" 404 153 "-" "python-requests/2.31.0"
+203.0.113.7 - - [10/Mar/2024:14:10:45 +0000] "GET /index.html HTTP/1.1" 304 - "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0 Safari/537.36"
+198.51.100.99 - - [10/Mar/2024:15:20:00 +0100] "GET /api/report?id=7&fmt=csv HTTP/1.1" 500 612 "-" "Go-http-client/1.1"
+198.51.100.99 - - [10/Mar/2024:15:20:05 +0100] "GET /api/report?id=7&fmt=csv HTTP/1.1" 200 90210 "-" "Go-http-client/1.1"
+this line is garbage and does not match
+192.0.2.1 - - [10/Mar/2024:15:30:00 +0000] "\x16\x03\x01" 400 166 "-" "-"
+203.0.113.9 - - [10/Mar/2024:16:00:00 +0000] "GET /search?q=%22quoted%22 HTTP/1.1" 200 4410 "https://example.com/?ref=\"x\"" "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_3) Safari/605.1.15"
