@@ -128,8 +128,12 @@ jobs:
           "$T" --version | tee version.out; grep -qF "$VERSION" version.out
 
           before=$(cat "$R/$SLUG/installed.txt")
-          "$T" update
+          "$T" update | tee update.out
           until_changed "$R/$SLUG/installed.txt" "$before"; echo "update ok"
+          if grep -q 'logged to' update.out; then # detached Windows update: its log must show the finished install
+            for _ in $(seq 30); do grep -qs 'installed' "$R/$SLUG-install.log" && break; sleep 2; done
+            cat "$R/$SLUG-install.log"; grep -q 'installed' "$R/$SLUG-install.log"; echo "update log ok"
+          fi
           sleep 3; start
 
           "$T" uninstall || true
@@ -163,6 +167,12 @@ jobs:
           [ "$RUNNER_OS" = Linux ] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
           brew install "chayprabs/localtools/localtools-$SLUG"
           "localtools-$SLUG" --version | grep -F "$VERSION"
+          for a in update uninstall; do
+            out=$("localtools-$SLUG" $a); echo "$out"
+            grep -q "was installed with brew" <<<"$out" || echo "::warning::$a has no package-manager guard (older build)"
+            if grep -q "installed with" <<<"$out"; then grep -q "brew $([ $a = update ] && echo upgrade || echo uninstall) localtools-$SLUG" <<<"$out"; fi
+          done
+          "localtools-$SLUG" --version | grep -F "$VERSION" # still installed: the guard must not have touched it
       - name: scoop install
         if: runner.os == 'Windows' && env.HAS_SCOOP == 'true'
         shell: powershell
@@ -173,3 +183,11 @@ jobs:
           $v = & "localtools-$env:SLUG" --version
           "version: $v"
           if ("$v" -notmatch [regex]::Escape($env:VERSION)) { throw "unexpected version" }
+          foreach ($a in 'update', 'uninstall') {
+            $out = (& "localtools-$env:SLUG" $a | Out-String); $out
+            if ($out -match 'installed with') {
+              $want = if ($a -eq 'update') { "scoop update localtools-$env:SLUG" } else { "scoop uninstall localtools-$env:SLUG" }
+              if (-not $out.Contains($want)) { throw "guard printed the wrong command" }
+            } else { Write-Host "::warning::$a has no package-manager guard (older build)" }
+          }
+          if (-not ((& "localtools-$env:SLUG" --version) -match [regex]::Escape($env:VERSION))) { throw "guard removed the install" }
