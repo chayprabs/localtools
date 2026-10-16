@@ -1,0 +1,48 @@
+[
+  {
+    "goto": "/"
+  },
+  {
+    "setInputFiles": {
+      "selector": "#b-file",
+      "files": [
+        "petstore-v1.yaml"
+      ]
+    },
+    "pause": 500
+  },
+  {
+    "setInputFiles": {
+      "selector": "#r-file",
+      "files": [
+        "petstore-v2.yaml"
+      ]
+    },
+    "pause": 500
+  },
+  {
+    "click": "#go"
+  },
+  {
+    "waitFor": {
+      "text": "api-removed-without-deprecation"
+    },
+    "pause": 1500
+  },
+  {
+    "click": "#show-info",
+    "pause": 1200
+  },
+  {
+    "click": "[aria-controls=p-md]"
+  },
+  {
+    "waitFor": {
+      "text": "6 breaking changes"
+    }
+  },
+  {
+    "scrollIntoView": ".lt-output",
+    "pause": 2000
+  }
+]

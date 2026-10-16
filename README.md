@@ -14,6 +14,7 @@ Browse all tools, with docs and how-tos: **https://tools.chaitanyaprabuddha.com*
 | [File Type Detector](file-type-detector/) | Detect real file types from magic bytes and flag extension/MIME mismatches, macros and polyglot files across folders. | `localtools-file-type-detector` |
 | [JSON to Excel](json-to-excel/) | Convert JSON or JSONL into formatted .xlsx workbooks with typed columns and multiple sheets. | `localtools-json-to-excel` |
 | [YAML JSON Query](yaml-json-query/) | Query and edit YAML, JSON, XML, TOML and INI with yq expressions and apply RFC 6902 JSON Patch, keeping comments. | `localtools-yaml-json-query` |
+| [OpenAPI Diff](openapi-diff/) | Diff two OpenAPI 3 or Swagger specs and list breaking changes with severity. | `localtools-openapi-diff` |
 | [SVG Optimizer](svg-optimizer/) | Optimize and minify SVG files with SVGO and export them to PNG. | `localtools-svg-optimizer` |
 | [Font Subsetter](font-subsetter/) | Subset fonts to the characters you use, instance variable fonts, and convert to WOFF2. | `localtools-font-subsetter` |
 <!-- /tools -->
