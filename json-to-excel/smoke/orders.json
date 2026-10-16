@@ -1,0 +1,5 @@
+[
+  {"id": 1001, "customer": {"name": "Ada Lovelace", "email": "ada@example.com", "address": {"city": "London", "country": "GB"}}, "total": 249.99, "paid": true, "ordered": "2024-03-01", "shipped_at": "2024-03-02T14:30:00Z", "tags": ["priority", "gift"], "tracking": "9400111899223344556677"},
+  {"id": 1002, "customer": {"name": "Alan Turing", "email": "alan@example.com", "address": {"city": "Manchester", "country": "GB"}}, "total": 15, "paid": false, "ordered": "2024-03-03", "shipped_at": null, "tags": [], "tracking": null},
+  {"id": 1003, "customer": {"name": "Grace Hopper", "email": "grace@example.com", "address": {"city": "New York", "country": "US"}}, "total": 1200.5, "paid": true, "ordered": "2024-03-05", "shipped_at": "2024-03-06T09:00:00+02:00", "tags": ["bulk"], "tracking": "1Z999AA10123456784", "items": [{"sku": "A-1", "qty": 2}]}
+]

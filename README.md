@@ -12,6 +12,7 @@ Browse all tools, with docs and how-tos: **https://tools.chaitanyaprabuddha.com*
 | Tool | What it does | Command |
 |---|---|---|
 | [File Type Detector](file-type-detector/) | Detect real file types from magic bytes and flag extension/MIME mismatches, macros and polyglot files across folders. | `localtools-file-type-detector` |
+| [JSON to Excel](json-to-excel/) | Convert JSON or JSONL into formatted .xlsx workbooks with typed columns and multiple sheets. | `localtools-json-to-excel` |
 <!-- /tools -->
 
 ## Install

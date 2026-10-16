@@ -1,0 +1,11 @@
+{
+  "path": "/api/convert",
+  "fields": {
+    "preview": "1",
+    "sheet": "Orders"
+  },
+  "files": {
+    "file": "orders.json"
+  },
+  "expect": "\"name\":\"Orders\",\"rows\":3,\"cols\":12"
+}

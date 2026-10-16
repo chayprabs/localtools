@@ -1,0 +1,33 @@
+[
+  {
+    "goto": "/"
+  },
+  {
+    "setInputFiles": {
+      "selector": "#file",
+      "files": [
+        "orders.json"
+      ]
+    },
+    "pause": 700
+  },
+  {
+    "fill": {
+      "selector": "#o-sheet",
+      "text": "Orders"
+    }
+  },
+  {
+    "click": "#go"
+  },
+  {
+    "waitFor": {
+      "selector": "#preview table"
+    },
+    "pause": 800
+  },
+  {
+    "scrollIntoView": "#out-l",
+    "pause": 2500
+  }
+]
