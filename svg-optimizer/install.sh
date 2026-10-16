@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for SVG Optimizer (svg-optimizer 1.0.0). macOS / Linux, no sudo.
+# localtools installer for SVG Optimizer (svg-optimizer 1.0.1). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/svg-optimizer/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='svg-optimizer'; NAME='SVG Optimizer'; VERSION='1.0.0'; PORT='47127'; KIND='js'; IMAGE=''
+SLUG='svg-optimizer'; NAME='SVG Optimizer'; VERSION='1.0.1'; PORT='47127'; KIND='js'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -29,10 +29,10 @@ if [ "$OS" = macos ] && [ "$(sysctl -n sysctl.proc_translated 2>/dev/null || ech
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/svg-optimizer-v1.0.0/svg-optimizer-1.0.0-macos-arm64.zip'; SHA='5c8e87f6f7cdb114463ceef45f2302c19784ee6fe917088850a20afb9963095c' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/svg-optimizer-v1.0.0/svg-optimizer-1.0.0-macos-x64.zip'; SHA='43dedb8f515506d78b21ca6572fca14f6643af82d85e572064d8eede3198f5e5' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/svg-optimizer-v1.0.0/svg-optimizer-1.0.0-linux-x64.zip'; SHA='fb7a4a80a3d82e78dadb293da371bf426160c24edebc7b2ffe7a850c074d4b4e' ;;
-  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/svg-optimizer-v1.0.0/svg-optimizer-1.0.0-linux-arm64.zip'; SHA='cca6513d6ed182333ffacba3c8cc82df16f7f0ad141f3215203d03092eb55fbb' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/svg-optimizer-v1.0.1/svg-optimizer-1.0.1-macos-arm64.zip'; SHA='8feccf00aeb2943e1cab18cb89feabfa183e7127c4dff5c9324757d8a4a851b0' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/svg-optimizer-v1.0.1/svg-optimizer-1.0.1-macos-x64.zip'; SHA='52864f1ea6ca863e71484a6d587c6941a5aa04de416133562d703700aa9d5468' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/svg-optimizer-v1.0.1/svg-optimizer-1.0.1-linux-x64.zip'; SHA='7e2deb303ef44abc3f7b05b180b6a9c97de631d264859e8b6d2880e1292646aa' ;;
+  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/svg-optimizer-v1.0.1/svg-optimizer-1.0.1-linux-arm64.zip'; SHA='e17087cbe17210c66bdd01cfbb04eb98ba972fcc9cda2bc68d48bb9a58fb7572' ;;
 esac
 
 if [ "$KIND" = docker ]; then

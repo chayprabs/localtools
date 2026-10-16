@@ -1,4 +1,4 @@
-# localtools installer for SVG Optimizer (svg-optimizer 1.0.0). Windows PowerShell 5.1+, no admin.
+# localtools installer for SVG Optimizer (svg-optimizer 1.0.1). Windows PowerShell 5.1+, no admin.
 # Usage: irm https://raw.githubusercontent.com/chayprabs/localtools/main/svg-optimizer/install.ps1 | iex
 # Re-running updates. Set $env:LOCALTOOLS_NO_OPEN='1' to skip launching the tool afterwards.
 # Wrapped in a script block so `irm | iex` never leaks settings into, or exits, the caller's session.
@@ -7,8 +7,8 @@ $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 
-$Slug = 'svg-optimizer'; $Name = 'SVG Optimizer'; $Version = '1.0.0'; $Port = 47127; $Kind = 'js'
-$Url = 'https://github.com/chayprabs/localtools/releases/download/svg-optimizer-v1.0.0/svg-optimizer-1.0.0-windows-x64.zip'; $Sha = 'db03a5b4f6c1c303e85fd832d22fa3734e575519e1c817626d033bac1e3be238'; $Image = ''
+$Slug = 'svg-optimizer'; $Name = 'SVG Optimizer'; $Version = '1.0.1'; $Port = 47127; $Kind = 'js'
+$Url = 'https://github.com/chayprabs/localtools/releases/download/svg-optimizer-v1.0.1/svg-optimizer-1.0.1-windows-x64.zip'; $Sha = '2aae5c1028b76bb29c7ce8304fd44fc1d1678c9f5e92d8ec95db43ef5ebee868'; $Image = ''
 $Cmd = "localtools-$Slug"
 $Root = if ($env:LOCALTOOLS_HOME) { $env:LOCALTOOLS_HOME } else { Join-Path $env:USERPROFILE '.localtools' }
 $Dir = Join-Path $Root $Slug
