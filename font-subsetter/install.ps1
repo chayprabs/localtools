@@ -1,4 +1,4 @@
-# localtools installer for Font Subsetter (font-subsetter 1.0.0). Windows PowerShell 5.1+, no admin.
+# localtools installer for Font Subsetter (font-subsetter 1.0.1). Windows PowerShell 5.1+, no admin.
 # Usage: irm https://raw.githubusercontent.com/chayprabs/localtools/main/font-subsetter/install.ps1 | iex
 # Re-running updates. Set $env:LOCALTOOLS_NO_OPEN='1' to skip launching the tool afterwards.
 # Wrapped in a script block so `irm | iex` never leaks settings into, or exits, the caller's session.
@@ -7,8 +7,8 @@ $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 
-$Slug = 'font-subsetter'; $Name = 'Font Subsetter'; $Version = '1.0.0'; $Port = 47129; $Kind = 'py'
-$Url = 'https://github.com/chayprabs/localtools/releases/download/font-subsetter-v1.0.0/font-subsetter-1.0.0-windows-x64.zip'; $Sha = 'e008454b053d0fe47737f9d00ac49152a04738cdb4c5e46d675753f1257a3457'; $Image = ''
+$Slug = 'font-subsetter'; $Name = 'Font Subsetter'; $Version = '1.0.1'; $Port = 47129; $Kind = 'py'
+$Url = 'https://github.com/chayprabs/localtools/releases/download/font-subsetter-v1.0.1/font-subsetter-1.0.1-windows-x64.zip'; $Sha = 'aa09faae774a7870df3c4a928b3864a89711b59a4c6d63e2a97c49ceeca1ae66'; $Image = ''
 $Cmd = "localtools-$Slug"
 $Root = if ($env:LOCALTOOLS_HOME) { $env:LOCALTOOLS_HOME } else { Join-Path $env:USERPROFILE '.localtools' }
 $Dir = Join-Path $Root $Slug

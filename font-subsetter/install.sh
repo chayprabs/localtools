@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for Font Subsetter (font-subsetter 1.0.0). macOS / Linux, no sudo.
+# localtools installer for Font Subsetter (font-subsetter 1.0.1). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/font-subsetter/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='font-subsetter'; NAME='Font Subsetter'; VERSION='1.0.0'; PORT='47129'; KIND='py'; IMAGE=''
+SLUG='font-subsetter'; NAME='Font Subsetter'; VERSION='1.0.1'; PORT='47129'; KIND='py'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -29,9 +29,9 @@ if [ "$OS" = macos ] && [ "$(sysctl -n sysctl.proc_translated 2>/dev/null || ech
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/font-subsetter-v1.0.0/font-subsetter-1.0.0-macos-arm64.zip'; SHA='fc44914e56ba9eda62b0456813f30c2267533a17b6a6a5653aa2a243f163bef9' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/font-subsetter-v1.0.0/font-subsetter-1.0.0-macos-x64.zip'; SHA='fbb11b865977929c901713abca2e558ff54de9c68a00936140225550bede96dd' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/font-subsetter-v1.0.0/font-subsetter-1.0.0-linux-x64.zip'; SHA='b700a52cf113c3ec429d4cfc852dd9db3a1f115d6f008777ab141d1438ec2109' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/font-subsetter-v1.0.1/font-subsetter-1.0.1-macos-arm64.zip'; SHA='16bf1a1e3fc5d1bdfb391665345c07aa68c6ff380f79d05c0fddf1b3a1f42676' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/font-subsetter-v1.0.1/font-subsetter-1.0.1-macos-x64.zip'; SHA='c84d69d865f497491e705ba1a95040d67fbd8fa5d019411f127459af6fc9f7f8' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/font-subsetter-v1.0.1/font-subsetter-1.0.1-linux-x64.zip'; SHA='baaee090883fcab741fbb2b91776d5fc6c24cd6b0a5f1a6fc58a33788b2ddbd3' ;;
 esac
 
 if [ "$KIND" = docker ]; then
