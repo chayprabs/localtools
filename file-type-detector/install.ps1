@@ -1,4 +1,4 @@
-# localtools installer for File Type Detector (file-type-detector 1.0.1). Windows PowerShell 5.1+, no admin.
+# localtools installer for File Type Detector (file-type-detector 1.0.2). Windows PowerShell 5.1+, no admin.
 # Usage: irm https://raw.githubusercontent.com/chayprabs/localtools/main/file-type-detector/install.ps1 | iex
 # Re-running updates. Set $env:LOCALTOOLS_NO_OPEN='1' to skip launching the tool afterwards.
 # Wrapped in a script block so `irm | iex` never leaks settings into, or exits, the caller's session.
@@ -7,8 +7,8 @@ $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 
-$Slug = 'file-type-detector'; $Name = 'File Type Detector'; $Version = '1.0.1'; $Port = 47101; $Kind = 'bin'
-$Url = 'https://github.com/chayprabs/localtools/releases/download/file-type-detector-v1.0.1/file-type-detector-1.0.1-windows-x64.zip'; $Sha = 'fded0c42dc1ba7221e2716aa07b8f1ae569c7a4abdf391eaa71eb44506cee2af'; $Image = ''
+$Slug = 'file-type-detector'; $Name = 'File Type Detector'; $Version = '1.0.2'; $Port = 47101; $Kind = 'bin'
+$Url = 'https://github.com/chayprabs/localtools/releases/download/file-type-detector-v1.0.2/file-type-detector-1.0.2-windows-x64.zip'; $Sha = '8c2a2f892b9746809560c613aa78520da5b7c00cdb324613d1064c64ce8453ae'; $Image = ''
 $Cmd = "localtools-$Slug"
 $Root = if ($env:LOCALTOOLS_HOME) { $env:LOCALTOOLS_HOME } else { Join-Path $env:USERPROFILE '.localtools' }
 $Dir = Join-Path $Root $Slug

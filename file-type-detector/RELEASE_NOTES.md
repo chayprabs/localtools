@@ -7,3 +7,7 @@ First release: real file types from magic bytes, extension mismatches, disguised
 ## 1.0.1 (2026-10-16)
 
 Risk only for formats the OS runs on double-click (archived .py/.sh/.bin/.o are info); padded double extensions flagged; MZ files need a real PE header; corrupt or truncated ZIP/OLE containers warned; uploads batched 500 per request; tables scroll on narrow screens; failed updates keep the old install; package-manager installs print the brew/scoop/winget command for update/uninstall.
+
+## 1.0.2 (2026-10-16)
+
+Detects ISO 9660/UDF, DMG, VHD/VHDX, VMDK and QCOW images; archive entries that run on double-click are warn, risk only when disguised or inside an archive posing as another type; text starting with MZ is text; Unicode whitespace padding caught in double extensions; .winmd accepted; EPUB without a mimetype entry detected.

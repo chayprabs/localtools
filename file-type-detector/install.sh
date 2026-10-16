@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for File Type Detector (file-type-detector 1.0.1). macOS / Linux, no sudo.
+# localtools installer for File Type Detector (file-type-detector 1.0.2). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/file-type-detector/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='file-type-detector'; NAME='File Type Detector'; VERSION='1.0.1'; PORT='47101'; KIND='bin'; IMAGE=''
+SLUG='file-type-detector'; NAME='File Type Detector'; VERSION='1.0.2'; PORT='47101'; KIND='bin'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -29,10 +29,10 @@ if [ "$OS" = macos ] && [ "$(sysctl -n sysctl.proc_translated 2>/dev/null || ech
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/file-type-detector-v1.0.1/file-type-detector-1.0.1-macos-arm64.zip'; SHA='5e12e8caa0b7c219d7db607036323eef1587c3ea6d01af1461941b96f54e64aa' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/file-type-detector-v1.0.1/file-type-detector-1.0.1-macos-x64.zip'; SHA='8693956c258a81d2283d03f383da5e715104bac35618f5fba5fce4e98e3c4dd2' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/file-type-detector-v1.0.1/file-type-detector-1.0.1-linux-x64.zip'; SHA='137ebfa75f6b5b2906fecf76bc3e87af88236cd4ae39eeef5145689d1b9d67e3' ;;
-  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/file-type-detector-v1.0.1/file-type-detector-1.0.1-linux-arm64.zip'; SHA='020b9393a2db4d7d787543c057ddae76303a0ac91cdec503b756918eae5f8065' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/file-type-detector-v1.0.2/file-type-detector-1.0.2-macos-arm64.zip'; SHA='713f369de2f155d80a16768503fb9155a8c44aca03a143f01c42c46b37aca11e' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/file-type-detector-v1.0.2/file-type-detector-1.0.2-macos-x64.zip'; SHA='9afa1e3cb73e2ae18c55da80acf56843956f4a7906b450f61ac038d4e8590efc' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/file-type-detector-v1.0.2/file-type-detector-1.0.2-linux-x64.zip'; SHA='e699414b5a10ea82afe17d6ca882ab31677e3d591aa49eb66667a1c6a75605bb' ;;
+  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/file-type-detector-v1.0.2/file-type-detector-1.0.2-linux-arm64.zip'; SHA='1e75076b645be2e3d034775d2797aa88cd9772af58cf8654b2a6689717d40f27' ;;
 esac
 
 if [ "$KIND" = docker ]; then

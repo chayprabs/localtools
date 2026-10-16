@@ -2,7 +2,7 @@
   "slug": "file-type-detector",
   "name": "File Type Detector",
   "command": "localtools-file-type-detector",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "port": 47101,
   "kind": "bin",
   "registries": {
