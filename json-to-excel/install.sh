@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for JSON to Excel (json-to-excel 1.0.1). macOS / Linux, no sudo.
+# localtools installer for JSON to Excel (json-to-excel 1.0.2). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/json-to-excel/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='json-to-excel'; NAME='JSON to Excel'; VERSION='1.0.1'; PORT='47108'; KIND='bin'; IMAGE=''
+SLUG='json-to-excel'; NAME='JSON to Excel'; VERSION='1.0.2'; PORT='47108'; KIND='bin'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -29,10 +29,10 @@ if [ "$OS" = macos ] && [ "$(sysctl -n sysctl.proc_translated 2>/dev/null || ech
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/json-to-excel-v1.0.1/json-to-excel-1.0.1-linux-arm64.zip'; SHA='0777c566e3588cdff91cd5a68b9b3c552e0569f388cbe416c56e735c4e95997c' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/json-to-excel-v1.0.1/json-to-excel-1.0.1-linux-x64.zip'; SHA='0ac1ee663b7414d136fdbc232c9a8f1855e6a35bd2ea94db519243d5ebf8cd99' ;;
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/json-to-excel-v1.0.1/json-to-excel-1.0.1-macos-arm64.zip'; SHA='ae5c0124d909962b3d3a34be22f79f52fd1ca7c9c5ec85898f330b6444647ebf' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/json-to-excel-v1.0.1/json-to-excel-1.0.1-macos-x64.zip'; SHA='337a8cd8695cf395d3c7b809cd76194d5d8fea84ec1f7b1df60dc1e9faf2f3e8' ;;
+  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/json-to-excel-v1.0.2/json-to-excel-1.0.2-linux-arm64.zip'; SHA='bc91692e839afa52c335a90f41a2b02ff905591f6ec749fb34f3eb75d22049d3' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/json-to-excel-v1.0.2/json-to-excel-1.0.2-linux-x64.zip'; SHA='65a21a62820c034d3fbeeec85ad9abb44089d0d2ae71bcfef2a9508b52c96bd0' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/json-to-excel-v1.0.2/json-to-excel-1.0.2-macos-arm64.zip'; SHA='270e2c014cd7c16729739a642b249d8fc5341d7f535039dff926511aa07bb119' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/json-to-excel-v1.0.2/json-to-excel-1.0.2-macos-x64.zip'; SHA='6fb0ad4d59e3cfe78800fb814eed2ffbd1f299014de11229f7cd0a854444ffb2' ;;
 esac
 
 if [ "$KIND" = docker ]; then

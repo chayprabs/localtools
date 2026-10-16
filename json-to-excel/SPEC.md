@@ -26,7 +26,7 @@ To convert such an object as plain data, use `--mode data` / `mode=data`. Full e
 | `header_style` | style for the header (default bold, grey fill, thin border) |
 | `freeze` | freeze panes below the header (default `true`) |
 | `autofilter` | add filter buttons to the header |
-| `table` | make the block an Excel table: `{"name": "Sales", "style": "TableStyleMedium2", "no_stripes": false, "first_column": false, "last_column": false}`. The name uses letters, digits, `_` and `.`, starts with a letter or `_`, and must not look like a cell reference (`A1`, `R1C1`). Every header must be non-empty and unique (case-insensitive). Merges may not overlap the table |
+| `table` | make the block an Excel table: `{"name": "Sales", "style": "TableStyleMedium2", "no_stripes": false, "first_column": false, "last_column": false}`. The name uses letters, digits, `_` and `.`, starts with a letter or `_`, and must not look like a cell reference (`A1`, `R1C1`). Table names are unique across the workbook (ignoring case); unnamed tables get `Table1`, `Table2`, ... avoiding your names. A table needs `columns` and a header row (`"header": false` with `table` is an error). Every header must be non-empty and unique (case-insensitive). Merges may not overlap the table |
 | `cells` | single cells: `{"ref": "A1", "value": ..., "formula": "=SUM(D4:D7)", "type": ..., "format": ..., "style": ...}` |
 | `merge` | ranges to merge, e.g. `["A1:F1"]` |
 | `row_heights` | `{"1": 28}` |
