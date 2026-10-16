@@ -1,0 +1,37 @@
+[
+ {
+  "goto": "/"
+ },
+ {
+  "setInputFiles": {
+   "selector": "#file",
+   "files": [
+    "inkscape-badge.svg"
+   ]
+  },
+  "pause": 800
+ },
+ {
+  "click": "input[name=sanitize]"
+ },
+ {
+  "fill": {
+   "selector": "#o-png",
+   "text": "256"
+  }
+ },
+ {
+  "click": "#go"
+ },
+ {
+  "waitFor": {
+   "selector": "#result"
+  }
+ },
+ {
+  "wait": 800
+ },
+ {
+  "scrollIntoView": "#out-l"
+ }
+]

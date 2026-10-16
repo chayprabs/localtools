@@ -1,0 +1,11 @@
+{
+  "path": "/api/optimize",
+  "fields": {
+    "preset": "safe",
+    "sanitize": "1"
+  },
+  "files": {
+    "file": "inkscape-badge.svg"
+  },
+  "expect": "\"after\":785"
+}

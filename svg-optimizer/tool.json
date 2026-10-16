@@ -1,0 +1,16 @@
+{
+  "slug": "svg-optimizer",
+  "name": "SVG Optimizer",
+  "command": "localtools-svg-optimizer",
+  "version": "1.0.0",
+  "port": 47127,
+  "kind": "js",
+  "registries": {
+    "brew": true,
+    "scoop": true,
+    "winget": true,
+    "npm": "localtools-svg-optimizer",
+    "pypi": null,
+    "ghcr": null
+  }
+}
