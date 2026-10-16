@@ -29,7 +29,7 @@ jobs:
         run: |
           if [ -n "$INPUT" ]; then dirs="$INPUT"
           else dirs=$(git diff --name-only "$BEFORE" HEAD 2>/dev/null || git diff --name-only HEAD~1 HEAD); fi
-          slugs=$(for d in $(echo "$dirs" | cut -d/ -f1 | sort -u); do [ -f "$d/tool.json" ] && echo "$d"; done | jq -R . | jq -cs .)
+          slugs=$(for d in $(echo "$dirs" | cut -d/ -f1 | sort -u); do if [ -f "$d/tool.json" ]; then echo "$d"; fi; done | jq -R . | jq -cs .)
           echo "slugs=$slugs" | tee -a "$GITHUB_OUTPUT"
           [ -n "$INPUT" ] && [ "$slugs" = "[]" ] && { echo "::error::no $INPUT/tool.json"; exit 1; } || true
       - name: wait for raw.githubusercontent.com to serve this commit
