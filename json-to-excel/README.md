@@ -4,6 +4,7 @@ Convert JSON or JSONL into formatted .xlsx workbooks with typed columns and mult
 
 Part of [localtools](https://tools.chaitanyaprabuddha.com): free tools that run entirely on your machine. Your files never leave it.
 Details and how-to: https://tools.chaitanyaprabuddha.com/json-to-excel
+Workbook spec format: [SPEC.md](SPEC.md)
 
 ## Install
 

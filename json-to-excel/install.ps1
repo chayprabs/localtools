@@ -1,4 +1,4 @@
-# localtools installer for JSON to Excel (json-to-excel 1.0.0). Windows PowerShell 5.1+, no admin.
+# localtools installer for JSON to Excel (json-to-excel 1.0.1). Windows PowerShell 5.1+, no admin.
 # Usage: irm https://raw.githubusercontent.com/chayprabs/localtools/main/json-to-excel/install.ps1 | iex
 # Re-running updates. Set $env:LOCALTOOLS_NO_OPEN='1' to skip launching the tool afterwards.
 # Wrapped in a script block so `irm | iex` never leaks settings into, or exits, the caller's session.
@@ -7,8 +7,8 @@ $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 
-$Slug = 'json-to-excel'; $Name = 'JSON to Excel'; $Version = '1.0.0'; $Port = 47108; $Kind = 'bin'
-$Url = 'https://github.com/chayprabs/localtools/releases/download/json-to-excel-v1.0.0/json-to-excel-1.0.0-windows-x64.zip'; $Sha = '9e4d791dd2d3cd7e973b8ed5548b388c53f90148e9e4fbb0b0eb8f5cdf7aa3b4'; $Image = ''
+$Slug = 'json-to-excel'; $Name = 'JSON to Excel'; $Version = '1.0.1'; $Port = 47108; $Kind = 'bin'
+$Url = 'https://github.com/chayprabs/localtools/releases/download/json-to-excel-v1.0.1/json-to-excel-1.0.1-windows-x64.zip'; $Sha = '325883b421e8d5f9dce132fa359f33b36f1820abb3969d9c0ef2243c6791a51b'; $Image = ''
 $Cmd = "localtools-$Slug"
 $Root = if ($env:LOCALTOOLS_HOME) { $env:LOCALTOOLS_HOME } else { Join-Path $env:USERPROFILE '.localtools' }
 $Dir = Join-Path $Root $Slug
