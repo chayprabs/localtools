@@ -1,0 +1,12 @@
+{
+  "path": "/api/transform",
+  "fields": {
+    "from": "auto",
+    "to": "json",
+    "verbs": "sort -f name then head -n 1"
+  },
+  "files": {
+    "file": "sales.csv"
+  },
+  "expect": "\"name\": \"Ana Souza\""
+}

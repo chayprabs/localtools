@@ -1,0 +1,47 @@
+[
+  {
+    "goto": "/"
+  },
+  {
+    "setInputFiles": {
+      "selector": "#file",
+      "files": [
+        "sales.csv"
+      ]
+    },
+    "pause": 600
+  },
+  {
+    "click": "#recipes button[data-v^='stats1']",
+    "pause": 800
+  },
+  {
+    "click": "#go"
+  },
+  {
+    "waitFor": {
+      "selector": "#tablewrap table"
+    },
+    "pause": 1500
+  },
+  {
+    "fill": {
+      "selector": "#verbs",
+      "text": "filter '$amount > 100' then sort -nr amount"
+    },
+    "pause": 600
+  },
+  {
+    "click": "#go"
+  },
+  {
+    "waitFor": {
+      "text": "Chidi Okafor"
+    },
+    "pause": 2000
+  },
+  {
+    "scrollIntoView": "#tablewrap",
+    "pause": 1500
+  }
+]
