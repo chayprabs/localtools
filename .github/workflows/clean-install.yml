@@ -65,6 +65,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: read tool.json
         run: |
+          jq() { command jq "$@" | tr -d '\r'; } # jq on Windows prints CRLF
           kind=$(jq -r .kind "$SLUG/tool.json")
           full=true; [ "$kind" = docker ] && [ "$RUNNER_OS" != Linux ] && full=false
           { echo "KIND=$kind"; echo "FULL=$full"
@@ -96,6 +97,7 @@ jobs:
       - name: shim, launcher, health, smoke, version, update, uninstall
         if: env.FULL == 'true'
         run: |
+          jq() { command jq "$@" | tr -d '\r'; } # jq on Windows prints CRLF
           home=~; T=localtools-$SLUG; R=~/.localtools
           case "$RUNNER_OS" in
             Windows) T=$T.cmd; L="$(cygpath "$APPDATA")/Microsoft/Windows/Start Menu/Programs/localtools/$NAME.lnk"
@@ -150,17 +152,19 @@ jobs:
       - uses: actions/checkout@v4
       - shell: bash
         run: |
-          { echo "BREW=$(jq -r .registries.brew "$SLUG/tool.json")"; echo "SCOOP=$(jq -r .registries.scoop "$SLUG/tool.json")"
+          jq() { command jq "$@" | tr -d '\r'; }
+          # not BREW/SCOOP: the Scoop installer reads $env:SCOOP as its install directory
+          { echo "HAS_BREW=$(jq -r .registries.brew "$SLUG/tool.json")"; echo "HAS_SCOOP=$(jq -r .registries.scoop "$SLUG/tool.json")"
             echo "VERSION=$(jq -r .version "$SLUG/tool.json")"; } >> "$GITHUB_ENV"
       - name: brew install
-        if: runner.os != 'Windows' && env.BREW == 'true'
+        if: runner.os != 'Windows' && env.HAS_BREW == 'true'
         shell: bash
         run: |
           [ "$RUNNER_OS" = Linux ] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
           brew install "chayprabs/localtools/localtools-$SLUG"
           "localtools-$SLUG" --version | grep -F "$VERSION"
       - name: scoop install
-        if: runner.os == 'Windows' && env.SCOOP == 'true'
+        if: runner.os == 'Windows' && env.HAS_SCOOP == 'true'
         shell: powershell
         run: |
           iex "& {$(irm get.scoop.sh)} -RunAsAdmin"

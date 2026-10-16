@@ -93,7 +93,7 @@ ENTRY="$DIR/$CMD"
 [ -f "$ENTRY" ] || die "release has no $CMD at its root"
 chmod +x "$ENTRY"
 if [ "$OS" = macos ]; then xattr -dr com.apple.quarantine "$DIR" 2>/dev/null || true; fi
-echo "$VERSION $(date -u +%Y-%m-%dT%H:%M:%SZ)" > "$DIR/installed.txt"
+echo "$VERSION $(date -u +%Y-%m-%dT%H:%M:%SZ) $$" > "$DIR/installed.txt" # pid: re-installs in the same second still differ
 
 ln -sf "$ENTRY" "$BIN/$CMD"
 
