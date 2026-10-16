@@ -1,0 +1,80 @@
+name: capture-media
+
+# Installs a released tool with its public install.sh, drives it with <slug>/media/demo.json and commits
+# <slug>/media/screenshot.png, screenshot-dark.png and demo.webm (+ demo.gif when small enough).
+on:
+  workflow_dispatch:
+    inputs:
+      slug:
+        description: Tool slug (folder name)
+        required: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: capture-media-${{ inputs.slug }}
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    env:
+      SLUG: ${{ inputs.slug }}
+      LOCALTOOLS_NO_OPEN: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - name: read tool.json
+        run: |
+          test -f "$SLUG/tool.json" || { echo "::error::$SLUG/tool.json not found (tool not released?)"; exit 1; }
+          test -f "$SLUG/media/demo.json" || { echo "::error::$SLUG/media/demo.json not found"; exit 1; }
+          echo "PORT=$(jq -r .port "$SLUG/tool.json")" >> "$GITHUB_ENV"
+      - name: install
+        run: curl -fsSL "https://raw.githubusercontent.com/chayprabs/localtools/main/$SLUG/install.sh" | bash
+      - name: start
+        run: |
+          nohup ~/.localtools/bin/localtools-"$SLUG" --no-open > server.log 2>&1 &
+          for _ in $(seq 90); do
+            curl -fs "http://127.0.0.1:$PORT/api/health" | grep -Eq "\"tool\": *\"$SLUG\"" && exit 0
+            sleep 2
+          done
+          cat server.log; exit 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: playwright
+        working-directory: .github/media
+        run: |
+          npm init -y > /dev/null
+          npm i playwright@1
+          npx playwright install --with-deps chromium
+          sudo apt-get install -y ffmpeg > /dev/null
+      - name: capture
+        run: node .github/media/capture.mjs "$SLUG" "$PORT" "$RUNNER_TEMP/media"
+      - name: encode
+        working-directory: ${{ runner.temp }}/media
+        run: |
+          max=1572864
+          for crf in 40 46 52; do
+            ffmpeg -loglevel error -y -i raw.webm -an -c:v libvpx-vp9 -b:v 0 -crf "$crf" -row-mt 1 -r 15 demo.webm
+            [ "$(stat -c%s demo.webm)" -le "$max" ] && break
+          done
+          [ "$(stat -c%s demo.webm)" -le "$max" ] || { echo "::error::demo.webm over 1.5 MB, shorten demo.json"; exit 1; }
+          ffmpeg -loglevel error -y -i raw.webm -vf "fps=8,scale=800:-1:flags=lanczos,split[a][b];[a]palettegen=max_colors=64[p];[b][p]paletteuse=dither=bayer" demo.gif
+          [ "$(stat -c%s demo.gif)" -le "$max" ] || { echo "demo.gif over 1.5 MB, keeping webm only"; rm demo.gif; }
+          ls -l
+      - name: commit
+        run: |
+          mkdir -p "$SLUG/media"
+          rm -f "$SLUG/media/demo.gif"
+          cp "$RUNNER_TEMP"/media/{screenshot.png,screenshot-dark.png,demo.webm} "$SLUG/media/"
+          [ -f "$RUNNER_TEMP/media/demo.gif" ] && cp "$RUNNER_TEMP/media/demo.gif" "$SLUG/media/"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$SLUG/media"
+          git diff --cached --quiet && { echo "no change"; exit 0; }
+          git commit -m "chore($SLUG): capture media"
+          for i in 1 2 3; do git pull --rebase && git push && exit 0; sleep $((i * 5)); done
+          exit 1
+      - name: stop
+        if: always()
+        run: pkill -f "localtools-$SLUG" || true
