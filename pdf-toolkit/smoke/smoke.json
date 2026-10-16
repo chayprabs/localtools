@@ -1,0 +1,8 @@
+{
+  "path": "/api/info",
+  "fields": {},
+  "files": {
+    "file": "a.pdf"
+  },
+  "expect": "\"pages\":3"
+}

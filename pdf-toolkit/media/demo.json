@@ -1,0 +1,11 @@
+[
+  {"goto": "/"},
+  {"click": "#ops label:has(input[value=fill])", "pause": 600},
+  {"setInputFiles": {"selector": "#file", "files": ["form.pdf"]}},
+  {"waitFor": {"text": "7 fields"}},
+  {"fill": {"selector": "#ff-0", "text": "Ada Lovelace"}},
+  {"fill": {"selector": "#ff-1", "text": "ada@example.org"}, "pause": 500},
+  {"click": "button.lt-btn-primary"},
+  {"waitFor": {"text": "form-filled.pdf"}},
+  {"scrollIntoView": "#out-l", "pause": 1500}
+]
