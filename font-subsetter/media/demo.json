@@ -1,0 +1,33 @@
+[
+ {
+  "goto": "/"
+ },
+ {
+  "setInputFiles": {
+   "selector": "#file",
+   "files": [
+    "Inter-Regular.ttf"
+   ]
+  },
+  "pause": 600
+ },
+ {
+  "fill": {
+   "selector": "#text",
+   "text": "Ship smaller web fonts. Привет"
+  },
+  "pause": 600
+ },
+ {
+  "click": "#go"
+ },
+ {
+  "waitFor": {
+   "selector": "article.font"
+  }
+ },
+ {
+  "scrollIntoView": "#out-l",
+  "pause": 2500
+ }
+]

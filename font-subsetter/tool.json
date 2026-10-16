@@ -1,0 +1,16 @@
+{
+  "slug": "font-subsetter",
+  "name": "Font Subsetter",
+  "command": "localtools-font-subsetter",
+  "version": "1.0.0",
+  "port": 47129,
+  "kind": "py",
+  "registries": {
+    "brew": false,
+    "scoop": false,
+    "winget": false,
+    "npm": null,
+    "pypi": "localtools-font-subsetter",
+    "ghcr": null
+  }
+}

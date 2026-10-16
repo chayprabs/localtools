@@ -1,0 +1,11 @@
+{
+  "path": "/api/subset",
+  "fields": {
+    "text": "Hello",
+    "format": "woff2"
+  },
+  "files": {
+    "file": "Inter-Regular.ttf"
+  },
+  "expect": "wOF2"
+}
