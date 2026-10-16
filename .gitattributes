@@ -1,2 +1,4 @@
 *.ps1 -text
 *.sh text eol=lf
+*/smoke/** -text
+*/media/** -text
