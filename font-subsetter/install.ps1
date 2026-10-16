@@ -8,7 +8,7 @@ $ProgressPreference = 'SilentlyContinue'
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 
 $Slug = 'font-subsetter'; $Name = 'Font Subsetter'; $Version = '1.0.0'; $Port = 47129; $Kind = 'py'
-$Url = 'https://github.com/chayprabs/localtools/releases/download/font-subsetter-v1.0.0/font-subsetter-1.0.0-windows-x64.zip'; $Sha = '57cc0d2baf39c50e3eb7dc960f2e7383947de29bb0c420d23770400b4c69edb6'; $Image = ''
+$Url = 'https://github.com/chayprabs/localtools/releases/download/font-subsetter-v1.0.0/font-subsetter-1.0.0-windows-x64.zip'; $Sha = '80c44c6b9748b27a48cbc249b36a9f4bacbeb2efc928339aba82a93136635dbf'; $Image = ''
 $Cmd = "localtools-$Slug"
 $Root = if ($env:LOCALTOOLS_HOME) { $env:LOCALTOOLS_HOME } else { Join-Path $env:USERPROFILE '.localtools' }
 $Dir = Join-Path $Root $Slug

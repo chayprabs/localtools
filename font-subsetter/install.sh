@@ -29,9 +29,9 @@ if [ "$OS" = macos ] && [ "$(sysctl -n sysctl.proc_translated 2>/dev/null || ech
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/font-subsetter-v1.0.0/font-subsetter-1.0.0-macos-arm64.zip'; SHA='e3393e4d6ef4387ddfdc5e7b5459bc7d14d7e11a2084d1843f718b81cd303381' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/font-subsetter-v1.0.0/font-subsetter-1.0.0-macos-x64.zip'; SHA='c7a17b6899dbe4e51e923235ebde0c5fe168f93f8f04aed483bba8c6078179f1' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/font-subsetter-v1.0.0/font-subsetter-1.0.0-linux-x64.zip'; SHA='9eb3cf0996f615c8575e567e7af4798f29edd715c9856d20d395a03b9b642870' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/font-subsetter-v1.0.0/font-subsetter-1.0.0-macos-arm64.zip'; SHA='6c462117bb710cb43184c48b6cab08239d43a2d64a99c768b24d280741535623' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/font-subsetter-v1.0.0/font-subsetter-1.0.0-macos-x64.zip'; SHA='a2bf080e41ebdd7abae9cdfa9e9e4859d2f0536b2fb6ecd506a63f257de888c6' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/font-subsetter-v1.0.0/font-subsetter-1.0.0-linux-x64.zip'; SHA='6b0fe7e20adfd54a23a037e89cdcbe953a34cf2edec7e4862f788f91ff4feaca' ;;
 esac
 
 if [ "$KIND" = docker ]; then
