@@ -9,7 +9,7 @@
     "brew": true,
     "scoop": true,
     "winget": true,
-    "npm": "localtools-svg-optimizer",
+    "npm": null,
     "pypi": null,
     "ghcr": null
   }
