@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for File Type Detector (file-type-detector 1.0.0). macOS / Linux, no sudo.
+# localtools installer for File Type Detector (file-type-detector 1.0.1). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/file-type-detector/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='file-type-detector'; NAME='File Type Detector'; VERSION='1.0.0'; PORT='47101'; KIND='bin'; IMAGE=''
+SLUG='file-type-detector'; NAME='File Type Detector'; VERSION='1.0.1'; PORT='47101'; KIND='bin'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -29,10 +29,10 @@ if [ "$OS" = macos ] && [ "$(sysctl -n sysctl.proc_translated 2>/dev/null || ech
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/file-type-detector-v1.0.0/file-type-detector-1.0.0-macos-arm64.zip'; SHA='0d6ee4749ef2106041f329dc08de122b3b4c0f6cc9ce21f30248ae633099fe64' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/file-type-detector-v1.0.0/file-type-detector-1.0.0-macos-x64.zip'; SHA='69671ccb4b04601121b60dbe86511a06d52b1f159c18102d474cce6f92efe4c6' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/file-type-detector-v1.0.0/file-type-detector-1.0.0-linux-x64.zip'; SHA='2d601ba20dd99410dcd378e18185e4ba2415a7569a5541ef1ea8169c35b3fecc' ;;
-  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/file-type-detector-v1.0.0/file-type-detector-1.0.0-linux-arm64.zip'; SHA='a6a2c04df92dd99cfdb036e6ea9858be2e6a9ebb01a8037d0850d8be89aaaf6f' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/file-type-detector-v1.0.1/file-type-detector-1.0.1-macos-arm64.zip'; SHA='5e12e8caa0b7c219d7db607036323eef1587c3ea6d01af1461941b96f54e64aa' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/file-type-detector-v1.0.1/file-type-detector-1.0.1-macos-x64.zip'; SHA='8693956c258a81d2283d03f383da5e715104bac35618f5fba5fce4e98e3c4dd2' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/file-type-detector-v1.0.1/file-type-detector-1.0.1-linux-x64.zip'; SHA='137ebfa75f6b5b2906fecf76bc3e87af88236cd4ae39eeef5145689d1b9d67e3' ;;
+  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/file-type-detector-v1.0.1/file-type-detector-1.0.1-linux-arm64.zip'; SHA='020b9393a2db4d7d787543c057ddae76303a0ac91cdec503b756918eae5f8065' ;;
 esac
 
 if [ "$KIND" = docker ]; then
@@ -42,18 +42,20 @@ elif [ -z "$URL" ]; then
   die "no $NAME build for $OS-$ARCH yet"
 fi
 
-# Stop a running copy so the update takes effect.
-if command -v pkill >/dev/null 2>&1; then pkill -f "($DIR/|$BIN/$CMD)" 2>/dev/null || true; fi
-
 mkdir -p "$ROOT" "$BIN"
-rm -rf "$DIR"
-mkdir -p "$DIR"
+# Build the new copy in a staging dir next to the install dir; the current install stays untouched until it is ready.
+STAGE="$DIR.new-$$"; OLD="$DIR.old-$$"; TMP="$(mktemp -d)"
+rm -rf "$DIR".new-* "$DIR".old-* 2>/dev/null || true
+trap 'rm -rf "$TMP" "$STAGE"' EXIT
+fail() {
+  if [ -d "$DIR" ]; then die "$*; your current install in $DIR was left unchanged"; else die "$*; nothing was installed"; fi
+}
+mkdir -p "$STAGE"
 
 if [ "$KIND" = docker ]; then
-  docker rm -f "$CMD" >/dev/null 2>&1 || true
   say "pulling $IMAGE:$VERSION"
-  docker pull "$IMAGE:$VERSION"
-  cat > "$DIR/$CMD" <<EOF
+  docker pull "$IMAGE:$VERSION" || fail "docker pull $IMAGE:$VERSION failed"
+  cat > "$STAGE/$CMD" <<EOF
 #!/usr/bin/env bash
 # serve (default) runs the container and opens the browser; anything else goes to the tool CLI.
 set -euo pipefail
@@ -75,25 +77,33 @@ case "\${1:-serve}" in
 esac
 EOF
 else
-  command -v curl >/dev/null 2>&1 || die "curl is required"
-  TMP="$(mktemp -d)"
-  trap 'rm -rf "$TMP"' EXIT
+  command -v curl >/dev/null 2>&1 || fail "curl is required"
   ZIP="$TMP/$SLUG.zip"
   say "downloading $NAME $VERSION ($OS-$ARCH)"
-  curl -fsSL "$URL" -o "$ZIP"
+  curl -fsSL "$URL" -o "$ZIP" || fail "download of $URL failed"
   if command -v sha256sum >/dev/null 2>&1; then GOT="$(sha256sum "$ZIP" | cut -d' ' -f1)"; else GOT="$(shasum -a 256 "$ZIP" | cut -d' ' -f1)"; fi
-  [ "$GOT" = "$SHA" ] || die "checksum mismatch for $URL (expected $SHA, got $GOT); nothing was installed"
-  if command -v unzip >/dev/null 2>&1; then unzip -qo "$ZIP" -d "$DIR"
-  elif command -v bsdtar >/dev/null 2>&1; then bsdtar -xf "$ZIP" -C "$DIR"
-  elif command -v python3 >/dev/null 2>&1; then python3 -c 'import sys,zipfile; zipfile.ZipFile(sys.argv[1]).extractall(sys.argv[2])' "$ZIP" "$DIR"
-  else die "need unzip, bsdtar or python3 to extract the download"; fi
+  [ "$GOT" = "$SHA" ] || fail "checksum mismatch for $URL (expected $SHA, got $GOT)"
+  if command -v unzip >/dev/null 2>&1; then unzip -qo "$ZIP" -d "$STAGE"
+  elif command -v bsdtar >/dev/null 2>&1; then bsdtar -xf "$ZIP" -C "$STAGE"
+  elif command -v python3 >/dev/null 2>&1; then python3 -c 'import sys,zipfile; zipfile.ZipFile(sys.argv[1]).extractall(sys.argv[2])' "$ZIP" "$STAGE"
+  else fail "need unzip, bsdtar or python3 to extract the download"; fi || fail "could not extract $ZIP"
 fi
+[ -f "$STAGE/$CMD" ] || fail "release has no $CMD at its root"
+chmod +x "$STAGE/$CMD"
+echo "$VERSION $(date -u +%Y-%m-%dT%H:%M:%SZ) $$" > "$STAGE/installed.txt" # pid: re-installs in the same second still differ
+
+# Swap: stop the running copy, move the old install aside, move the new one in, then delete the old one.
+if command -v pkill >/dev/null 2>&1; then pkill -f "($DIR/|$BIN/$CMD)" 2>/dev/null || true; fi
+[ "$KIND" = docker ] && { docker rm -f "$CMD" >/dev/null 2>&1 || true; }
+if [ -e "$DIR" ]; then mv "$DIR" "$OLD" || fail "could not move $DIR aside"; fi
+if ! mv "$STAGE" "$DIR"; then
+  [ -e "$OLD" ] && mv "$OLD" "$DIR"
+  fail "could not move the new version into $DIR"
+fi
+rm -rf "$OLD"
 
 ENTRY="$DIR/$CMD"
-[ -f "$ENTRY" ] || die "release has no $CMD at its root"
-chmod +x "$ENTRY"
 if [ "$OS" = macos ]; then xattr -dr com.apple.quarantine "$DIR" 2>/dev/null || true; fi
-echo "$VERSION $(date -u +%Y-%m-%dT%H:%M:%SZ) $$" > "$DIR/installed.txt" # pid: re-installs in the same second still differ
 
 ln -sf "$ENTRY" "$BIN/$CMD"
 

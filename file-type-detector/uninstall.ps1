@@ -17,7 +17,8 @@ for ($i = 0; $i -lt 10 -and (Test-Path $Dir); $i++) {
   try { Remove-Item -Recurse -Force $Dir } catch { Start-Sleep -Milliseconds 500 }
 }
 if (Test-Path $Dir) { throw "Could not remove $Dir (is $Cmd still running?)" }
-Remove-Item -Force -ErrorAction SilentlyContinue (Join-Path $Bin "$Cmd.cmd")
+Remove-Item -Force -ErrorAction SilentlyContinue (Join-Path $Bin "$Cmd.cmd"), (Join-Path $Root "$Slug-install.log")
+Get-ChildItem -Directory -Path $Root -Filter "$Slug.*-*" -ErrorAction SilentlyContinue | Where-Object { $_.Name -match '^.+[.](new|old)-[0-9]+$' } | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
 
 $menu = Join-Path ([Environment]::GetFolderPath('Programs')) 'localtools'
 Remove-Item -Force -ErrorAction SilentlyContinue (Join-Path $menu "$Name.lnk")
