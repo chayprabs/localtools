@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for CSV JSON Transform (csv-json-transform 1.0.1). macOS / Linux, no sudo.
+# localtools installer for CSV JSON Transform (csv-json-transform 1.0.2). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/csv-json-transform/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='csv-json-transform'; NAME='CSV JSON Transform'; VERSION='1.0.1'; PORT='47106'; KIND='bin'; IMAGE=''
+SLUG='csv-json-transform'; NAME='CSV JSON Transform'; VERSION='1.0.2'; PORT='47106'; KIND='bin'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -29,10 +29,10 @@ if [ "$OS" = macos ] && [ "$(sysctl -n sysctl.proc_translated 2>/dev/null || ech
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/csv-json-transform-v1.0.1/csv-json-transform-1.0.1-linux-arm64.zip'; SHA='0c756afb73efbe01dc9805b9de2dd75bd2beed77d68fe1d1497bbea811d873e4' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/csv-json-transform-v1.0.1/csv-json-transform-1.0.1-linux-x64.zip'; SHA='5fb8c63395e16e72f4dc0a4831baa1d0f3aebd98977f15c58f0dd7c752607ef6' ;;
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/csv-json-transform-v1.0.1/csv-json-transform-1.0.1-macos-arm64.zip'; SHA='389fbd82ed43981ad66086cb9f9a846dac62f97df4687b10554950f35b02109a' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/csv-json-transform-v1.0.1/csv-json-transform-1.0.1-macos-x64.zip'; SHA='0b63dfdaa2a7d7f7ce44057d7fc890b010377e2f56f1165305c1eb927d2b4e04' ;;
+  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/csv-json-transform-v1.0.2/csv-json-transform-1.0.2-linux-arm64.zip'; SHA='bf51715e58dd94e13379aa203c05fab95ccb4d57a9b190660babf7acba2a71b6' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/csv-json-transform-v1.0.2/csv-json-transform-1.0.2-linux-x64.zip'; SHA='1e46f27252fe6d7863d14d4db1fdef16fd8b026cb39603da9d62f2295afa3a80' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/csv-json-transform-v1.0.2/csv-json-transform-1.0.2-macos-arm64.zip'; SHA='f483c80bf0212af32cf9a8fa2ed02d9c7e08e1e6180cdef5044b2f7fba9b7037' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/csv-json-transform-v1.0.2/csv-json-transform-1.0.2-macos-x64.zip'; SHA='00ae91f05f2d2ec127b47adcb5fe4142262561655c0c383a0459b4787f949e61' ;;
 esac
 
 if [ "$KIND" = docker ]; then
