@@ -1,4 +1,4 @@
-# localtools installer for Grok Debugger (grok-debugger 1.0.1). Windows PowerShell 5.1+, no admin.
+# localtools installer for Grok Debugger (grok-debugger 1.0.2). Windows PowerShell 5.1+, no admin.
 # Usage: irm https://raw.githubusercontent.com/chayprabs/localtools/main/grok-debugger/install.ps1 | iex
 # Re-running updates. Set $env:LOCALTOOLS_NO_OPEN='1' to skip launching the tool afterwards.
 # Wrapped in a script block so `irm | iex` never leaks settings into, or exits, the caller's session.
@@ -7,8 +7,8 @@ $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 
-$Slug = 'grok-debugger'; $Name = 'Grok Debugger'; $Version = '1.0.1'; $Port = 47118; $Kind = 'bin'
-$Url = 'https://github.com/chayprabs/localtools/releases/download/grok-debugger-v1.0.1/grok-debugger-1.0.1-windows-x64.zip'; $Sha = '94f744b9a6e3fae1acff092588b2ab9c5fa241e20d943d0585c5c00786967a74'; $Image = ''
+$Slug = 'grok-debugger'; $Name = 'Grok Debugger'; $Version = '1.0.2'; $Port = 47118; $Kind = 'bin'
+$Url = 'https://github.com/chayprabs/localtools/releases/download/grok-debugger-v1.0.2/grok-debugger-1.0.2-windows-x64.zip'; $Sha = '99b672d8e980019d2a6f7d3790af6cee67e782bad5ce9974c6c7bc60a96a44b6'; $Image = ''
 $Cmd = "localtools-$Slug"
 $Root = if ($env:LOCALTOOLS_HOME) { $env:LOCALTOOLS_HOME } else { Join-Path $env:USERPROFILE '.localtools' }
 $Dir = Join-Path $Root $Slug

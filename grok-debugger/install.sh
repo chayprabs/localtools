@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for Grok Debugger (grok-debugger 1.0.1). macOS / Linux, no sudo.
+# localtools installer for Grok Debugger (grok-debugger 1.0.2). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/grok-debugger/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='grok-debugger'; NAME='Grok Debugger'; VERSION='1.0.1'; PORT='47118'; KIND='bin'; IMAGE=''
+SLUG='grok-debugger'; NAME='Grok Debugger'; VERSION='1.0.2'; PORT='47118'; KIND='bin'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -29,10 +29,10 @@ if [ "$OS" = macos ] && [ "$(sysctl -n sysctl.proc_translated 2>/dev/null || ech
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/grok-debugger-v1.0.1/grok-debugger-1.0.1-linux-arm64.zip'; SHA='d0a2d34a01b765a798cce56f9f3ef7826d3167d950f477b7972ae5c056186b9f' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/grok-debugger-v1.0.1/grok-debugger-1.0.1-linux-x64.zip'; SHA='53eebb6b7c627de2e6556939314debcc1063226a55739c79ead69287e1e9e034' ;;
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/grok-debugger-v1.0.1/grok-debugger-1.0.1-macos-arm64.zip'; SHA='ee5f79ac36326e7ee28b911bb29d571fb0815f008c49502f47975bbdc6be43e4' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/grok-debugger-v1.0.1/grok-debugger-1.0.1-macos-x64.zip'; SHA='93682cfa22dbe4bf9678ac73b62486ed077e48a158318df02cdf4d2ecf0f94b6' ;;
+  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/grok-debugger-v1.0.2/grok-debugger-1.0.2-linux-arm64.zip'; SHA='144ce071cfe7f7ea2bace51c57aa60ce9a5ed44077f38145b6bdfd840fda8793' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/grok-debugger-v1.0.2/grok-debugger-1.0.2-linux-x64.zip'; SHA='ae38d8e69ea65044c2cbb95bf8843ebcb3fa76de04271f67b96f95c463f8387f' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/grok-debugger-v1.0.2/grok-debugger-1.0.2-macos-arm64.zip'; SHA='57ee6cbfb00281adb1d39771138fe04a1964336aa8e7e55a974d7fa3e89185a2' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/grok-debugger-v1.0.2/grok-debugger-1.0.2-macos-x64.zip'; SHA='edf1b47a0de1256f15dc48d0a8a99549e4ab0165dff5d06b76960fe33cd68dd5' ;;
 esac
 
 if [ "$KIND" = docker ]; then

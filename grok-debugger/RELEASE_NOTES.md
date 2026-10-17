@@ -7,3 +7,7 @@ First release: grok pattern testing with the full Logstash ECS/legacy library, h
 ## 1.0.1 (2026-10-17)
 
 Matches run in killable worker processes (pattern/regex caps, 503 when busy, killed on timeout or disconnect); integers beyond int64/2^53 stay exact; legacy HAPROXYDATE milliseconds fixed and adapted library patterns flagged; stale export cleared; better suggestions (JSON, units, syslog PRI/RFC 5424, nginx dates, key=value).
+
+## 1.0.2 (2026-10-17)
+
+Match, Suggest and Export share isolated workers, compilation limits, deadlines and cancellation. Uploads are removable and newer pasted input wins; table columns include every row and repeated capture values. Dark legends and API errors are corrected; zips include upstream pattern licenses.
