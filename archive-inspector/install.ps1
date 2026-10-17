@@ -1,4 +1,4 @@
-# localtools installer for Archive Inspector (archive-inspector 1.0.0). Windows PowerShell 5.1+, no admin.
+# localtools installer for Archive Inspector (archive-inspector 1.0.1). Windows PowerShell 5.1+, no admin.
 # Usage: irm https://raw.githubusercontent.com/chayprabs/localtools/main/archive-inspector/install.ps1 | iex
 # Re-running updates. Set $env:LOCALTOOLS_NO_OPEN='1' to skip launching the tool afterwards.
 # Wrapped in a script block so `irm | iex` never leaks settings into, or exits, the caller's session.
@@ -7,8 +7,8 @@ $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 
-$Slug = 'archive-inspector'; $Name = 'Archive Inspector'; $Version = '1.0.0'; $Port = 47122; $Kind = 'bin'
-$Url = 'https://github.com/chayprabs/localtools/releases/download/archive-inspector-v1.0.0/archive-inspector-1.0.0-windows-x64.zip'; $Sha = 'cdbd118ce8b40975fe30222f959c000beeb790048b073cd090334ec28dc16ee6'; $Image = ''
+$Slug = 'archive-inspector'; $Name = 'Archive Inspector'; $Version = '1.0.1'; $Port = 47122; $Kind = 'bin'
+$Url = 'https://github.com/chayprabs/localtools/releases/download/archive-inspector-v1.0.1/archive-inspector-1.0.1-windows-x64.zip'; $Sha = '1b7eec4cca9c7ed92e85948dd946f186a6c4cac2b004c4db16f97948f21e828b'; $Image = ''
 $Cmd = "localtools-$Slug"
 $Root = if ($env:LOCALTOOLS_HOME) { $env:LOCALTOOLS_HOME } else { Join-Path $env:USERPROFILE '.localtools' }
 $Dir = Join-Path $Root $Slug

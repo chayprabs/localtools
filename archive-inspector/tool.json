@@ -2,7 +2,7 @@
   "slug": "archive-inspector",
   "name": "Archive Inspector",
   "command": "localtools-archive-inspector",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "port": 47122,
   "kind": "bin",
   "registries": {

@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for Archive Inspector (archive-inspector 1.0.0). macOS / Linux, no sudo.
+# localtools installer for Archive Inspector (archive-inspector 1.0.1). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/archive-inspector/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='archive-inspector'; NAME='Archive Inspector'; VERSION='1.0.0'; PORT='47122'; KIND='bin'; IMAGE=''
+SLUG='archive-inspector'; NAME='Archive Inspector'; VERSION='1.0.1'; PORT='47122'; KIND='bin'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -29,10 +29,10 @@ if [ "$OS" = macos ] && [ "$(sysctl -n sysctl.proc_translated 2>/dev/null || ech
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/archive-inspector-v1.0.0/archive-inspector-1.0.0-macos-arm64.zip'; SHA='e18153bb3411ca7d249b6d51cdbb473e6715f3ba20c4bd56b5f67c23e8fc33c3' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/archive-inspector-v1.0.0/archive-inspector-1.0.0-macos-x64.zip'; SHA='716032e6b85268c9c810fd266395e800185042c67fabe23172cc9cb336f53cc6' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/archive-inspector-v1.0.0/archive-inspector-1.0.0-linux-x64.zip'; SHA='d99866c57806ebc41950e5222ea487367c4044fe5ce0b6c9d3847848fa25a9e3' ;;
-  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/archive-inspector-v1.0.0/archive-inspector-1.0.0-linux-arm64.zip'; SHA='0ca74256143ab91bd3614f34eba183a8e7d5a83cafe4e71954ee87f8333f86de' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/archive-inspector-v1.0.1/archive-inspector-1.0.1-macos-arm64.zip'; SHA='51114d8b7dd53df918f729f1081b897a0afde6709fb450005f1847283a69c821' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/archive-inspector-v1.0.1/archive-inspector-1.0.1-macos-x64.zip'; SHA='0ec244964d58ff6e5661bd5ea10d52dab6437b38f06e1b510b8f8fe5ba4ed535' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/archive-inspector-v1.0.1/archive-inspector-1.0.1-linux-x64.zip'; SHA='abb2d05a0d00a677e60b1faa67b60ed837900f96450258dd35490362b8624963' ;;
+  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/archive-inspector-v1.0.1/archive-inspector-1.0.1-linux-arm64.zip'; SHA='64d52876764ef66c2a04795560d16e5c60a6bca626924bad33831dd14006f1ae' ;;
 esac
 
 if [ "$KIND" = docker ]; then
