@@ -19,6 +19,7 @@ Browse all tools, with docs and how-tos: **https://tools.chaitanyaprabuddha.com*
 | [YAML JSON Query](yaml-json-query/) | Query and edit YAML, JSON, XML, TOML and INI with yq expressions and apply RFC 6902 JSON Patch, keeping comments. | `localtools-yaml-json-query` |
 | [OpenAPI Diff](openapi-diff/) | Diff two OpenAPI 3 or Swagger specs and list breaking changes with severity. | `localtools-openapi-diff` |
 | [Grok Debugger](grok-debugger/) | Test grok patterns against log lines with the full Logstash pattern library and highlighted matches. | `localtools-grok-debugger` |
+| [HTML Extractor](html-extractor/) | Extract data from HTML pages with CSS selectors into JSON or CSV. | `localtools-html-extractor` |
 | [SVG Optimizer](svg-optimizer/) | Optimize and minify SVG files with SVGO and export them to PNG. | `localtools-svg-optimizer` |
 | [Font Subsetter](font-subsetter/) | Subset fonts to the characters you use, instance variable fonts, and convert to WOFF2. | `localtools-font-subsetter` |
 <!-- /tools -->

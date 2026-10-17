@@ -1,0 +1,16 @@
+{
+  "slug": "html-extractor",
+  "name": "HTML Extractor",
+  "command": "localtools-html-extractor",
+  "version": "1.0.0",
+  "port": 47120,
+  "kind": "bin",
+  "registries": {
+    "brew": true,
+    "scoop": true,
+    "winget": true,
+    "npm": null,
+    "pypi": null,
+    "ghcr": null
+  }
+}

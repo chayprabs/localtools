@@ -1,0 +1,12 @@
+{
+  "path": "/api/extract",
+  "fields": {
+    "rows": "article",
+    "fields": "[{\"name\":\"title\",\"selector\":\"h2\"},{\"name\":\"id\",\"selector\":\"\",\"attribute\":\"data-id\"}]",
+    "format": "json"
+  },
+  "files": {
+    "file": "catalog.html"
+  },
+  "expect": "9007199254740993"
+}
