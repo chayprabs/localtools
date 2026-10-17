@@ -2,7 +2,7 @@
   "slug": "pdf-toolkit",
   "name": "PDF Toolkit",
   "command": "localtools-pdf-toolkit",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "port": 47102,
   "kind": "bin",
   "registries": {

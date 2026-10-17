@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for PDF Toolkit (pdf-toolkit 1.0.0). macOS / Linux, no sudo.
+# localtools installer for PDF Toolkit (pdf-toolkit 1.0.1). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/pdf-toolkit/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='pdf-toolkit'; NAME='PDF Toolkit'; VERSION='1.0.0'; PORT='47102'; KIND='bin'; IMAGE=''
+SLUG='pdf-toolkit'; NAME='PDF Toolkit'; VERSION='1.0.1'; PORT='47102'; KIND='bin'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -29,10 +29,10 @@ if [ "$OS" = macos ] && [ "$(sysctl -n sysctl.proc_translated 2>/dev/null || ech
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/pdf-toolkit-v1.0.0/pdf-toolkit-1.0.0-macos-arm64.zip'; SHA='c43f3c2ce66bd76eaeeb7637b45b263430cfa5c4344d198b77e37035932e6a77' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/pdf-toolkit-v1.0.0/pdf-toolkit-1.0.0-macos-x64.zip'; SHA='bd326ceabf38d1cbc3baff3d921029236b1905bed1d02e4099eead0a565c2be7' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/pdf-toolkit-v1.0.0/pdf-toolkit-1.0.0-linux-x64.zip'; SHA='b9a8f6a1632ec189c2650e4a81a68cf3198fdd47e71aaaabca3dd075ef22df17' ;;
-  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/pdf-toolkit-v1.0.0/pdf-toolkit-1.0.0-linux-arm64.zip'; SHA='0a9cabf347ed15b6063ce975cd7b52dd8e07b5daf35924524ee49edf75f088b1' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/pdf-toolkit-v1.0.1/pdf-toolkit-1.0.1-macos-arm64.zip'; SHA='fe0d6d91722a7263ae8dcdf651aa323cb240521ad2df3e359c043f6e0f72a348' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/pdf-toolkit-v1.0.1/pdf-toolkit-1.0.1-macos-x64.zip'; SHA='21055f635ebc9a902de1a35852f57f62188a21c8c0b07bffd923487a24a1ecf3' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/pdf-toolkit-v1.0.1/pdf-toolkit-1.0.1-linux-x64.zip'; SHA='6b358c2994453cc33dde8aec782ade896f4e1a988f339afde9cef7d38bbb0d9a' ;;
+  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/pdf-toolkit-v1.0.1/pdf-toolkit-1.0.1-linux-arm64.zip'; SHA='b75bb829eedf4257cce2474642f822e43cdd165fa3599d9c18541a7d3b1f7813' ;;
 esac
 
 if [ "$KIND" = docker ]; then
