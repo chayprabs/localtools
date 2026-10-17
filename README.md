@@ -20,6 +20,7 @@ Browse all tools, with docs and how-tos: **https://tools.chaitanyaprabuddha.com*
 | [OpenAPI Diff](openapi-diff/) | Diff two OpenAPI 3 or Swagger specs and list breaking changes with severity. | `localtools-openapi-diff` |
 | [Grok Debugger](grok-debugger/) | Test grok patterns against log lines with the full Logstash pattern library and highlighted matches. | `localtools-grok-debugger` |
 | [HTML Extractor](html-extractor/) | Extract data from HTML pages with CSS selectors into JSON or CSV. | `localtools-html-extractor` |
+| [SSL Checker](ssl-checker/) | Check a domain's TLS certificate chain, expiry, supported protocols, DNSSEC and CAA records. | `localtools-ssl-checker` |
 | [SVG Optimizer](svg-optimizer/) | Optimize and minify SVG files with SVGO and export them to PNG. | `localtools-svg-optimizer` |
 | [Font Subsetter](font-subsetter/) | Subset fonts to the characters you use, instance variable fonts, and convert to WOFF2. | `localtools-font-subsetter` |
 <!-- /tools -->

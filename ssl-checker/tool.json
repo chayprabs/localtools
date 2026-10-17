@@ -1,0 +1,16 @@
+{
+  "slug": "ssl-checker",
+  "name": "SSL Checker",
+  "command": "localtools-ssl-checker",
+  "version": "1.0.0",
+  "port": 47121,
+  "kind": "bin",
+  "registries": {
+    "brew": true,
+    "scoop": true,
+    "winget": true,
+    "npm": null,
+    "pypi": null,
+    "ghcr": null
+  }
+}

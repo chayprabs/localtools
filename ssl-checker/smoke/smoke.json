@@ -1,0 +1,9 @@
+{
+  "path": "/api/check",
+  "fields": {
+    "host": "example.com",
+    "dns": "0"
+  },
+  "files": {},
+  "expect": "expires"
+}

@@ -1,0 +1,7 @@
+[
+ {"goto": "/"},
+ {"fill": {"selector": "#hosts", "text": "example.com\nexpired.badssl.com"}, "pause": 300},
+ {"click": "#go"},
+ {"waitFor": {"text": "expired.badssl.com:443"}, "pause": 600},
+ {"scrollIntoView": "#out-l", "pause": 1500}
+]
