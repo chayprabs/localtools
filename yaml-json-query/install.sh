@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for YAML JSON Query (yaml-json-query 1.0.1). macOS / Linux, no sudo.
+# localtools installer for YAML JSON Query (yaml-json-query 1.0.2). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/yaml-json-query/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='yaml-json-query'; NAME='YAML JSON Query'; VERSION='1.0.1'; PORT='47110'; KIND='bin'; IMAGE=''
+SLUG='yaml-json-query'; NAME='YAML JSON Query'; VERSION='1.0.2'; PORT='47110'; KIND='bin'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -29,10 +29,10 @@ if [ "$OS" = macos ] && [ "$(sysctl -n sysctl.proc_translated 2>/dev/null || ech
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/yaml-json-query-v1.0.1/yaml-json-query-1.0.1-macos-arm64.zip'; SHA='69a2eed1c4db4d452815ca8695091123385529788a6e11c7a5ed2fa2bf05f186' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/yaml-json-query-v1.0.1/yaml-json-query-1.0.1-macos-x64.zip'; SHA='1beeea3d098679b79d738be50176f0ca6acb2c7dfbad9d3808c088cdc025cfd3' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/yaml-json-query-v1.0.1/yaml-json-query-1.0.1-linux-x64.zip'; SHA='f99d368c2fe6d55a08555fbdbcaa7398a9bc7cc216eba0847a2c5c3c314e1b83' ;;
-  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/yaml-json-query-v1.0.1/yaml-json-query-1.0.1-linux-arm64.zip'; SHA='36eec688ee631cde0750b6ba42fae2cfcbf7daccd13e6ddfd4c35b9c92483ee0' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/yaml-json-query-v1.0.2/yaml-json-query-1.0.2-macos-arm64.zip'; SHA='e08bec8f5155add24f73c5dd33fd517ad8fca0bd26dcb87a5735e168dc742278' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/yaml-json-query-v1.0.2/yaml-json-query-1.0.2-macos-x64.zip'; SHA='0c5e934a2f5e314d4e5cb3c2fc676617ba1a8c50f851dc4561dbb95bfebe7f89' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/yaml-json-query-v1.0.2/yaml-json-query-1.0.2-linux-x64.zip'; SHA='0321689ae948d74e63b65a5a9a532d7a25aa56f96f17d255aecf63a40f4283fb' ;;
+  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/yaml-json-query-v1.0.2/yaml-json-query-1.0.2-linux-arm64.zip'; SHA='8fc1244f2c295075247e84e0d6a6c47c5df14394237bfbd7239f0f6af4b3f505' ;;
 esac
 
 if [ "$KIND" = docker ]; then
