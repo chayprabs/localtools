@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for HTML Extractor (html-extractor 1.0.0). macOS / Linux, no sudo.
+# localtools installer for HTML Extractor (html-extractor 1.0.1). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/html-extractor/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='html-extractor'; NAME='HTML Extractor'; VERSION='1.0.0'; PORT='47120'; KIND='bin'; IMAGE=''
+SLUG='html-extractor'; NAME='HTML Extractor'; VERSION='1.0.1'; PORT='47120'; KIND='bin'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -29,10 +29,10 @@ if [ "$OS" = macos ] && [ "$(sysctl -n sysctl.proc_translated 2>/dev/null || ech
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/html-extractor-v1.0.0/html-extractor-1.0.0-macos-arm64.zip'; SHA='b60df601b6e7a245632e4bd055451d0a86fd3128b2135d0bc04a56baadab9773' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/html-extractor-v1.0.0/html-extractor-1.0.0-macos-x64.zip'; SHA='7deb89cf1535c68843a6a713e2bacdfa855c3b0b9cc4ce5bf37b372dc27366a3' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/html-extractor-v1.0.0/html-extractor-1.0.0-linux-x64.zip'; SHA='974484711e9f38a3acb21bda35cb01fd79b12c7c7c9cf4078ea9ab948e6c961b' ;;
-  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/html-extractor-v1.0.0/html-extractor-1.0.0-linux-arm64.zip'; SHA='b71bc445fc215abc9eb3f052fad872a2a4f69fcb54babd9b1a3e12294dfca37a' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/html-extractor-v1.0.1/html-extractor-1.0.1-macos-arm64.zip'; SHA='1891fe509363887aa93f34251a7ce8120243a7a7500373f3257eddcc63733af6' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/html-extractor-v1.0.1/html-extractor-1.0.1-macos-x64.zip'; SHA='878305f3577098a2aab40da0a2c9c78986faced37d10032c9f25a7a406392518' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/html-extractor-v1.0.1/html-extractor-1.0.1-linux-x64.zip'; SHA='fa8d9aa94e948e1963b83f5888ec84e7b8fd62d53c79314fb8a80936a1b6f9e0' ;;
+  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/html-extractor-v1.0.1/html-extractor-1.0.1-linux-arm64.zip'; SHA='3d45e894498b426bf1d8f8e01106c9d60f916791d9278cab4a08fed22917a018' ;;
 esac
 
 if [ "$KIND" = docker ]; then

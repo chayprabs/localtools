@@ -2,7 +2,7 @@
   "slug": "html-extractor",
   "name": "HTML Extractor",
   "command": "localtools-html-extractor",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "port": 47120,
   "kind": "bin",
   "registries": {
