@@ -16,6 +16,7 @@ Browse all tools, with docs and how-tos: **https://tools.chaitanyaprabuddha.com*
 | [CSV SQL Query](csv-sql-query/) | Run SQL on CSV, TSV, JSON, Parquet and log files (nginx, Apache, syslog) with DuckDB. | `localtools-csv-sql-query` |
 | [CSV JSON Transform](csv-json-transform/) | Convert and transform CSV, TSV, JSON and JSONL with Miller verbs: filter, sort, join, reshape. | `localtools-csv-json-transform` |
 | [JSON to Excel](json-to-excel/) | Convert JSON or JSONL into formatted .xlsx workbooks with typed columns and multiple sheets. | `localtools-json-to-excel` |
+| [Excel Diff](excel-diff/) | Compare two Excel or CSV files cell by cell: values, formulas, formats, inserted rows and columns, sheets and named ranges. | `localtools-excel-diff` |
 | [YAML JSON Query](yaml-json-query/) | Query and edit YAML, JSON, XML, TOML and INI with yq expressions and apply RFC 6902 JSON Patch, keeping comments. | `localtools-yaml-json-query` |
 | [OpenAPI Diff](openapi-diff/) | Diff two OpenAPI 3 or Swagger specs and list breaking changes with severity. | `localtools-openapi-diff` |
 | [Grok Debugger](grok-debugger/) | Test grok patterns against log lines with the full Logstash pattern library and highlighted matches. | `localtools-grok-debugger` |

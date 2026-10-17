@@ -1,0 +1,9 @@
+{
+  "path": "/api/diff",
+  "fields": {},
+  "files": {
+    "a": "a.xlsx",
+    "b": "b.xlsx"
+  },
+  "expect": "\"status\":\"changed\""
+}

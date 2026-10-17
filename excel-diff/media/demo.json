@@ -1,0 +1,11 @@
+[
+  {"goto": "/"},
+  {"setInputFiles": {"selector": "#fileA", "files": ["a.xlsx"]}, "pause": 500},
+  {"setInputFiles": {"selector": "#fileB", "files": ["b.xlsx"]}, "pause": 600},
+  {"click": "#go"},
+  {"waitFor": {"selector": "#gridB td.xd-chg"}, "pause": 700},
+  {"scrollIntoView": "#out-l", "pause": 900},
+  {"click": "#next", "pause": 900},
+  {"click": "#next", "pause": 900},
+  {"click": "#next", "pause": 2500}
+]
