@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for OpenAPI Diff (openapi-diff 1.0.0). macOS / Linux, no sudo.
+# localtools installer for OpenAPI Diff (openapi-diff 1.0.1). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/openapi-diff/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='openapi-diff'; NAME='OpenAPI Diff'; VERSION='1.0.0'; PORT='47111'; KIND='bin'; IMAGE=''
+SLUG='openapi-diff'; NAME='OpenAPI Diff'; VERSION='1.0.1'; PORT='47111'; KIND='bin'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -29,10 +29,10 @@ if [ "$OS" = macos ] && [ "$(sysctl -n sysctl.proc_translated 2>/dev/null || ech
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/openapi-diff-v1.0.0/openapi-diff-1.0.0-linux-arm64.zip'; SHA='f7fdb343f149918b87c4f01c2e1d401caab9d677e723d3d3c5e2324900537286' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/openapi-diff-v1.0.0/openapi-diff-1.0.0-linux-x64.zip'; SHA='9df15620beb338dd5aec367c29ab9dbe5d1ef8a4224ea5485722b3d4e0824526' ;;
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/openapi-diff-v1.0.0/openapi-diff-1.0.0-macos-arm64.zip'; SHA='79575dcd9287056a3ee45edc697c13d92d18c54338d095c86070875fa1fca975' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/openapi-diff-v1.0.0/openapi-diff-1.0.0-macos-x64.zip'; SHA='a3a53ccc2a19baa5ae5aea2022e7a882de1b44f92cf3b94f0137f56b6bd11a0c' ;;
+  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/openapi-diff-v1.0.1/openapi-diff-1.0.1-linux-arm64.zip'; SHA='90067dd742b38fd7d38307118ee44c49262312c60baef770d82fdecfc895b8f2' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/openapi-diff-v1.0.1/openapi-diff-1.0.1-linux-x64.zip'; SHA='1de3a78f2436e6eb4cb3ab964d084fec9f34c6aa5b415ca6bef792781c34f275' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/openapi-diff-v1.0.1/openapi-diff-1.0.1-macos-arm64.zip'; SHA='5d16fcc7b2a01197d64ca9e7872c34d010aed2c7e44a15fbf88cf4671d5427d3' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/openapi-diff-v1.0.1/openapi-diff-1.0.1-macos-x64.zip'; SHA='4a6cdd546a35498de5d67b68dd604c17f2f50265f5ac3f95d4e511713a8a33a2' ;;
 esac
 
 if [ "$KIND" = docker ]; then

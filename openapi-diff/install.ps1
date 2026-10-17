@@ -1,4 +1,4 @@
-# localtools installer for OpenAPI Diff (openapi-diff 1.0.0). Windows PowerShell 5.1+, no admin.
+# localtools installer for OpenAPI Diff (openapi-diff 1.0.1). Windows PowerShell 5.1+, no admin.
 # Usage: irm https://raw.githubusercontent.com/chayprabs/localtools/main/openapi-diff/install.ps1 | iex
 # Re-running updates. Set $env:LOCALTOOLS_NO_OPEN='1' to skip launching the tool afterwards.
 # Wrapped in a script block so `irm | iex` never leaks settings into, or exits, the caller's session.
@@ -7,8 +7,8 @@ $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 
-$Slug = 'openapi-diff'; $Name = 'OpenAPI Diff'; $Version = '1.0.0'; $Port = 47111; $Kind = 'bin'
-$Url = 'https://github.com/chayprabs/localtools/releases/download/openapi-diff-v1.0.0/openapi-diff-1.0.0-windows-x64.zip'; $Sha = '11fb91b95fefae004b0e94e698ffaa28921d5197e0423aec076d3378e71ec277'; $Image = ''
+$Slug = 'openapi-diff'; $Name = 'OpenAPI Diff'; $Version = '1.0.1'; $Port = 47111; $Kind = 'bin'
+$Url = 'https://github.com/chayprabs/localtools/releases/download/openapi-diff-v1.0.1/openapi-diff-1.0.1-windows-x64.zip'; $Sha = '24f1e6987f2fd220be8db20e7c43f4b43b9621190c8dc0d7c4866e08291452c7'; $Image = ''
 $Cmd = "localtools-$Slug"
 $Root = if ($env:LOCALTOOLS_HOME) { $env:LOCALTOOLS_HOME } else { Join-Path $env:USERPROFILE '.localtools' }
 $Dir = Join-Path $Root $Slug
