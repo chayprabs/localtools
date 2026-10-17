@@ -1,4 +1,4 @@
-# localtools installer for PDF Toolkit (pdf-toolkit 1.0.1). Windows PowerShell 5.1+, no admin.
+# localtools installer for PDF Toolkit (pdf-toolkit 1.0.2). Windows PowerShell 5.1+, no admin.
 # Usage: irm https://raw.githubusercontent.com/chayprabs/localtools/main/pdf-toolkit/install.ps1 | iex
 # Re-running updates. Set $env:LOCALTOOLS_NO_OPEN='1' to skip launching the tool afterwards.
 # Wrapped in a script block so `irm | iex` never leaks settings into, or exits, the caller's session.
@@ -7,8 +7,8 @@ $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 
-$Slug = 'pdf-toolkit'; $Name = 'PDF Toolkit'; $Version = '1.0.1'; $Port = 47102; $Kind = 'bin'
-$Url = 'https://github.com/chayprabs/localtools/releases/download/pdf-toolkit-v1.0.1/pdf-toolkit-1.0.1-windows-x64.zip'; $Sha = '92ce5084c466652f07bbbcae96d94082e08b45218ee2a3f4e6290f90d807d288'; $Image = ''
+$Slug = 'pdf-toolkit'; $Name = 'PDF Toolkit'; $Version = '1.0.2'; $Port = 47102; $Kind = 'bin'
+$Url = 'https://github.com/chayprabs/localtools/releases/download/pdf-toolkit-v1.0.2/pdf-toolkit-1.0.2-windows-x64.zip'; $Sha = 'b4998a14869806f80b7ac0b4c5f81cc596e49ee528e85e512461b8a231d7dc43'; $Image = ''
 $Cmd = "localtools-$Slug"
 $Root = if ($env:LOCALTOOLS_HOME) { $env:LOCALTOOLS_HOME } else { Join-Path $env:USERPROFILE '.localtools' }
 $Dir = Join-Path $Root $Slug
