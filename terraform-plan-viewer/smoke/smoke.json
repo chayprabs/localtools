@@ -1,0 +1,8 @@
+{
+  "path": "/api/plan",
+  "fields": {},
+  "files": {
+    "file": "plan.json"
+  },
+  "expect": "Plan: 1 to import, 7 to add, 1 to change, 7 to destroy."
+}

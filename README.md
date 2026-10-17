@@ -19,6 +19,7 @@ Browse all tools, with docs and how-tos: **https://tools.chaitanyaprabuddha.com*
 | [Excel Diff](excel-diff/) | Compare two Excel or CSV files cell by cell: values, formulas, formats, inserted rows and columns, sheets and named ranges. | `localtools-excel-diff` |
 | [YAML JSON Query](yaml-json-query/) | Query and edit YAML, JSON, XML, TOML and INI with yq expressions and apply RFC 6902 JSON Patch, keeping comments. | `localtools-yaml-json-query` |
 | [OpenAPI Diff](openapi-diff/) | Diff two OpenAPI 3 or Swagger specs and list breaking changes with severity. | `localtools-openapi-diff` |
+| [Terraform Plan Viewer](terraform-plan-viewer/) | Review terraform or OpenTofu plan JSON offline: destructive changes first, attribute diffs, blast radius, drift and risk flags. | `localtools-terraform-plan-viewer` |
 | [Grok Debugger](grok-debugger/) | Test grok patterns against log lines with the full Logstash pattern library and highlighted matches. | `localtools-grok-debugger` |
 | [HTML Extractor](html-extractor/) | Extract data from HTML pages with CSS selectors into JSON or CSV. | `localtools-html-extractor` |
 | [SSL Checker](ssl-checker/) | Check a domain's TLS certificate chain, expiry, supported protocols, DNSSEC and CAA records. | `localtools-ssl-checker` |

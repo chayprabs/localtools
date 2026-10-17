@@ -1,0 +1,8 @@
+[
+  {"goto": "/"},
+  {"setInputFiles": {"selector": "#file", "files": ["plan.json"]}},
+  {"click": "#go"},
+  {"waitFor": {"selector": "#result"}},
+  {"click": "#list .pv-res summary", "pause": 600},
+  {"scrollIntoView": "#line", "pause": 1500}
+]
