@@ -2,7 +2,7 @@
   "slug": "grok-debugger",
   "name": "Grok Debugger",
   "command": "localtools-grok-debugger",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "port": 47118,
   "kind": "bin",
   "registries": {
