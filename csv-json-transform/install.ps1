@@ -1,4 +1,4 @@
-# localtools installer for CSV JSON Transform (csv-json-transform 1.0.0). Windows PowerShell 5.1+, no admin.
+# localtools installer for CSV JSON Transform (csv-json-transform 1.0.1). Windows PowerShell 5.1+, no admin.
 # Usage: irm https://raw.githubusercontent.com/chayprabs/localtools/main/csv-json-transform/install.ps1 | iex
 # Re-running updates. Set $env:LOCALTOOLS_NO_OPEN='1' to skip launching the tool afterwards.
 # Wrapped in a script block so `irm | iex` never leaks settings into, or exits, the caller's session.
@@ -7,8 +7,8 @@ $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 
-$Slug = 'csv-json-transform'; $Name = 'CSV JSON Transform'; $Version = '1.0.0'; $Port = 47106; $Kind = 'bin'
-$Url = 'https://github.com/chayprabs/localtools/releases/download/csv-json-transform-v1.0.0/csv-json-transform-1.0.0-windows-x64.zip'; $Sha = 'a2ea4cd73debf48ac7ae142043823a309b66acd58ae5be384fb8e7f1e43ba847'; $Image = ''
+$Slug = 'csv-json-transform'; $Name = 'CSV JSON Transform'; $Version = '1.0.1'; $Port = 47106; $Kind = 'bin'
+$Url = 'https://github.com/chayprabs/localtools/releases/download/csv-json-transform-v1.0.1/csv-json-transform-1.0.1-windows-x64.zip'; $Sha = '35d03b7f70a24b4d475479565f1ee15f358ca195b0e6c25f5998b1f81d444006'; $Image = ''
 $Cmd = "localtools-$Slug"
 $Root = if ($env:LOCALTOOLS_HOME) { $env:LOCALTOOLS_HOME } else { Join-Path $env:USERPROFILE '.localtools' }
 $Dir = Join-Path $Root $Slug
