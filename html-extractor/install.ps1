@@ -1,4 +1,4 @@
-# localtools installer for HTML Extractor (html-extractor 1.0.1). Windows PowerShell 5.1+, no admin.
+# localtools installer for HTML Extractor (html-extractor 1.0.2). Windows PowerShell 5.1+, no admin.
 # Usage: irm https://raw.githubusercontent.com/chayprabs/localtools/main/html-extractor/install.ps1 | iex
 # Re-running updates. Set $env:LOCALTOOLS_NO_OPEN='1' to skip launching the tool afterwards.
 # Wrapped in a script block so `irm | iex` never leaks settings into, or exits, the caller's session.
@@ -7,8 +7,8 @@ $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 
-$Slug = 'html-extractor'; $Name = 'HTML Extractor'; $Version = '1.0.1'; $Port = 47120; $Kind = 'bin'
-$Url = 'https://github.com/chayprabs/localtools/releases/download/html-extractor-v1.0.1/html-extractor-1.0.1-windows-x64.zip'; $Sha = '575777e9aaa1490078df4f01fb6cb140a46349b5cb78926657bef2880ba5d578'; $Image = ''
+$Slug = 'html-extractor'; $Name = 'HTML Extractor'; $Version = '1.0.2'; $Port = 47120; $Kind = 'bin'
+$Url = 'https://github.com/chayprabs/localtools/releases/download/html-extractor-v1.0.2/html-extractor-1.0.2-windows-x64.zip'; $Sha = '6b17f7c4ce5a4c8ff8ecd97ab595fa94a921c16d069546e2089e78faf61fc989'; $Image = ''
 $Cmd = "localtools-$Slug"
 $Root = if ($env:LOCALTOOLS_HOME) { $env:LOCALTOOLS_HOME } else { Join-Path $env:USERPROFILE '.localtools' }
 $Dir = Join-Path $Root $Slug

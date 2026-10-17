@@ -7,3 +7,7 @@ First release: extract repeated HTML rows with a row selector and an ordered fie
 ## 1.0.1 (2026-10-17)
 
 Single-column CSV keeps rows with an empty value; selectors match Chromium (:empty, case-insensitive enumerated attribute values, no <template> contents, case-insensitive attribute names); late and ISO-2022-JP meta charsets honoured; unterminated field maps report line/column; oversize requests return 413.
+
+## 1.0.2 (2026-10-17)
+
+Blank meta charset values are ignored instead of failing the page; internal failures report as internal errors; attribute flags without a space parse; case-insensitive enumerated attribute values apply only to HTML elements, as in Chromium.
