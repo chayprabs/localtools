@@ -7,3 +7,7 @@ First release: SVGO 4.1 optimization with safe/aggressive presets and toggles (v
 ## 1.0.1 (2026-10-16)
 
 Windows: update and uninstall now start the installer through WMI so it keeps running after the tool exits; logs are UTF-8.
+
+## 1.0.2 (2026-10-17)
+
+Safe keeps <symbol> sprites, defs and ids; sanitize decodes CSS escapes before checking and blocks image-set/cross-fade/@font-face; each file runs in a worker with a 30 s limit and size/nesting limits; CLI -o keeps sub-folders; unique id prefixes; 32 MB paste; clear error for oversized PNG; growth shows +%.
