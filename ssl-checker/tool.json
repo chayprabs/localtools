@@ -2,7 +2,7 @@
   "slug": "ssl-checker",
   "name": "SSL Checker",
   "command": "localtools-ssl-checker",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "port": 47121,
   "kind": "bin",
   "registries": {

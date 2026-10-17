@@ -1,4 +1,4 @@
-# localtools installer for SSL Checker (ssl-checker 1.0.0). Windows PowerShell 5.1+, no admin.
+# localtools installer for SSL Checker (ssl-checker 1.0.1). Windows PowerShell 5.1+, no admin.
 # Usage: irm https://raw.githubusercontent.com/chayprabs/localtools/main/ssl-checker/install.ps1 | iex
 # Re-running updates. Set $env:LOCALTOOLS_NO_OPEN='1' to skip launching the tool afterwards.
 # Wrapped in a script block so `irm | iex` never leaks settings into, or exits, the caller's session.
@@ -7,8 +7,8 @@ $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 
-$Slug = 'ssl-checker'; $Name = 'SSL Checker'; $Version = '1.0.0'; $Port = 47121; $Kind = 'bin'
-$Url = 'https://github.com/chayprabs/localtools/releases/download/ssl-checker-v1.0.0/ssl-checker-1.0.0-windows-x64.zip'; $Sha = 'b4deff60626abb4482ceb418b682e1b82cf59ffb4d66ee3ca2f8fa2777a64281'; $Image = ''
+$Slug = 'ssl-checker'; $Name = 'SSL Checker'; $Version = '1.0.1'; $Port = 47121; $Kind = 'bin'
+$Url = 'https://github.com/chayprabs/localtools/releases/download/ssl-checker-v1.0.1/ssl-checker-1.0.1-windows-x64.zip'; $Sha = 'edceec6bcc3165d40581908efc8297e508382fe3ee94b31ec75709d386cf0c43'; $Image = ''
 $Cmd = "localtools-$Slug"
 $Root = if ($env:LOCALTOOLS_HOME) { $env:LOCALTOOLS_HOME } else { Join-Path $env:USERPROFILE '.localtools' }
 $Dir = Join-Path $Root $Slug

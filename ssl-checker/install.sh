@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for SSL Checker (ssl-checker 1.0.0). macOS / Linux, no sudo.
+# localtools installer for SSL Checker (ssl-checker 1.0.1). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/ssl-checker/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='ssl-checker'; NAME='SSL Checker'; VERSION='1.0.0'; PORT='47121'; KIND='bin'; IMAGE=''
+SLUG='ssl-checker'; NAME='SSL Checker'; VERSION='1.0.1'; PORT='47121'; KIND='bin'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -29,10 +29,10 @@ if [ "$OS" = macos ] && [ "$(sysctl -n sysctl.proc_translated 2>/dev/null || ech
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/ssl-checker-v1.0.0/ssl-checker-1.0.0-linux-arm64.zip'; SHA='7e7addca42bb28b3e63d7a17589387719a207a0eee55e95c5ed7aa9d49c59b68' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/ssl-checker-v1.0.0/ssl-checker-1.0.0-linux-x64.zip'; SHA='d1c74dbe52433e4b8b29fb155285647cffde07fef18491b0c270e8b15997e729' ;;
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/ssl-checker-v1.0.0/ssl-checker-1.0.0-macos-arm64.zip'; SHA='14c4840f970392e1cf4a7609ca59aaa585889a8bb63b3b06de62ad58b6d504e0' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/ssl-checker-v1.0.0/ssl-checker-1.0.0-macos-x64.zip'; SHA='54f93d18b8685eab87af2ff8d2c258cdffb3bd3f33c42cbb134b00bac1364c14' ;;
+  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/ssl-checker-v1.0.1/ssl-checker-1.0.1-linux-arm64.zip'; SHA='268ed5e3044bef0de70f7b13a6a7205f052e56350801cfaec896e40d8c5fd231' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/ssl-checker-v1.0.1/ssl-checker-1.0.1-linux-x64.zip'; SHA='0a6ce4b6612763f716c740f1bc02744aad320e122b062c7dc33f8549905eb9cb' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/ssl-checker-v1.0.1/ssl-checker-1.0.1-macos-arm64.zip'; SHA='04456aa6d66a9a8fda77ee8a401f080a3505ffad17ff56035fd68c9ad0b44db5' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/ssl-checker-v1.0.1/ssl-checker-1.0.1-macos-x64.zip'; SHA='3e48cb69b142992721d67541133eae471ce11439c509dd525aeab51323ccec89' ;;
 esac
 
 if [ "$KIND" = docker ]; then
