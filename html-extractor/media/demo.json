@@ -2,7 +2,8 @@
   { "goto": "/" },
   { "setInputFiles": { "selector": "#file", "files": ["catalog.html"] }, "pause": 900 },
   { "fill": { "selector": "#rows", "text": "article.product" }, "pause": 600 },
+  { "fill": { "selector": "#fields", "text": "[\n  {\"name\":\"title\",\"selector\":\"h2\"},\n  {\"name\":\"url\",\"selector\":\"a\",\"attribute\":\"href\"},\n  {\"name\":\"price\",\"selector\":\".price\"},\n  {\"name\":\"id\",\"selector\":\"\",\"attribute\":\"data-id\"}\n]" }, "pause": 600 },
   { "click": "#go" },
-  { "waitFor": { "text": "9007199254740993" }, "pause": 800 },
+  { "waitFor": { "selector": "#out" }, "pause": 800 },
   { "scrollIntoView": "#out-l", "pause": 2500 }
 ]
