@@ -1,0 +1,10 @@
+{
+  "path": "/api/inspect",
+  "fields": {
+    "depth": "8"
+  },
+  "files": {
+    "file": "nested-demo.zip"
+  },
+  "expect": "config/settings.json"
+}

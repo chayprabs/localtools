@@ -1,0 +1,10 @@
+[
+  {"goto": "/"},
+  {"setInputFiles": {"selector": "#file", "files": ["nested-demo.zip"]}, "pause": 600},
+  {"click": "#go"},
+  {"waitFor": {"selector": "#entsec"}, "pause": 800},
+  {"scrollIntoView": "#out-l", "pause": 1200},
+  {"click": "#entries tr:nth-child(5) button"},
+  {"waitFor": {"selector": "#preview pre"}, "pause": 600},
+  {"scrollIntoView": "#out-l", "pause": 1500}
+]
