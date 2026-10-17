@@ -1,0 +1,10 @@
+[
+  { "goto": "/" },
+  { "setInputFiles": { "selector": "#file", "files": ["apache-combined.log"] }, "pause": 600 },
+  { "click": "#go" },
+  { "waitFor": { "selector": "#lines mark" }, "pause": 1200 },
+  { "fill": { "selector": "#pattern", "text": "%{IP:client} - %{USER:user} \[%{HTTPDATE:ts}\] \"%{WORD:method} %{NOTSPACE:path} HTTP/%{NUMBER:v}\" %{INT:status:int} %{NOTSPACE:bytes}" } },
+  { "click": "#go" },
+  { "waitFor": { "text": "3 of 3 lines matched" }, "pause": 600 },
+  { "scrollIntoView": "#out-l", "pause": 2500 }
+]

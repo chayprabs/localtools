@@ -1,0 +1,10 @@
+{
+  "path": "/api/match",
+  "fields": {
+    "pattern": "%{COMBINEDAPACHELOG}"
+  },
+  "files": {
+    "file": "apache-combined.log"
+  },
+  "expect": "\"frank\""
+}
