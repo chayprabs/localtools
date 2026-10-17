@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for CSV SQL Query (csv-sql-query 1.0.1). macOS / Linux, no sudo.
+# localtools installer for CSV SQL Query (csv-sql-query 1.0.2). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/csv-sql-query/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='csv-sql-query'; NAME='CSV SQL Query'; VERSION='1.0.1'; PORT='47105'; KIND='bin'; IMAGE=''
+SLUG='csv-sql-query'; NAME='CSV SQL Query'; VERSION='1.0.2'; PORT='47105'; KIND='bin'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -29,10 +29,10 @@ if [ "$OS" = macos ] && [ "$(sysctl -n sysctl.proc_translated 2>/dev/null || ech
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/csv-sql-query-v1.0.1/csv-sql-query-1.0.1-macos-arm64.zip'; SHA='e7426d9ea8180ea6f321f0d872838ab1f723dd4000883fe3618d62cea6f4928c' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/csv-sql-query-v1.0.1/csv-sql-query-1.0.1-macos-x64.zip'; SHA='c1928f7ee59e2d7ae4efba337f4e4b42b02b9a99dde33bffc4f2bd905490da1e' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/csv-sql-query-v1.0.1/csv-sql-query-1.0.1-linux-x64.zip'; SHA='250c8f367f6cf8513e0075ef33e9e31e3be50c93cce0432f2e22f08ae57cede4' ;;
-  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/csv-sql-query-v1.0.1/csv-sql-query-1.0.1-linux-arm64.zip'; SHA='65480b51d9b82f45e344b2edd13230a0edc0e52b57c145c3af929397874ad7a3' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/csv-sql-query-v1.0.2/csv-sql-query-1.0.2-macos-arm64.zip'; SHA='ac910a4648ef60474f266ece9bec96896000d37b4aabf7ab5418485dd4407cde' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/csv-sql-query-v1.0.2/csv-sql-query-1.0.2-macos-x64.zip'; SHA='bbc9874d06ea4d7b034b2f7941f9dca66d28e690fd058383c09abde426126837' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/csv-sql-query-v1.0.2/csv-sql-query-1.0.2-linux-x64.zip'; SHA='e802ed3c27f28d123f15e50feb7f927c42edf14403055d827ab845bf1290d241' ;;
+  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/csv-sql-query-v1.0.2/csv-sql-query-1.0.2-linux-arm64.zip'; SHA='bdd104445f3274372a87e0151efbc1239703e5474e40a8be827a65e9707d4d4b' ;;
 esac
 
 if [ "$KIND" = docker ]; then

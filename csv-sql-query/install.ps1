@@ -1,4 +1,4 @@
-# localtools installer for CSV SQL Query (csv-sql-query 1.0.1). Windows PowerShell 5.1+, no admin.
+# localtools installer for CSV SQL Query (csv-sql-query 1.0.2). Windows PowerShell 5.1+, no admin.
 # Usage: irm https://raw.githubusercontent.com/chayprabs/localtools/main/csv-sql-query/install.ps1 | iex
 # Re-running updates. Set $env:LOCALTOOLS_NO_OPEN='1' to skip launching the tool afterwards.
 # Wrapped in a script block so `irm | iex` never leaks settings into, or exits, the caller's session.
@@ -7,8 +7,8 @@ $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 
-$Slug = 'csv-sql-query'; $Name = 'CSV SQL Query'; $Version = '1.0.1'; $Port = 47105; $Kind = 'bin'
-$Url = 'https://github.com/chayprabs/localtools/releases/download/csv-sql-query-v1.0.1/csv-sql-query-1.0.1-windows-x64.zip'; $Sha = '6309f55a7163158c1c633cb37717122d05058dec80bf3e0a4157a9d85f0d5ffe'; $Image = ''
+$Slug = 'csv-sql-query'; $Name = 'CSV SQL Query'; $Version = '1.0.2'; $Port = 47105; $Kind = 'bin'
+$Url = 'https://github.com/chayprabs/localtools/releases/download/csv-sql-query-v1.0.2/csv-sql-query-1.0.2-windows-x64.zip'; $Sha = 'c817074102cb8cc2dd9feb244913e2b51be4d829a9b438553c48bbe2d8ee54d1'; $Image = ''
 $Cmd = "localtools-$Slug"
 $Root = if ($env:LOCALTOOLS_HOME) { $env:LOCALTOOLS_HOME } else { Join-Path $env:USERPROFILE '.localtools' }
 $Dir = Join-Path $Root $Slug
