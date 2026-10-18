@@ -52,7 +52,7 @@ Package-manager installs are updated by that package manager; `localtools-excel-
 
 ## Engine
 
-Go: streaming xlsx reader + Myers row/column alignment; excelize for the annotated workbook. A streaming reader keeps every stored value exact (no float rounding) and handles a million cells in seconds; Myers O(ND) alignment finds inserted and deleted rows and columns; excelize writes B back with the changes highlighted.
+Go: streaming xlsx reader + Myers row/column alignment; excelize for the annotated workbook. A streaming reader shows every value exactly as stored (comparison uses the stored double, like Excel) and handles a million cells in seconds; Myers O(ND) alignment, with per-column alignment when a column changed in every row, finds inserted and deleted rows and columns; excelize writes B back with the changes highlighted.
 
 ## Report an issue
 

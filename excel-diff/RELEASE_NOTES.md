@@ -11,3 +11,10 @@
 - Office 2010+ (x14) data validations are compared, including input-prompt settings.
 - Annotated workbook keeps added (green) and changed (yellow) fills apart.
 - Workbook date-system (1900/1904) changes are reported; capped exports end with a truncated line.
+
+## 1.0.2 (2026-10-18)
+
+- Rows align when one column changed in every row plus inserted rows (correct, under a second); large blocks are paired by position.
+- Annotated workbook works without a stylesheet and with openpyxl/pandas colours; a failed -o leaves no partial file.
+- Less re-save noise (default validation attributes, empty inline strings, built-in formats, quoted sheet names in names).
+- Date-system changes have their own label; one file argument exits 2.

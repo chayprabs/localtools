@@ -1,4 +1,4 @@
-# localtools installer for Excel Diff (excel-diff 1.0.1). Windows PowerShell 5.1+, no admin.
+# localtools installer for Excel Diff (excel-diff 1.0.2). Windows PowerShell 5.1+, no admin.
 # Usage: irm https://raw.githubusercontent.com/chayprabs/localtools/main/excel-diff/install.ps1 | iex
 # Re-running updates. Set $env:LOCALTOOLS_NO_OPEN='1' to skip launching the tool afterwards.
 # Wrapped in a script block so `irm | iex` never leaks settings into, or exits, the caller's session.
@@ -7,8 +7,8 @@ $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 
-$Slug = 'excel-diff'; $Name = 'Excel Diff'; $Version = '1.0.1'; $Port = 47109; $Kind = 'bin'
-$Url = 'https://github.com/chayprabs/localtools/releases/download/excel-diff-v1.0.1/excel-diff-1.0.1-windows-x64.zip'; $Sha = '85155ac89cf2dbeacf798256f2843cebb682bc36770d4fd81126e2c1242f9baa'; $Image = ''
+$Slug = 'excel-diff'; $Name = 'Excel Diff'; $Version = '1.0.2'; $Port = 47109; $Kind = 'bin'
+$Url = 'https://github.com/chayprabs/localtools/releases/download/excel-diff-v1.0.2/excel-diff-1.0.2-windows-x64.zip'; $Sha = '992909ba181c8661f923967e6459ada1ed2daf2565c699020bac9c55395857ce'; $Image = ''
 $Cmd = "localtools-$Slug"
 $Root = if ($env:LOCALTOOLS_HOME) { $env:LOCALTOOLS_HOME } else { Join-Path $env:USERPROFILE '.localtools' }
 $Dir = Join-Path $Root $Slug
