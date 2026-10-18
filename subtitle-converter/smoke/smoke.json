@@ -1,0 +1,10 @@
+{
+  "path": "/api/convert",
+  "fields": {
+    "to": "vtt"
+  },
+  "files": {
+    "file": "sample.srt"
+  },
+  "expect": "WEBVTT"
+}

@@ -34,6 +34,7 @@ Browse all tools, with docs and how-tos: **https://tools.chaitanyaprabuddha.com*
 | [Archive Inspector](archive-inspector/) | List and inspect nested zip, tar, 7z, rar, gz, xz and zst archives and flag zip bombs and path traversal. | `localtools-archive-inspector` |
 | [Video Thumbnail Generator](video-thumbnail-generator/) | Generate thumbnails, frame grids and contact sheets from video files with ffmpeg. | `localtools-video-thumbnail-generator` |
 | [Loudness Normalizer](loudness-normalizer/) | Normalize audio loudness to EBU R128 / LUFS targets with two-pass ffmpeg loudnorm. | `localtools-loudness-normalizer` |
+| [Subtitle Converter](subtitle-converter/) | Convert, inspect and re-time subtitles; extract, add or burn captions into video. | `localtools-subtitle-converter` |
 | [EXIF Remover](exif-remover/) | Inspect and remove metadata from JPEG, PNG, TIFF and WebP images; download clean copies and a remaining-tags report. | `localtools-exif-remover` |
 | [SVG Optimizer](svg-optimizer/) | Optimize and minify SVG files with SVGO and export them to PNG. | `localtools-svg-optimizer` |
 | [Font Subsetter](font-subsetter/) | Subset fonts to the characters you use, instance variable fonts, and convert to WOFF2. | `localtools-font-subsetter` |

@@ -1,0 +1,35 @@
+[
+  {
+    "goto": "/"
+  },
+  {
+    "fill": {
+      "selector": "#text",
+      "text": "1\n00:00:01,000 --> 00:00:03,000\nHello, <i>world</i> &amp; friends.\n\n2\n00:00:04,500 --> 00:00:06,250\n[music]\nALICE: Meet me at the station.\n\n3\n00:00:08,000 --> 00:00:10,000\nCafé — 日本語 — مرحبا\n"
+    }
+  },
+  {
+    "fill": {
+      "selector": "#shift",
+      "text": "+500ms"
+    }
+  },
+  {
+    "click": "#go"
+  },
+  {
+    "waitFor": {
+      "selector": "#out"
+    }
+  },
+  {
+    "scrollIntoView": "#results"
+  },
+  {
+    "screenshot": {
+      "selector": "main",
+      "maxHeight": 2400,
+      "padding": 24
+    }
+  }
+]
