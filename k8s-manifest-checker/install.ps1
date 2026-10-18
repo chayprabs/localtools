@@ -1,4 +1,4 @@
-# localtools installer for Kubernetes Manifest Checker (k8s-manifest-checker 1.0.0). Windows PowerShell 5.1+, no admin.
+# localtools installer for Kubernetes Manifest Checker (k8s-manifest-checker 1.0.1). Windows PowerShell 5.1+, no admin.
 # Usage: irm https://raw.githubusercontent.com/chayprabs/localtools/main/k8s-manifest-checker/install.ps1 | iex
 # Re-running updates. Set $env:LOCALTOOLS_NO_OPEN='1' to skip launching the tool afterwards.
 # Wrapped in a script block so `irm | iex` never leaks settings into, or exits, the caller's session.
@@ -7,8 +7,8 @@ $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 
-$Slug = 'k8s-manifest-checker'; $Name = 'Kubernetes Manifest Checker'; $Version = '1.0.0'; $Port = 47114; $Kind = 'bin'
-$Url = 'https://github.com/chayprabs/localtools/releases/download/k8s-manifest-checker-v1.0.0/k8s-manifest-checker-1.0.0-windows-x64.zip'; $Sha = '16742a485f8a8bffadce20cfeac84e5c9ab2d5921f6bdca67c10b0f745225b3c'; $Image = ''
+$Slug = 'k8s-manifest-checker'; $Name = 'Kubernetes Manifest Checker'; $Version = '1.0.1'; $Port = 47114; $Kind = 'bin'
+$Url = 'https://github.com/chayprabs/localtools/releases/download/k8s-manifest-checker-v1.0.1/k8s-manifest-checker-1.0.1-windows-x64.zip'; $Sha = '135ef4edeb3ba747680922009045f0cc004c3404c7ea9b4d013bc4af41447994'; $Image = ''
 $Cmd = "localtools-$Slug"
 $Root = if ($env:LOCALTOOLS_HOME) { $env:LOCALTOOLS_HOME } else { Join-Path $env:USERPROFILE '.localtools' }
 $Dir = Join-Path $Root $Slug

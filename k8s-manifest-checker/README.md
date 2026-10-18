@@ -52,7 +52,7 @@ Package-manager installs are updated by that package manager; `localtools-k8s-ma
 
 ## Engine
 
-Go + kube-score library + PSS-aligned checks. kube-score (Go, MIT) checks single objects and cross-object relationships with mature messages; localtools adds line-exact Pod Security Standards checks, API removals per Kubernetes version and duplicate detection.
+Go + kube-score library + pod security checks. kube-score (Go, MIT) checks single objects and cross-object relationships; localtools adds a documented subset of versioned Pod Security Standards checks, API removals and duplicate detection.
 
 ## Report an issue
 

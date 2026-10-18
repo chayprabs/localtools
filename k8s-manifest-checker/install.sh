@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for Kubernetes Manifest Checker (k8s-manifest-checker 1.0.0). macOS / Linux, no sudo.
+# localtools installer for Kubernetes Manifest Checker (k8s-manifest-checker 1.0.1). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/k8s-manifest-checker/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='k8s-manifest-checker'; NAME='Kubernetes Manifest Checker'; VERSION='1.0.0'; PORT='47114'; KIND='bin'; IMAGE=''
+SLUG='k8s-manifest-checker'; NAME='Kubernetes Manifest Checker'; VERSION='1.0.1'; PORT='47114'; KIND='bin'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -29,10 +29,10 @@ if [ "$OS" = macos ] && [ "$(sysctl -n sysctl.proc_translated 2>/dev/null || ech
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/k8s-manifest-checker-v1.0.0/k8s-manifest-checker-1.0.0-macos-arm64.zip'; SHA='a7fea03c9cd278c9e5cc0bfe7f75c36061a92dc777f1747beca64a206cae7c70' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/k8s-manifest-checker-v1.0.0/k8s-manifest-checker-1.0.0-macos-x64.zip'; SHA='57921885b8e56429d15b503bacf38d79a83c8799b2d901a8398daf0f4c91dae6' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/k8s-manifest-checker-v1.0.0/k8s-manifest-checker-1.0.0-linux-x64.zip'; SHA='5c09f0e52bb36effde665190085b15e5efb35c3c16adb51f2f8c392db0ad52c2' ;;
-  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/k8s-manifest-checker-v1.0.0/k8s-manifest-checker-1.0.0-linux-arm64.zip'; SHA='1945b83ee4c48322a8f968a9deb6de0e1b612e5263691bef684c318de7a9e121' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/k8s-manifest-checker-v1.0.1/k8s-manifest-checker-1.0.1-macos-arm64.zip'; SHA='f9c0ebeae2b632ab90bc38e9b7c96dac9a6aa1d5d1bdebb5980ff29446afbbd2' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/k8s-manifest-checker-v1.0.1/k8s-manifest-checker-1.0.1-macos-x64.zip'; SHA='bf137f7a23649be927849515068d6b119f78024cac1656ebf7d76abdce8a7545' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/k8s-manifest-checker-v1.0.1/k8s-manifest-checker-1.0.1-linux-x64.zip'; SHA='52ed5e48afa89d8f607984ed8d34fb794fac325f3c53b06df975d73b0cd7d3ec' ;;
+  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/k8s-manifest-checker-v1.0.1/k8s-manifest-checker-1.0.1-linux-arm64.zip'; SHA='76b443f7675393a834e4cccad99a5cdec2664dff6492c71391421549ef93ad97' ;;
 esac
 
 if [ "$KIND" = docker ]; then
