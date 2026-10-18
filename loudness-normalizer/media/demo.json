@@ -1,0 +1,30 @@
+[
+  {
+    "goto": "/"
+  },
+  {
+    "setInputFiles": {
+      "selector": "#file",
+      "files": [
+        "sample.wav"
+      ]
+    }
+  },
+  {
+    "waitFor": {
+      "selector": "#go:not([disabled])"
+    }
+  },
+  {
+    "click": "#go"
+  },
+  {
+    "waitFor": {
+      "text": "1 of 1 normalized"
+    }
+  },
+  {
+    "scrollIntoView": "#graphbox",
+    "pause": 1200
+  }
+]

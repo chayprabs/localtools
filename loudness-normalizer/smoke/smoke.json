@@ -1,0 +1,8 @@
+{
+  "path": "/api/measure",
+  "fields": {},
+  "files": {
+    "file": "sample.wav"
+  },
+  "expect": "\"integrated\":-26.63"
+}

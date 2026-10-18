@@ -1,0 +1,1 @@
+Sample speech excerpt from the public-domain LibriVox Winnie-the-Pooh (1926) introduction. Reference URL and SHA256 are in the private tool source tests. Used only for installation measurement checks.
