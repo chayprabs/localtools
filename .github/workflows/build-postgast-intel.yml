@@ -9,7 +9,11 @@ jobs:
         with: {python-version: '3.13'}
       - name: Build unmodified BSD parser dependency
         run: |
-          python -m pip wheel --no-deps --no-binary=postgast postgast==0.2.0 -w wheels
+          curl -fsSL https://files.pythonhosted.org/packages/27/a1/6c4626ce2697a4f1dbb0ea52ea34752ad584257d397046e9fea6a6705878/postgast-0.2.0.tar.gz -o source.tgz
+          echo 'a242bc40007c20d03b8b7b92e3aeefc4d797dc10ddba7c05e48c10b6dc58bcb2  source.tgz' | shasum -a 256 -c -
+          tar xf source.tgz
+          make -C postgast-0.2.0/vendor/libpg_query clean
+          python -m pip wheel --no-deps ./postgast-0.2.0 -w wheels
           python -m pip install wheels/*.whl
           python -c "import postgast; t=postgast.parse('CREATE INDEX CONCURRENTLY i ON t(c)'); assert t.version == 180004; print(postgast.deparse(t))"
       - uses: actions/upload-artifact@v4
