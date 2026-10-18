@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for Excel Diff (excel-diff 1.0.0). macOS / Linux, no sudo.
+# localtools installer for Excel Diff (excel-diff 1.0.1). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/excel-diff/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='excel-diff'; NAME='Excel Diff'; VERSION='1.0.0'; PORT='47109'; KIND='bin'; IMAGE=''
+SLUG='excel-diff'; NAME='Excel Diff'; VERSION='1.0.1'; PORT='47109'; KIND='bin'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -29,10 +29,10 @@ if [ "$OS" = macos ] && [ "$(sysctl -n sysctl.proc_translated 2>/dev/null || ech
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/excel-diff-v1.0.0/excel-diff-1.0.0-linux-arm64.zip'; SHA='ab09f904edad156737d4831468d251fa403370d0de9a5128a828a5c012d60ee8' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/excel-diff-v1.0.0/excel-diff-1.0.0-linux-x64.zip'; SHA='5976f53e05395b8b64d3d89e7e24f0d8c6bb53ea983912a94adaf85a2554b3ef' ;;
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/excel-diff-v1.0.0/excel-diff-1.0.0-macos-arm64.zip'; SHA='3831c7394fbddbafb4715c8fa9fc50ee4e4ac9f9dc39dbb1d46cc90ab45c65c1' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/excel-diff-v1.0.0/excel-diff-1.0.0-macos-x64.zip'; SHA='3a368e39103fe8babc41a1a1179ed46f6d7840a2014fa0c32ab10d6d5e7dc535' ;;
+  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/excel-diff-v1.0.1/excel-diff-1.0.1-linux-arm64.zip'; SHA='7db37b7ae010babb41945e84f0226009110be2b06555d8f3856e5f6f19deff3d' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/excel-diff-v1.0.1/excel-diff-1.0.1-linux-x64.zip'; SHA='7c1d76b3056d4f24c2b31af9ce544e42a870e1cf140440a72df054adc3d07593' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/excel-diff-v1.0.1/excel-diff-1.0.1-macos-arm64.zip'; SHA='2eb21799f3309260ba179ce041e598c765f75d8da1ec6831487f105cdc969667' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/excel-diff-v1.0.1/excel-diff-1.0.1-macos-x64.zip'; SHA='92c7a5f0632b9881acce77613295a9d84ccc93e6357e2ab94f0419a4010a4d3e' ;;
 esac
 
 if [ "$KIND" = docker ]; then
