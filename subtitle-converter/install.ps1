@@ -1,4 +1,4 @@
-# localtools installer for Subtitle Converter (subtitle-converter 1.0.0). Windows PowerShell 5.1+, no admin.
+# localtools installer for Subtitle Converter (subtitle-converter 1.0.1). Windows PowerShell 5.1+, no admin.
 # Usage: irm https://raw.githubusercontent.com/chayprabs/localtools/main/subtitle-converter/install.ps1 | iex
 # Re-running updates. Set $env:LOCALTOOLS_NO_OPEN='1' to skip launching the tool afterwards.
 # Wrapped in a script block so `irm | iex` never leaks settings into, or exits, the caller's session.
@@ -7,8 +7,8 @@ $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 
-$Slug = 'subtitle-converter'; $Name = 'Subtitle Converter'; $Version = '1.0.0'; $Port = 47125; $Kind = 'bin'
-$Url = 'https://github.com/chayprabs/localtools/releases/download/subtitle-converter-v1.0.0/subtitle-converter-1.0.0-windows-x64.zip'; $Sha = '3b4421980af64ff563d992d9371aecc31bb9888da8479a5d2ab2dae0893e8fa1'; $Image = ''
+$Slug = 'subtitle-converter'; $Name = 'Subtitle Converter'; $Version = '1.0.1'; $Port = 47125; $Kind = 'bin'
+$Url = 'https://github.com/chayprabs/localtools/releases/download/subtitle-converter-v1.0.1/subtitle-converter-1.0.1-windows-x64.zip'; $Sha = 'df253982ea983ad1ec7a6ad19bfbb476e45ba205d5d235f0c3a9230d3d3313b4'; $Image = ''
 $Cmd = "localtools-$Slug"
 $Root = if ($env:LOCALTOOLS_HOME) { $env:LOCALTOOLS_HOME } else { Join-Path $env:USERPROFILE '.localtools' }
 $Dir = Join-Path $Root $Slug
