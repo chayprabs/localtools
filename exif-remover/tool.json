@@ -2,7 +2,7 @@
   "slug": "exif-remover",
   "name": "EXIF Remover",
   "command": "localtools-exif-remover",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "port": 47126,
   "kind": "bin",
   "registries": {

@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for EXIF Remover (exif-remover 1.0.0). macOS / Linux, no sudo.
+# localtools installer for EXIF Remover (exif-remover 1.0.1). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/exif-remover/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='exif-remover'; NAME='EXIF Remover'; VERSION='1.0.0'; PORT='47126'; KIND='bin'; IMAGE=''
+SLUG='exif-remover'; NAME='EXIF Remover'; VERSION='1.0.1'; PORT='47126'; KIND='bin'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -33,10 +33,10 @@ fi
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/exif-remover-v1.0.0/exif-remover-1.0.0-linux-arm64.zip'; SHA='1b65ea8b529bc4845580bd9841019b44223869cb0c05196b21b64623682e09e4' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/exif-remover-v1.0.0/exif-remover-1.0.0-linux-x64.zip'; SHA='36ec77d503c67e49da83510fb333eb21d81ac44ee4e14185b551b24437149168' ;;
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/exif-remover-v1.0.0/exif-remover-1.0.0-macos-arm64.zip'; SHA='b1418eae30c4b1fc370c1f87734aa84bcf0ba93ed5c9ac6bf16d5a496f211db3' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/exif-remover-v1.0.0/exif-remover-1.0.0-macos-x64.zip'; SHA='20d8659147ce5b99e5235e70d447d5a36bd9e6c11375effd3333d346ff3dd52d' ;;
+  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/exif-remover-v1.0.1/exif-remover-1.0.1-linux-arm64.zip'; SHA='ce6486ebae38a473aab74adb7be412f999dd436acac6dfa6d7e9076848cd5eb8' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/exif-remover-v1.0.1/exif-remover-1.0.1-linux-x64.zip'; SHA='eeff76e11bd098c6db98b052fb6ffb7a9b5459dbd8038489586a8ff9a7a6f50d' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/exif-remover-v1.0.1/exif-remover-1.0.1-macos-arm64.zip'; SHA='6ae2195a6c4a731de15ad202fc67874c62e8af95f53c832f656640e98e18656f' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/exif-remover-v1.0.1/exif-remover-1.0.1-macos-x64.zip'; SHA='062e3a2a8bdca33e3678f99e1d6d88fb11ca4c85ac740bc849e475f0550b78b8' ;;
 esac
 
 if [ "$KIND" = docker ]; then

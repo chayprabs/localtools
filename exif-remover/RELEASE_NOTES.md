@@ -3,3 +3,7 @@
 ## 1.0.0 (2026-10-19)
 
 First release: batch image metadata inspection and removal, original files untouched, orientation/color preservation option, ZIP plus removed/remaining-tags report. JPEG, PNG, TIFF and WebP only. 16 files; 32 MiB each; 64 MiB total. Unix requires Perl 5 on PATH. Not a forensic anonymization guarantee.
+
+## 1.0.1 (2026-10-19)
+
+Privacy fix: removed tags are exported as identifiers only; stripped GPS, author, comment and serial values are no longer copied into ZIP or CLI reports. Inspection and remaining-tag values stay explicit. Batch image metadata inspection/removal, original files untouched, orientation/color preservation option. JPEG, PNG, TIFF and WebP only. 16 files; 32 MiB each; 64 MiB total. Unix requires Perl 5 on PATH. Not a forensic anonymization guarantee.

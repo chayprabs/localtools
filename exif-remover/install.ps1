@@ -1,4 +1,4 @@
-# localtools installer for EXIF Remover (exif-remover 1.0.0). Windows PowerShell 5.1+, no admin.
+# localtools installer for EXIF Remover (exif-remover 1.0.1). Windows PowerShell 5.1+, no admin.
 # Usage: irm https://raw.githubusercontent.com/chayprabs/localtools/main/exif-remover/install.ps1 | iex
 # Re-running updates. Set $env:LOCALTOOLS_NO_OPEN='1' to skip launching the tool afterwards.
 # Wrapped in a script block so `irm | iex` never leaks settings into, or exits, the caller's session.
@@ -7,8 +7,8 @@ $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 
-$Slug = 'exif-remover'; $Name = 'EXIF Remover'; $Version = '1.0.0'; $Port = 47126; $Kind = 'bin'
-$Url = 'https://github.com/chayprabs/localtools/releases/download/exif-remover-v1.0.0/exif-remover-1.0.0-windows-x64.zip'; $Sha = 'dad0aca1b089e5e0044de42b103c12589980f71332945b92914a2d44ab7aedc2'; $Image = ''
+$Slug = 'exif-remover'; $Name = 'EXIF Remover'; $Version = '1.0.1'; $Port = 47126; $Kind = 'bin'
+$Url = 'https://github.com/chayprabs/localtools/releases/download/exif-remover-v1.0.1/exif-remover-1.0.1-windows-x64.zip'; $Sha = 'f97f2a281c7cbd378302cb1fcb585b1b4d2b80fc144b40e97526d3e4faf8f60a'; $Image = ''
 $Cmd = "localtools-$Slug"
 $Root = if ($env:LOCALTOOLS_HOME) { $env:LOCALTOOLS_HOME } else { Join-Path $env:USERPROFILE '.localtools' }
 $Dir = Join-Path $Root $Slug
