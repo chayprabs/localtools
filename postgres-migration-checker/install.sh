@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for Postgres Migration Checker (postgres-migration-checker 1.0.2). macOS / Linux, no sudo.
+# localtools installer for Postgres Migration Checker (postgres-migration-checker 1.0.3). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/postgres-migration-checker/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='postgres-migration-checker'; NAME='Postgres Migration Checker'; VERSION='1.0.2'; PORT='47116'; KIND='py'; IMAGE=''
+SLUG='postgres-migration-checker'; NAME='Postgres Migration Checker'; VERSION='1.0.3'; PORT='47116'; KIND='py'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -29,9 +29,9 @@ if [ "$OS" = macos ] && [ "$(sysctl -n sysctl.proc_translated 2>/dev/null || ech
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/postgres-migration-checker-v1.0.2/postgres-migration-checker-1.0.2-macos-arm64.zip'; SHA='9b2befc778102ba1fdc256f604318b1261c7e630d7b319e8bfd9974c036bdd45' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/postgres-migration-checker-v1.0.2/postgres-migration-checker-1.0.2-macos-x64.zip'; SHA='9cf1360885c7915e2a292c300ac64d25d5c06efdd0bd73341601e5e4538b229a' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/postgres-migration-checker-v1.0.2/postgres-migration-checker-1.0.2-linux-x64.zip'; SHA='96f16111dc56951d7c30bcd677010ced7674feb8233093a0d40536edbc5a9220' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/postgres-migration-checker-v1.0.3/postgres-migration-checker-1.0.3-macos-arm64.zip'; SHA='d832f761c5935022c7ab6a7315b7aa4881c1f8286b68a2f27219175eed7ce047' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/postgres-migration-checker-v1.0.3/postgres-migration-checker-1.0.3-macos-x64.zip'; SHA='72269ee9eb1a6c949ca0bec0f3aea05a3435f4646d18523ca8505944a1ac3c24' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/postgres-migration-checker-v1.0.3/postgres-migration-checker-1.0.3-linux-x64.zip'; SHA='f9ff4e24748807e554656f5327bc7fa07a562154294ae7db7b233fa9c25f281e' ;;
 esac
 
 if [ "$KIND" = docker ]; then
