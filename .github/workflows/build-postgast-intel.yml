@@ -8,6 +8,7 @@ jobs:
       - uses: actions/setup-python@v5
         with: {python-version: '3.13'}
       - name: Build unmodified BSD parser dependency
+        env: {MACOSX_DEPLOYMENT_TARGET: '10.13'}
         run: |
           git clone --branch v0.2.0 --depth 1 --recurse-submodules https://github.com/eddieland/postgast.git postgast-0.2.0
           python -m pip wheel --no-deps ./postgast-0.2.0 -w wheels
