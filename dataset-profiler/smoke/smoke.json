@@ -1,0 +1,9 @@
+{
+  "path": "/api/profile",
+  "fields": {},
+  "files": {
+    "file": "sample.csv",
+    "compare": "changed.csv"
+  },
+  "expect": "\"column\":\"amount\",\"schema\":\"unchanged\",\"before_type\":\"BIGINT\",\"after_type\":\"BIGINT\",\"total_variation\":\"1.0\""
+}

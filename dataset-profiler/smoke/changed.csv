@@ -1,0 +1,5 @@
+id,category,amount,active
+1,book,15,true
+2,book,20,true
+3,music,25,false
+5,music,40,true

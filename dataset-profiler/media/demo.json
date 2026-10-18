@@ -1,0 +1,9 @@
+[
+ {"goto": "/"},
+ {"setInputFiles": {"selector": "#file", "files": ["sample.csv"]}},
+ {"setInputFiles": {"selector": "#compare", "files": ["changed.csv"]}},
+ {"click": "#go"},
+ {"waitFor": {"text": "Schema & value drift"}},
+ {"click": "summary"},
+ {"scrollIntoView": "#results", "pause": 1500}
+]
