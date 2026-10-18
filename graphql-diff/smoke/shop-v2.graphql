@@ -1,0 +1,49 @@
+"""A small store API (version 2)."""
+type Query {
+  product(id: ID!): Product
+  products(first: Int = 50, after: String, inStock: Boolean): [Product!]!
+  order(id: ID!, includeArchived: Boolean!): Order
+}
+
+type Mutation {
+  placeOrder(input: OrderInput!): Order
+  cancelOrder(id: ID!): Order
+}
+
+type Product {
+  id: ID!
+  title: String!
+  price: Money!
+  tags: [String!] @deprecated(reason: "Use collections.")
+  collections: [String!]!
+}
+
+type Money {
+  amount: Float!
+  currency: String!
+}
+
+type Order {
+  id: ID!
+  status: OrderStatus!
+  total: Money!
+  items: [OrderItem!]!
+}
+
+type OrderItem {
+  product: Product!
+  quantity: Int!
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  SHIPPED
+  REFUNDED
+}
+
+input OrderInput {
+  productId: ID!
+  quantity: Int = 1
+  coupon: String!
+}

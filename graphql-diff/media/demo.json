@@ -1,0 +1,8 @@
+[
+  {"goto": "/"},
+  {"setInputFiles": {"selector": "#old-file", "files": ["shop-v1.graphql"]}},
+  {"setInputFiles": {"selector": "#new-file", "files": ["shop-v2.graphql"]}},
+  {"click": "#go"},
+  {"waitFor": {"text": "5 breaking"}},
+  {"scrollIntoView": "#out-l", "pause": 1500}
+]

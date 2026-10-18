@@ -1,0 +1,9 @@
+{
+  "path": "/api/diff",
+  "fields": {},
+  "files": {
+    "oldFile": "shop-v1.graphql",
+    "newFile": "shop-v2.graphql"
+  },
+  "expect": "\"breaking\":5"
+}

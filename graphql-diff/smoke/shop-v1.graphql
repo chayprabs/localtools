@@ -1,0 +1,41 @@
+"""A small store API (version 1)."""
+type Query {
+  product(id: ID!): Product
+  products(first: Int = 20, after: String): [Product!]!
+  order(id: ID!): Order
+}
+
+type Mutation {
+  placeOrder(input: OrderInput!): Order
+}
+
+type Product {
+  id: ID!
+  title: String!
+  price: Float!
+  sku: String
+  tags: [String!]
+}
+
+type Order {
+  id: ID!
+  status: OrderStatus!
+  total: Float!
+  items: [OrderItem!]!
+}
+
+type OrderItem {
+  product: Product!
+  quantity: Int!
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  SHIPPED
+}
+
+input OrderInput {
+  productId: ID!
+  quantity: Int = 1
+}
