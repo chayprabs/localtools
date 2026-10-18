@@ -2,7 +2,7 @@
   "slug": "postgres-migration-checker",
   "name": "Postgres Migration Checker",
   "command": "localtools-postgres-migration-checker",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "port": 47116,
   "kind": "py",
   "registries": {
