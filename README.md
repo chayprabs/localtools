@@ -32,6 +32,7 @@ Browse all tools, with docs and how-tos: **https://tools.chaitanyaprabuddha.com*
 | [HTML Extractor](html-extractor/) | Extract data from HTML pages with CSS selectors into JSON or CSV. | `localtools-html-extractor` |
 | [SSL Checker](ssl-checker/) | Check a domain's TLS certificate chain, expiry, supported protocols, DNSSEC and CAA records. | `localtools-ssl-checker` |
 | [Archive Inspector](archive-inspector/) | List and inspect nested zip, tar, 7z, rar, gz, xz and zst archives and flag zip bombs and path traversal. | `localtools-archive-inspector` |
+| [Video Thumbnail Generator](video-thumbnail-generator/) | Generate thumbnails, frame grids and contact sheets from video files with ffmpeg. | `localtools-video-thumbnail-generator` |
 | [SVG Optimizer](svg-optimizer/) | Optimize and minify SVG files with SVGO and export them to PNG. | `localtools-svg-optimizer` |
 | [Font Subsetter](font-subsetter/) | Subset fonts to the characters you use, instance variable fonts, and convert to WOFF2. | `localtools-font-subsetter` |
 <!-- /tools -->

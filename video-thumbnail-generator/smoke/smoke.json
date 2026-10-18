@@ -1,0 +1,11 @@
+{
+  "path": "/api/thumbnails",
+  "fields": {
+    "mode": "frames",
+    "count": "4"
+  },
+  "files": {
+    "file": "Big_Buck_Bunny_360_10s_1MB.mp4"
+  },
+  "expect": "\"name\":\"Big_Buck_Bunny_360_10s_1MB_00h00m01.250s.png\",\"time\":1.25,\"width\":640,\"height\":360,\"mime\":\"image/png\""
+}

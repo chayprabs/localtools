@@ -1,0 +1,9 @@
+[
+ {"goto": "/"},
+ {"setInputFiles": {"selector": "#file", "files": ["Big_Buck_Bunny_360_10s_1MB.mp4"]}},
+ {"waitFor": {"text": "Display size"}, "pause": 1200},
+ {"click": "label:has(input[value=grid])"},
+ {"click": "#go"},
+ {"waitFor": {"selector": "#gallery figure"}},
+ {"scrollIntoView": "#out-l", "pause": 1500}
+]
