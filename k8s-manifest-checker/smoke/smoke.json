@@ -1,0 +1,10 @@
+{
+  "path": "/api/check",
+  "fields": {
+    "k8s": "1.31"
+  },
+  "files": {
+    "file": "deployment.yaml"
+  },
+  "expect": "container-image-tag"
+}

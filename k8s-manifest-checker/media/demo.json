@@ -1,0 +1,8 @@
+[
+  { "goto": "/" },
+  { "setInputFiles": { "selector": "#file", "files": ["deployment.yaml"] }, "pause": 900 },
+  { "click": "#go" },
+  { "waitFor": { "selector": "#results" }, "pause": 600 },
+  { "click": "#findings summary" , "pause": 900 },
+  { "scrollIntoView": "#out-l", "pause": 2500 }
+]
