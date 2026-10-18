@@ -1,0 +1,39 @@
+[
+  {
+    "goto": "/"
+  },
+  {
+    "setInputFiles": {
+      "selector": "#file",
+      "files": [
+        "df.txt"
+      ]
+    },
+    "pause": 700
+  },
+  {
+    "click": "#suggest"
+  },
+  {
+    "waitFor": {
+      "text": "df (header hints)"
+    },
+    "pause": 500
+  },
+  {
+    "click": "#candidates button"
+  },
+  {
+    "click": "#parse"
+  },
+  {
+    "waitFor": {
+      "text": "/dev/sda1"
+    },
+    "pause": 900
+  },
+  {
+    "scrollIntoView": "#results",
+    "pause": 1200
+  }
+]

@@ -1,0 +1,16 @@
+{
+  "slug": "cli-output-to-json",
+  "name": "CLI Output to JSON",
+  "command": "localtools-cli-output-to-json",
+  "version": "1.0.0",
+  "port": 47119,
+  "kind": "py",
+  "registries": {
+    "brew": false,
+    "scoop": false,
+    "winget": false,
+    "npm": null,
+    "pypi": "localtools-cli-output-to-json",
+    "ghcr": null
+  }
+}

@@ -26,6 +26,7 @@ Browse all tools, with docs and how-tos: **https://tools.chaitanyaprabuddha.com*
 | [Postgres Migration Checker](postgres-migration-checker/) | Check PostgreSQL migrations for the lock each statement takes, what it blocks, and a safe rewrite. | `localtools-postgres-migration-checker` |
 | [SQL Formatter](sql-formatter/) | Format and lint SQL in any major dialect with sqlfluff, including auto-fix. | `localtools-sql-formatter` |
 | [Grok Debugger](grok-debugger/) | Test grok patterns against log lines with the full Logstash pattern library and highlighted matches. | `localtools-grok-debugger` |
+| [CLI Output to JSON](cli-output-to-json/) | Convert command output (ls, ps, netstat, dig, network device show commands) into JSON with jc and TextFSM. | `localtools-cli-output-to-json` |
 | [HTML Extractor](html-extractor/) | Extract data from HTML pages with CSS selectors into JSON or CSV. | `localtools-html-extractor` |
 | [SSL Checker](ssl-checker/) | Check a domain's TLS certificate chain, expiry, supported protocols, DNSSEC and CAA records. | `localtools-ssl-checker` |
 | [Archive Inspector](archive-inspector/) | List and inspect nested zip, tar, 7z, rar, gz, xz and zst archives and flag zip bombs and path traversal. | `localtools-archive-inspector` |
