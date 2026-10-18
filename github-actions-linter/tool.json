@@ -1,0 +1,16 @@
+{
+  "slug": "github-actions-linter",
+  "name": "GitHub Actions Linter",
+  "command": "localtools-github-actions-linter",
+  "version": "1.0.0",
+  "port": 47113,
+  "kind": "bin",
+  "registries": {
+    "brew": true,
+    "scoop": true,
+    "winget": true,
+    "npm": null,
+    "pypi": null,
+    "ghcr": null
+  }
+}

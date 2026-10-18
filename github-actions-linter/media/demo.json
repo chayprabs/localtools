@@ -1,0 +1,29 @@
+[
+  {
+    "goto": "/"
+  },
+  {
+    "setInputFiles": {
+      "selector": "#file",
+      "files": [
+        "workflow.yml"
+      ]
+    }
+  },
+  {
+    "click": "#go"
+  },
+  {
+    "waitFor": {
+      "selector": ".finding"
+    },
+    "pause": 1000
+  },
+  {
+    "screenshot": {
+      "selector": "main",
+      "maxHeight": 1800,
+      "padding": 24
+    }
+  }
+]

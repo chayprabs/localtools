@@ -1,0 +1,8 @@
+{
+  "path": "/api/lint",
+  "fields": {},
+  "files": {
+    "file": "workflow.yml"
+  },
+  "expect": "excessive-permissions"
+}
