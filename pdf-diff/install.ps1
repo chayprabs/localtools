@@ -1,4 +1,4 @@
-# localtools installer for PDF Diff (pdf-diff 1.0.0). Windows PowerShell 5.1+, no admin.
+# localtools installer for PDF Diff (pdf-diff 1.0.1). Windows PowerShell 5.1+, no admin.
 # Usage: irm https://raw.githubusercontent.com/chayprabs/localtools/main/pdf-diff/install.ps1 | iex
 # Re-running updates. Set $env:LOCALTOOLS_NO_OPEN='1' to skip launching the tool afterwards.
 # Wrapped in a script block so `irm | iex` never leaks settings into, or exits, the caller's session.
@@ -7,8 +7,8 @@ $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 
-$Slug = 'pdf-diff'; $Name = 'PDF Diff'; $Version = '1.0.0'; $Port = 47103; $Kind = 'py'
-$Url = 'https://github.com/chayprabs/localtools/releases/download/pdf-diff-v1.0.0/pdf-diff-1.0.0-windows-x64.zip'; $Sha = '334ff89b5456cedf886ebb880cdba88665303d3d93e5934bc967caede570b2f3'; $Image = ''
+$Slug = 'pdf-diff'; $Name = 'PDF Diff'; $Version = '1.0.1'; $Port = 47103; $Kind = 'py'
+$Url = 'https://github.com/chayprabs/localtools/releases/download/pdf-diff-v1.0.1/pdf-diff-1.0.1-windows-x64.zip'; $Sha = '6903dc60fe50764089b73f435afb6fd28a39e13be0fd0c4941a59948cbbf665d'; $Image = ''
 $Cmd = "localtools-$Slug"
 $Root = if ($env:LOCALTOOLS_HOME) { $env:LOCALTOOLS_HOME } else { Join-Path $env:USERPROFILE '.localtools' }
 $Dir = Join-Path $Root $Slug

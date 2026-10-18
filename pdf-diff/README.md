@@ -50,7 +50,7 @@ Package-manager installs are updated by that package manager; `localtools-pdf-di
 
 ## Engine
 
-Python + PDFium (pypdfium2) render/text/structure + Pillow pixel diff + difflib word diff. PDFium renders pages exactly like Chrome; numpy pixel diff is exact and fast.
+Python + PDFium (pypdfium2 5.14) render/text/structure + Pillow pixel diff + difflib word diff. PDFium renders pages exactly like Chrome and gives text with character boxes; Pillow compares pixels in C and difflib diffs words, so no numpy is needed.
 
 ## Report an issue
 

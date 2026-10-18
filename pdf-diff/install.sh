@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for PDF Diff (pdf-diff 1.0.0). macOS / Linux, no sudo.
+# localtools installer for PDF Diff (pdf-diff 1.0.1). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/pdf-diff/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='pdf-diff'; NAME='PDF Diff'; VERSION='1.0.0'; PORT='47103'; KIND='py'; IMAGE=''
+SLUG='pdf-diff'; NAME='PDF Diff'; VERSION='1.0.1'; PORT='47103'; KIND='py'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -29,9 +29,9 @@ if [ "$OS" = macos ] && [ "$(sysctl -n sysctl.proc_translated 2>/dev/null || ech
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/pdf-diff-v1.0.0/pdf-diff-1.0.0-linux-x64.zip'; SHA='a7ac04e5afb256045ed882583601414dcf0dfcdefeeac4e3624fba6a1a1dbf36' ;;
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/pdf-diff-v1.0.0/pdf-diff-1.0.0-macos-arm64.zip'; SHA='eb53dcb07683fee52d37c91b5c70d624d7a5e77ec468e7f4a083c9b51a266dad' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/pdf-diff-v1.0.0/pdf-diff-1.0.0-macos-x64.zip'; SHA='af7fc03f3a3f078c34c403f417fbabe00a1d3e0c6b941dd45947c96732d5f2d2' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/pdf-diff-v1.0.1/pdf-diff-1.0.1-linux-x64.zip'; SHA='8a0aebca7e09544bb15bbcdd8ade1430fb5e248a97d1a717a2ab70c266c31886' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/pdf-diff-v1.0.1/pdf-diff-1.0.1-macos-arm64.zip'; SHA='d9831ca812bad2f39cad847923b67c53affb31e7f406269ec7a64be61ab1e469' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/pdf-diff-v1.0.1/pdf-diff-1.0.1-macos-x64.zip'; SHA='cc01bab375ada0f54f2e07ae917528282be69055db6166daafe06f331ed6f95e' ;;
 esac
 
 if [ "$KIND" = docker ]; then
