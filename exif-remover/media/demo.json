@@ -1,0 +1,42 @@
+[
+  {
+    "goto": "/"
+  },
+  {
+    "setInputFiles": {
+      "selector": "#files",
+      "files": [
+        "sample.jpg"
+      ]
+    }
+  },
+  {
+    "click": "#inspect"
+  },
+  {
+    "waitFor": {
+      "text": "Inspected 1"
+    }
+  },
+  {
+    "click": "summary"
+  },
+  {
+    "wait": 700
+  },
+  {
+    "click": "#strip"
+  },
+  {
+    "waitFor": {
+      "selector": "#download:not([disabled])"
+    }
+  },
+  {
+    "screenshot": {
+      "selector": "main",
+      "maxHeight": 1400,
+      "padding": 24
+    }
+  }
+]

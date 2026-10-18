@@ -1,0 +1,10 @@
+{
+  "path": "/api/strip",
+  "fields": {
+    "preset": "keep"
+  },
+  "files": {
+    "file": "sample.jpg"
+  },
+  "expect": "01-clean-sample.jpg"
+}
