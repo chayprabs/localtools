@@ -13,6 +13,7 @@ Browse all tools, with docs and how-tos: **https://tools.chaitanyaprabuddha.com*
 |---|---|---|
 | [File Type Detector](file-type-detector/) | Detect real file types from magic bytes and flag extension/MIME mismatches, macros and polyglot files across folders. | `localtools-file-type-detector` |
 | [PDF Toolkit](pdf-toolkit/) | Merge, split, reorder, rotate, compress, stamp, number, encrypt and fill PDF forms, offline. | `localtools-pdf-toolkit` |
+| [PDF Diff](pdf-diff/) | Compare two PDFs page by page with visual pixel-diff overlays and a text diff. | `localtools-pdf-diff` |
 | [CSV SQL Query](csv-sql-query/) | Run SQL on CSV, TSV, JSON, Parquet and log files (nginx, Apache, syslog) with DuckDB. | `localtools-csv-sql-query` |
 | [CSV JSON Transform](csv-json-transform/) | Convert and transform CSV, TSV, JSON and JSONL with Miller verbs: filter, sort, join, reshape. | `localtools-csv-json-transform` |
 | [Dataset Profiler](dataset-profiler/) | Profile CSV, Parquet and JSON datasets (types, nulls, distributions) and detect schema and value drift between two files. | `localtools-dataset-profiler` |

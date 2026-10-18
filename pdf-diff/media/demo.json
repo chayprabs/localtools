@@ -1,0 +1,8 @@
+[
+  {"goto": "/"},
+  {"setInputFiles": {"selector": "#file-a", "files": ["a.pdf"]}, "pause": 500},
+  {"setInputFiles": {"selector": "#file-b", "files": ["b.pdf"]}, "pause": 600},
+  {"click": "#go"},
+  {"waitFor": {"text": "page pairs differ"}, "pause": 800},
+  {"scrollIntoView": "#results", "pause": 1500}
+]

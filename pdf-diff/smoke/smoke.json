@@ -1,0 +1,11 @@
+{
+  "path": "/api/diff",
+  "fields": {
+    "mode": "text"
+  },
+  "files": {
+    "a": "a.pdf",
+    "b": "b.pdf"
+  },
+  "expect": "pages"
+}
