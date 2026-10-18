@@ -1,4 +1,4 @@
-# localtools installer for Postgres Migration Checker (postgres-migration-checker 1.0.0). Windows PowerShell 5.1+, no admin.
+# localtools installer for Postgres Migration Checker (postgres-migration-checker 1.0.1). Windows PowerShell 5.1+, no admin.
 # Usage: irm https://raw.githubusercontent.com/chayprabs/localtools/main/postgres-migration-checker/install.ps1 | iex
 # Re-running updates. Set $env:LOCALTOOLS_NO_OPEN='1' to skip launching the tool afterwards.
 # Wrapped in a script block so `irm | iex` never leaks settings into, or exits, the caller's session.
@@ -7,8 +7,8 @@ $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 
-$Slug = 'postgres-migration-checker'; $Name = 'Postgres Migration Checker'; $Version = '1.0.0'; $Port = 47116; $Kind = 'py'
-$Url = 'https://github.com/chayprabs/localtools/releases/download/postgres-migration-checker-v1.0.0/postgres-migration-checker-1.0.0-windows-x64.zip'; $Sha = '913a5c7ff308d7b3f3b07643d852da404118a016a8a8b47f47f218acd3d7306c'; $Image = ''
+$Slug = 'postgres-migration-checker'; $Name = 'Postgres Migration Checker'; $Version = '1.0.1'; $Port = 47116; $Kind = 'py'
+$Url = 'https://github.com/chayprabs/localtools/releases/download/postgres-migration-checker-v1.0.1/postgres-migration-checker-1.0.1-windows-x64.zip'; $Sha = 'ca6e715cc8b7cbd5261868f62743752fcd1469429bb1c0da0886b7d2c4441c39'; $Image = ''
 $Cmd = "localtools-$Slug"
 $Root = if ($env:LOCALTOOLS_HOME) { $env:LOCALTOOLS_HOME } else { Join-Path $env:USERPROFILE '.localtools' }
 $Dir = Join-Path $Root $Slug
