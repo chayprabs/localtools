@@ -7,3 +7,7 @@ First release: batch image metadata inspection and removal, original files untou
 ## 1.0.1 (2026-10-19)
 
 Privacy fix: removed tags are exported as identifiers only; stripped GPS, author, comment and serial values are no longer copied into ZIP or CLI reports. Inspection and remaining-tag values stay explicit. Batch image metadata inspection/removal, original files untouched, orientation/color preservation option. JPEG, PNG, TIFF and WebP only. 16 files; 32 MiB each; 64 MiB total. Unix requires Perl 5 on PATH. Not a forensic anonymization guarantee.
+
+## 1.0.2 (2026-10-19)
+
+Fixes lossless WebP rejection; TIFF cleaning now removes private IFD0 tags (DocumentName, PageName...) and GeoTIFF location, which counts as location. Quieter warnings, unknown PNG chunks reported, per-file results and privacy highlighting in the UI, HTTP 504 on deadline. Batch image metadata inspection/removal, originals untouched, orientation/color preservation option. JPEG, PNG, TIFF and WebP. 16 files; 32 MiB each; 64 MiB total. Unix requires Perl 5 on PATH. Not a forensic anonymization guarantee.
