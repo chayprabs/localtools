@@ -53,7 +53,7 @@ Package-manager installs are updated by that package manager; `localtools-html-e
 
 ## Engine
 
-Go + goquery / cascadia. goquery/cascadia give jQuery-style CSS selectors over a real HTML5 parser in pure Go.
+Go + cascadia + x/net/html. Cascadia selectors over the x/net/html HTML5 parser provide CSS matching, entity decoding and browser-style HTML repair in one pure-Go executable; no browser runtime or goquery dependency is needed.
 
 ## Report an issue
 
