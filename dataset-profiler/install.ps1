@@ -1,4 +1,4 @@
-# localtools installer for Dataset Profiler (dataset-profiler 1.0.0). Windows PowerShell 5.1+, no admin.
+# localtools installer for Dataset Profiler (dataset-profiler 1.0.1). Windows PowerShell 5.1+, no admin.
 # Usage: irm https://raw.githubusercontent.com/chayprabs/localtools/main/dataset-profiler/install.ps1 | iex
 # Re-running updates. Set $env:LOCALTOOLS_NO_OPEN='1' to skip launching the tool afterwards.
 # Wrapped in a script block so `irm | iex` never leaks settings into, or exits, the caller's session.
@@ -7,8 +7,8 @@ $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 
-$Slug = 'dataset-profiler'; $Name = 'Dataset Profiler'; $Version = '1.0.0'; $Port = 47107; $Kind = 'bin'
-$Url = 'https://github.com/chayprabs/localtools/releases/download/dataset-profiler-v1.0.0/dataset-profiler-1.0.0-windows-x64.zip'; $Sha = 'adfed78c0341c9e64fcb1a1d5aa87cac44c58cc1aad8c6cc07c28382fdd122bc'; $Image = ''
+$Slug = 'dataset-profiler'; $Name = 'Dataset Profiler'; $Version = '1.0.1'; $Port = 47107; $Kind = 'bin'
+$Url = 'https://github.com/chayprabs/localtools/releases/download/dataset-profiler-v1.0.1/dataset-profiler-1.0.1-windows-x64.zip'; $Sha = 'f04f19d76f4e9cdff88c2289bd4bc7b05fd73f5f3bf3ad465bae22523d19b046'; $Image = ''
 $Cmd = "localtools-$Slug"
 $Root = if ($env:LOCALTOOLS_HOME) { $env:LOCALTOOLS_HOME } else { Join-Path $env:USERPROFILE '.localtools' }
 $Dir = Join-Path $Root $Slug

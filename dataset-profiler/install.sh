@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for Dataset Profiler (dataset-profiler 1.0.0). macOS / Linux, no sudo.
+# localtools installer for Dataset Profiler (dataset-profiler 1.0.1). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/dataset-profiler/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='dataset-profiler'; NAME='Dataset Profiler'; VERSION='1.0.0'; PORT='47107'; KIND='bin'; IMAGE=''
+SLUG='dataset-profiler'; NAME='Dataset Profiler'; VERSION='1.0.1'; PORT='47107'; KIND='bin'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -29,10 +29,10 @@ if [ "$OS" = macos ] && [ "$(sysctl -n sysctl.proc_translated 2>/dev/null || ech
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/dataset-profiler-v1.0.0/dataset-profiler-1.0.0-macos-arm64.zip'; SHA='910625570870766ffdfb9c7779ea6e530ce38348dc933d5621a82c145deab0b9' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/dataset-profiler-v1.0.0/dataset-profiler-1.0.0-macos-x64.zip'; SHA='80f69a8cb4cc99ff232b6cb3e9e7207d48d10aa4a1c3603146d6f084772d380c' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/dataset-profiler-v1.0.0/dataset-profiler-1.0.0-linux-x64.zip'; SHA='9d11eadacccc565cc0f97c91b4350ede944337db2c977f57c94257f162e5ed4c' ;;
-  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/dataset-profiler-v1.0.0/dataset-profiler-1.0.0-linux-arm64.zip'; SHA='c6c0fa048c5509ab4d0fc5eb7b37a9c3079ce66734cf9c145d44cf2e55abf00b' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/dataset-profiler-v1.0.1/dataset-profiler-1.0.1-macos-arm64.zip'; SHA='9d829f679246d701d40c6f2064c133f05f0f1f6d897e12399f527a2b48a9e5a3' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/dataset-profiler-v1.0.1/dataset-profiler-1.0.1-macos-x64.zip'; SHA='3a20553c90d50464a708e5d6f57f51d780667a90ab1edf20e7b8013c88987200' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/dataset-profiler-v1.0.1/dataset-profiler-1.0.1-linux-x64.zip'; SHA='505d4b7f7ca7b2acc6e0e2e1011c4bcb31331c6e3ccba8a0613d74d77b254e60' ;;
+  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/dataset-profiler-v1.0.1/dataset-profiler-1.0.1-linux-arm64.zip'; SHA='00fef9e43b091ed13384b5d6909a9da759593bb4bb0ae96848fb6a726ae3502d' ;;
 esac
 
 if [ "$KIND" = docker ]; then
