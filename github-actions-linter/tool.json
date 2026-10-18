@@ -2,7 +2,7 @@
   "slug": "github-actions-linter",
   "name": "GitHub Actions Linter",
   "command": "localtools-github-actions-linter",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "port": 47113,
   "kind": "bin",
   "registries": {

@@ -1,4 +1,4 @@
-# localtools installer for GitHub Actions Linter (github-actions-linter 1.0.0). Windows PowerShell 5.1+, no admin.
+# localtools installer for GitHub Actions Linter (github-actions-linter 1.0.1). Windows PowerShell 5.1+, no admin.
 # Usage: irm https://raw.githubusercontent.com/chayprabs/localtools/main/github-actions-linter/install.ps1 | iex
 # Re-running updates. Set $env:LOCALTOOLS_NO_OPEN='1' to skip launching the tool afterwards.
 # Wrapped in a script block so `irm | iex` never leaks settings into, or exits, the caller's session.
@@ -7,8 +7,8 @@ $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 
-$Slug = 'github-actions-linter'; $Name = 'GitHub Actions Linter'; $Version = '1.0.0'; $Port = 47113; $Kind = 'bin'
-$Url = 'https://github.com/chayprabs/localtools/releases/download/github-actions-linter-v1.0.0/github-actions-linter-1.0.0-windows-x64.zip'; $Sha = '835586a54fe45e99eede6d8c2187fb189452f67240d5b59af90e9fff0619cacc'; $Image = ''
+$Slug = 'github-actions-linter'; $Name = 'GitHub Actions Linter'; $Version = '1.0.1'; $Port = 47113; $Kind = 'bin'
+$Url = 'https://github.com/chayprabs/localtools/releases/download/github-actions-linter-v1.0.1/github-actions-linter-1.0.1-windows-x64.zip'; $Sha = 'f843552ed9728be737a50ea2136bb40a732e475d740421f9643ee87d51a12d63'; $Image = ''
 $Cmd = "localtools-$Slug"
 $Root = if ($env:LOCALTOOLS_HOME) { $env:LOCALTOOLS_HOME } else { Join-Path $env:USERPROFILE '.localtools' }
 $Dir = Join-Path $Root $Slug
