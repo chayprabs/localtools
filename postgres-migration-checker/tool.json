@@ -1,0 +1,16 @@
+{
+  "slug": "postgres-migration-checker",
+  "name": "Postgres Migration Checker",
+  "command": "localtools-postgres-migration-checker",
+  "version": "1.0.0",
+  "port": 47116,
+  "kind": "py",
+  "registries": {
+    "brew": false,
+    "scoop": false,
+    "winget": false,
+    "npm": null,
+    "pypi": "localtools-postgres-migration-checker",
+    "ghcr": null
+  }
+}

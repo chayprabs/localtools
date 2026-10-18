@@ -23,6 +23,7 @@ Browse all tools, with docs and how-tos: **https://tools.chaitanyaprabuddha.com*
 | [GitHub Actions Linter](github-actions-linter/) | Lint GitHub Actions workflows and composite actions for errors and security issues (script injection, permissions, unpinned actions) with a fix per finding. | `localtools-github-actions-linter` |
 | [Kubernetes Manifest Checker](k8s-manifest-checker/) | Score Kubernetes YAML and Helm-rendered manifests for production readiness and security, with a fix snippet per finding. | `localtools-k8s-manifest-checker` |
 | [Terraform Plan Viewer](terraform-plan-viewer/) | Review terraform or OpenTofu plan JSON offline: destructive changes first, attribute diffs, blast radius, drift and risk flags. | `localtools-terraform-plan-viewer` |
+| [Postgres Migration Checker](postgres-migration-checker/) | Check PostgreSQL migrations for the lock each statement takes, what it blocks, and a safe rewrite. | `localtools-postgres-migration-checker` |
 | [SQL Formatter](sql-formatter/) | Format and lint SQL in any major dialect with sqlfluff, including auto-fix. | `localtools-sql-formatter` |
 | [Grok Debugger](grok-debugger/) | Test grok patterns against log lines with the full Logstash pattern library and highlighted matches. | `localtools-grok-debugger` |
 | [HTML Extractor](html-extractor/) | Extract data from HTML pages with CSS selectors into JSON or CSV. | `localtools-html-extractor` |

@@ -1,0 +1,8 @@
+{
+  "path": "/api/check",
+  "fields": {
+    "sql": "ALTER TABLE users ADD COLUMN age int NOT NULL DEFAULT 0;"
+  },
+  "files": {},
+  "expect": "ACCESS EXCLUSIVE"
+}

@@ -1,0 +1,7 @@
+[
+  {"goto": "/"},
+  {"setInputFiles": {"selector": "#files", "files": ["migration.sql"]}, "pause": 700},
+  {"click": "#check"},
+  {"waitFor": {"text": "add-check"}},
+  {"scrollIntoView": "#rows article:nth-child(5)", "pause": 1500}
+]
