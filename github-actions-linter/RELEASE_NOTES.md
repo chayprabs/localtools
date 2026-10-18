@@ -7,3 +7,7 @@ First real offline release: actionlint 1.7.12 and zizmor 1.31.1; paste/upload ba
 ## 1.0.1 (2026-10-18)
 
 Fix: bundled zizmor engine found when launched through the macOS/Linux symlink shim (security checks returned 422 on macOS).
+
+## 1.0.2 (2026-10-18)
+
+Per-file zizmor audits (failures skip only that file, with the reason), composite action.yml support, folder/zip discovery, SARIF and Markdown, --fail-on, ignores, cross-engine dedupe, fix snippets per rule.

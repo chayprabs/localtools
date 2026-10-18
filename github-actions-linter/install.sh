@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for GitHub Actions Linter (github-actions-linter 1.0.1). macOS / Linux, no sudo.
+# localtools installer for GitHub Actions Linter (github-actions-linter 1.0.2). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/github-actions-linter/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='github-actions-linter'; NAME='GitHub Actions Linter'; VERSION='1.0.1'; PORT='47113'; KIND='bin'; IMAGE=''
+SLUG='github-actions-linter'; NAME='GitHub Actions Linter'; VERSION='1.0.2'; PORT='47113'; KIND='bin'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -29,10 +29,10 @@ if [ "$OS" = macos ] && [ "$(sysctl -n sysctl.proc_translated 2>/dev/null || ech
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/github-actions-linter-v1.0.1/github-actions-linter-1.0.1-linux-arm64.zip'; SHA='a0100cd630b6b912b0d16d97ca16590646cdd4d22723eaa2b01cc69b5b6c3924' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/github-actions-linter-v1.0.1/github-actions-linter-1.0.1-linux-x64.zip'; SHA='1f5655687218da1cadd9b2d0c6506997391589e532e5420a87b063b6202cd7ce' ;;
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/github-actions-linter-v1.0.1/github-actions-linter-1.0.1-macos-arm64.zip'; SHA='6f5eb00e36cbee2c1c253739df849083bcbe3e9ac854eefea2661fc6009979e7' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/github-actions-linter-v1.0.1/github-actions-linter-1.0.1-macos-x64.zip'; SHA='9ef0a54eb3c5efa160d55d20e181deee121a140ea486ec5ccd04248603f260b6' ;;
+  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/github-actions-linter-v1.0.2/github-actions-linter-1.0.2-linux-arm64.zip'; SHA='1479aa88b1e499b7475db482997184c55f0297cbeba1a4f4936dcc07575ee032' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/github-actions-linter-v1.0.2/github-actions-linter-1.0.2-linux-x64.zip'; SHA='3d13ef1975cf60b7abdd54ba6ba0e3185552648548eb71edfbc7f6c4bbfea7d2' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/github-actions-linter-v1.0.2/github-actions-linter-1.0.2-macos-arm64.zip'; SHA='dea8cb892872daad06dee29d714c78d114c9ebb8a4083c2efae240a177f72d51' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/github-actions-linter-v1.0.2/github-actions-linter-1.0.2-macos-x64.zip'; SHA='addd2b7298f2583dc2f05c47370b4078315673c14e615a00406c74e42886fb4a' ;;
 esac
 
 if [ "$KIND" = docker ]; then

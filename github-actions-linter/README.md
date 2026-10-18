@@ -1,6 +1,6 @@
 # GitHub Actions Linter
 
-Lint GitHub Actions workflows for correctness and security issues, with line-level findings and suggested fixes.
+Lint GitHub Actions workflows and composite actions for errors and security issues (script injection, permissions, unpinned actions) with a fix per finding.
 
 Part of [localtools](https://tools.chaitanyaprabuddha.com): free tools that run entirely on your machine. Your files never leave it.
 Details and how-to: https://tools.chaitanyaprabuddha.com/github-actions-linter

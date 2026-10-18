@@ -20,7 +20,7 @@ Browse all tools, with docs and how-tos: **https://tools.chaitanyaprabuddha.com*
 | [Excel Diff](excel-diff/) | Compare two Excel or CSV files cell by cell: values, formulas, formats, inserted rows and columns, sheets and named ranges. | `localtools-excel-diff` |
 | [YAML JSON Query](yaml-json-query/) | Query and edit YAML, JSON, XML, TOML and INI with yq expressions and apply RFC 6902 JSON Patch, keeping comments. | `localtools-yaml-json-query` |
 | [OpenAPI Diff](openapi-diff/) | Diff two OpenAPI 3 or Swagger specs and list breaking changes with severity. | `localtools-openapi-diff` |
-| [GitHub Actions Linter](github-actions-linter/) | Lint GitHub Actions workflows for correctness and security issues, with line-level findings and suggested fixes. | `localtools-github-actions-linter` |
+| [GitHub Actions Linter](github-actions-linter/) | Lint GitHub Actions workflows and composite actions for errors and security issues (script injection, permissions, unpinned actions) with a fix per finding. | `localtools-github-actions-linter` |
 | [Kubernetes Manifest Checker](k8s-manifest-checker/) | Score Kubernetes YAML and Helm-rendered manifests for production readiness and security, with a fix snippet per finding. | `localtools-k8s-manifest-checker` |
 | [Terraform Plan Viewer](terraform-plan-viewer/) | Review terraform or OpenTofu plan JSON offline: destructive changes first, attribute diffs, blast radius, drift and risk flags. | `localtools-terraform-plan-viewer` |
 | [Grok Debugger](grok-debugger/) | Test grok patterns against log lines with the full Logstash pattern library and highlighted matches. | `localtools-grok-debugger` |
