@@ -1,0 +1,16 @@
+{
+  "slug": "sql-formatter",
+  "name": "SQL Formatter",
+  "command": "localtools-sql-formatter",
+  "version": "1.0.0",
+  "port": 47117,
+  "kind": "py",
+  "registries": {
+    "brew": false,
+    "scoop": false,
+    "winget": false,
+    "npm": null,
+    "pypi": "localtools-sql-formatter",
+    "ghcr": null
+  }
+}

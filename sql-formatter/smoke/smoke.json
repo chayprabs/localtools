@@ -1,0 +1,9 @@
+{
+  "path": "/api/lint",
+  "fields": {
+    "sql": "select a,b from t\n",
+    "dialect": "ansi"
+  },
+  "files": {},
+  "expect": "LT09"
+}

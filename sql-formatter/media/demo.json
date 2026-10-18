@@ -1,0 +1,11 @@
+[
+  {"goto": "/"},
+  {"waitFor": {"selector": "#dialect option[value=postgres]"}},
+  {"setInputFiles": {"selector": "#file", "files": ["messy.sql"]}},
+  {"click": "#go", "pause": 300},
+  {"waitFor": {"selector": "article.file .count"}, "pause": 1200},
+  {"click": "#mode input[value=fix]"},
+  {"click": "#go"},
+  {"waitFor": {"selector": "article.file pre.diff"}, "pause": 800},
+  {"scrollIntoView": "#out", "pause": 1500}
+]
