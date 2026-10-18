@@ -1,0 +1,16 @@
+name: build-postgast-intel
+on:
+  workflow_dispatch:
+jobs:
+  dependency:
+    runs-on: macos-15-intel
+    steps:
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.13'}
+      - name: Build unmodified BSD parser dependency
+        run: |
+          python -m pip wheel --no-deps --no-binary=postgast postgast==0.2.0 -w wheels
+          python -m pip install wheels/*.whl
+          python -c "import postgast; t=postgast.parse('CREATE INDEX CONCURRENTLY i ON t(c)'); assert t.version == 180004; print(postgast.deparse(t))"
+      - uses: actions/upload-artifact@v4
+        with: {name: postgast-intel-wheel, path: 'wheels/*.whl'}
