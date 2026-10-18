@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for Subtitle Converter (subtitle-converter 1.0.1). macOS / Linux, no sudo.
+# localtools installer for Subtitle Converter (subtitle-converter 1.0.2). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/subtitle-converter/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='subtitle-converter'; NAME='Subtitle Converter'; VERSION='1.0.1'; PORT='47125'; KIND='bin'; IMAGE=''
+SLUG='subtitle-converter'; NAME='Subtitle Converter'; VERSION='1.0.2'; PORT='47125'; KIND='bin'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -33,10 +33,10 @@ fi
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/subtitle-converter-v1.0.1/subtitle-converter-1.0.1-linux-arm64.zip'; SHA='2ad13047116235633eafc1b217b6a9bf2d7a394ad21b39fabb287254dcd2a2cf' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/subtitle-converter-v1.0.1/subtitle-converter-1.0.1-linux-x64.zip'; SHA='4fee503f80a04aedb4c180f8d3662491cf0b94f2ebb24e45e538ecb1122570de' ;;
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/subtitle-converter-v1.0.1/subtitle-converter-1.0.1-macos-arm64.zip'; SHA='50b6194e44a47cc17d9b758796f70cb60062fd046c2b6165be6aff9f0578622f' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/subtitle-converter-v1.0.1/subtitle-converter-1.0.1-macos-x64.zip'; SHA='b0da65b2d0408ff7dea49209fba68eb878d2b949107dc25757706d36a6ab14b9' ;;
+  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/subtitle-converter-v1.0.2/subtitle-converter-1.0.2-linux-arm64.zip'; SHA='a9b7cb2d25d364e2c2480600512fd8161728a6904ebff3955be47e5eb909c481' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/subtitle-converter-v1.0.2/subtitle-converter-1.0.2-linux-x64.zip'; SHA='ae6edbc44bcc0e80ce407b706c6d6ecfaa989fec4f1af0f5d7e57dd552ecbd7b' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/subtitle-converter-v1.0.2/subtitle-converter-1.0.2-macos-arm64.zip'; SHA='8abe26949b4ef70453247e3316d0ad0ab0d35e4123ae9c0d9cc4d91958d251e6' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/subtitle-converter-v1.0.2/subtitle-converter-1.0.2-macos-x64.zip'; SHA='912ad0913d43b19798d32939df27b0c4c67573a355fa50899ef83b4c2990f2a7' ;;
 esac
 
 if [ "$KIND" = docker ]; then
