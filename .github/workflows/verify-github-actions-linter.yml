@@ -1,0 +1,20 @@
+name: github-actions-linter release verification
+on: workflow_dispatch
+permissions: {contents: read}
+jobs:
+  macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify native engines and report errors
+        shell: bash
+        run: |
+          curl -fsSL https://github.com/chayprabs/localtools/releases/download/github-actions-linter-v1.0.0/github-actions-linter-1.0.0-macos-arm64.zip -o release.zip
+          mkdir release
+          unzip -q release.zip -d release
+          chmod +x release/localtools-github-actions-linter release/zizmor/zizmor
+          release/localtools-github-actions-linter --version
+          release/zizmor/zizmor --version
+          release/localtools-github-actions-linter lint --json github-actions-linter/smoke/workflow.yml || true
+          release/zizmor/zizmor --offline --no-config --no-progress --no-exit-codes --format sarif --persona pedantic - < github-actions-linter/smoke/workflow.yml || true
+          env -i PATH="$PATH" SystemRoot="" TEMP="$TMPDIR" TMP="$TMPDIR" NO_COLOR=1 release/zizmor/zizmor --offline --no-config --no-progress --no-exit-codes --format sarif --persona pedantic - < github-actions-linter/smoke/workflow.yml || true
