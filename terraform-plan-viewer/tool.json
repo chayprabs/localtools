@@ -2,7 +2,7 @@
   "slug": "terraform-plan-viewer",
   "name": "Terraform Plan Viewer",
   "command": "localtools-terraform-plan-viewer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "port": 47115,
   "kind": "bin",
   "registries": {

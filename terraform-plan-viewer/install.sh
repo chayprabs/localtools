@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for Terraform Plan Viewer (terraform-plan-viewer 1.0.0). macOS / Linux, no sudo.
+# localtools installer for Terraform Plan Viewer (terraform-plan-viewer 1.0.1). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/terraform-plan-viewer/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='terraform-plan-viewer'; NAME='Terraform Plan Viewer'; VERSION='1.0.0'; PORT='47115'; KIND='bin'; IMAGE=''
+SLUG='terraform-plan-viewer'; NAME='Terraform Plan Viewer'; VERSION='1.0.1'; PORT='47115'; KIND='bin'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -29,10 +29,10 @@ if [ "$OS" = macos ] && [ "$(sysctl -n sysctl.proc_translated 2>/dev/null || ech
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/terraform-plan-viewer-v1.0.0/terraform-plan-viewer-1.0.0-linux-arm64.zip'; SHA='6ab7dd8f228a4c2a70ce6fb62d057e02aa8166817e8dfca6e21817d261ef360a' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/terraform-plan-viewer-v1.0.0/terraform-plan-viewer-1.0.0-linux-x64.zip'; SHA='38d01bb50a44e665deac7d11d8541cc6e4a97707b6d3654087ae9c79b545960f' ;;
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/terraform-plan-viewer-v1.0.0/terraform-plan-viewer-1.0.0-macos-arm64.zip'; SHA='01b04dcbe50295557437d3257745272bbcbce9a8b94ea44907ce40f3ebf8f1a8' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/terraform-plan-viewer-v1.0.0/terraform-plan-viewer-1.0.0-macos-x64.zip'; SHA='4df29a07df3f49031c860e2d6d979a2e5337c2f752915bb8e7d4051536fdb85b' ;;
+  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/terraform-plan-viewer-v1.0.1/terraform-plan-viewer-1.0.1-linux-arm64.zip'; SHA='05ea3605c167d131e03b340267135849ed8b3ebdc780a75b08dfb73049443190' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/terraform-plan-viewer-v1.0.1/terraform-plan-viewer-1.0.1-linux-x64.zip'; SHA='0a7d007e2d4a42484b34aa46ea5658204447e5714c338949e65459634029ff29' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/terraform-plan-viewer-v1.0.1/terraform-plan-viewer-1.0.1-macos-arm64.zip'; SHA='6750da67ae14b068172f2c4b6ebe5035ec171140e2ae43fe43573ade1170f95a' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/terraform-plan-viewer-v1.0.1/terraform-plan-viewer-1.0.1-macos-x64.zip'; SHA='b6dcb9e04be4c64855003a17208150f111a2321e5e4a1bba8dbf07bfeceb7b78' ;;
 esac
 
 if [ "$KIND" = docker ]; then
