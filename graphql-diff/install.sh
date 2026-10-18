@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for GraphQL Diff (graphql-diff 1.0.0). macOS / Linux, no sudo.
+# localtools installer for GraphQL Diff (graphql-diff 1.0.1). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/graphql-diff/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='graphql-diff'; NAME='GraphQL Diff'; VERSION='1.0.0'; PORT='47112'; KIND='js'; IMAGE=''
+SLUG='graphql-diff'; NAME='GraphQL Diff'; VERSION='1.0.1'; PORT='47112'; KIND='js'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -29,10 +29,10 @@ if [ "$OS" = macos ] && [ "$(sysctl -n sysctl.proc_translated 2>/dev/null || ech
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/graphql-diff-v1.0.0/graphql-diff-1.0.0-macos-arm64.zip'; SHA='704efa21535ee6d24e26340ac6fbecab4b1ef363ec0493d3c600dee919d40173' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/graphql-diff-v1.0.0/graphql-diff-1.0.0-macos-x64.zip'; SHA='e06215d4acfb7d57d5c1f9773b0e98ff57d9605b12a5abb124ba67ef91cfe399' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/graphql-diff-v1.0.0/graphql-diff-1.0.0-linux-x64.zip'; SHA='37ecb1e498c8c7aea6147543ad15333596aa829660ebf17b2f0d66e6f59f289a' ;;
-  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/graphql-diff-v1.0.0/graphql-diff-1.0.0-linux-arm64.zip'; SHA='bdf8a8bc6400ee89f612b263676927ae3bbf30edb8e4a6e5913c012d4078be87' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/graphql-diff-v1.0.1/graphql-diff-1.0.1-macos-arm64.zip'; SHA='fc2ddb00ac14709ec77144557380baeb3a0452ceb61e96a4cbcf92741ab9a415' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/graphql-diff-v1.0.1/graphql-diff-1.0.1-macos-x64.zip'; SHA='bb1215e001bed813f3945fe31772181be4d80ac65f08a830a2c9f87e3eafe707' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/graphql-diff-v1.0.1/graphql-diff-1.0.1-linux-x64.zip'; SHA='43f579e930223d736d0dcdc49876c47f308f96e60bad34623484b0cf6515ae66' ;;
+  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/graphql-diff-v1.0.1/graphql-diff-1.0.1-linux-arm64.zip'; SHA='5a2a8789a7ae55a9d1994a9306f390c395ecdf5a9cbf1805056c95ae2f78c8be' ;;
 esac
 
 if [ "$KIND" = docker ]; then

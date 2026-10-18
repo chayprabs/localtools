@@ -1,4 +1,4 @@
-# localtools installer for GraphQL Diff (graphql-diff 1.0.0). Windows PowerShell 5.1+, no admin.
+# localtools installer for GraphQL Diff (graphql-diff 1.0.1). Windows PowerShell 5.1+, no admin.
 # Usage: irm https://raw.githubusercontent.com/chayprabs/localtools/main/graphql-diff/install.ps1 | iex
 # Re-running updates. Set $env:LOCALTOOLS_NO_OPEN='1' to skip launching the tool afterwards.
 # Wrapped in a script block so `irm | iex` never leaks settings into, or exits, the caller's session.
@@ -7,8 +7,8 @@ $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 
-$Slug = 'graphql-diff'; $Name = 'GraphQL Diff'; $Version = '1.0.0'; $Port = 47112; $Kind = 'js'
-$Url = 'https://github.com/chayprabs/localtools/releases/download/graphql-diff-v1.0.0/graphql-diff-1.0.0-windows-x64.zip'; $Sha = 'e32156be7563aac7b1d5ea02771e866247324ef057b4cdd656800c08a23324ab'; $Image = ''
+$Slug = 'graphql-diff'; $Name = 'GraphQL Diff'; $Version = '1.0.1'; $Port = 47112; $Kind = 'js'
+$Url = 'https://github.com/chayprabs/localtools/releases/download/graphql-diff-v1.0.1/graphql-diff-1.0.1-windows-x64.zip'; $Sha = 'ea1d54388759498da4cddd1d8a6af1c4d006971eea88272cfb07209b9726c49f'; $Image = ''
 $Cmd = "localtools-$Slug"
 $Root = if ($env:LOCALTOOLS_HOME) { $env:LOCALTOOLS_HOME } else { Join-Path $env:USERPROFILE '.localtools' }
 $Dir = Join-Path $Root $Slug
