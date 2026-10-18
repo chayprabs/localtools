@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for SQL Formatter (sql-formatter 1.0.0). macOS / Linux, no sudo.
+# localtools installer for SQL Formatter (sql-formatter 1.0.1). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/sql-formatter/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='sql-formatter'; NAME='SQL Formatter'; VERSION='1.0.0'; PORT='47117'; KIND='py'; IMAGE=''
+SLUG='sql-formatter'; NAME='SQL Formatter'; VERSION='1.0.1'; PORT='47117'; KIND='py'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -29,9 +29,9 @@ if [ "$OS" = macos ] && [ "$(sysctl -n sysctl.proc_translated 2>/dev/null || ech
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/sql-formatter-v1.0.0/sql-formatter-1.0.0-macos-arm64.zip'; SHA='35af80b27b3fbf4bfb1555d2e03b80f383b8db17d5ac83ac91f68c5cf22d6235' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/sql-formatter-v1.0.0/sql-formatter-1.0.0-macos-x64.zip'; SHA='d00186036ab96f83efc6dd840f646d1a1e92bb892bfa47c8ab7a418451da068a' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/sql-formatter-v1.0.0/sql-formatter-1.0.0-linux-x64.zip'; SHA='21fbaf078a90895058f64d4f2f97abe76a439e1759e82f5abb4f2d1f13728466' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/sql-formatter-v1.0.1/sql-formatter-1.0.1-macos-arm64.zip'; SHA='19e47c0917ec8cc030f864c66ab464ea844ded08bacda954d798c401304ac2f1' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/sql-formatter-v1.0.1/sql-formatter-1.0.1-macos-x64.zip'; SHA='29ed158d5f8782cad270aebb2b775b1438669f8a0bef76406f56794f105a85ae' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/sql-formatter-v1.0.1/sql-formatter-1.0.1-linux-x64.zip'; SHA='ff67a7ae4615517106e64cf3fcbf2c74569778ea6ea6d2060924b57b9aeb8c93' ;;
 esac
 
 if [ "$KIND" = docker ]; then

@@ -2,7 +2,7 @@
   "slug": "sql-formatter",
   "name": "SQL Formatter",
   "command": "localtools-sql-formatter",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "port": 47117,
   "kind": "py",
   "registries": {
