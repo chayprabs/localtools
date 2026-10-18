@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for CLI Output to JSON (cli-output-to-json 1.0.0). macOS / Linux, no sudo.
+# localtools installer for CLI Output to JSON (cli-output-to-json 1.0.1). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/cli-output-to-json/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='cli-output-to-json'; NAME='CLI Output to JSON'; VERSION='1.0.0'; PORT='47119'; KIND='py'; IMAGE=''
+SLUG='cli-output-to-json'; NAME='CLI Output to JSON'; VERSION='1.0.1'; PORT='47119'; KIND='py'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -29,9 +29,9 @@ if [ "$OS" = macos ] && [ "$(sysctl -n sysctl.proc_translated 2>/dev/null || ech
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/cli-output-to-json-v1.0.0/cli-output-to-json-1.0.0-macos-arm64.zip'; SHA='24934ed693a940cb6d33d3bf1f622f2e8eb7c542fa0fd51d1995b17da110cb2b' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/cli-output-to-json-v1.0.0/cli-output-to-json-1.0.0-macos-x64.zip'; SHA='32c4cfe63202c6a692009355f7f5c59150f2b590b1868599eec83b8eb6dbd8fa' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/cli-output-to-json-v1.0.0/cli-output-to-json-1.0.0-linux-x64.zip'; SHA='f11c7fbe90b3f68a847df2c47f6938c035eef55b54c1668aa10a9f5491a382b6' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/cli-output-to-json-v1.0.1/cli-output-to-json-1.0.1-macos-arm64.zip'; SHA='d471961e22f7c728b5b592abc47cd5966bd4f7c5d8e9dd47dd1de26bd3d6a0d0' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/cli-output-to-json-v1.0.1/cli-output-to-json-1.0.1-macos-x64.zip'; SHA='a677d299755a135c6de1464148589655e3a91ebc3f3555c0e07d320a70f77a24' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/cli-output-to-json-v1.0.1/cli-output-to-json-1.0.1-linux-x64.zip'; SHA='d0029614e9fa7fa8135a227387f552f7708d2446d14601c559b6d4350ccb658e' ;;
 esac
 
 if [ "$KIND" = docker ]; then

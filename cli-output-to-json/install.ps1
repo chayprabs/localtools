@@ -1,4 +1,4 @@
-# localtools installer for CLI Output to JSON (cli-output-to-json 1.0.0). Windows PowerShell 5.1+, no admin.
+# localtools installer for CLI Output to JSON (cli-output-to-json 1.0.1). Windows PowerShell 5.1+, no admin.
 # Usage: irm https://raw.githubusercontent.com/chayprabs/localtools/main/cli-output-to-json/install.ps1 | iex
 # Re-running updates. Set $env:LOCALTOOLS_NO_OPEN='1' to skip launching the tool afterwards.
 # Wrapped in a script block so `irm | iex` never leaks settings into, or exits, the caller's session.
@@ -7,8 +7,8 @@ $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 
-$Slug = 'cli-output-to-json'; $Name = 'CLI Output to JSON'; $Version = '1.0.0'; $Port = 47119; $Kind = 'py'
-$Url = 'https://github.com/chayprabs/localtools/releases/download/cli-output-to-json-v1.0.0/cli-output-to-json-1.0.0-windows-x64.zip'; $Sha = '799bbce2b59cb9b6c9e5d57f135074a04bb6eaa7d9227527256ff62e852d527c'; $Image = ''
+$Slug = 'cli-output-to-json'; $Name = 'CLI Output to JSON'; $Version = '1.0.1'; $Port = 47119; $Kind = 'py'
+$Url = 'https://github.com/chayprabs/localtools/releases/download/cli-output-to-json-v1.0.1/cli-output-to-json-1.0.1-windows-x64.zip'; $Sha = 'a1bf9d432f71e3d8147914dcf7b801c56fcfa3504d44597e32b42684a538e415'; $Image = ''
 $Cmd = "localtools-$Slug"
 $Root = if ($env:LOCALTOOLS_HOME) { $env:LOCALTOOLS_HOME } else { Join-Path $env:USERPROFILE '.localtools' }
 $Dir = Join-Path $Root $Slug
