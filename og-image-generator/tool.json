@@ -2,7 +2,7 @@
   "slug": "og-image-generator",
   "name": "OG Image Generator",
   "command": "localtools-og-image-generator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "port": 47128,
   "kind": "js",
   "registries": {

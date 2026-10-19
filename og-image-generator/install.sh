@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for OG Image Generator (og-image-generator 1.0.0). macOS / Linux, no sudo.
+# localtools installer for OG Image Generator (og-image-generator 1.0.1). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/og-image-generator/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='og-image-generator'; NAME='OG Image Generator'; VERSION='1.0.0'; PORT='47128'; KIND='js'; IMAGE=''
+SLUG='og-image-generator'; NAME='OG Image Generator'; VERSION='1.0.1'; PORT='47128'; KIND='js'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -33,10 +33,10 @@ fi
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/og-image-generator-v1.0.0/og-image-generator-1.0.0-macos-arm64.zip'; SHA='fc821d327214b1c55e52c874db28dd0d18430ec3b3618a1262e205be86f68eb9' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/og-image-generator-v1.0.0/og-image-generator-1.0.0-macos-x64.zip'; SHA='16c4bfe579f526e6da8f28a0c32a0222b203ab4170976833a8c2e3ca0b57fbfc' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/og-image-generator-v1.0.0/og-image-generator-1.0.0-linux-x64.zip'; SHA='a360782d07b98d70e3b67659e5bcc785706574d75edfc0e9b13eec7502c0afeb' ;;
-  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/og-image-generator-v1.0.0/og-image-generator-1.0.0-linux-arm64.zip'; SHA='7c293065ad3f0e6aee3ca7a7541417e7c903e7ff6f87fdc68ee80220b804640d' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/og-image-generator-v1.0.1/og-image-generator-1.0.1-macos-arm64.zip'; SHA='1d103dfbba3cec4ce4e85aac433d37b4423ec72da27ea7a09c836a68ed076cb4' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/og-image-generator-v1.0.1/og-image-generator-1.0.1-macos-x64.zip'; SHA='28cd3e7c7fcda406d701e16a69926c336b2c41c8532198f5e60216004762044e' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/og-image-generator-v1.0.1/og-image-generator-1.0.1-linux-x64.zip'; SHA='676885fbe4d8325241673d43ffe69291eb9066dbcf760611bda48cbbb68eb74c' ;;
+  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/og-image-generator-v1.0.1/og-image-generator-1.0.1-linux-arm64.zip'; SHA='690546c5f37103f796100af68d43074068d007839c431b8fe33b7ec309013930' ;;
 esac
 
 if [ "$KIND" = docker ]; then

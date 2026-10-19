@@ -1,4 +1,4 @@
-# localtools installer for OG Image Generator (og-image-generator 1.0.0). Windows PowerShell 5.1+, no admin.
+# localtools installer for OG Image Generator (og-image-generator 1.0.1). Windows PowerShell 5.1+, no admin.
 # Usage: irm https://raw.githubusercontent.com/chayprabs/localtools/main/og-image-generator/install.ps1 | iex
 # Re-running updates. Set $env:LOCALTOOLS_NO_OPEN='1' to skip launching the tool afterwards.
 # Wrapped in a script block so `irm | iex` never leaks settings into, or exits, the caller's session.
@@ -7,8 +7,8 @@ $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 
-$Slug = 'og-image-generator'; $Name = 'OG Image Generator'; $Version = '1.0.0'; $Port = 47128; $Kind = 'js'
-$Url = 'https://github.com/chayprabs/localtools/releases/download/og-image-generator-v1.0.0/og-image-generator-1.0.0-windows-x64.zip'; $Sha = '3ce30bfef54f3f38e5a05382f3c05c9d9dcc4209ee1ae4668d5a62f94a71572b'; $Image = ''
+$Slug = 'og-image-generator'; $Name = 'OG Image Generator'; $Version = '1.0.1'; $Port = 47128; $Kind = 'js'
+$Url = 'https://github.com/chayprabs/localtools/releases/download/og-image-generator-v1.0.1/og-image-generator-1.0.1-windows-x64.zip'; $Sha = '92b4c750d7f147d8aa29d075e9dcabed8499f9bd89bc4ce1d30cb64e01663fd2'; $Image = ''
 $Cmd = "localtools-$Slug"
 $Root = if ($env:LOCALTOOLS_HOME) { $env:LOCALTOOLS_HOME } else { Join-Path $env:USERPROFILE '.localtools' }
 $Dir = Join-Path $Root $Slug
