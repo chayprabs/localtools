@@ -1,0 +1,16 @@
+{
+  "slug": "asciidoc-converter",
+  "name": "AsciiDoc Converter",
+  "command": "localtools-asciidoc-converter",
+  "version": "1.0.0",
+  "port": 47132,
+  "kind": "js",
+  "registries": {
+    "brew": true,
+    "scoop": true,
+    "winget": true,
+    "npm": null,
+    "pypi": null,
+    "ghcr": null
+  }
+}

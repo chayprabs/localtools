@@ -1,0 +1,8 @@
+[
+  {"goto": "/"},
+  {"fill": {"selector": "#source", "text": "= Field Notes\n:toc:\n\n== Measuring flow\n\nNOTE: Measure on a straight reach.\n\nThe discharge is stem:[Q = A v].\n\n[source,python]\n----\ndef discharge(a, v):\n    return a * v\n----\n\n|===\n|Date |Discharge\n|2026-03-01 |1.18\n|===\n"}},
+  {"click": "#stem"},
+  {"click": "#sectnums"},
+  {"waitFor": {"text": "document.html"}},
+  {"scrollIntoView": "#out-l", "pause": 1500}
+]

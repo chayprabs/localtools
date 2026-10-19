@@ -42,6 +42,7 @@ Browse all tools, with docs and how-tos: **https://tools.chaitanyaprabuddha.com*
 | [Font Subsetter](font-subsetter/) | Subset fonts to the characters you use, instance variable fonts, and convert to WOFF2. | `localtools-font-subsetter` |
 | [Pandoc GUI](pandoc-gui/) | Convert documents between Markdown, DOCX, HTML, EPUB, LaTeX and PDF with pandoc. | `localtools-pandoc-gui` |
 | [Typst Editor](typst-editor/) | Write Typst documents with live preview and export them to PDF, PNG or SVG. | `localtools-typst-editor` |
+| [AsciiDoc Converter](asciidoc-converter/) | Convert AsciiDoc documents and projects to self-contained HTML5, DocBook 5 or Markdown with Asciidoctor, offline. | `localtools-asciidoc-converter` |
 <!-- /tools -->
 
 ## Install
