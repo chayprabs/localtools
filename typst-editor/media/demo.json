@@ -32,11 +32,6 @@
     "wait": 3500
   },
   {
-    "screenshot": {
-      "selector": "main",
-      "maxHeight": 2400,
-      "padding": 24
-    }
+    "scrollIntoView": "main"
   }
 ]
-
