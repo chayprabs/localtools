@@ -1,0 +1,10 @@
+{
+  "path": "/api/convert",
+  "fields": {
+    "format": "markdown"
+  },
+  "files": {
+    "file": "report.pdf"
+  },
+  "expect": "| Upstream | 4.12 | 1.20 |"
+}

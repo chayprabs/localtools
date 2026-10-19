@@ -1,0 +1,10 @@
+[
+  {"goto": "/"},
+  {"setInputFiles": {"selector": "#file", "files": ["report.pdf"]}, "pause": 600},
+  {"click": "#images"},
+  {"click": "#go"},
+  {"waitFor": {"selector": "#rendered table"}, "pause": 800},
+  {"scrollIntoView": "#results", "pause": 1200},
+  {"click": "#t-chunks", "pause": 1200},
+  {"click": "#t-rendered", "pause": 600}
+]
