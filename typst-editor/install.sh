@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for Typst Editor (typst-editor 1.0.0). macOS / Linux, no sudo.
+# localtools installer for Typst Editor (typst-editor 1.0.1). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/typst-editor/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='typst-editor'; NAME='Typst Editor'; VERSION='1.0.0'; PORT='47131'; KIND='bin'; IMAGE=''
+SLUG='typst-editor'; NAME='Typst Editor'; VERSION='1.0.1'; PORT='47131'; KIND='bin'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -33,10 +33,10 @@ fi
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/typst-editor-v1.0.0/typst-editor-1.0.0-macos-arm64.zip'; SHA='5f61522a52a4686c5cf5813e081238841eb077325f2ffae641e2534df0cf5afc' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/typst-editor-v1.0.0/typst-editor-1.0.0-macos-x64.zip'; SHA='0de2416e639cf9cff204691431e3b75852acde8c5692e8dd92562d16ee2a2088' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/typst-editor-v1.0.0/typst-editor-1.0.0-linux-x64.zip'; SHA='b5067c1b50279a2c5ffde80fea9cd11a77d2503a3dff8abbefdcfb695bd599ab' ;;
-  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/typst-editor-v1.0.0/typst-editor-1.0.0-linux-arm64.zip'; SHA='09fb2c503aca5efb20973a1dfa1555ccdca05423999afec9a1e10cabd40d20a5' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/typst-editor-v1.0.1/typst-editor-1.0.1-macos-arm64.zip'; SHA='db7269dc4fbbfae54379d632ac6cc4cacd237aec905a04e6c350ee6c1608e239' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/typst-editor-v1.0.1/typst-editor-1.0.1-macos-x64.zip'; SHA='768a8519dafc07594540fed7c7a2175850a4a241ee1678ffd94a8a47d865cc5a' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/typst-editor-v1.0.1/typst-editor-1.0.1-linux-x64.zip'; SHA='500fc620df5bbd2c5166aa38f51cc5fec7073041184bd3acb7ae4d5520e98e31' ;;
+  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/typst-editor-v1.0.1/typst-editor-1.0.1-linux-arm64.zip'; SHA='e666ea19226b268c12697ee8f1daa11844f710c072b76e1db6797e16bf87f02f' ;;
 esac
 
 if [ "$KIND" = docker ]; then

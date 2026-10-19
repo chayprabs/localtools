@@ -2,7 +2,7 @@
   "slug": "typst-editor",
   "name": "Typst Editor",
   "command": "localtools-typst-editor",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "port": 47131,
   "kind": "bin",
   "registries": {
