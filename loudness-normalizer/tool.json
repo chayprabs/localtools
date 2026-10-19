@@ -2,7 +2,7 @@
   "slug": "loudness-normalizer",
   "name": "Loudness Normalizer",
   "command": "localtools-loudness-normalizer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "port": 47124,
   "kind": "bin",
   "registries": {

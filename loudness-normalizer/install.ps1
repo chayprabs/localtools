@@ -1,4 +1,4 @@
-# localtools installer for Loudness Normalizer (loudness-normalizer 1.0.0). Windows PowerShell 5.1+, no admin.
+# localtools installer for Loudness Normalizer (loudness-normalizer 1.0.1). Windows PowerShell 5.1+, no admin.
 # Usage: irm https://raw.githubusercontent.com/chayprabs/localtools/main/loudness-normalizer/install.ps1 | iex
 # Re-running updates. Set $env:LOCALTOOLS_NO_OPEN='1' to skip launching the tool afterwards.
 # Wrapped in a script block so `irm | iex` never leaks settings into, or exits, the caller's session.
@@ -7,8 +7,8 @@ $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 
-$Slug = 'loudness-normalizer'; $Name = 'Loudness Normalizer'; $Version = '1.0.0'; $Port = 47124; $Kind = 'bin'
-$Url = 'https://github.com/chayprabs/localtools/releases/download/loudness-normalizer-v1.0.0/loudness-normalizer-1.0.0-windows-x64.zip'; $Sha = 'e8f4505f6dfbf011718ad50597da102ee56cf669a5fc4c86dd55e4250f281e52'; $Image = ''
+$Slug = 'loudness-normalizer'; $Name = 'Loudness Normalizer'; $Version = '1.0.1'; $Port = 47124; $Kind = 'bin'
+$Url = 'https://github.com/chayprabs/localtools/releases/download/loudness-normalizer-v1.0.1/loudness-normalizer-1.0.1-windows-x64.zip'; $Sha = 'b82f788799231ea28594b64d5c47f2f17113f46025d5d58fe8f80e935683e62c'; $Image = ''
 $Cmd = "localtools-$Slug"
 $Root = if ($env:LOCALTOOLS_HOME) { $env:LOCALTOOLS_HOME } else { Join-Path $env:USERPROFILE '.localtools' }
 $Dir = Join-Path $Root $Slug
