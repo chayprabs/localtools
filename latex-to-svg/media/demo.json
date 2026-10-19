@@ -1,0 +1,8 @@
+[
+  {"goto": "/"},
+  {"waitFor": {"text": "ex ·"}, "pause": 800},
+  {"fill": {"selector": "#math", "text": "\\int_{-\\infty}^{\\infty} e^{-x^2}\\,dx = \\sqrt{\\pi}"}, "pause": 1500},
+  {"fill": {"selector": "#math", "text": "\\ce{CO2 + C -> 2 CO} \\qquad i\\hbar\\pdv{t}\\ket{\\Psi} = \\hat{H}\\ket{\\Psi}"}, "pause": 2000},
+  {"click": "#codetabs button:nth-child(2)", "pause": 1500},
+  {"scrollIntoView": "#out-l", "pause": 1500}
+]

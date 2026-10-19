@@ -1,0 +1,9 @@
+{
+  "path": "/api/render",
+  "fields": {
+    "math": "E=mc^2",
+    "format": "svg"
+  },
+  "files": {},
+  "expect": "<svg"
+}

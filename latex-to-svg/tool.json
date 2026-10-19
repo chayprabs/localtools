@@ -1,0 +1,16 @@
+{
+  "slug": "latex-to-svg",
+  "name": "LaTeX to SVG",
+  "command": "localtools-latex-to-svg",
+  "version": "1.0.0",
+  "port": 47133,
+  "kind": "js",
+  "registries": {
+    "brew": true,
+    "scoop": true,
+    "winget": true,
+    "npm": null,
+    "pypi": null,
+    "ghcr": null
+  }
+}
