@@ -1,0 +1,29 @@
+[
+  {
+    "goto": "/"
+  },
+  {
+    "fill": {
+      "selector": "#text",
+      "text": "# Conversion results\n\nKeep **headings**, tables, code and mathematics.\n\n| Format | Use |\n|:-------|:----|\n| DOCX | Editing |\n| EPUB | Reading |\n| PDF | Sharing |\n\nThe area is $A = \\pi r^2$.\n"
+    }
+  },
+  {
+    "fill": {
+      "selector": "#title",
+      "text": "Document conversion"
+    }
+  },
+  {
+    "click": "#go"
+  },
+  {
+    "waitFor": {
+      "selector": "#out"
+    }
+  },
+  {
+    "scrollIntoView": "#text",
+    "pause": 900
+  }
+]

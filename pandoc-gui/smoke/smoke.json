@@ -1,0 +1,11 @@
+{
+  "path": "/api/convert",
+  "fields": {
+    "from": "markdown",
+    "to": "pdf"
+  },
+  "files": {
+    "file": "sample.md"
+  },
+  "expect": "%PDF-"
+}

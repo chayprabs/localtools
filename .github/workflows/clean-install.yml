@@ -94,6 +94,9 @@ jobs:
           if out=$(curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/${{ matrix.slug }}/install.sh | bash 2>&1); then echo "expected failure"; exit 1; fi
           echo "installer said: $out"; grep -q Docker <<<"$out"
 
+      - uses: actions/setup-python@v5
+        if: matrix.slug == 'pandoc-gui' && env.FULL == 'true'
+        with: { python-version: "3.13" }
       - name: shim, launcher, health, smoke, version, update, uninstall
         if: env.FULL == 'true'
         run: |
@@ -124,6 +127,8 @@ jobs:
           while IFS= read -r k; do [ -n "$k" ] && args+=(-F "$k=@$SLUG/smoke/$(jq -r --arg k "$k" '.files[$k]' "$S")"); done < <(jq -r '.files|keys[]' "$S")
           curl -fsS "${args[@]}" "http://127.0.0.1:$PORT$(jq -r .path "$S")" -o smoke.out
           grep -aqF -- "$(jq -r .expect "$S")" smoke.out; echo "smoke ok ($(wc -c < smoke.out) bytes)"
+
+          if [ "$SLUG" = pandoc-gui ]; then python "$SLUG/verify.py"; fi
 
           "$T" --version | tee version.out; grep -qF "$VERSION" version.out
 

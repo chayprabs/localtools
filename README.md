@@ -38,6 +38,7 @@ Browse all tools, with docs and how-tos: **https://tools.chaitanyaprabuddha.com*
 | [EXIF Remover](exif-remover/) | Inspect and remove metadata from JPEG, PNG, TIFF and WebP images; download clean copies and a remaining-tags report. | `localtools-exif-remover` |
 | [SVG Optimizer](svg-optimizer/) | Optimize and minify SVG files with SVGO and export them to PNG. | `localtools-svg-optimizer` |
 | [Font Subsetter](font-subsetter/) | Subset fonts to the characters you use, instance variable fonts, and convert to WOFF2. | `localtools-font-subsetter` |
+| [Pandoc GUI](pandoc-gui/) | Convert documents between Markdown, DOCX, HTML, EPUB, LaTeX and PDF with pandoc. | `localtools-pandoc-gui` |
 <!-- /tools -->
 
 ## Install
