@@ -1,4 +1,4 @@
-# localtools installer for Pandoc GUI (pandoc-gui 1.0.0). Windows PowerShell 5.1+, no admin.
+# localtools installer for Pandoc GUI (pandoc-gui 1.0.1). Windows PowerShell 5.1+, no admin.
 # Usage: irm https://raw.githubusercontent.com/chayprabs/localtools/main/pandoc-gui/install.ps1 | iex
 # Re-running updates. Set $env:LOCALTOOLS_NO_OPEN='1' to skip launching the tool afterwards.
 # Wrapped in a script block so `irm | iex` never leaks settings into, or exits, the caller's session.
@@ -7,8 +7,8 @@ $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 
-$Slug = 'pandoc-gui'; $Name = 'Pandoc GUI'; $Version = '1.0.0'; $Port = 47130; $Kind = 'bin'
-$Url = 'https://github.com/chayprabs/localtools/releases/download/pandoc-gui-v1.0.0/pandoc-gui-1.0.0-windows-x64.zip'; $Sha = 'c7ec982a639f16054404b74d55e527f6d1112af95d08894d3b4771c253d7d567'; $Image = ''
+$Slug = 'pandoc-gui'; $Name = 'Pandoc GUI'; $Version = '1.0.1'; $Port = 47130; $Kind = 'bin'
+$Url = 'https://github.com/chayprabs/localtools/releases/download/pandoc-gui-v1.0.1/pandoc-gui-1.0.1-windows-x64.zip'; $Sha = '7e59baed698a931b5ed373b8e083fd7e7e309e53cc0cc5d7d4c5d57fcc8e438b'; $Image = ''
 $Cmd = "localtools-$Slug"
 $Root = if ($env:LOCALTOOLS_HOME) { $env:LOCALTOOLS_HOME } else { Join-Path $env:USERPROFILE '.localtools' }
 $Dir = Join-Path $Root $Slug

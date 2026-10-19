@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for Pandoc GUI (pandoc-gui 1.0.0). macOS / Linux, no sudo.
+# localtools installer for Pandoc GUI (pandoc-gui 1.0.1). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/pandoc-gui/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='pandoc-gui'; NAME='Pandoc GUI'; VERSION='1.0.0'; PORT='47130'; KIND='bin'; IMAGE=''
+SLUG='pandoc-gui'; NAME='Pandoc GUI'; VERSION='1.0.1'; PORT='47130'; KIND='bin'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -33,10 +33,10 @@ fi
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/pandoc-gui-v1.0.0/pandoc-gui-1.0.0-linux-arm64.zip'; SHA='567604856d09e00e308d77b862c861170d1a8d4d7811e2a59bc96085184adde0' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/pandoc-gui-v1.0.0/pandoc-gui-1.0.0-linux-x64.zip'; SHA='360542ef79d1d258d23f2fb899ef1a35c81cc8ba96310e3ba63dd7199d7339bc' ;;
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/pandoc-gui-v1.0.0/pandoc-gui-1.0.0-macos-arm64.zip'; SHA='a315cf2c17572246c2cbcd0b6a6d4c82fb808f6c9bad3bb70690a87b1a257484' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/pandoc-gui-v1.0.0/pandoc-gui-1.0.0-macos-x64.zip'; SHA='31fc8c21c8e86c506d6de03f82e35401ebca0eacd682a60ea212e031bb555994' ;;
+  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/pandoc-gui-v1.0.1/pandoc-gui-1.0.1-linux-arm64.zip'; SHA='a00d69f5d1a334012229568b6ef47cf2df785dc0ef950fcbd47114797d12a618' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/pandoc-gui-v1.0.1/pandoc-gui-1.0.1-linux-x64.zip'; SHA='8960ab7d291a746c62247c03c25696579dbc028de45ca6ad889450e661da78cf' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/pandoc-gui-v1.0.1/pandoc-gui-1.0.1-macos-arm64.zip'; SHA='93a6f1acc783f9a5fb8190dcc1c68bfa5481e499502848212622e6ae1f9df5ea' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/pandoc-gui-v1.0.1/pandoc-gui-1.0.1-macos-x64.zip'; SHA='ee3ac08d06c87cda4eba27382eddc5cb1d2acac81919ae5e0458535d6b7d3bf3' ;;
 esac
 
 if [ "$KIND" = docker ]; then
