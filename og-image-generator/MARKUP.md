@@ -55,4 +55,4 @@ and weight from the file name: `Acme-Bold.ttf` is family `Acme`, weight 700.
 
 ## Limits
 
-512 KB markup, 5,000 elements, 100 levels of nesting, 2 MB after placeholders are filled; 200 to 4096 px per side.
+512 KiB raw markup, 5,000 elements, 100 levels of nesting, 2 MiB expanded template text; 200 to 4096 px per side. Uploaded images (up to 10 MiB / 25 MP each) are resolved after expansion and do not count toward its text limit. A card may contain at most 128 MiB of encoded image references. Inline data URLs still count toward the raw markup limit. Server jobs have a 20-second per-card / 15-minute per-batch deadline; CLI jobs run until finished or interrupted.
