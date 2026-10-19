@@ -40,6 +40,7 @@ Browse all tools, with docs and how-tos: **https://tools.chaitanyaprabuddha.com*
 | [OG Image Generator](og-image-generator/) | Design and render Open Graph / social card images offline: templates, live preview, code highlighting, batch. | `localtools-og-image-generator` |
 | [Font Subsetter](font-subsetter/) | Subset fonts to the characters you use, instance variable fonts, and convert to WOFF2. | `localtools-font-subsetter` |
 | [Pandoc GUI](pandoc-gui/) | Convert documents between Markdown, DOCX, HTML, EPUB, LaTeX and PDF with pandoc. | `localtools-pandoc-gui` |
+| [Typst Editor](typst-editor/) | Write Typst documents with live preview and export them to PDF, PNG or SVG. | `localtools-typst-editor` |
 <!-- /tools -->
 
 ## Install

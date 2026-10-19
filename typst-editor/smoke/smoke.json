@@ -1,0 +1,9 @@
+{
+  "path": "/api/compile",
+  "fields": {
+    "source": "= Hello\n$ x^2 $",
+    "format": "pdf"
+  },
+  "files": {},
+  "expect": "%PDF"
+}

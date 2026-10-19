@@ -1,0 +1,9 @@
+[
+  {"goto": "/"},
+  {"waitFor": {"selector": "#pages img"}, "pause": 800},
+  {"setInputFiles": {"selector": "#zipin", "files": ["thesis.zip"]}},
+  {"waitFor": {"text": "chapters/chapter.typ"}, "pause": 1200},
+  {"fill": {"selector": "#src", "text": "#set page(width: 14cm, height: auto, margin: 1cm)\n= Live preview\nTypst compiles on this machine.\n$ integral_0^oo e^(-x^2) dif x = sqrt(pi) / 2 $"}},
+  {"wait": 1500},
+  {"scrollIntoView": ".ed"}
+]
