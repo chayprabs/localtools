@@ -47,6 +47,14 @@ for (const scheme of ["light", "dark"]) {
   const page = await ctx.newPage();
   await play(page);
   await page.waitForTimeout(1000);
+  // SVG previews and embedded document frames must finish decoding and painting before capture.
+  for (const frame of page.frames()) {
+    await frame.evaluate(async () => {
+      await document.fonts.ready;
+      await Promise.all(Array.from(document.images, img => img.decode().catch(() => {})));
+      await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+    });
+  }
   const path = `${out}/screenshot${scheme === "dark" ? "-dark" : ""}.png`;
   if (shot?.selector) {
     // Full page, clipped to the element, so a long result is not cut off at the fold.
