@@ -37,6 +37,7 @@ Browse all tools, with docs and how-tos: **https://tools.chaitanyaprabuddha.com*
 | [Subtitle Converter](subtitle-converter/) | Convert, inspect and re-time subtitles; extract, add or burn captions into video. | `localtools-subtitle-converter` |
 | [EXIF Remover](exif-remover/) | Inspect and remove metadata from JPEG, PNG, TIFF and WebP images; download clean copies and a remaining-tags report. | `localtools-exif-remover` |
 | [SVG Optimizer](svg-optimizer/) | Optimize and minify SVG files with SVGO and export them to PNG. | `localtools-svg-optimizer` |
+| [OG Image Generator](og-image-generator/) | Design and render Open Graph / social card images offline: templates, live preview, code highlighting, batch. | `localtools-og-image-generator` |
 | [Font Subsetter](font-subsetter/) | Subset fonts to the characters you use, instance variable fonts, and convert to WOFF2. | `localtools-font-subsetter` |
 | [Pandoc GUI](pandoc-gui/) | Convert documents between Markdown, DOCX, HTML, EPUB, LaTeX and PDF with pandoc. | `localtools-pandoc-gui` |
 <!-- /tools -->

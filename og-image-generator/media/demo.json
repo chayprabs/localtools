@@ -1,0 +1,8 @@
+[
+  {"goto": "/"},
+  {"waitFor": {"text": "KB"}, "pause": 800},
+  {"fill": {"selector": "#f-title", "text": "Rendered on your machine, no browser engine"}, "pause": 1500},
+  {"click": "#templates label:nth-child(2)", "pause": 2000},
+  {"click": "#templates label:nth-child(5)", "pause": 2000},
+  {"scrollIntoView": "#out-l", "pause": 1500}
+]
