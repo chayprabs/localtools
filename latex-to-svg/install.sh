@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for LaTeX to SVG (latex-to-svg 1.0.1). macOS / Linux, no sudo.
+# localtools installer for LaTeX to SVG (latex-to-svg 1.0.2). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/latex-to-svg/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='latex-to-svg'; NAME='LaTeX to SVG'; VERSION='1.0.1'; PORT='47133'; KIND='js'; IMAGE=''
+SLUG='latex-to-svg'; NAME='LaTeX to SVG'; VERSION='1.0.2'; PORT='47133'; KIND='js'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -33,10 +33,10 @@ fi
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/latex-to-svg-v1.0.1/latex-to-svg-1.0.1-macos-arm64.zip'; SHA='23aeed0155f166b4d94dcb617042ca3db9cf7ccfe31477002f8f2f8d191455ca' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/latex-to-svg-v1.0.1/latex-to-svg-1.0.1-macos-x64.zip'; SHA='ac1df04c7bad9475a32c6bdb7219ed5e852db9307c55a37e26afd40c242d617f' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/latex-to-svg-v1.0.1/latex-to-svg-1.0.1-linux-x64.zip'; SHA='5802e63bc1097309106bf15b291951b7b3120d5c34937499e98303ee433724a4' ;;
-  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/latex-to-svg-v1.0.1/latex-to-svg-1.0.1-linux-arm64.zip'; SHA='ca9ae9ad0daf96b41b7a66106a33416afa8ab3a1e83c6613c396c23bce61fe28' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/latex-to-svg-v1.0.2/latex-to-svg-1.0.2-macos-arm64.zip'; SHA='81e729e22377bd04993c5c0b382be3e15fa475424cade0ff8583041d5478e8cc' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/latex-to-svg-v1.0.2/latex-to-svg-1.0.2-macos-x64.zip'; SHA='8383d8750d21e1ec9c71feb236c29e42ba63c618cee47aa40713be3fe0dfd697' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/latex-to-svg-v1.0.2/latex-to-svg-1.0.2-linux-x64.zip'; SHA='f1dee7d9ef13c6ead70838a3c28f9bd20eca47c542056d43cbe0103472e91c6c' ;;
+  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/latex-to-svg-v1.0.2/latex-to-svg-1.0.2-linux-arm64.zip'; SHA='77b87fdb47657f0c718bbabc505dd443b3d6b1a1bf316b61ad9f439eda689fa8' ;;
 esac
 
 if [ "$KIND" = docker ]; then
