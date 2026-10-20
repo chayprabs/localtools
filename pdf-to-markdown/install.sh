@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for PDF to Markdown (pdf-to-markdown 1.0.1). macOS / Linux, no sudo.
+# localtools installer for PDF to Markdown (pdf-to-markdown 1.0.2). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/pdf-to-markdown/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='pdf-to-markdown'; NAME='PDF to Markdown'; VERSION='1.0.1'; PORT='47104'; KIND='py'; IMAGE=''
+SLUG='pdf-to-markdown'; NAME='PDF to Markdown'; VERSION='1.0.2'; PORT='47104'; KIND='py'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -33,9 +33,9 @@ fi
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/pdf-to-markdown-v1.0.1/pdf-to-markdown-1.0.1-linux-x64.zip'; SHA='517e67baa30d13af3dfb6037d8c34385d6c88d4c2e2dde06a2110a2f81ef8227' ;;
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/pdf-to-markdown-v1.0.1/pdf-to-markdown-1.0.1-macos-arm64.zip'; SHA='f92148cc95e619acebef86e271e0fbf4de92689d33d3b3fa652b92729313ded8' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/pdf-to-markdown-v1.0.1/pdf-to-markdown-1.0.1-macos-x64.zip'; SHA='4eb5e2cd21471dc497d258175cf3a03fa8363946ecad4e815c97e9364d5e08b1' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/pdf-to-markdown-v1.0.2/pdf-to-markdown-1.0.2-linux-x64.zip'; SHA='591589133604227a73f5176ec04ed7452673dc4ca6e2c25b8c4ec351177eb233' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/pdf-to-markdown-v1.0.2/pdf-to-markdown-1.0.2-macos-arm64.zip'; SHA='0d0105a34706e14ba44c98b2ece00874cf6773ebe8d0fe718d15758ff1e5e762' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/pdf-to-markdown-v1.0.2/pdf-to-markdown-1.0.2-macos-x64.zip'; SHA='d974830bbc49f48b76b22222b4288c8ebeb75045a21d244224176ee4a0f6fe0c' ;;
 esac
 
 if [ "$KIND" = docker ]; then

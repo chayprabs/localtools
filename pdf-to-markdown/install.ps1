@@ -1,4 +1,4 @@
-# localtools installer for PDF to Markdown (pdf-to-markdown 1.0.1). Windows PowerShell 5.1+, no admin.
+# localtools installer for PDF to Markdown (pdf-to-markdown 1.0.2). Windows PowerShell 5.1+, no admin.
 # Usage: irm https://raw.githubusercontent.com/chayprabs/localtools/main/pdf-to-markdown/install.ps1 | iex
 # Re-running updates. Set $env:LOCALTOOLS_NO_OPEN='1' to skip launching the tool afterwards.
 # Wrapped in a script block so `irm | iex` never leaks settings into, or exits, the caller's session.
@@ -7,8 +7,8 @@ $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 
-$Slug = 'pdf-to-markdown'; $Name = 'PDF to Markdown'; $Version = '1.0.1'; $Port = 47104; $Kind = 'py'
-$Url = 'https://github.com/chayprabs/localtools/releases/download/pdf-to-markdown-v1.0.1/pdf-to-markdown-1.0.1-windows-x64.zip'; $Sha = 'cd726db55b40bb78623beb34e45dea48eee60cb4d3dba9c52da3d437b4ce3b83'; $Image = ''
+$Slug = 'pdf-to-markdown'; $Name = 'PDF to Markdown'; $Version = '1.0.2'; $Port = 47104; $Kind = 'py'
+$Url = 'https://github.com/chayprabs/localtools/releases/download/pdf-to-markdown-v1.0.2/pdf-to-markdown-1.0.2-windows-x64.zip'; $Sha = '0020d536fb8167098ff03c7abd2ea131bb0729a9b92c540bdb662059ffec9568'; $Image = ''
 $Cmd = "localtools-$Slug"
 $Root = if ($env:LOCALTOOLS_HOME) { $env:LOCALTOOLS_HOME } else { Join-Path $env:USERPROFILE '.localtools' }
 $Dir = Join-Path $Root $Slug
