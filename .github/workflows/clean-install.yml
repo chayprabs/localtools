@@ -95,7 +95,7 @@ jobs:
           echo "installer said: $out"; grep -q Docker <<<"$out"
 
       - uses: actions/setup-python@v5
-        if: (matrix.slug == 'pandoc-gui' || matrix.slug == 'og-image-generator') && env.FULL == 'true'
+        if: (matrix.slug == 'pandoc-gui' || matrix.slug == 'og-image-generator' || matrix.slug == 'latex-to-svg') && env.FULL == 'true'
         with: { python-version: "3.13" }
       - name: shim, launcher, health, smoke, version, update, uninstall
         if: env.FULL == 'true'
@@ -128,7 +128,7 @@ jobs:
           curl -fsS "${args[@]}" "http://127.0.0.1:$PORT$(jq -r .path "$S")" -o smoke.out
           grep -aqF -- "$(jq -r .expect "$S")" smoke.out; echo "smoke ok ($(wc -c < smoke.out) bytes)"
 
-          if [ "$SLUG" = pandoc-gui ] || [ "$SLUG" = og-image-generator ]; then python "$SLUG/verify.py"; fi
+          if [ "$SLUG" = pandoc-gui ] || [ "$SLUG" = og-image-generator ] || [ "$SLUG" = latex-to-svg ]; then python "$SLUG/verify.py"; fi
 
           "$T" --version | tee version.out; grep -qF "$VERSION" version.out
 

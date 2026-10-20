@@ -1,4 +1,4 @@
-# localtools installer for LaTeX to SVG (latex-to-svg 1.0.0). Windows PowerShell 5.1+, no admin.
+# localtools installer for LaTeX to SVG (latex-to-svg 1.0.1). Windows PowerShell 5.1+, no admin.
 # Usage: irm https://raw.githubusercontent.com/chayprabs/localtools/main/latex-to-svg/install.ps1 | iex
 # Re-running updates. Set $env:LOCALTOOLS_NO_OPEN='1' to skip launching the tool afterwards.
 # Wrapped in a script block so `irm | iex` never leaks settings into, or exits, the caller's session.
@@ -7,8 +7,8 @@ $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 
-$Slug = 'latex-to-svg'; $Name = 'LaTeX to SVG'; $Version = '1.0.0'; $Port = 47133; $Kind = 'js'
-$Url = 'https://github.com/chayprabs/localtools/releases/download/latex-to-svg-v1.0.0/latex-to-svg-1.0.0-windows-x64.zip'; $Sha = '0b261c2bbc1a68017723bf3e7b877f84e342fdb0d8895c3b63349e2e8b5ef182'; $Image = ''
+$Slug = 'latex-to-svg'; $Name = 'LaTeX to SVG'; $Version = '1.0.1'; $Port = 47133; $Kind = 'js'
+$Url = 'https://github.com/chayprabs/localtools/releases/download/latex-to-svg-v1.0.1/latex-to-svg-1.0.1-windows-x64.zip'; $Sha = '09ab2aea8c7d8204fdc23971d1938dd7db997273f52d4f14519e00f12c63bbf4'; $Image = ''
 $Cmd = "localtools-$Slug"
 $Root = if ($env:LOCALTOOLS_HOME) { $env:LOCALTOOLS_HOME } else { Join-Path $env:USERPROFILE '.localtools' }
 $Dir = Join-Path $Root $Slug

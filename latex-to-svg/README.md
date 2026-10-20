@@ -52,7 +52,7 @@ Package-manager installs are updated by that package manager; `localtools-latex-
 
 ## Engine
 
-MathJax 4.1.3 (TeX/MathML/AsciiMath -> SVG/MathML) + Speech Rule Engine 5 + resvg-wasm 2.6. MathJax is the reference renderer of TeX math on the web; run directly with its lite DOM and every font range bundled, it renders offline and byte-identical to stock MathJax. SRE gives accessible speech text, resvg rasterizes PNGs identically on every OS.
+MathJax 4.1.3 (TeX/MathML/AsciiMath -> SVG/MathML) + Speech Rule Engine 5 + resvg-wasm 2.6. MathJax is the reference renderer of TeX math on the web; its lite DOM, font ranges and named entities are bundled offline. Supported equations match stock MathJax with documented standalone post-processing and Safe filtering. SRE provides optional speech; resvg rasterizes PNGs across OSes.
 
 ## Report an issue
 
