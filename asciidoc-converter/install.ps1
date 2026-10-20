@@ -1,4 +1,4 @@
-# localtools installer for AsciiDoc Converter (asciidoc-converter 1.0.0). Windows PowerShell 5.1+, no admin.
+# localtools installer for AsciiDoc Converter (asciidoc-converter 1.0.1). Windows PowerShell 5.1+, no admin.
 # Usage: irm https://raw.githubusercontent.com/chayprabs/localtools/main/asciidoc-converter/install.ps1 | iex
 # Re-running updates. Set $env:LOCALTOOLS_NO_OPEN='1' to skip launching the tool afterwards.
 # Wrapped in a script block so `irm | iex` never leaks settings into, or exits, the caller's session.
@@ -7,8 +7,8 @@ $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 
-$Slug = 'asciidoc-converter'; $Name = 'AsciiDoc Converter'; $Version = '1.0.0'; $Port = 47132; $Kind = 'js'
-$Url = 'https://github.com/chayprabs/localtools/releases/download/asciidoc-converter-v1.0.0/asciidoc-converter-1.0.0-windows-x64.zip'; $Sha = '0258197a5a729f37b8dffd08102f9a0f056279f3f04f654f64b1c12b96668b20'; $Image = ''
+$Slug = 'asciidoc-converter'; $Name = 'AsciiDoc Converter'; $Version = '1.0.1'; $Port = 47132; $Kind = 'js'
+$Url = 'https://github.com/chayprabs/localtools/releases/download/asciidoc-converter-v1.0.1/asciidoc-converter-1.0.1-windows-x64.zip'; $Sha = '9162dc2cb59104f15bb9b3e54acffb9b0615de62807688675b8a87aa097b4e1f'; $Image = ''
 $Cmd = "localtools-$Slug"
 $Root = if ($env:LOCALTOOLS_HOME) { $env:LOCALTOOLS_HOME } else { Join-Path $env:USERPROFILE '.localtools' }
 $Dir = Join-Path $Root $Slug

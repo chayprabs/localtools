@@ -52,7 +52,7 @@ Package-manager installs are updated by that package manager; `localtools-asciid
 
 ## Engine
 
-Asciidoctor.js 4.1.1 + downdoc 1.1 + highlight.js 11.12 + MathJax 3.2. Asciidoctor.js is the official JavaScript Asciidoctor; output is byte-identical to using it directly. It runs in SAFE mode jailed to the project, with highlighting, icons and math embedded so nothing is fetched. downdoc (by Asciidoctor's lead) produces Markdown after Asciidoctor resolves includes.
+Asciidoctor.js 4.1.1 + downdoc 1.1 + highlight.js 11.12 + MathJax 3.2. Asciidoctor.js is the official JavaScript Asciidoctor; reference comparisons match after removing the default Google Fonts import. SAFE mode confines conversion to the project. Local images, highlighting, icons and math are embedded; remote media URLs are retained with an export warning. downdoc (by Asciidoctor's lead) produces Markdown after Asciidoctor resolves includes.
 
 ## Report an issue
 

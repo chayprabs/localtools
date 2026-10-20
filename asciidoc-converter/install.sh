@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for AsciiDoc Converter (asciidoc-converter 1.0.0). macOS / Linux, no sudo.
+# localtools installer for AsciiDoc Converter (asciidoc-converter 1.0.1). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/asciidoc-converter/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='asciidoc-converter'; NAME='AsciiDoc Converter'; VERSION='1.0.0'; PORT='47132'; KIND='js'; IMAGE=''
+SLUG='asciidoc-converter'; NAME='AsciiDoc Converter'; VERSION='1.0.1'; PORT='47132'; KIND='js'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -33,10 +33,10 @@ fi
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/asciidoc-converter-v1.0.0/asciidoc-converter-1.0.0-linux-arm64.zip'; SHA='7d91e6d9eed0985fad8b20ec407cae38963e09414f99d1aa10bd913def82271b' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/asciidoc-converter-v1.0.0/asciidoc-converter-1.0.0-linux-x64.zip'; SHA='19d1291476d3eec0aae95ae17080144707953bf7f098e91300f30f64c1a6d83b' ;;
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/asciidoc-converter-v1.0.0/asciidoc-converter-1.0.0-macos-arm64.zip'; SHA='65a98f32e6c8ea74eb30d69975758eff6fed7589c4b65ed1a9d5934d2648f2cf' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/asciidoc-converter-v1.0.0/asciidoc-converter-1.0.0-macos-x64.zip'; SHA='582f544ce760680bf45e75538a653afd754bf70460f987fda278ebda8cbfe1da' ;;
+  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/asciidoc-converter-v1.0.1/asciidoc-converter-1.0.1-linux-arm64.zip'; SHA='b50b4a8ea424958cb8a577b50854838756a185ce6db5a1f161014639dd92382f' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/asciidoc-converter-v1.0.1/asciidoc-converter-1.0.1-linux-x64.zip'; SHA='9687668d6885a418f277892b2e98c91a4e1a9eb6f9c9acf63814aad244a379c1' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/asciidoc-converter-v1.0.1/asciidoc-converter-1.0.1-macos-arm64.zip'; SHA='2202d21774fb767d71a7550d8ae88c86ad34aab9f2b834c1dd72fea8bd39e4d3' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/asciidoc-converter-v1.0.1/asciidoc-converter-1.0.1-macos-x64.zip'; SHA='c9180c0100ca0b58b9482be43c355db5fd020f780e80ed609cd9c26cda190ccb' ;;
 esac
 
 if [ "$KIND" = docker ]; then
