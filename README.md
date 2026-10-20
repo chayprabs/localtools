@@ -45,6 +45,7 @@ Browse all tools, with docs and how-tos: **https://tools.chaitanyaprabuddha.com*
 | [AsciiDoc Converter](asciidoc-converter/) | Convert AsciiDoc documents and projects to self-contained HTML5, DocBook 5 or Markdown with Asciidoctor, offline. | `localtools-asciidoc-converter` |
 | [LaTeX to SVG](latex-to-svg/) | Render LaTeX, MathML or AsciiMath to SVG, PNG and MathML with speech alt text, offline with MathJax. | `localtools-latex-to-svg` |
 | [DOCX Compare](docx-compare/) | Compare two Word documents and produce a tracked-changes redline .docx. | `localtools-docx-compare` |
+| [EPUB Validator](epub-validator/) | Validate EPUB files with EPUBCheck and repair common errors. | `localtools-epub-validator` |
 <!-- /tools -->
 
 ## Install

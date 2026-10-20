@@ -1,0 +1,8 @@
+{
+  "path": "/api/validate",
+  "fields": {},
+  "files": {
+    "file": "sample.epub"
+  },
+  "expect": "\"valid\":true"
+}

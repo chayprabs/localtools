@@ -1,0 +1,7 @@
+[
+  {"goto": "/"},
+  {"setInputFiles": {"selector": "#file", "files": ["frankenstein-epub3.epub", "sample.epub"]}, "pause": 800},
+  {"click": "#check"},
+  {"waitFor": {"text": "2 of 2 done"}, "pause": 1200},
+  {"scrollIntoView": "#out"}
+]
