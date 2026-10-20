@@ -1,0 +1,9 @@
+{
+  "path": "/api/compare",
+  "fields": {},
+  "files": {
+    "original": "a.docx",
+    "revised": "b.docx"
+  },
+  "expect": "PK"
+}

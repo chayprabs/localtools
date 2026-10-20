@@ -1,0 +1,10 @@
+[
+  {"goto": "/"},
+  {"setInputFiles": {"selector": "#fileA", "files": ["a.docx"]}, "pause": 500},
+  {"setInputFiles": {"selector": "#fileB", "files": ["b.docx"]}, "pause": 600},
+  {"fill": {"selector": "#author", "text": "Legal Review"}, "pause": 400},
+  {"click": "#go"},
+  {"waitFor": {"selector": "#doc ins"}, "pause": 800},
+  {"scrollIntoView": "#out-l", "pause": 1500},
+  {"click": "#t-list", "pause": 2500}
+]
