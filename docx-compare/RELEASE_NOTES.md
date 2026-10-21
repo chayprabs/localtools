@@ -11,3 +11,7 @@ Headers and footers are compared and redlined (or reported); hyperlinks, bookmar
 ## 1.0.2 (2026-10-21)
 
 Footnote/endnote links and bookmarks kept; header/footer image, link and field changes and new headers/footers tracked with their images and links; reject-all restores exact link/bookmark ranges.
+
+## 1.0.3 (2026-10-21)
+
+Multi-section documents keep sections and headers/footers; accept/reject handle tracked moves and altChunk; exact reject ranges for bookmarks ending after their paragraph; 413 for oversized uploads; no false header/footer changes; one-line CLI errors.

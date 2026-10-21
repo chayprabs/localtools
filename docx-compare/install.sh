@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for DOCX Compare (docx-compare 1.0.2). macOS / Linux, no sudo.
+# localtools installer for DOCX Compare (docx-compare 1.0.3). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/docx-compare/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='docx-compare'; NAME='DOCX Compare'; VERSION='1.0.2'; PORT='47134'; KIND='bin'; IMAGE=''
+SLUG='docx-compare'; NAME='DOCX Compare'; VERSION='1.0.3'; PORT='47134'; KIND='bin'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -38,10 +38,10 @@ fi
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/docx-compare-v1.0.2/docx-compare-1.0.2-linux-arm64.zip'; SHA='c06363e03ad514f80f169cd053f63ab9b445013ba137869f397cc4c6583c3c18' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/docx-compare-v1.0.2/docx-compare-1.0.2-linux-x64.zip'; SHA='afcc33889c55af5562608b330addb606036f7929598c3e1d4e2a74b60b9eae5a' ;;
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/docx-compare-v1.0.2/docx-compare-1.0.2-macos-arm64.zip'; SHA='f3569292255402c9c8a9e1f142d7050edb4ee43ee350410ab7f57aac8e604560' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/docx-compare-v1.0.2/docx-compare-1.0.2-macos-x64.zip'; SHA='b4fa421f858d4569653e45d2a299f24ad581bdd0917da177bc2a8586f37296f1' ;;
+  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/docx-compare-v1.0.3/docx-compare-1.0.3-linux-arm64.zip'; SHA='32ffe80b89a1cd773683334af444ef05f9ba20db7b361ca6f1ea2068066df29c' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/docx-compare-v1.0.3/docx-compare-1.0.3-linux-x64.zip'; SHA='b305d5ffdf08208be80037c9094622df5ccd636ac830e231108bddd19d86a57e' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/docx-compare-v1.0.3/docx-compare-1.0.3-macos-arm64.zip'; SHA='a5406ef53726e033b58bd31534155411c632ab876d023be06296476e2d3e0a34' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/docx-compare-v1.0.3/docx-compare-1.0.3-macos-x64.zip'; SHA='f25a1bcd2dedb1bab76056909f3abc245d2c6a136a5d905c47dfed42f66969e8' ;;
 esac
 
 if [ "$KIND" = docker ]; then
@@ -67,7 +67,7 @@ if [ "$KIND" = docker ]; then
   cat > "$STAGE/$CMD" <<'EOF'
 #!/usr/bin/env bash
 set -euo pipefail
-slug='docx-compare'; cmd="localtools-$slug"; image=':1.0.2'
+slug='docx-compare'; cmd="localtools-$slug"; image=':1.0.3'
 self="${BASH_SOURCE[0]}"
 while [ -L "$self" ]; do
   parent="$(cd -P "$(dirname "$self")" && pwd)"; self="$(readlink "$self")"
@@ -103,7 +103,7 @@ if $serve; then
   own() { curl -fsS --max-time 1 "$url/api/health" 2>/dev/null | grep -q '"tool": *"'"$slug"'"'; }
   if own; then echo "$cmd already running at $url"; [ "$no_open" = 1 ] || browser; exit 0; fi
   if [ "$no_open" != 1 ]; then (for _ in $(seq 90); do if own; then browser; break; fi; sleep 1; done) & fi
-  echo "$cmd 1.0.2 running at $url  (Ctrl+C to stop; choose --port N for another port)"
+  echo "$cmd 1.0.3 running at $url  (Ctrl+C to stop; choose --port N for another port)"
   exec docker run --rm --name "$cmd-$port" --label "localtools.install=$dir" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -p "127.0.0.1:$port:$port" "$image" serve --no-open --port "$port"
 fi
 exec docker run --rm -i --network none --user "$(id -u):$(id -g)" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -v "$PWD:/work" -w /work "$image" "$@"
