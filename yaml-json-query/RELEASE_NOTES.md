@@ -11,3 +11,7 @@ Security and correctness fixes: YAML documents whose aliases expand past 5 milli
 ## 1.0.2 (2026-10-17)
 
 Large-input and robustness fixes: the UI/API upload limit is now 16 MB, which reliably fits the 2 GB worker (measured peak heap: 1.0 GB for 16 MB of dense JSON, 1.1 GB for 16 MB of Kubernetes YAML); bigger inputs get a clear "input too large" message. Workers stop when the request is cancelled, when the tool exits, or at their own deadline, and at most two run at once. JSON: nesting deeper than 10000 levels is a clean error, duplicate keys keep the last value, a UTF-8 BOM is accepted. YAML numbers like 0b101, 017, .inf and integers beyond 64 bits convert to JSON/TOML correctly or fail with a clear message. UI: Ctrl+Enter no longer starts a second run while one is in progress.
+
+## 1.0.3 (2026-10-21)
+
+Multi-document YAML expressions run per document (linear time). YAML output memory is bounded, so 16 MB of typical JSON converts to YAML in the UI. TOML +nan/-nan input works; inf/NaN are written as .inf/.nan in YAML; floats beyond 64 bits are a clear error for TOML. Oversized uploads get HTTP 413, busy workers HTTP 503. --in-place writes atomically.
