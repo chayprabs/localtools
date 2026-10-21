@@ -27,6 +27,11 @@ esac
 # A shell running under Rosetta reports x86_64 on Apple Silicon; prefer the native build.
 if [ "$OS" = macos ] && [ "$(sysctl -n sysctl.proc_translated 2>/dev/null || echo 0)" = 1 ]; then ARCH=arm64; fi
 
+if [ "$OS" = macos ] && [ "$KIND" != docker ]; then
+  macos_version=$(sw_vers -productVersion) || die "could not determine macOS version; nothing was changed"
+  [ "${macos_version%%.*}" -ge 12 ] || die "$NAME requires macOS 12 or later (found $macos_version); nothing was changed"
+fi
+
 if [ "$SLUG" = exif-remover ]; then
   command -v perl >/dev/null 2>&1 || die "EXIF Remover needs Perl 5 on PATH. Provide a local Perl runtime, then run this command again."
 fi

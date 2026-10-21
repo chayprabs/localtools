@@ -27,6 +27,15 @@ esac
 # A shell running under Rosetta reports x86_64 on Apple Silicon; prefer the native build.
 if [ "$OS" = macos ] && [ "$(sysctl -n sysctl.proc_translated 2>/dev/null || echo 0)" = 1 ]; then ARCH=arm64; fi
 
+if [ "$OS" = macos ] && [ "$KIND" != docker ]; then
+  macos_version=$(sw_vers -productVersion) || die "could not determine macOS version; nothing was changed"
+  [ "${macos_version%%.*}" -ge 12 ] || die "$NAME requires macOS 12 or later (found $macos_version); nothing was changed"
+fi
+
+if [ "$SLUG" = exif-remover ]; then
+  command -v perl >/dev/null 2>&1 || die "EXIF Remover needs Perl 5 on PATH. Provide a local Perl runtime, then run this command again."
+fi
+
 URL=''; SHA=''
 case "$OS-$ARCH" in
   linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/terraform-plan-viewer-v1.0.2/terraform-plan-viewer-1.0.2-linux-arm64.zip'; SHA='40a5e233485d20b9a08f5b18cb3d11aa47f985339a2f8b3a2789aee89eaec64f' ;;
@@ -55,26 +64,49 @@ mkdir -p "$STAGE"
 if [ "$KIND" = docker ]; then
   say "pulling $IMAGE:$VERSION"
   docker pull "$IMAGE:$VERSION" || fail "docker pull $IMAGE:$VERSION failed"
-  cat > "$STAGE/$CMD" <<EOF
+  cat > "$STAGE/$CMD" <<'EOF'
 #!/usr/bin/env bash
-# serve (default) runs the container and opens the browser; anything else goes to the tool CLI.
 set -euo pipefail
-case "\${1:-serve}" in
-  update) export LOCALTOOLS_NO_OPEN=1; exec bash -c "\$(curl -fsSL $BASE/install.sh)" ;;
-  uninstall) exec bash -c "\$(curl -fsSL $BASE/uninstall.sh)" ;;
-  serve|--no-open|--port)
-    if [[ " \$* " != *" --no-open "* && "\${LOCALTOOLS_NO_OPEN:-}" != 1 ]]; then
-      ( for _ in \$(seq 60); do
-          if curl -fs http://127.0.0.1:$PORT/api/health >/dev/null 2>&1; then
-            if command -v open >/dev/null 2>&1; then open http://127.0.0.1:$PORT/; else xdg-open http://127.0.0.1:$PORT/ >/dev/null 2>&1 || true; fi
-            break
-          fi; sleep 1
-        done ) &
+slug='terraform-plan-viewer'; cmd="localtools-$slug"; image=':1.0.2'
+self="${BASH_SOURCE[0]}"
+while [ -L "$self" ]; do
+  parent="$(cd -P "$(dirname "$self")" && pwd)"; self="$(readlink "$self")"
+  [[ "$self" = /* ]] || self="$parent/$self"
+done
+dir="$(cd -P "$(dirname "$self")" && pwd)"; root="$(dirname "$dir")"
+first="${1:-serve}"
+case "$first" in
+  update|uninstall)
+    if [ ! -f "$dir/installed.txt" ] || [ ! -L "$root/bin/$cmd" ] || [ "$(readlink "$root/bin/$cmd")" != "$dir/$cmd" ]; then
+      echo "$cmd was not installed by the localtools script; use your original package manager or docker pull $image"; exit 0
     fi
-    echo "$CMD $VERSION running at http://127.0.0.1:$PORT  (Ctrl+C to stop)"
-    exec docker run --rm --name $CMD -p 127.0.0.1:$PORT:$PORT $IMAGE:$VERSION serve --no-open ;;
-  *) exec docker run --rm -i -v "\$PWD:/work" -w /work $IMAGE:$VERSION "\$@" ;;
+    export LOCALTOOLS_HOME="$root" LOCALTOOLS_NO_OPEN=1
+    script=install; [ "$first" = uninstall ] && script=uninstall
+    exec bash -c "$(curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/$slug/$script.sh)" ;;
 esac
+port="${LOCALTOOLS_PORT:-47115}"; no_open="${LOCALTOOLS_NO_OPEN:-}"
+serve=false
+case "$first" in serve|--no-open|--port|--port=*) serve=true;; esac
+if $serve; then
+  args=("$@"); [ "$first" = serve ] && args=("${args[@]:1}")
+  for ((i=0;i<${#args[@]};i++)); do
+    case "${args[i]}" in
+      --port) i=$((i+1)); port="${args[i]:-}" ;;
+      --port=*) port="${args[i]#*=}" ;;
+      --no-open|--no-open=true) no_open=1 ;;
+      *) echo "error: unknown serve option ${args[i]} (see --help)" >&2; exit 1 ;;
+    esac
+  done
+  [[ "$port" =~ ^[0-9]+$ ]] && [ "$port" -ge 1 ] && [ "$port" -le 65535 ] || { echo 'error: --port must be 1 through 65535' >&2; exit 1; }
+  url="http://127.0.0.1:$port"
+  browser() { if command -v open >/dev/null 2>&1; then open "$url/"; else xdg-open "$url/" >/dev/null 2>&1 || true; fi; }
+  own() { curl -fsS --max-time 1 "$url/api/health" 2>/dev/null | grep -q '"tool": *"'"$slug"'"'; }
+  if own; then echo "$cmd already running at $url"; [ "$no_open" = 1 ] || browser; exit 0; fi
+  if [ "$no_open" != 1 ]; then (for _ in $(seq 90); do if own; then browser; break; fi; sleep 1; done) & fi
+  echo "$cmd 1.0.2 running at $url  (Ctrl+C to stop; choose --port N for another port)"
+  exec docker run --rm --name "$cmd-$port" --label "localtools.install=$dir" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -p "127.0.0.1:$port:$port" "$image" serve --no-open --port "$port"
+fi
+exec docker run --rm -i --network none --user "$(id -u):$(id -g)" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -v "$PWD:/work" -w /work "$image" "$@"
 EOF
 else
   command -v curl >/dev/null 2>&1 || fail "curl is required"
@@ -94,7 +126,9 @@ echo "$VERSION $(date -u +%Y-%m-%dT%H:%M:%SZ) $$" > "$STAGE/installed.txt" # pid
 
 # Swap: stop the running copy, move the old install aside, move the new one in, then delete the old one.
 if command -v pkill >/dev/null 2>&1; then pkill -f "($DIR/|$BIN/$CMD)" 2>/dev/null || true; fi
-[ "$KIND" = docker ] && { docker rm -f "$CMD" >/dev/null 2>&1 || true; }
+if [ "$KIND" = docker ]; then
+  while IFS= read -r id; do [ -z "$id" ] || docker rm -f "$id" >/dev/null 2>&1 || true; done < <(docker ps -aq --filter "label=localtools.install=$DIR")
+fi
 if [ -e "$DIR" ]; then mv "$DIR" "$OLD" || fail "could not move $DIR aside"; fi
 if ! mv "$STAGE" "$DIR"; then
   [ -e "$OLD" ] && mv "$OLD" "$DIR"

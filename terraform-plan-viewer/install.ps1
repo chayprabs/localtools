@@ -41,24 +41,46 @@ try {
     Invoke-Docker pull $ref
     if ($LASTEXITCODE -ne 0) { throw "docker pull $ref failed" }
     # Entry wrapper: serve (default) runs the container and opens the browser; anything else is passed to the tool CLI.
-    $ps = @"
-`$ErrorActionPreference = 'Continue'
-`$a = @(`$args)
-`$first = if (`$a.Count) { [string]`$a[0] } else { 'serve' }
-switch -regex (`$first) {
-  '^update$'    { `$env:LOCALTOOLS_NO_OPEN = '1'; irm '$Base/install.ps1' | iex; return }
-  '^uninstall$' { irm '$Base/uninstall.ps1' | iex; return }
-  '^(serve|--no-open|--port)$' {
-    if (-not (`$a -contains '--no-open') -and `$env:LOCALTOOLS_NO_OPEN -ne '1') {
-      Start-Job { for (`$i = 0; `$i -lt 60; `$i++) { try { Invoke-WebRequest -UseBasicParsing 'http://127.0.0.1:$Port/api/health' | Out-Null; Start-Process 'http://127.0.0.1:$Port/'; return } catch { Start-Sleep 1 } } } | Out-Null
-    }
-    Write-Host "$Cmd $Version running at http://127.0.0.1:$Port  (Ctrl+C to stop)"
-    & docker run --rm --name $Cmd -p 127.0.0.1:${Port}:$Port $ref serve --no-open
-    exit `$LASTEXITCODE
+    $ps = @'
+$ErrorActionPreference = 'Continue'
+$a = @($args); $first = if ($a.Count) { [string]$a[0] } else { 'serve' }
+$dir = $PSScriptRoot; $root = Split-Path -Parent $dir
+$cmd = 'localtools-terraform-plan-viewer'; $image = ':1.0.2'
+if ($first -in @('update','uninstall')) {
+  $shim = Join-Path (Join-Path $root 'bin') "$cmd.cmd"
+  if (-not (Test-Path (Join-Path $dir 'installed.txt')) -or -not (Test-Path $shim) -or -not ((Get-Content -Raw $shim).Contains((Join-Path $dir "$cmd.cmd")))) {
+    Write-Host "$cmd was not installed by the localtools script; use your original package manager or docker pull $image"; exit 0
   }
-  default { & docker run --rm -i -v "`${PWD}:/work" -w /work $ref @a; exit `$LASTEXITCODE }
+  $env:LOCALTOOLS_HOME = $root; $env:LOCALTOOLS_NO_OPEN = '1'
+  $script = if ($first -eq 'update') { 'install' } else { 'uninstall' }
+  try { irm "https://raw.githubusercontent.com/chayprabs/localtools/main/terraform-plan-viewer/$script.ps1" | iex; exit 0 } catch { Write-Error $_; exit 1 }
 }
-"@
+$port = if ($env:LOCALTOOLS_PORT) { $env:LOCALTOOLS_PORT } else { '47115' }
+$noOpen = $env:LOCALTOOLS_NO_OPEN -eq '1'
+if ($first -match '^(serve|--no-open|--port(?:=.*)?)$') {
+  $start = if ($first -eq 'serve') { 1 } else { 0 }
+  for ($i=$start; $i -lt $a.Count; $i++) {
+    switch -regex ([string]$a[$i]) {
+      '^--port$' { $i++; if ($i -ge $a.Count) { Write-Error '--port requires a number'; exit 1 }; $port=$a[$i]; break }
+      '^--port=(.*)$' { $port=$Matches[1]; break }
+      '^--no-open(?:=true)?$' { $noOpen=$true; break }
+      default { Write-Error "unknown serve option $($a[$i]) (see --help)"; exit 1 }
+    }
+  }
+  $number=0; if (-not [int]::TryParse([string]$port,[ref]$number) -or $number -lt 1 -or $number -gt 65535) { Write-Error '--port must be 1 through 65535'; exit 1 }
+  $url="http://127.0.0.1:$port"
+  try { $health=Invoke-RestMethod "$url/api/health" -TimeoutSec 1 } catch { $health=$null }
+  if ($health.tool -eq 'terraform-plan-viewer') { Write-Host "$cmd already running at $url"; if (-not $noOpen) { Start-Process "$url/" }; exit 0 }
+  if (-not $noOpen) {
+    Start-Job -ArgumentList $url { param($url) for ($i=0; $i -lt 90; $i++) { try { $h=Invoke-RestMethod "$url/api/health" -TimeoutSec 1; if ($h.tool -eq 'terraform-plan-viewer') { Start-Process "$url/"; return } } catch {}; Start-Sleep 1 } } | Out-Null
+  }
+  Write-Host "$cmd 1.0.2 running at $url  (Ctrl+C to stop; choose --port N for another port)"
+  & docker run --rm --name "$cmd-$port" --label "localtools.install=$dir" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -p "127.0.0.1:${port}:$port" $image serve --no-open --port $port
+  exit $LASTEXITCODE
+}
+& docker run --rm -i --network none --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -v "${PWD}:/work" -w /work $image @a
+exit $LASTEXITCODE
+'@
     Set-Content -Encoding ASCII -Path (Join-Path $Stage 'run.ps1') -Value $ps
     Set-Content -Encoding ASCII -Path (Join-Path $Stage "$Cmd.cmd") -Value "@powershell -NoProfile -ExecutionPolicy Bypass -File `"%~dp0run.ps1`" %*"
   } else {
@@ -80,7 +102,7 @@ switch -regex (`$first) {
 
 # Swap: stop the running copy, move the old install aside, move the new one in, then delete the old one.
 Get-Process -ErrorAction SilentlyContinue | Where-Object { $_.Path -and $_.Path.StartsWith($Dir + [IO.Path]::DirectorySeparatorChar, [StringComparison]::OrdinalIgnoreCase) } | Stop-Process -Force -ErrorAction SilentlyContinue
-if ($Kind -eq 'docker') { Invoke-Docker rm -f $Cmd 2>&1 | Out-Null }
+if ($Kind -eq 'docker') { Invoke-Docker ps -aq --filter "label=localtools.install=$Dir" | ForEach-Object { Invoke-Docker rm -f $_ 2>&1 | Out-Null } }
 function Move-Retry($from, $to) {
   # A just-stopped exe can keep its folder locked for a moment.
   for ($i = 0; ; $i++) { try { Rename-Item -Path $from -NewName (Split-Path -Leaf $to); return } catch { if ($i -ge 20) { throw }; Start-Sleep -Milliseconds 500 } }

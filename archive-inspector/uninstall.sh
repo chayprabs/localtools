@@ -11,7 +11,7 @@ BIN="$ROOT/bin"
 
 if command -v pkill >/dev/null 2>&1; then pkill -f "($DIR/|$BIN/$CMD)" 2>/dev/null || true; fi
 if [ "$KIND" = docker ] && command -v docker >/dev/null 2>&1; then
-  docker rm -f "$CMD" >/dev/null 2>&1 || true
+  while IFS= read -r id; do [ -z "$id" ] || docker rm -f "$id" >/dev/null 2>&1 || true; done < <(docker ps -aq --filter "label=localtools.install=$DIR")
   docker images -q "$IMAGE" 2>/dev/null | xargs -r docker rmi -f >/dev/null 2>&1 || true
 fi
 rm -rf "$DIR" "$DIR".new-* "$DIR".old-* "$BIN/$CMD" "$HOME/Applications/localtools $NAME.app" "${XDG_DATA_HOME:-$HOME/.local/share}/applications/$CMD.desktop"

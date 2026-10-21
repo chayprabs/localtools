@@ -10,7 +10,7 @@ $Bin = Join-Path $Root 'bin'
 
 Get-Process -ErrorAction SilentlyContinue | Where-Object { $_.Path -and $_.Path.StartsWith($Dir + '\', [StringComparison]::OrdinalIgnoreCase) } | Stop-Process -Force -ErrorAction SilentlyContinue
 if ($Kind -eq 'docker' -and (Get-Command docker -ErrorAction SilentlyContinue)) {
-  & { $ErrorActionPreference = 'Continue'; docker rm -f $Cmd; docker images -q $Image | ForEach-Object { docker rmi -f $_ } } 2>&1 | Out-Null
+  & { $ErrorActionPreference = 'Continue'; docker ps -aq --filter "label=localtools.install=$Dir" | ForEach-Object { docker rm -f $_ }; docker images -q $Image | ForEach-Object { docker rmi -f $_ } } 2>&1 | Out-Null
 }
 # A just-stopped exe can stay locked for a moment.
 for ($i = 0; $i -lt 10 -and (Test-Path $Dir); $i++) {
