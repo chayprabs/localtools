@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for PDF to Markdown (pdf-to-markdown 1.0.2). macOS / Linux, no sudo.
+# localtools installer for PDF to Markdown (pdf-to-markdown 1.0.3). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/pdf-to-markdown/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='pdf-to-markdown'; NAME='PDF to Markdown'; VERSION='1.0.2'; PORT='47104'; KIND='py'; IMAGE=''
+SLUG='pdf-to-markdown'; NAME='PDF to Markdown'; VERSION='1.0.3'; PORT='47104'; KIND='py'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -38,9 +38,9 @@ fi
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/pdf-to-markdown-v1.0.2/pdf-to-markdown-1.0.2-linux-x64.zip'; SHA='591589133604227a73f5176ec04ed7452673dc4ca6e2c25b8c4ec351177eb233' ;;
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/pdf-to-markdown-v1.0.2/pdf-to-markdown-1.0.2-macos-arm64.zip'; SHA='0d0105a34706e14ba44c98b2ece00874cf6773ebe8d0fe718d15758ff1e5e762' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/pdf-to-markdown-v1.0.2/pdf-to-markdown-1.0.2-macos-x64.zip'; SHA='d974830bbc49f48b76b22222b4288c8ebeb75045a21d244224176ee4a0f6fe0c' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/pdf-to-markdown-v1.0.3/pdf-to-markdown-1.0.3-linux-x64.zip'; SHA='e5c58c9538360eec34518fdfda7560c53b7fedff836f7bf19d56bc790278f6fb' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/pdf-to-markdown-v1.0.3/pdf-to-markdown-1.0.3-macos-arm64.zip'; SHA='e49e664016d58aa29125eda5b6ab19acd43e9f7842d4b57ef9c4d48ae8b13414' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/pdf-to-markdown-v1.0.3/pdf-to-markdown-1.0.3-macos-x64.zip'; SHA='a0c17ed0c5e1717989b3274ebcb8b55c410267c0d78e497d3fec8a243d4d2485' ;;
 esac
 
 if [ "$KIND" = docker ]; then
@@ -66,7 +66,7 @@ if [ "$KIND" = docker ]; then
   cat > "$STAGE/$CMD" <<'EOF'
 #!/usr/bin/env bash
 set -euo pipefail
-slug='pdf-to-markdown'; cmd="localtools-$slug"; image=':1.0.2'
+slug='pdf-to-markdown'; cmd="localtools-$slug"; image=':1.0.3'
 self="${BASH_SOURCE[0]}"
 while [ -L "$self" ]; do
   parent="$(cd -P "$(dirname "$self")" && pwd)"; self="$(readlink "$self")"
@@ -102,7 +102,7 @@ if $serve; then
   own() { curl -fsS --max-time 1 "$url/api/health" 2>/dev/null | grep -q '"tool": *"'"$slug"'"'; }
   if own; then echo "$cmd already running at $url"; [ "$no_open" = 1 ] || browser; exit 0; fi
   if [ "$no_open" != 1 ]; then (for _ in $(seq 90); do if own; then browser; break; fi; sleep 1; done) & fi
-  echo "$cmd 1.0.2 running at $url  (Ctrl+C to stop; choose --port N for another port)"
+  echo "$cmd 1.0.3 running at $url  (Ctrl+C to stop; choose --port N for another port)"
   exec docker run --rm --name "$cmd-$port" --label "localtools.install=$dir" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -p "127.0.0.1:$port:$port" "$image" serve --no-open --port "$port"
 fi
 exec docker run --rm -i --network none --user "$(id -u):$(id -g)" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -v "$PWD:/work" -w /work "$image" "$@"
