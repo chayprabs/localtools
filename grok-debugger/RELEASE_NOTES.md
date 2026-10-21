@@ -11,3 +11,7 @@ Matches run in killable worker processes (pattern/regex caps, 503 when busy, kil
 ## 1.0.2 (2026-10-17)
 
 Match, Suggest and Export share isolated workers, compilation limits, deadlines and cancellation. Uploads are removable and newer pasted input wins; table columns include every row and repeated capture values. Dark legends and API errors are corrected; zips include upstream pattern licenses.
+
+## 1.0.3 (2026-10-22)
+
+Long literal runs in patterns and custom definitions now compile in linear time, so oversized definitions hit the documented 1 MB regex cap immediately instead of timing out; Suggest stays fast on very long lines. UI code text renders without ligatures; runtime host/origin rejection drains uploads first.

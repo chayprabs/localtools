@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for Grok Debugger (grok-debugger 1.0.2). macOS / Linux, no sudo.
+# localtools installer for Grok Debugger (grok-debugger 1.0.3). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/grok-debugger/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='grok-debugger'; NAME='Grok Debugger'; VERSION='1.0.2'; PORT='47118'; KIND='bin'; IMAGE=''
+SLUG='grok-debugger'; NAME='Grok Debugger'; VERSION='1.0.3'; PORT='47118'; KIND='bin'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -38,10 +38,10 @@ fi
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/grok-debugger-v1.0.2/grok-debugger-1.0.2-linux-arm64.zip'; SHA='144ce071cfe7f7ea2bace51c57aa60ce9a5ed44077f38145b6bdfd840fda8793' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/grok-debugger-v1.0.2/grok-debugger-1.0.2-linux-x64.zip'; SHA='ae38d8e69ea65044c2cbb95bf8843ebcb3fa76de04271f67b96f95c463f8387f' ;;
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/grok-debugger-v1.0.2/grok-debugger-1.0.2-macos-arm64.zip'; SHA='57ee6cbfb00281adb1d39771138fe04a1964336aa8e7e55a974d7fa3e89185a2' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/grok-debugger-v1.0.2/grok-debugger-1.0.2-macos-x64.zip'; SHA='edf1b47a0de1256f15dc48d0a8a99549e4ab0165dff5d06b76960fe33cd68dd5' ;;
+  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/grok-debugger-v1.0.3/grok-debugger-1.0.3-linux-arm64.zip'; SHA='907352f83282afd807d814d5bc1aa224ac90d49cfd37fe57fb51f91abae7b6d6' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/grok-debugger-v1.0.3/grok-debugger-1.0.3-linux-x64.zip'; SHA='6e1b801180a4d0f6a99382a2f6221fc7aefe0fd6d9102ea49e008017ebb0c5c1' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/grok-debugger-v1.0.3/grok-debugger-1.0.3-macos-arm64.zip'; SHA='6d428ccebf04e2ee492003f6b072fe0712ed52557bb50120952f116581df4e47' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/grok-debugger-v1.0.3/grok-debugger-1.0.3-macos-x64.zip'; SHA='55320365d4dc2c00651345666f7ff6a5cf773f26b65ba71dc7d9c5920be0c02e' ;;
 esac
 
 if [ "$KIND" = docker ]; then
@@ -67,7 +67,7 @@ if [ "$KIND" = docker ]; then
   cat > "$STAGE/$CMD" <<'EOF'
 #!/usr/bin/env bash
 set -euo pipefail
-slug='grok-debugger'; cmd="localtools-$slug"; image=':1.0.2'
+slug='grok-debugger'; cmd="localtools-$slug"; image=':1.0.3'
 self="${BASH_SOURCE[0]}"
 while [ -L "$self" ]; do
   parent="$(cd -P "$(dirname "$self")" && pwd)"; self="$(readlink "$self")"
@@ -103,7 +103,7 @@ if $serve; then
   own() { curl -fsS --max-time 1 "$url/api/health" 2>/dev/null | grep -q '"tool": *"'"$slug"'"'; }
   if own; then echo "$cmd already running at $url"; [ "$no_open" = 1 ] || browser; exit 0; fi
   if [ "$no_open" != 1 ]; then (for _ in $(seq 90); do if own; then browser; break; fi; sleep 1; done) & fi
-  echo "$cmd 1.0.2 running at $url  (Ctrl+C to stop; choose --port N for another port)"
+  echo "$cmd 1.0.3 running at $url  (Ctrl+C to stop; choose --port N for another port)"
   exec docker run --rm --name "$cmd-$port" --label "localtools.install=$dir" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -p "127.0.0.1:$port:$port" "$image" serve --no-open --port "$port"
 fi
 exec docker run --rm -i --network none --user "$(id -u):$(id -g)" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -v "$PWD:/work" -w /work "$image" "$@"
