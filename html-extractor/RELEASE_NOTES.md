@@ -11,3 +11,7 @@ Single-column CSV keeps rows with an empty value; selectors match Chromium (:emp
 ## 1.0.2 (2026-10-17)
 
 Blank meta charset values are ignored instead of failing the page; internal failures report as internal errors; attribute flags without a space parse; case-insensitive enumerated attribute values apply only to HTML elements, as in Chromium.
+
+## 1.0.3 (2026-10-22)
+
+Selectors with :not() around case-insensitive enumerated attributes (type, method, rel, dir, ...) now match exactly like Chromium instead of returning extra rows. UI code text renders without ligatures; runtime host/origin rejection drains uploads first.

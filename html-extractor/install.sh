@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for HTML Extractor (html-extractor 1.0.2). macOS / Linux, no sudo.
+# localtools installer for HTML Extractor (html-extractor 1.0.3). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/html-extractor/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='html-extractor'; NAME='HTML Extractor'; VERSION='1.0.2'; PORT='47120'; KIND='bin'; IMAGE=''
+SLUG='html-extractor'; NAME='HTML Extractor'; VERSION='1.0.3'; PORT='47120'; KIND='bin'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -38,10 +38,10 @@ fi
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/html-extractor-v1.0.2/html-extractor-1.0.2-macos-arm64.zip'; SHA='892213a0a5054a50138fabe81095209c92b224a58d5286ce1ce340fa87cc56d6' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/html-extractor-v1.0.2/html-extractor-1.0.2-macos-x64.zip'; SHA='037211ef638a8e0d6f8f0e71a41f95101940b827217c3d8d674e0ee94f42b1c9' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/html-extractor-v1.0.2/html-extractor-1.0.2-linux-x64.zip'; SHA='ef7bef3a7a841f66c54869363559abe65a560bee2103420c98ac874dd383693e' ;;
-  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/html-extractor-v1.0.2/html-extractor-1.0.2-linux-arm64.zip'; SHA='bd2673ab765796aef4cba27d1cdf8479c07843adef44e1ecf12c8c24feb9435a' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/html-extractor-v1.0.3/html-extractor-1.0.3-macos-arm64.zip'; SHA='5b4ac5263730ec563c99077d0d686445d8034c848f2e04a5b2407dd0e5ed754d' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/html-extractor-v1.0.3/html-extractor-1.0.3-macos-x64.zip'; SHA='faacea0f641a1be6171495076033ede1a954c8c9d0fa8827e5d5ae5494486057' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/html-extractor-v1.0.3/html-extractor-1.0.3-linux-x64.zip'; SHA='cdc75e5b9032c7b279b762b2307b23900142363614728735dcc4daf7a85a460b' ;;
+  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/html-extractor-v1.0.3/html-extractor-1.0.3-linux-arm64.zip'; SHA='3d8f93905564ed6c43eca37d8c26d1aef6c05c4e42de46dea9d86ed5c2866671' ;;
 esac
 
 if [ "$KIND" = docker ]; then
@@ -67,7 +67,7 @@ if [ "$KIND" = docker ]; then
   cat > "$STAGE/$CMD" <<'EOF'
 #!/usr/bin/env bash
 set -euo pipefail
-slug='html-extractor'; cmd="localtools-$slug"; image=':1.0.2'
+slug='html-extractor'; cmd="localtools-$slug"; image=':1.0.3'
 self="${BASH_SOURCE[0]}"
 while [ -L "$self" ]; do
   parent="$(cd -P "$(dirname "$self")" && pwd)"; self="$(readlink "$self")"
@@ -103,7 +103,7 @@ if $serve; then
   own() { curl -fsS --max-time 1 "$url/api/health" 2>/dev/null | grep -q '"tool": *"'"$slug"'"'; }
   if own; then echo "$cmd already running at $url"; [ "$no_open" = 1 ] || browser; exit 0; fi
   if [ "$no_open" != 1 ]; then (for _ in $(seq 90); do if own; then browser; break; fi; sleep 1; done) & fi
-  echo "$cmd 1.0.2 running at $url  (Ctrl+C to stop; choose --port N for another port)"
+  echo "$cmd 1.0.3 running at $url  (Ctrl+C to stop; choose --port N for another port)"
   exec docker run --rm --name "$cmd-$port" --label "localtools.install=$dir" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -p "127.0.0.1:$port:$port" "$image" serve --no-open --port "$port"
 fi
 exec docker run --rm -i --network none --user "$(id -u):$(id -g)" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -v "$PWD:/work" -w /work "$image" "$@"
