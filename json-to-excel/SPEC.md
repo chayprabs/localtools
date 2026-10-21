@@ -65,7 +65,20 @@ A row value may also be `{"formula": "=..."}` to put a formula in one cell.
 - `formula` + `criteria` (e.g. `"=$B2>100"`)
 - `top` / `bottom` + `value` (count, or percent with `"percent": true`), `average` (`"above": true`), `duplicate`, `unique`, `blanks`, `no_blanks`, `errors`, `no_errors`
 - `2_color_scale` / `3_color_scale` (optional `min_color`, `mid_color`, `max_color`, `*_type`, `*_value`)
-- `data_bar` (optional `bar_color`), `icon_set` (optional `icon_style`, e.g. `3Arrows`, `3TrafficLights1`)
+- `data_bar` (optional `bar_color`), `icon_set` (optional `icon_style`: `3Arrows`, `3ArrowsGray`, `3Flags`, `3Signs`,
+  `3Symbols`, `3Symbols2`, `3TrafficLights1`, `3TrafficLights2`, `4Arrows`, `4ArrowsGray`, `4Rating`, `4RedToBlack`,
+  `4TrafficLights`, `5Arrows`, `5ArrowsGray`, `5Quarters`, `5Rating`)
+- `text` + `criteria` (`containing`, `not containing`, `begins with`, `ends with`) + `value`
+- `time_period` + `criteria` (`yesterday`, `today`, `tomorrow`, `last 7 days`, `last week`, `this week`, `continue week` (next week), `last month`, `this month`, `continue month` (next month))
+
+Rules are checked before the workbook is written; an invalid rule is rejected with its sheet and rule number:
+
+- `value`, `min_value`, `max_value`, `mid_value` are JSON strings (`"5"`, `"=SUM(A1:A3)"`), never bare numbers.
+- `cell` needs `value` (or `min_value` and `max_value` for `between`/`not between`); formula values must have balanced brackets and quotes.
+- `top`/`bottom` `value` is an integer 1–1000 (1–100 with `"percent": true`).
+- Color scales and data bars: `min_type` is `min`, `num`, `percent`, `percentile` or `formula`; `max_type` the same with `max`
+  instead of `min`; `mid_type` one of `num`, `percent`, `percentile`, `formula` (default `percentile` 50). Every type except
+  `min`/`max` needs its `*_value`: a number (0–100 for `percent`/`percentile`) or a formula.
 
 ## Charts
 

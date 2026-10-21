@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for JSON to Excel (json-to-excel 1.0.2). macOS / Linux, no sudo.
+# localtools installer for JSON to Excel (json-to-excel 1.0.3). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/json-to-excel/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='json-to-excel'; NAME='JSON to Excel'; VERSION='1.0.2'; PORT='47108'; KIND='bin'; IMAGE=''
+SLUG='json-to-excel'; NAME='JSON to Excel'; VERSION='1.0.3'; PORT='47108'; KIND='bin'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -38,10 +38,10 @@ fi
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/json-to-excel-v1.0.2/json-to-excel-1.0.2-linux-arm64.zip'; SHA='bc91692e839afa52c335a90f41a2b02ff905591f6ec749fb34f3eb75d22049d3' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/json-to-excel-v1.0.2/json-to-excel-1.0.2-linux-x64.zip'; SHA='65a21a62820c034d3fbeeec85ad9abb44089d0d2ae71bcfef2a9508b52c96bd0' ;;
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/json-to-excel-v1.0.2/json-to-excel-1.0.2-macos-arm64.zip'; SHA='270e2c014cd7c16729739a642b249d8fc5341d7f535039dff926511aa07bb119' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/json-to-excel-v1.0.2/json-to-excel-1.0.2-macos-x64.zip'; SHA='6fb0ad4d59e3cfe78800fb814eed2ffbd1f299014de11229f7cd0a854444ffb2' ;;
+  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/json-to-excel-v1.0.3/json-to-excel-1.0.3-linux-arm64.zip'; SHA='5e6462d075bcad7c84819afa23f0565a4193a00e00e10ef5c44c06357bb20a84' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/json-to-excel-v1.0.3/json-to-excel-1.0.3-linux-x64.zip'; SHA='0244c79ce596c6460fb56eb0628bd448f46b25131f7ba046b26511b2f49be2ea' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/json-to-excel-v1.0.3/json-to-excel-1.0.3-macos-arm64.zip'; SHA='e72c95b96306730ca32809406d1cf41b88f2269ea34a64c821e75bab826419d9' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/json-to-excel-v1.0.3/json-to-excel-1.0.3-macos-x64.zip'; SHA='8935de271d24dee8c6b6158917aa0a9d8a25ef086df749f53db2ef0c93789b75' ;;
 esac
 
 if [ "$KIND" = docker ]; then
@@ -67,7 +67,7 @@ if [ "$KIND" = docker ]; then
   cat > "$STAGE/$CMD" <<'EOF'
 #!/usr/bin/env bash
 set -euo pipefail
-slug='json-to-excel'; cmd="localtools-$slug"; image=':1.0.2'
+slug='json-to-excel'; cmd="localtools-$slug"; image=':1.0.3'
 self="${BASH_SOURCE[0]}"
 while [ -L "$self" ]; do
   parent="$(cd -P "$(dirname "$self")" && pwd)"; self="$(readlink "$self")"
@@ -103,7 +103,7 @@ if $serve; then
   own() { curl -fsS --max-time 1 "$url/api/health" 2>/dev/null | grep -q '"tool": *"'"$slug"'"'; }
   if own; then echo "$cmd already running at $url"; [ "$no_open" = 1 ] || browser; exit 0; fi
   if [ "$no_open" != 1 ]; then (for _ in $(seq 90); do if own; then browser; break; fi; sleep 1; done) & fi
-  echo "$cmd 1.0.2 running at $url  (Ctrl+C to stop; choose --port N for another port)"
+  echo "$cmd 1.0.3 running at $url  (Ctrl+C to stop; choose --port N for another port)"
   exec docker run --rm --name "$cmd-$port" --label "localtools.install=$dir" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -p "127.0.0.1:$port:$port" "$image" serve --no-open --port "$port"
 fi
 exec docker run --rm -i --network none --user "$(id -u):$(id -g)" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -v "$PWD:/work" -w /work "$image" "$@"

@@ -11,3 +11,7 @@ Fixes from review: - Spec images (PNG, JPEG, GIF) work in the shipped binary (de
 ## 1.0.2 (2026-10-16)
 
 - Table names must be unique across the workbook (ignoring case); duplicates are rejected, and unnamed tables get generated names that avoid yours. - A table with "header": false is an error (Excel tables need a header row) instead of being dropped silently. - Row counts for spec sheets without a header are correct. - In an object of arrays, empty arrays are skipped with a warning instead of failing the whole input.
+
+## 1.0.3 (2026-10-21)
+
+- Conditional formats, icon styles and number formats are validated before writing: one-line errors with sheet and rule number, never a workbook Excel has to repair. - Plain-language JSON type errors (e.g. a number where a string is needed); UTF-16/UTF-32 input is rejected with a clear message; headers longer than 32,767 characters are truncated with a warning. - Web/API conversions run in a separate process with a two-minute deadline, at most two at a time (HTTP 503 otherwise); oversized uploads get a JSON 413. - The CLI writes outputs atomically; code text shows operators without font ligatures.
