@@ -15,3 +15,7 @@ Security fix: verb chain validated with Miller's own parser; all DSL redirects, 
 ## 1.0.3 (2026-10-21)
 
 Preserve exact unsafe integers in JSON/JSONL previews, bound HTTP transforms to two concurrent workers with clear 503 overload errors, and consistently default CLI run output to JSON. Includes current UI code-font fixes.
+
+## 1.0.4 (2026-10-22)
+
+Bound upload admission and rejection; report missing Miller verb arguments promptly with human errors; keep worker lifeline separate from data stdin.

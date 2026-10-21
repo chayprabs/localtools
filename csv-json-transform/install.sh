@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for CSV JSON Transform (csv-json-transform 1.0.3). macOS / Linux, no sudo.
+# localtools installer for CSV JSON Transform (csv-json-transform 1.0.4). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/csv-json-transform/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='csv-json-transform'; NAME='CSV JSON Transform'; VERSION='1.0.3'; PORT='47106'; KIND='bin'; IMAGE=''
+SLUG='csv-json-transform'; NAME='CSV JSON Transform'; VERSION='1.0.4'; PORT='47106'; KIND='bin'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -38,10 +38,10 @@ fi
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/csv-json-transform-v1.0.3/csv-json-transform-1.0.3-linux-arm64.zip'; SHA='5defd9404a259f21db3e3f05b460448f18027fa0d60a514a8f55245d74b9d5fd' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/csv-json-transform-v1.0.3/csv-json-transform-1.0.3-linux-x64.zip'; SHA='99e96a916b055cb7aec0554ed92cee428fc9bafbf397acacc6f9d2a86b076a6b' ;;
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/csv-json-transform-v1.0.3/csv-json-transform-1.0.3-macos-arm64.zip'; SHA='364b619ce3fa0880a9ebfacd8dda77dba2bf942245b034959475c8c5b654197c' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/csv-json-transform-v1.0.3/csv-json-transform-1.0.3-macos-x64.zip'; SHA='50364e04a65a2a7e51b0e7a6c873f7fa06bb6b2e9f075639a6e0501937e399ce' ;;
+  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/csv-json-transform-v1.0.4/csv-json-transform-1.0.4-linux-arm64.zip'; SHA='edd9290cdf2d88d504baefdce7d1224685880c6f2efa0b5c2875b16f0c1db7c7' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/csv-json-transform-v1.0.4/csv-json-transform-1.0.4-linux-x64.zip'; SHA='6ae1618c8f36686f88a2197e8755b6b904f9aa0b31f3036948dd7c722fb8b0c1' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/csv-json-transform-v1.0.4/csv-json-transform-1.0.4-macos-arm64.zip'; SHA='7d31ed23183637951fe375cd1ff1fb86c2f2962b55d6749f24bce908e32a365b' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/csv-json-transform-v1.0.4/csv-json-transform-1.0.4-macos-x64.zip'; SHA='244665ce739adc314075717b52100c9045661292b7ac1a604b5c0b2d0a2c0c5e' ;;
 esac
 
 if [ "$KIND" = docker ]; then
@@ -67,7 +67,7 @@ if [ "$KIND" = docker ]; then
   cat > "$STAGE/$CMD" <<'EOF'
 #!/usr/bin/env bash
 set -euo pipefail
-slug='csv-json-transform'; cmd="localtools-$slug"; image=':1.0.3'
+slug='csv-json-transform'; cmd="localtools-$slug"; image=':1.0.4'
 self="${BASH_SOURCE[0]}"
 while [ -L "$self" ]; do
   parent="$(cd -P "$(dirname "$self")" && pwd)"; self="$(readlink "$self")"
@@ -103,7 +103,7 @@ if $serve; then
   own() { curl -fsS --max-time 1 "$url/api/health" 2>/dev/null | grep -q '"tool": *"'"$slug"'"'; }
   if own; then echo "$cmd already running at $url"; [ "$no_open" = 1 ] || browser; exit 0; fi
   if [ "$no_open" != 1 ]; then (for _ in $(seq 90); do if own; then browser; break; fi; sleep 1; done) & fi
-  echo "$cmd 1.0.3 running at $url  (Ctrl+C to stop; choose --port N for another port)"
+  echo "$cmd 1.0.4 running at $url  (Ctrl+C to stop; choose --port N for another port)"
   exec docker run --rm --name "$cmd-$port" --label "localtools.install=$dir" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -p "127.0.0.1:$port:$port" "$image" serve --no-open --port "$port"
 fi
 exec docker run --rm -i --network none --user "$(id -u):$(id -g)" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -v "$PWD:/work" -w /work "$image" "$@"
