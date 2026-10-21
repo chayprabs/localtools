@@ -15,3 +15,7 @@ Exact display of integers beyond 2^53; keyword-named tables quoted; JSON-lines l
 ## 1.0.3 (2026-10-17)
 
 Fix: after a one-page result, paging a larger result could stop at rows 201-400.
+
+## 1.0.4 (2026-10-22)
+
+Clear stale query results, downloads and pager controls before new queries/explains; synchronize shared kit and bounded guard rejection. Nested large integers remain quoted in JSON previews as documented; downloads preserve exact numbers.

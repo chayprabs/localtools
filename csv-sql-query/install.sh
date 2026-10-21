@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for CSV SQL Query (csv-sql-query 1.0.3). macOS / Linux, no sudo.
+# localtools installer for CSV SQL Query (csv-sql-query 1.0.4). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/csv-sql-query/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='csv-sql-query'; NAME='CSV SQL Query'; VERSION='1.0.3'; PORT='47105'; KIND='bin'; IMAGE=''
+SLUG='csv-sql-query'; NAME='CSV SQL Query'; VERSION='1.0.4'; PORT='47105'; KIND='bin'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -38,10 +38,10 @@ fi
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/csv-sql-query-v1.0.3/csv-sql-query-1.0.3-macos-arm64.zip'; SHA='04d0c4408ff7feaf4b9bbe48c30db0f1c9822334869ec8c8b09f63282108e3d2' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/csv-sql-query-v1.0.3/csv-sql-query-1.0.3-macos-x64.zip'; SHA='7121bf7d786b7e568338e37c2c134b50d3295ebf4563a3290d5b619359fb8b6e' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/csv-sql-query-v1.0.3/csv-sql-query-1.0.3-linux-x64.zip'; SHA='089f484378c91063121722e4a600291870434bdcc6ec291d07ea2ae6e72cd180' ;;
-  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/csv-sql-query-v1.0.3/csv-sql-query-1.0.3-linux-arm64.zip'; SHA='cf69fe633e627b58215c3cc98b112b39d60f9b279408726ebdf1ee2ec0cb891d' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/csv-sql-query-v1.0.4/csv-sql-query-1.0.4-macos-arm64.zip'; SHA='37f80d1d8cd2f36ba0baf45585a8352c6503e986a94b77063cbdc7b49df19228' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/csv-sql-query-v1.0.4/csv-sql-query-1.0.4-macos-x64.zip'; SHA='0212b1ed991337c9e5e9c21e60a9fb4b3e1a2d90c6d5f6f7a30a9c9f49f0b619' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/csv-sql-query-v1.0.4/csv-sql-query-1.0.4-linux-x64.zip'; SHA='2f7a826fee9653cbd55aaa147ed618d1fbd2e7e2179e652a8d80bbe19eca6a2f' ;;
+  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/csv-sql-query-v1.0.4/csv-sql-query-1.0.4-linux-arm64.zip'; SHA='85fa1371d195f230027ac8bc4f6965c81dbedd5fdbccbccccb80b2453fc41488' ;;
 esac
 
 if [ "$KIND" = docker ]; then
@@ -67,7 +67,7 @@ if [ "$KIND" = docker ]; then
   cat > "$STAGE/$CMD" <<'EOF'
 #!/usr/bin/env bash
 set -euo pipefail
-slug='csv-sql-query'; cmd="localtools-$slug"; image=':1.0.3'
+slug='csv-sql-query'; cmd="localtools-$slug"; image=':1.0.4'
 self="${BASH_SOURCE[0]}"
 while [ -L "$self" ]; do
   parent="$(cd -P "$(dirname "$self")" && pwd)"; self="$(readlink "$self")"
@@ -103,7 +103,7 @@ if $serve; then
   own() { curl -fsS --max-time 1 "$url/api/health" 2>/dev/null | grep -q '"tool": *"'"$slug"'"'; }
   if own; then echo "$cmd already running at $url"; [ "$no_open" = 1 ] || browser; exit 0; fi
   if [ "$no_open" != 1 ]; then (for _ in $(seq 90); do if own; then browser; break; fi; sleep 1; done) & fi
-  echo "$cmd 1.0.3 running at $url  (Ctrl+C to stop; choose --port N for another port)"
+  echo "$cmd 1.0.4 running at $url  (Ctrl+C to stop; choose --port N for another port)"
   exec docker run --rm --name "$cmd-$port" --label "localtools.install=$dir" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -p "127.0.0.1:$port:$port" "$image" serve --no-open --port "$port"
 fi
 exec docker run --rm -i --network none --user "$(id -u):$(id -g)" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -v "$PWD:/work" -w /work "$image" "$@"
