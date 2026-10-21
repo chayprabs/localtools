@@ -18,3 +18,10 @@
 - Annotated workbook works without a stylesheet and with openpyxl/pandas colours; a failed -o leaves no partial file.
 - Less re-save noise (default validation attributes, empty inline strings, built-in formats, quoted sheet names in names).
 - Date-system changes have their own label; one file argument exits 2.
+
+## 1.0.3 (2026-10-21)
+
+- A far-right cell (column XFD) no longer makes alignment slow: 500,001 cells diff in about 4 s.
+- Annotated export works for styles-less workbooks with prefixed package XML.
+- Defined names compare quotes inside string constants exactly.
+- Overload and early-error replies reach Connection: close clients; worker temp files stay in the job folder and stale folders are swept at startup.
