@@ -15,3 +15,7 @@ Fixes: burn --override-style on ASS files positions top/middle/bottom and sizes 
 ## 1.0.3 (2026-10-21)
 
 Fixes: Latin code pages chosen by per-language alphabet scoring (Icelandic/Faroese 1252, Serbian/Croatian/Slovene/Romanian 1250, Baltic 1257, Turkish 1254); SRT/VTT arrows without spaces read, malformed timing lines skipped with a warning; burn override derives missing PlayResY like libass; early 413/503 replies reach Connection: close clients.
+
+## 1.0.5 (2026-10-22)
+
+Fixes: Latin code-page detection scores letters only (symbols like £ º ¿ keep windows-1252; short Polish still windows-1250); any malformed --> timing line is skipped with a warning instead of merging into the previous cue.
