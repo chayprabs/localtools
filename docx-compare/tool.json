@@ -2,7 +2,7 @@
   "slug": "docx-compare",
   "name": "DOCX Compare",
   "command": "localtools-docx-compare",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "port": 47134,
   "kind": "bin",
   "registries": {
