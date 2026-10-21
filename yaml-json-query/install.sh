@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for YAML JSON Query (yaml-json-query 1.0.3). macOS / Linux, no sudo.
+# localtools installer for YAML JSON Query (yaml-json-query 1.0.4). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/yaml-json-query/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='yaml-json-query'; NAME='YAML JSON Query'; VERSION='1.0.3'; PORT='47110'; KIND='bin'; IMAGE=''
+SLUG='yaml-json-query'; NAME='YAML JSON Query'; VERSION='1.0.4'; PORT='47110'; KIND='bin'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -38,10 +38,10 @@ fi
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/yaml-json-query-v1.0.3/yaml-json-query-1.0.3-macos-arm64.zip'; SHA='510fca459c47ed2dcb5c1b1f03b62221dc5bcfc0dd82d9e493aa92a5cb955d3a' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/yaml-json-query-v1.0.3/yaml-json-query-1.0.3-macos-x64.zip'; SHA='2f9818512825f6ddc9ca0371765a5d07abea57dcf61fdf2b72de68de0978f222' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/yaml-json-query-v1.0.3/yaml-json-query-1.0.3-linux-x64.zip'; SHA='587526e0b97d42ad7795afd57db8b09d5aa0a5d52eb7095f1d6904c1bca14629' ;;
-  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/yaml-json-query-v1.0.3/yaml-json-query-1.0.3-linux-arm64.zip'; SHA='3d47a794e5cc3e1a31611b56f70238e18f49521c28ebb827a27db7be8774b676' ;;
+  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/yaml-json-query-v1.0.4/yaml-json-query-1.0.4-linux-arm64.zip'; SHA='446e37b9b8eb07c53c6e36fdf1dfe466c2758a5f4b20d7d72ce22ccd873f3971' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/yaml-json-query-v1.0.4/yaml-json-query-1.0.4-linux-x64.zip'; SHA='e4cf56d4d2759d23c587ba819870da64290feb824c14feec642ca380c88749b6' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/yaml-json-query-v1.0.4/yaml-json-query-1.0.4-macos-arm64.zip'; SHA='01f4bc968e0f10a1f752acf73be454a1d7197070a963bfb3f4ccc654ec7ad7d8' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/yaml-json-query-v1.0.4/yaml-json-query-1.0.4-macos-x64.zip'; SHA='005bcc996fc285938eca04c3de0779b511488b367edeb32b2c05b439807191ea' ;;
 esac
 
 if [ "$KIND" = docker ]; then
@@ -67,7 +67,7 @@ if [ "$KIND" = docker ]; then
   cat > "$STAGE/$CMD" <<'EOF'
 #!/usr/bin/env bash
 set -euo pipefail
-slug='yaml-json-query'; cmd="localtools-$slug"; image=':1.0.3'
+slug='yaml-json-query'; cmd="localtools-$slug"; image=':1.0.4'
 self="${BASH_SOURCE[0]}"
 while [ -L "$self" ]; do
   parent="$(cd -P "$(dirname "$self")" && pwd)"; self="$(readlink "$self")"
@@ -103,7 +103,7 @@ if $serve; then
   own() { curl -fsS --max-time 1 "$url/api/health" 2>/dev/null | grep -q '"tool": *"'"$slug"'"'; }
   if own; then echo "$cmd already running at $url"; [ "$no_open" = 1 ] || browser; exit 0; fi
   if [ "$no_open" != 1 ]; then (for _ in $(seq 90); do if own; then browser; break; fi; sleep 1; done) & fi
-  echo "$cmd 1.0.3 running at $url  (Ctrl+C to stop; choose --port N for another port)"
+  echo "$cmd 1.0.4 running at $url  (Ctrl+C to stop; choose --port N for another port)"
   exec docker run --rm --name "$cmd-$port" --label "localtools.install=$dir" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -p "127.0.0.1:$port:$port" "$image" serve --no-open --port "$port"
 fi
 exec docker run --rm -i --network none --user "$(id -u):$(id -g)" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -v "$PWD:/work" -w /work "$image" "$@"

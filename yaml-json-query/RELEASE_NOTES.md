@@ -15,3 +15,7 @@ Large-input and robustness fixes: the UI/API upload limit is now 16 MB, which re
 ## 1.0.3 (2026-10-21)
 
 Multi-document YAML expressions run per document (linear time). YAML output memory is bounded, so 16 MB of typical JSON converts to YAML in the UI. TOML +nan/-nan input works; inf/NaN are written as .inf/.nan in YAML; floats beyond 64 bits are a clear error for TOML. Oversized uploads get HTTP 413, busy workers HTTP 503. --in-place writes atomically.
+
+## 1.0.4 (2026-10-22)
+
+Bundles the modified go-yaml NOTICE and full Apache/MIT licence texts. Multipart request errors now report the actual 33 MiB limit and distinguish excessive parts/headers; memory errors include expensive expressions. Current shared runtime and UI kit verified in sync.
