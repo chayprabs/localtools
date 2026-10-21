@@ -46,7 +46,7 @@ Package-manager installs are updated by that package manager; `localtools-docx-c
 
 ## Requirements
 
-- Windows 10/11, macOS 12+, Linux (glibc), x64 and Apple Silicon
+- Windows 10/11, macOS 14+, Linux (glibc), x64 and Apple Silicon
 - About 120 MB of disk
 - No account, no internet after install.
 
