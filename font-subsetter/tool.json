@@ -2,7 +2,7 @@
   "slug": "font-subsetter",
   "name": "Font Subsetter",
   "command": "localtools-font-subsetter",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "port": 47129,
   "kind": "py",
   "registries": {

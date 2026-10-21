@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for Font Subsetter (font-subsetter 1.0.1). macOS / Linux, no sudo.
+# localtools installer for Font Subsetter (font-subsetter 1.0.2). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/font-subsetter/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='font-subsetter'; NAME='Font Subsetter'; VERSION='1.0.1'; PORT='47129'; KIND='py'; IMAGE=''
+SLUG='font-subsetter'; NAME='Font Subsetter'; VERSION='1.0.2'; PORT='47129'; KIND='py'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -38,9 +38,9 @@ fi
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/font-subsetter-v1.0.1/font-subsetter-1.0.1-macos-arm64.zip'; SHA='16bf1a1e3fc5d1bdfb391665345c07aa68c6ff380f79d05c0fddf1b3a1f42676' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/font-subsetter-v1.0.1/font-subsetter-1.0.1-macos-x64.zip'; SHA='c84d69d865f497491e705ba1a95040d67fbd8fa5d019411f127459af6fc9f7f8' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/font-subsetter-v1.0.1/font-subsetter-1.0.1-linux-x64.zip'; SHA='baaee090883fcab741fbb2b91776d5fc6c24cd6b0a5f1a6fc58a33788b2ddbd3' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/font-subsetter-v1.0.2/font-subsetter-1.0.2-linux-x64.zip'; SHA='49add2306450c5811cbd9a1380fe471c10428dd5b405e57b06df0ba0f918d402' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/font-subsetter-v1.0.2/font-subsetter-1.0.2-macos-arm64.zip'; SHA='76b331a2e95bdc2995c736206260c6a1005e1c717f61ac203db178bb95d1130e' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/font-subsetter-v1.0.2/font-subsetter-1.0.2-macos-x64.zip'; SHA='3794ec11e60ed1152438cc1c7269b0fb9f5435a4c894d72aaec1b3bcd02f0ffd' ;;
 esac
 
 if [ "$KIND" = docker ]; then
@@ -66,7 +66,7 @@ if [ "$KIND" = docker ]; then
   cat > "$STAGE/$CMD" <<'EOF'
 #!/usr/bin/env bash
 set -euo pipefail
-slug='font-subsetter'; cmd="localtools-$slug"; image=':1.0.1'
+slug='font-subsetter'; cmd="localtools-$slug"; image=':1.0.2'
 self="${BASH_SOURCE[0]}"
 while [ -L "$self" ]; do
   parent="$(cd -P "$(dirname "$self")" && pwd)"; self="$(readlink "$self")"
@@ -102,7 +102,7 @@ if $serve; then
   own() { curl -fsS --max-time 1 "$url/api/health" 2>/dev/null | grep -q '"tool": *"'"$slug"'"'; }
   if own; then echo "$cmd already running at $url"; [ "$no_open" = 1 ] || browser; exit 0; fi
   if [ "$no_open" != 1 ]; then (for _ in $(seq 90); do if own; then browser; break; fi; sleep 1; done) & fi
-  echo "$cmd 1.0.1 running at $url  (Ctrl+C to stop; choose --port N for another port)"
+  echo "$cmd 1.0.2 running at $url  (Ctrl+C to stop; choose --port N for another port)"
   exec docker run --rm --name "$cmd-$port" --label "localtools.install=$dir" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -p "127.0.0.1:$port:$port" "$image" serve --no-open --port "$port"
 fi
 exec docker run --rm -i --network none --user "$(id -u):$(id -g)" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -v "$PWD:/work" -w /work "$image" "$@"
