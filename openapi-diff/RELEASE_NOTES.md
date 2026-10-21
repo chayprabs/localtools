@@ -11,3 +11,7 @@ Late openapi/swagger keys (Stripe, Kubernetes JSON) detected; single upload is t
 ## 1.0.2 (2026-10-17)
 
 Large diffs stay responsive: capped summary in the page, full Markdown/JSON downloaded from the local server; at most 2 comparisons at once (503 when busy); the worker exits with the server.
+
+## 1.0.3 (2026-10-21)
+
+Reports kept per comparison and never evicted while running or fresh (fixes 422 on parallel comparisons); stale temp folders swept at startup, reports removed on exit, 30-minute expiry enforced every minute; smaller page summary; 413 delivered to Connection: close clients; pasted specs up to 64 MB, up to 5000 files per side; oasdiff 1.34.0.
