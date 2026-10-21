@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for AsciiDoc Converter (asciidoc-converter 1.0.2). macOS / Linux, no sudo.
+# localtools installer for AsciiDoc Converter (asciidoc-converter 1.0.3). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/asciidoc-converter/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='asciidoc-converter'; NAME='AsciiDoc Converter'; VERSION='1.0.2'; PORT='47132'; KIND='js'; IMAGE=''
+SLUG='asciidoc-converter'; NAME='AsciiDoc Converter'; VERSION='1.0.3'; PORT='47132'; KIND='js'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -38,10 +38,10 @@ fi
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/asciidoc-converter-v1.0.2/asciidoc-converter-1.0.2-linux-arm64.zip'; SHA='c3bb7fcaf1ce47eac95e1afb95f12646e866718c61c23c3c8758af02e9c09da6' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/asciidoc-converter-v1.0.2/asciidoc-converter-1.0.2-linux-x64.zip'; SHA='a48bc74bcd231aa4b6c1efc2d5af7437ffe931da0a4a8bd67b0aee8f8bf12573' ;;
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/asciidoc-converter-v1.0.2/asciidoc-converter-1.0.2-macos-arm64.zip'; SHA='28f972b16305672670bf4177daf1964686c703ac557dd9ee2b2fc526ad0d7a91' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/asciidoc-converter-v1.0.2/asciidoc-converter-1.0.2-macos-x64.zip'; SHA='b15785091437e42387d11009f9e61ad29198dcac19e565961018909cb9a01942' ;;
+  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/asciidoc-converter-v1.0.3/asciidoc-converter-1.0.3-linux-arm64.zip'; SHA='35eaba19522977279c2563cb3b908f9a1146f92692efe6dfc965e24f067b9959' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/asciidoc-converter-v1.0.3/asciidoc-converter-1.0.3-linux-x64.zip'; SHA='6b48909eb70755e819c0e59af2990559a5fdc9b32d5fa9155962e0640af2b0b8' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/asciidoc-converter-v1.0.3/asciidoc-converter-1.0.3-macos-arm64.zip'; SHA='6a6a1c9a6d358df8ff032471b754a9f17bbbd7bcd215d4ec97e8256fe833c612' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/asciidoc-converter-v1.0.3/asciidoc-converter-1.0.3-macos-x64.zip'; SHA='cc37062e42895d36d2de562e85bc34133712cf94eb2e67662ffdd2ed4fb3b37b' ;;
 esac
 
 if [ "$KIND" = docker ]; then
@@ -67,7 +67,7 @@ if [ "$KIND" = docker ]; then
   cat > "$STAGE/$CMD" <<'EOF'
 #!/usr/bin/env bash
 set -euo pipefail
-slug='asciidoc-converter'; cmd="localtools-$slug"; image=':1.0.2'
+slug='asciidoc-converter'; cmd="localtools-$slug"; image=':1.0.3'
 self="${BASH_SOURCE[0]}"
 while [ -L "$self" ]; do
   parent="$(cd -P "$(dirname "$self")" && pwd)"; self="$(readlink "$self")"
@@ -103,7 +103,7 @@ if $serve; then
   own() { curl -fsS --max-time 1 "$url/api/health" 2>/dev/null | grep -q '"tool": *"'"$slug"'"'; }
   if own; then echo "$cmd already running at $url"; [ "$no_open" = 1 ] || browser; exit 0; fi
   if [ "$no_open" != 1 ]; then (for _ in $(seq 90); do if own; then browser; break; fi; sleep 1; done) & fi
-  echo "$cmd 1.0.2 running at $url  (Ctrl+C to stop; choose --port N for another port)"
+  echo "$cmd 1.0.3 running at $url  (Ctrl+C to stop; choose --port N for another port)"
   exec docker run --rm --name "$cmd-$port" --label "localtools.install=$dir" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -p "127.0.0.1:$port:$port" "$image" serve --no-open --port "$port"
 fi
 exec docker run --rm -i --network none --user "$(id -u):$(id -g)" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -v "$PWD:/work" -w /work "$image" "$@"

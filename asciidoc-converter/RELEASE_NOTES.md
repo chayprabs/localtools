@@ -11,3 +11,7 @@ Fix STEM literal delimiters in code/configuration; remove Google Fonts import; n
 ## 1.0.2 (2026-10-20)
 
 The CLI no longer rewrites document text when the document folder path is short (Q:\docs, /work): {docdir} and {docfile} are relative before conversion and only diagnostics have absolute project paths removed. Opening an included file from a diagnostic keeps the preview on the main document.
+
+## 1.0.3 (2026-10-21)
+
+include::{docdir}/... inside included files resolves again (Asciidoctor keeps its real docdir; only the server temp path is hidden where printed). With a zip project, opening an included file from a diagnostic keeps converting the main document. DocBook hyperlinks no longer trigger the remote-media warning, and a Google Fonts @import written in a listing block is kept.
