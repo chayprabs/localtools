@@ -2,7 +2,7 @@
   "slug": "epub-validator",
   "name": "EPUB Validator",
   "command": "localtools-epub-validator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "port": 47136,
   "kind": "bin",
   "registries": {

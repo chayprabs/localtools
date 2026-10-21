@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for EPUB Validator (epub-validator 1.0.0). macOS / Linux, no sudo.
+# localtools installer for EPUB Validator (epub-validator 1.0.1). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/epub-validator/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='epub-validator'; NAME='EPUB Validator'; VERSION='1.0.0'; PORT='47136'; KIND='bin'; IMAGE=''
+SLUG='epub-validator'; NAME='EPUB Validator'; VERSION='1.0.1'; PORT='47136'; KIND='bin'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -33,10 +33,10 @@ fi
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/epub-validator-v1.0.0/epub-validator-1.0.0-linux-arm64.zip'; SHA='c8619f7787b7e123291771354097e94f54c6c4f0f126ee23ce330b172f782eee' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/epub-validator-v1.0.0/epub-validator-1.0.0-linux-x64.zip'; SHA='6d397298cbc681c8a58c61e4993b369841632fa167721ea89867569abba27af8' ;;
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/epub-validator-v1.0.0/epub-validator-1.0.0-macos-arm64.zip'; SHA='d1a6886abaf8c7231469f2f189163c7479610764623775e242a44a0bb6ef084f' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/epub-validator-v1.0.0/epub-validator-1.0.0-macos-x64.zip'; SHA='16e75490e7724ad1ff34357f28595a3460bf59cdea75cc815c4172f9a629b4ac' ;;
+  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/epub-validator-v1.0.1/epub-validator-1.0.1-linux-arm64.zip'; SHA='e6347c2bd96c8faf3ba3032dd09b1a8810c56625c6d05a8d017e2e46f1a67894' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/epub-validator-v1.0.1/epub-validator-1.0.1-linux-x64.zip'; SHA='688da5a063f7258adb7f4122dc54677af98b26546750b85515e8b29af2aadccd' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/epub-validator-v1.0.1/epub-validator-1.0.1-macos-arm64.zip'; SHA='a094c37892d211c7445a85c686149edd3898af3d0a06a2262299b35e53fa19f9' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/epub-validator-v1.0.1/epub-validator-1.0.1-macos-x64.zip'; SHA='06fb0ee7ddd5c5e90adf520af5da57a571bc75fec23fa4e689fb80f94faf993d' ;;
 esac
 
 if [ "$KIND" = docker ]; then
@@ -59,26 +59,49 @@ mkdir -p "$STAGE"
 if [ "$KIND" = docker ]; then
   say "pulling $IMAGE:$VERSION"
   docker pull "$IMAGE:$VERSION" || fail "docker pull $IMAGE:$VERSION failed"
-  cat > "$STAGE/$CMD" <<EOF
+  cat > "$STAGE/$CMD" <<'EOF'
 #!/usr/bin/env bash
-# serve (default) runs the container and opens the browser; anything else goes to the tool CLI.
 set -euo pipefail
-case "\${1:-serve}" in
-  update) export LOCALTOOLS_NO_OPEN=1; exec bash -c "\$(curl -fsSL $BASE/install.sh)" ;;
-  uninstall) exec bash -c "\$(curl -fsSL $BASE/uninstall.sh)" ;;
-  serve|--no-open|--port)
-    if [[ " \$* " != *" --no-open "* && "\${LOCALTOOLS_NO_OPEN:-}" != 1 ]]; then
-      ( for _ in \$(seq 60); do
-          if curl -fs http://127.0.0.1:$PORT/api/health >/dev/null 2>&1; then
-            if command -v open >/dev/null 2>&1; then open http://127.0.0.1:$PORT/; else xdg-open http://127.0.0.1:$PORT/ >/dev/null 2>&1 || true; fi
-            break
-          fi; sleep 1
-        done ) &
+slug='epub-validator'; cmd="localtools-$slug"; image=':1.0.1'
+self="${BASH_SOURCE[0]}"
+while [ -L "$self" ]; do
+  parent="$(cd -P "$(dirname "$self")" && pwd)"; self="$(readlink "$self")"
+  [[ "$self" = /* ]] || self="$parent/$self"
+done
+dir="$(cd -P "$(dirname "$self")" && pwd)"; root="$(dirname "$dir")"
+first="${1:-serve}"
+case "$first" in
+  update|uninstall)
+    if [ ! -f "$dir/installed.txt" ] || [ ! -L "$root/bin/$cmd" ] || [ "$(readlink "$root/bin/$cmd")" != "$dir/$cmd" ]; then
+      echo "$cmd was not installed by the localtools script; use your original package manager or docker pull $image"; exit 0
     fi
-    echo "$CMD $VERSION running at http://127.0.0.1:$PORT  (Ctrl+C to stop)"
-    exec docker run --rm --name $CMD -p 127.0.0.1:$PORT:$PORT $IMAGE:$VERSION serve --no-open ;;
-  *) exec docker run --rm -i -v "\$PWD:/work" -w /work $IMAGE:$VERSION "\$@" ;;
+    export LOCALTOOLS_HOME="$root" LOCALTOOLS_NO_OPEN=1
+    script=install; [ "$first" = uninstall ] && script=uninstall
+    exec bash -c "$(curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/$slug/$script.sh)" ;;
 esac
+port="${LOCALTOOLS_PORT:-47136}"; no_open="${LOCALTOOLS_NO_OPEN:-}"
+serve=false
+case "$first" in serve|--no-open|--port|--port=*) serve=true;; esac
+if $serve; then
+  args=("$@"); [ "$first" = serve ] && args=("${args[@]:1}")
+  for ((i=0;i<${#args[@]};i++)); do
+    case "${args[i]}" in
+      --port) i=$((i+1)); port="${args[i]:-}" ;;
+      --port=*) port="${args[i]#*=}" ;;
+      --no-open|--no-open=true) no_open=1 ;;
+      *) echo "error: unknown serve option ${args[i]} (see --help)" >&2; exit 1 ;;
+    esac
+  done
+  [[ "$port" =~ ^[0-9]+$ ]] && [ "$port" -ge 1 ] && [ "$port" -le 65535 ] || { echo 'error: --port must be 1 through 65535' >&2; exit 1; }
+  url="http://127.0.0.1:$port"
+  browser() { if command -v open >/dev/null 2>&1; then open "$url/"; else xdg-open "$url/" >/dev/null 2>&1 || true; fi; }
+  own() { curl -fsS --max-time 1 "$url/api/health" 2>/dev/null | grep -q '"tool": *"'"$slug"'"'; }
+  if own; then echo "$cmd already running at $url"; [ "$no_open" = 1 ] || browser; exit 0; fi
+  if [ "$no_open" != 1 ]; then (for _ in $(seq 90); do if own; then browser; break; fi; sleep 1; done) & fi
+  echo "$cmd 1.0.1 running at $url  (Ctrl+C to stop; choose --port N for another port)"
+  exec docker run --rm --name "$cmd-$port" --label "localtools.install=$dir" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -p "127.0.0.1:$port:$port" "$image" serve --no-open --port "$port"
+fi
+exec docker run --rm -i --network none --user "$(id -u):$(id -g)" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -v "$PWD:/work" -w /work "$image" "$@"
 EOF
 else
   command -v curl >/dev/null 2>&1 || fail "curl is required"
@@ -98,7 +121,9 @@ echo "$VERSION $(date -u +%Y-%m-%dT%H:%M:%SZ) $$" > "$STAGE/installed.txt" # pid
 
 # Swap: stop the running copy, move the old install aside, move the new one in, then delete the old one.
 if command -v pkill >/dev/null 2>&1; then pkill -f "($DIR/|$BIN/$CMD)" 2>/dev/null || true; fi
-[ "$KIND" = docker ] && { docker rm -f "$CMD" >/dev/null 2>&1 || true; }
+if [ "$KIND" = docker ]; then
+  while IFS= read -r id; do [ -z "$id" ] || docker rm -f "$id" >/dev/null 2>&1 || true; done < <(docker ps -aq --filter "label=localtools.install=$DIR")
+fi
 if [ -e "$DIR" ]; then mv "$DIR" "$OLD" || fail "could not move $DIR aside"; fi
 if ! mv "$STAGE" "$DIR"; then
   [ -e "$OLD" ] && mv "$OLD" "$DIR"
