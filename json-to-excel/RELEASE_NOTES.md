@@ -15,3 +15,7 @@ Fixes from review: - Spec images (PNG, JPEG, GIF) work in the shipped binary (de
 ## 1.0.3 (2026-10-21)
 
 - Conditional formats, icon styles and number formats are validated before writing: one-line errors with sheet and rule number, never a workbook Excel has to repair. - Plain-language JSON type errors (e.g. a number where a string is needed); UTF-16/UTF-32 input is rejected with a clear message; headers longer than 32,767 characters are truncated with a warning. - Web/API conversions run in a separate process with a two-minute deadline, at most two at a time (HTTP 503 otherwise); oversized uploads get a JSON 413. - The CLI writes outputs atomically; code text shows operators without font ligatures.
+
+## 1.0.4 (2026-10-21)
+
+- time_period conditional formats highlight the right dates in Excel and LibreOffice (written as the equivalent formula rule). - Rule formulas are stored without a leading '='; a rule range naming another sheet is rejected, reversed ranges are normalised; mid_* options only on 3_color_scale. - Number formats: [Color1]-[Color56] accepted; unknown [tags] and bare letters rejected. - CLI write errors name the output path. UI: a chosen file can be removed and newer pasted text replaces it; headerless sheets preview with column letters.

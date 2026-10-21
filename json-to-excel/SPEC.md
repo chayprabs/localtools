@@ -41,7 +41,7 @@ To convert such an object as plain data, use `--mode data` / `mode=data`. Full e
 | `key` | field name in object rows |
 | `header` | header text (default: `key`) |
 | `type` | `auto` (default: numbers, booleans, ISO dates detected), `string`, `number`, `integer`, `percent`, `currency`, `date`, `datetime`, `boolean`, `formula` |
-| `format` | Excel number format, e.g. `"#,##0.00"`, `"0.0%"`, `"dd mmm yyyy"`. Defaults per type: integer `#,##0`, number/currency `#,##0.00`, percent `0.00%`, date `yyyy-mm-dd`, datetime `yyyy-mm-dd hh:mm:ss` |
+| `format` | Excel number format, e.g. `"#,##0.00"`, `"0.0%"`, `"dd mmm yyyy"`. Defaults per type: integer `#,##0`, number/currency `#,##0.00`, percent `0.00%`, date `yyyy-mm-dd`, datetime `yyyy-mm-dd hh:mm:ss`. Checked before writing: at most 4 sections; text in quotes; `[...]` holds a color (`[Red]`, `[Color1]`–`[Color56]`), a condition (`[>=100]`), a locale (`[$-409]`), elapsed time (`[h]`) or `[DBNum1]`–`[DBNum4]` |
 | `width` | column width in characters |
 | `style` | style name from `styles`, or an inline style object |
 | `formula` | for `type: "formula"`: a template where `{row}` is the current row, e.g. `"=B{row}*C{row}"` |
@@ -73,7 +73,13 @@ A row value may also be `{"formula": "=..."}` to put a formula in one cell.
 
 Rules are checked before the workbook is written; an invalid rule is rejected with its sheet and rule number:
 
-- `value`, `min_value`, `max_value`, `mid_value` are JSON strings (`"5"`, `"=SUM(A1:A3)"`), never bare numbers.
+- `value`, `min_value`, `max_value`, `mid_value` are JSON strings (`"5"`, `"SUM(A1:A3)"`), never bare numbers. A leading `=`
+  is optional and is dropped (Excel stores rule formulas without it).
+- `range` is on the rule's own sheet (`"A2:A9"`, or several areas `"A2:A9 C2:C9"`); `"Other!A1:A2"` is rejected. Reversed
+  corners (`"B5:A1"`) are normalised. Relative references in formulas are relative to the range's top-left cell.
+- `mid_type`, `mid_value` and `mid_color` are only for `3_color_scale`.
+- `time_period` rules are written as the equivalent formula rule (weeks start on Sunday, as in Excel), so they work in
+  Excel and LibreOffice alike.
 - `cell` needs `value` (or `min_value` and `max_value` for `between`/`not between`); formula values must have balanced brackets and quotes.
 - `top`/`bottom` `value` is an integer 1–1000 (1–100 with `"percent": true`).
 - Color scales and data bars: `min_type` is `min`, `num`, `percent`, `percentile` or `formula`; `max_type` the same with `max`
