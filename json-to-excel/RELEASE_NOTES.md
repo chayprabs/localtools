@@ -19,3 +19,7 @@ Fixes from review: - Spec images (PNG, JPEG, GIF) work in the shipped binary (de
 ## 1.0.4 (2026-10-21)
 
 - time_period conditional formats highlight the right dates in Excel and LibreOffice (written as the equivalent formula rule). - Rule formulas are stored without a leading '='; a rule range naming another sheet is rejected, reversed ranges are normalised; mid_* options only on 3_color_scale. - Number formats: [Color1]-[Color56] accepted; unknown [tags] and bare letters rejected. - CLI write errors name the output path. UI: a chosen file can be removed and newer pasted text replaces it; headerless sheets preview with column letters.
+
+## 1.0.5 (2026-10-21)
+
+- Conditional-format formulas (including time_period) on multi-area ranges are anchored at the leftmost, then topmost area, as Excel and LibreOffice evaluate them. - Whole columns (C:C) and rows (2:2) are accepted as rule ranges. - Spec sheets of array rows without columns preview with column letters and the right row count.

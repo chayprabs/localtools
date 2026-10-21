@@ -75,8 +75,9 @@ Rules are checked before the workbook is written; an invalid rule is rejected wi
 
 - `value`, `min_value`, `max_value`, `mid_value` are JSON strings (`"5"`, `"SUM(A1:A3)"`), never bare numbers. A leading `=`
   is optional and is dropped (Excel stores rule formulas without it).
-- `range` is on the rule's own sheet (`"A2:A9"`, or several areas `"A2:A9 C2:C9"`); `"Other!A1:A2"` is rejected. Reversed
-  corners (`"B5:A1"`) are normalised. Relative references in formulas are relative to the range's top-left cell.
+- `range` is on the rule's own sheet (`"A2:A9"`, several areas `"A2:A9 C2:C9"`, whole columns `"C:C"` or rows `"2:2"`);
+  `"Other!A1:A2"` is rejected. Reversed corners (`"B5:A1"`) are normalised and areas are ordered left to right, then top
+  to bottom. Relative references in formulas are relative to the top-left cell of the leftmost (then topmost) area.
 - `mid_type`, `mid_value` and `mid_color` are only for `3_color_scale`.
 - `time_period` rules are written as the equivalent formula rule (weeks start on Sunday, as in Excel), so they work in
   Excel and LibreOffice alike.
