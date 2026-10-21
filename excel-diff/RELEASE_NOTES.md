@@ -25,3 +25,8 @@
 - Annotated export works for styles-less workbooks with prefixed package XML.
 - Defined names compare quotes inside string constants exactly.
 - Overload and early-error replies reach Connection: close clients; worker temp files stay in the job folder and stale folders are swept at startup.
+
+## 1.0.4 (2026-10-22)
+
+- Many scattered row inserts or deletions align exactly even when a column changed in every row.
+- Positional fallbacks are flagged: "approximate": true with a reason in JSON, a CLI warning and a UI banner suggesting key columns.

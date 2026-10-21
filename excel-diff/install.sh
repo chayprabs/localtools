@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for Excel Diff (excel-diff 1.0.3). macOS / Linux, no sudo.
+# localtools installer for Excel Diff (excel-diff 1.0.4). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/excel-diff/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='excel-diff'; NAME='Excel Diff'; VERSION='1.0.3'; PORT='47109'; KIND='bin'; IMAGE=''
+SLUG='excel-diff'; NAME='Excel Diff'; VERSION='1.0.4'; PORT='47109'; KIND='bin'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -38,10 +38,10 @@ fi
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/excel-diff-v1.0.3/excel-diff-1.0.3-linux-arm64.zip'; SHA='2f30b5b7a9674e5902537b2077244a413039838047c8519b8af7aa6b47f9f480' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/excel-diff-v1.0.3/excel-diff-1.0.3-linux-x64.zip'; SHA='1a73127b730fa49965e1566c6232b4d33e9bc63feaba454bdc3f34e4d264d8fa' ;;
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/excel-diff-v1.0.3/excel-diff-1.0.3-macos-arm64.zip'; SHA='b7e466d54e013d1caff98816cab47bc275204e3030563a6b340e0ce4208cee87' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/excel-diff-v1.0.3/excel-diff-1.0.3-macos-x64.zip'; SHA='3875f8e1971b00bf1054124dda33e475bb52c9a8402696609983ee2d43b60844' ;;
+  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/excel-diff-v1.0.4/excel-diff-1.0.4-linux-arm64.zip'; SHA='e023bf986f22ff0a9c9b77f9e493367ab444b09f8508ec54fcb2e55b0ee33c9e' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/excel-diff-v1.0.4/excel-diff-1.0.4-linux-x64.zip'; SHA='2c2b342ced1f8cefd436a585437c2a78c778437d001c9ab4879f60f8b39908b9' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/excel-diff-v1.0.4/excel-diff-1.0.4-macos-arm64.zip'; SHA='7bd23fefd34fa1cd17ee43237ba27d36931897bd0925791bfff51268f4923d0e' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/excel-diff-v1.0.4/excel-diff-1.0.4-macos-x64.zip'; SHA='25f25ff62f2f48f45f6c2dfda24660dba2f96a453cf47e823446a7ce38b826da' ;;
 esac
 
 if [ "$KIND" = docker ]; then
@@ -67,7 +67,7 @@ if [ "$KIND" = docker ]; then
   cat > "$STAGE/$CMD" <<'EOF'
 #!/usr/bin/env bash
 set -euo pipefail
-slug='excel-diff'; cmd="localtools-$slug"; image=':1.0.3'
+slug='excel-diff'; cmd="localtools-$slug"; image=':1.0.4'
 self="${BASH_SOURCE[0]}"
 while [ -L "$self" ]; do
   parent="$(cd -P "$(dirname "$self")" && pwd)"; self="$(readlink "$self")"
@@ -103,7 +103,7 @@ if $serve; then
   own() { curl -fsS --max-time 1 "$url/api/health" 2>/dev/null | grep -q '"tool": *"'"$slug"'"'; }
   if own; then echo "$cmd already running at $url"; [ "$no_open" = 1 ] || browser; exit 0; fi
   if [ "$no_open" != 1 ]; then (for _ in $(seq 90); do if own; then browser; break; fi; sleep 1; done) & fi
-  echo "$cmd 1.0.3 running at $url  (Ctrl+C to stop; choose --port N for another port)"
+  echo "$cmd 1.0.4 running at $url  (Ctrl+C to stop; choose --port N for another port)"
   exec docker run --rm --name "$cmd-$port" --label "localtools.install=$dir" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -p "127.0.0.1:$port:$port" "$image" serve --no-open --port "$port"
 fi
 exec docker run --rm -i --network none --user "$(id -u):$(id -g)" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -v "$PWD:/work" -w /work "$image" "$@"
