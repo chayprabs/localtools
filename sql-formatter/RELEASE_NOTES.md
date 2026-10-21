@@ -7,3 +7,7 @@ First release: lint, fix and transpile SQL in 28 dialects with sqlfluff 4.4 and 
 ## 1.0.1 (2026-10-18)
 
 1.0.1: a cancelled run no longer blocks the next one, so the latest SQL is what gets linted, fixed or transpiled. Unsupported placeholders and unknown rules error clearly, in-place writes stay atomic, diffs apply without a final newline, and the Raw templater plus non-ligature code font are in the release.
+
+## 1.0.2 (2026-10-22)
+
+1.0.2: read-only in-place fixes leave no temp file and name your file in the error; template/config errors return 400 without temp paths; the templater label fits at 1280 px; host/origin rejections drain the request first.

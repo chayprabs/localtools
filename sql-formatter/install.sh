@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for SQL Formatter (sql-formatter 1.0.1). macOS / Linux, no sudo.
+# localtools installer for SQL Formatter (sql-formatter 1.0.2). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/sql-formatter/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='sql-formatter'; NAME='SQL Formatter'; VERSION='1.0.1'; PORT='47117'; KIND='py'; IMAGE=''
+SLUG='sql-formatter'; NAME='SQL Formatter'; VERSION='1.0.2'; PORT='47117'; KIND='py'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -38,9 +38,9 @@ fi
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/sql-formatter-v1.0.1/sql-formatter-1.0.1-macos-arm64.zip'; SHA='19e47c0917ec8cc030f864c66ab464ea844ded08bacda954d798c401304ac2f1' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/sql-formatter-v1.0.1/sql-formatter-1.0.1-macos-x64.zip'; SHA='29ed158d5f8782cad270aebb2b775b1438669f8a0bef76406f56794f105a85ae' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/sql-formatter-v1.0.1/sql-formatter-1.0.1-linux-x64.zip'; SHA='ff67a7ae4615517106e64cf3fcbf2c74569778ea6ea6d2060924b57b9aeb8c93' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/sql-formatter-v1.0.2/sql-formatter-1.0.2-macos-arm64.zip'; SHA='74939aad4cfd3bf78f09cd6d6251a839c4d7c98089125193546508eb393d50ff' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/sql-formatter-v1.0.2/sql-formatter-1.0.2-macos-x64.zip'; SHA='268ce7ee70abafda295935447bf299e4ae4abb09d21932983cbbf806cca660f6' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/sql-formatter-v1.0.2/sql-formatter-1.0.2-linux-x64.zip'; SHA='ede7f81581a4aeab76425a10b245b09d57c0bc42f5311d44ba510ebef7cca162' ;;
 esac
 
 if [ "$KIND" = docker ]; then
@@ -66,7 +66,7 @@ if [ "$KIND" = docker ]; then
   cat > "$STAGE/$CMD" <<'EOF'
 #!/usr/bin/env bash
 set -euo pipefail
-slug='sql-formatter'; cmd="localtools-$slug"; image=':1.0.1'
+slug='sql-formatter'; cmd="localtools-$slug"; image=':1.0.2'
 self="${BASH_SOURCE[0]}"
 while [ -L "$self" ]; do
   parent="$(cd -P "$(dirname "$self")" && pwd)"; self="$(readlink "$self")"
@@ -102,7 +102,7 @@ if $serve; then
   own() { curl -fsS --max-time 1 "$url/api/health" 2>/dev/null | grep -q '"tool": *"'"$slug"'"'; }
   if own; then echo "$cmd already running at $url"; [ "$no_open" = 1 ] || browser; exit 0; fi
   if [ "$no_open" != 1 ]; then (for _ in $(seq 90); do if own; then browser; break; fi; sleep 1; done) & fi
-  echo "$cmd 1.0.1 running at $url  (Ctrl+C to stop; choose --port N for another port)"
+  echo "$cmd 1.0.2 running at $url  (Ctrl+C to stop; choose --port N for another port)"
   exec docker run --rm --name "$cmd-$port" --label "localtools.install=$dir" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -p "127.0.0.1:$port:$port" "$image" serve --no-open --port "$port"
 fi
 exec docker run --rm -i --network none --user "$(id -u):$(id -g)" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -v "$PWD:/work" -w /work "$image" "$@"
