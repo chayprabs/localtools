@@ -2,7 +2,7 @@
   "slug": "csv-json-transform",
   "name": "CSV JSON Transform",
   "command": "localtools-csv-json-transform",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "port": 47106,
   "kind": "bin",
   "registries": {
