@@ -15,3 +15,7 @@ Fixes clipped Latin form appearances in short LibreOffice widgets; rich-text pla
 ## 1.0.3 (2026-10-22)
 
 Multiline text fields word-wrap inside the field (auto-size shrinks to fit), flatten keeps stored appearances that already show the value, plain FDF error messages, startup sweep of stale job folders, ligatures off in code text, pdfcpu v0.16.3 security update.
+
+## 1.0.4 (2026-10-22)
+
+Flatten keeps a stored field appearance only when its shown text matches the complete current value; stale, shortened, extended or cleared values and list selections are redrawn.
