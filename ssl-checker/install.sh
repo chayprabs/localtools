@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for SSL Checker (ssl-checker 1.0.1). macOS / Linux, no sudo.
+# localtools installer for SSL Checker (ssl-checker 1.0.2). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/ssl-checker/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='ssl-checker'; NAME='SSL Checker'; VERSION='1.0.1'; PORT='47121'; KIND='bin'; IMAGE=''
+SLUG='ssl-checker'; NAME='SSL Checker'; VERSION='1.0.2'; PORT='47121'; KIND='bin'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -38,10 +38,10 @@ fi
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/ssl-checker-v1.0.1/ssl-checker-1.0.1-linux-arm64.zip'; SHA='268ed5e3044bef0de70f7b13a6a7205f052e56350801cfaec896e40d8c5fd231' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/ssl-checker-v1.0.1/ssl-checker-1.0.1-linux-x64.zip'; SHA='0a6ce4b6612763f716c740f1bc02744aad320e122b062c7dc33f8549905eb9cb' ;;
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/ssl-checker-v1.0.1/ssl-checker-1.0.1-macos-arm64.zip'; SHA='04456aa6d66a9a8fda77ee8a401f080a3505ffad17ff56035fd68c9ad0b44db5' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/ssl-checker-v1.0.1/ssl-checker-1.0.1-macos-x64.zip'; SHA='3e48cb69b142992721d67541133eae471ce11439c509dd525aeab51323ccec89' ;;
+  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/ssl-checker-v1.0.2/ssl-checker-1.0.2-linux-arm64.zip'; SHA='f9997f861bb4a79a8474e08ab4bd102b03388c5b44635ee4dcaeb765c83fd95c' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/ssl-checker-v1.0.2/ssl-checker-1.0.2-linux-x64.zip'; SHA='50cc8f71f352271e13fb30892908faae2fce913da8dd6d201c21c1894bb8cda9' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/ssl-checker-v1.0.2/ssl-checker-1.0.2-macos-arm64.zip'; SHA='be53304f2eae875505a57ae7ca3b4a6f9090dfdde1e6b242c609900b7de331aa' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/ssl-checker-v1.0.2/ssl-checker-1.0.2-macos-x64.zip'; SHA='bc204613cb8ae98e024eed4916211ab379c2718b211700f91e4224a1621c416e' ;;
 esac
 
 if [ "$KIND" = docker ]; then
@@ -67,7 +67,7 @@ if [ "$KIND" = docker ]; then
   cat > "$STAGE/$CMD" <<'EOF'
 #!/usr/bin/env bash
 set -euo pipefail
-slug='ssl-checker'; cmd="localtools-$slug"; image=':1.0.1'
+slug='ssl-checker'; cmd="localtools-$slug"; image=':1.0.2'
 self="${BASH_SOURCE[0]}"
 while [ -L "$self" ]; do
   parent="$(cd -P "$(dirname "$self")" && pwd)"; self="$(readlink "$self")"
@@ -103,7 +103,7 @@ if $serve; then
   own() { curl -fsS --max-time 1 "$url/api/health" 2>/dev/null | grep -q '"tool": *"'"$slug"'"'; }
   if own; then echo "$cmd already running at $url"; [ "$no_open" = 1 ] || browser; exit 0; fi
   if [ "$no_open" != 1 ]; then (for _ in $(seq 90); do if own; then browser; break; fi; sleep 1; done) & fi
-  echo "$cmd 1.0.1 running at $url  (Ctrl+C to stop; choose --port N for another port)"
+  echo "$cmd 1.0.2 running at $url  (Ctrl+C to stop; choose --port N for another port)"
   exec docker run --rm --name "$cmd-$port" --label "localtools.install=$dir" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -p "127.0.0.1:$port:$port" "$image" serve --no-open --port "$port"
 fi
 exec docker run --rm -i --network none --user "$(id -u):$(id -g)" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -v "$PWD:/work" -w /work "$image" "$@"
