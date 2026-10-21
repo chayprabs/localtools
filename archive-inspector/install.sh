@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for Archive Inspector (archive-inspector 1.0.1). macOS / Linux, no sudo.
+# localtools installer for Archive Inspector (archive-inspector 1.0.2). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/archive-inspector/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='archive-inspector'; NAME='Archive Inspector'; VERSION='1.0.1'; PORT='47122'; KIND='bin'; IMAGE=''
+SLUG='archive-inspector'; NAME='Archive Inspector'; VERSION='1.0.2'; PORT='47122'; KIND='bin'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -38,10 +38,10 @@ fi
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/archive-inspector-v1.0.1/archive-inspector-1.0.1-macos-arm64.zip'; SHA='51114d8b7dd53df918f729f1081b897a0afde6709fb450005f1847283a69c821' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/archive-inspector-v1.0.1/archive-inspector-1.0.1-macos-x64.zip'; SHA='0ec244964d58ff6e5661bd5ea10d52dab6437b38f06e1b510b8f8fe5ba4ed535' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/archive-inspector-v1.0.1/archive-inspector-1.0.1-linux-x64.zip'; SHA='abb2d05a0d00a677e60b1faa67b60ed837900f96450258dd35490362b8624963' ;;
-  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/archive-inspector-v1.0.1/archive-inspector-1.0.1-linux-arm64.zip'; SHA='64d52876764ef66c2a04795560d16e5c60a6bca626924bad33831dd14006f1ae' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/archive-inspector-v1.0.2/archive-inspector-1.0.2-macos-arm64.zip'; SHA='207bf9736dafbd66ed0cc870034771beabb56335283f37b4041d3139d246bf22' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/archive-inspector-v1.0.2/archive-inspector-1.0.2-macos-x64.zip'; SHA='e0a9bbcd2b987e3304843cae0e3626169eeb44745a7ddb52f63138ce1b3bd753' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/archive-inspector-v1.0.2/archive-inspector-1.0.2-linux-x64.zip'; SHA='429be05469a907f07a75fd8703b6fa5e1429024aac461ed50674fb9c4532057f' ;;
+  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/archive-inspector-v1.0.2/archive-inspector-1.0.2-linux-arm64.zip'; SHA='d0a7884cce01ed2da526ee24429329f82929354383059a05ff4fb9392ad2f2a5' ;;
 esac
 
 if [ "$KIND" = docker ]; then
@@ -67,7 +67,7 @@ if [ "$KIND" = docker ]; then
   cat > "$STAGE/$CMD" <<'EOF'
 #!/usr/bin/env bash
 set -euo pipefail
-slug='archive-inspector'; cmd="localtools-$slug"; image=':1.0.1'
+slug='archive-inspector'; cmd="localtools-$slug"; image=':1.0.2'
 self="${BASH_SOURCE[0]}"
 while [ -L "$self" ]; do
   parent="$(cd -P "$(dirname "$self")" && pwd)"; self="$(readlink "$self")"
@@ -103,7 +103,7 @@ if $serve; then
   own() { curl -fsS --max-time 1 "$url/api/health" 2>/dev/null | grep -q '"tool": *"'"$slug"'"'; }
   if own; then echo "$cmd already running at $url"; [ "$no_open" = 1 ] || browser; exit 0; fi
   if [ "$no_open" != 1 ]; then (for _ in $(seq 90); do if own; then browser; break; fi; sleep 1; done) & fi
-  echo "$cmd 1.0.1 running at $url  (Ctrl+C to stop; choose --port N for another port)"
+  echo "$cmd 1.0.2 running at $url  (Ctrl+C to stop; choose --port N for another port)"
   exec docker run --rm --name "$cmd-$port" --label "localtools.install=$dir" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -p "127.0.0.1:$port:$port" "$image" serve --no-open --port "$port"
 fi
 exec docker run --rm -i --network none --user "$(id -u):$(id -g)" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -v "$PWD:/work" -w /work "$image" "$@"
