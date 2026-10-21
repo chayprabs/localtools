@@ -15,3 +15,7 @@ Per-file zizmor audits (failures skip only that file, with the reason), composit
 ## 1.0.3 (2026-10-18)
 
 No temp-file leaks on cancelled jobs, discovery before limits (1,000 files / 16 MiB), one-run zizmor batches, real-world action.yml inputs accepted, engine failure fails --fail-on, review minors.
+
+## 1.0.4 (2026-10-21)
+
+Uploads of up to 1,000 files work (specific 413 above), chunked zizmor so one slow file only affects its own audit, drained 413s, kit refresh.
