@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for PDF Toolkit (pdf-toolkit 1.0.2). macOS / Linux, no sudo.
+# localtools installer for PDF Toolkit (pdf-toolkit 1.0.3). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/pdf-toolkit/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='pdf-toolkit'; NAME='PDF Toolkit'; VERSION='1.0.2'; PORT='47102'; KIND='bin'; IMAGE=''
+SLUG='pdf-toolkit'; NAME='PDF Toolkit'; VERSION='1.0.3'; PORT='47102'; KIND='bin'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -38,10 +38,10 @@ fi
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/pdf-toolkit-v1.0.2/pdf-toolkit-1.0.2-macos-arm64.zip'; SHA='2c160482e8ab0129e1999940ef4570b49ac5bb0185ccc6fe57a483e0c7700a69' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/pdf-toolkit-v1.0.2/pdf-toolkit-1.0.2-macos-x64.zip'; SHA='ceddedfd5b15b5893a0da9f2e49173ae2b6f205d88665f338bee5263c12b6c19' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/pdf-toolkit-v1.0.2/pdf-toolkit-1.0.2-linux-x64.zip'; SHA='e0e7c4e9abb23f84d6b7f87647d4a9178c4e9a6a9bc37d584c0fe3d7e7c8f084' ;;
-  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/pdf-toolkit-v1.0.2/pdf-toolkit-1.0.2-linux-arm64.zip'; SHA='5037a3b410ad22dbdfe6925e532fd71cc58a81575a4de66d179b352df0bc08fe' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/pdf-toolkit-v1.0.3/pdf-toolkit-1.0.3-macos-arm64.zip'; SHA='53ca6f407a12d1b57bfdd03588e16d72b3da51fdaa1abd09890380d6ed760ae4' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/pdf-toolkit-v1.0.3/pdf-toolkit-1.0.3-macos-x64.zip'; SHA='f98484cd1f38cec6493738cd7de343fcc1ffe6972cad03c4a24e6506f8d21aee' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/pdf-toolkit-v1.0.3/pdf-toolkit-1.0.3-linux-x64.zip'; SHA='47bc3494d79e7948f8523c84c9004750ecf0c6ed0d00a6f26cc2192471fe92dd' ;;
+  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/pdf-toolkit-v1.0.3/pdf-toolkit-1.0.3-linux-arm64.zip'; SHA='2146255e946ef1805ca9c06154b64574ab3744edad1b55c2ccdff285330da344' ;;
 esac
 
 if [ "$KIND" = docker ]; then
@@ -67,7 +67,7 @@ if [ "$KIND" = docker ]; then
   cat > "$STAGE/$CMD" <<'EOF'
 #!/usr/bin/env bash
 set -euo pipefail
-slug='pdf-toolkit'; cmd="localtools-$slug"; image=':1.0.2'
+slug='pdf-toolkit'; cmd="localtools-$slug"; image=':1.0.3'
 self="${BASH_SOURCE[0]}"
 while [ -L "$self" ]; do
   parent="$(cd -P "$(dirname "$self")" && pwd)"; self="$(readlink "$self")"
@@ -103,7 +103,7 @@ if $serve; then
   own() { curl -fsS --max-time 1 "$url/api/health" 2>/dev/null | grep -q '"tool": *"'"$slug"'"'; }
   if own; then echo "$cmd already running at $url"; [ "$no_open" = 1 ] || browser; exit 0; fi
   if [ "$no_open" != 1 ]; then (for _ in $(seq 90); do if own; then browser; break; fi; sleep 1; done) & fi
-  echo "$cmd 1.0.2 running at $url  (Ctrl+C to stop; choose --port N for another port)"
+  echo "$cmd 1.0.3 running at $url  (Ctrl+C to stop; choose --port N for another port)"
   exec docker run --rm --name "$cmd-$port" --label "localtools.install=$dir" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -p "127.0.0.1:$port:$port" "$image" serve --no-open --port "$port"
 fi
 exec docker run --rm -i --network none --user "$(id -u):$(id -g)" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -v "$PWD:/work" -w /work "$image" "$@"

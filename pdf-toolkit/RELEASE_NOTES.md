@@ -11,3 +11,7 @@ Fixes from an independent review on 45 real-world PDFs: encrypt works on every r
 ## 1.0.2 (2026-10-17)
 
 Fixes clipped Latin form appearances in short LibreOffice widgets; rich-text plain-value fallback and per-cell comb appearances; exact numeric JSON values; ordinary indirect uncompressed FDF; immediate stale UI result/field clearing, async response cancellation/guards, and encrypted-form password retry. Adds independent rendered-ink and comb-geometry regressions. Existing worker isolation and documented non-WinAnsi flattening limits remain.
+
+## 1.0.3 (2026-10-22)
+
+Multiline text fields word-wrap inside the field (auto-size shrinks to fit), flatten keeps stored appearances that already show the value, plain FDF error messages, startup sweep of stale job folders, ligatures off in code text, pdfcpu v0.16.3 security update.
