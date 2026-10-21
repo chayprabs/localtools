@@ -11,3 +11,7 @@ Fixes: CLI mux/burn with a relative -o write the real file; Central-European sub
 ## 1.0.2 (2026-10-19)
 
 Fixes: burn --override-style on ASS files positions top/middle/bottom and sizes text in video pixels; numeric arrow dialogue kept as text; TMPlayer named as unsupported; Baltic windows-1257 detected, more UI encodings, short Western text stays windows-1252; web output limit measures the text.
+
+## 1.0.3 (2026-10-21)
+
+Fixes: Latin code pages chosen by per-language alphabet scoring (Icelandic/Faroese 1252, Serbian/Croatian/Slovene/Romanian 1250, Baltic 1257, Turkish 1254); SRT/VTT arrows without spaces read, malformed timing lines skipped with a warning; burn override derives missing PlayResY like libass; early 413/503 replies reach Connection: close clients.
