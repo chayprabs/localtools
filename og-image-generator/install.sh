@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for OG Image Generator (og-image-generator 1.0.2). macOS / Linux, no sudo.
+# localtools installer for OG Image Generator (og-image-generator 1.0.3). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/og-image-generator/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='og-image-generator'; NAME='OG Image Generator'; VERSION='1.0.2'; PORT='47128'; KIND='js'; IMAGE=''
+SLUG='og-image-generator'; NAME='OG Image Generator'; VERSION='1.0.3'; PORT='47128'; KIND='js'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -38,10 +38,10 @@ fi
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/og-image-generator-v1.0.2/og-image-generator-1.0.2-linux-arm64.zip'; SHA='93f5b24a507befe4e283a4175e5ebb99abaa0a5f06aa807f2267755ccb66194c' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/og-image-generator-v1.0.2/og-image-generator-1.0.2-linux-x64.zip'; SHA='e6a89762215e57fec2fb37478d48e91b9b761976eaa04e9ed89827ea299ebeab' ;;
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/og-image-generator-v1.0.2/og-image-generator-1.0.2-macos-arm64.zip'; SHA='15791f3a0209f20de04341fe511ed6d7cd8403bd66c3194678f5c1503a69302a' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/og-image-generator-v1.0.2/og-image-generator-1.0.2-macos-x64.zip'; SHA='df1ee3651ecbc3b186d0537367ff8e27238d55e3513a72a6d75cbb8b8b556457' ;;
+  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/og-image-generator-v1.0.3/og-image-generator-1.0.3-linux-arm64.zip'; SHA='fb8641d5e2b3af14ccf1429861c8b9285b1a490c4483ac5a42df4c2164ab4221' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/og-image-generator-v1.0.3/og-image-generator-1.0.3-linux-x64.zip'; SHA='61b52c4b063fad207757727d283936242b852da22c4933389f273b22c0326018' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/og-image-generator-v1.0.3/og-image-generator-1.0.3-macos-arm64.zip'; SHA='09934003f5bad1d4a9cabfd5ca6afe0cae9057c94eaa9b7821f05d358c8f292d' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/og-image-generator-v1.0.3/og-image-generator-1.0.3-macos-x64.zip'; SHA='989b074e209f81eb4f93f7669015810cb923329d6f2c2c237ef500914c9fe376' ;;
 esac
 
 if [ "$KIND" = docker ]; then
@@ -67,7 +67,7 @@ if [ "$KIND" = docker ]; then
   cat > "$STAGE/$CMD" <<'EOF'
 #!/usr/bin/env bash
 set -euo pipefail
-slug='og-image-generator'; cmd="localtools-$slug"; image=':1.0.2'
+slug='og-image-generator'; cmd="localtools-$slug"; image=':1.0.3'
 self="${BASH_SOURCE[0]}"
 while [ -L "$self" ]; do
   parent="$(cd -P "$(dirname "$self")" && pwd)"; self="$(readlink "$self")"
@@ -103,7 +103,7 @@ if $serve; then
   own() { curl -fsS --max-time 1 "$url/api/health" 2>/dev/null | grep -q '"tool": *"'"$slug"'"'; }
   if own; then echo "$cmd already running at $url"; [ "$no_open" = 1 ] || browser; exit 0; fi
   if [ "$no_open" != 1 ]; then (for _ in $(seq 90); do if own; then browser; break; fi; sleep 1; done) & fi
-  echo "$cmd 1.0.2 running at $url  (Ctrl+C to stop; choose --port N for another port)"
+  echo "$cmd 1.0.3 running at $url  (Ctrl+C to stop; choose --port N for another port)"
   exec docker run --rm --name "$cmd-$port" --label "localtools.install=$dir" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -p "127.0.0.1:$port:$port" "$image" serve --no-open --port "$port"
 fi
 exec docker run --rm -i --network none --user "$(id -u):$(id -g)" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -v "$PWD:/work" -w /work "$image" "$@"

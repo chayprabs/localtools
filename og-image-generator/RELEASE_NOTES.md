@@ -11,3 +11,7 @@ WebP images decoded (were blank); Connection: close clients get JSON 413/503; ne
 ## 1.0.2 (2026-10-19)
 
 Drain rejected uploads before replying so Connection: close clients receive complete JSON 413/503. Resolve image bytes after template expansion, retaining real 10 MiB/25 MP limits. Validate inline WebP dimensions before decoding, including hidden VP8X bitstreams; cache conversion and compress PNG faster. Include libwebp's BSD-3-Clause copyright/license and clarify server-only deadlines.
+
+## 1.0.3 (2026-10-22)
+
+Exact byte counts in the image size error; unclosed-element errors hint at a nested element of the same name; uploads drained before 403.
