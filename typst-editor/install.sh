@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for Typst Editor (typst-editor 1.0.1). macOS / Linux, no sudo.
+# localtools installer for Typst Editor (typst-editor 1.0.2). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/typst-editor/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='typst-editor'; NAME='Typst Editor'; VERSION='1.0.1'; PORT='47131'; KIND='bin'; IMAGE=''
+SLUG='typst-editor'; NAME='Typst Editor'; VERSION='1.0.2'; PORT='47131'; KIND='bin'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -38,10 +38,10 @@ fi
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/typst-editor-v1.0.1/typst-editor-1.0.1-macos-arm64.zip'; SHA='db7269dc4fbbfae54379d632ac6cc4cacd237aec905a04e6c350ee6c1608e239' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/typst-editor-v1.0.1/typst-editor-1.0.1-macos-x64.zip'; SHA='768a8519dafc07594540fed7c7a2175850a4a241ee1678ffd94a8a47d865cc5a' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/typst-editor-v1.0.1/typst-editor-1.0.1-linux-x64.zip'; SHA='500fc620df5bbd2c5166aa38f51cc5fec7073041184bd3acb7ae4d5520e98e31' ;;
-  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/typst-editor-v1.0.1/typst-editor-1.0.1-linux-arm64.zip'; SHA='e666ea19226b268c12697ee8f1daa11844f710c072b76e1db6797e16bf87f02f' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/typst-editor-v1.0.2/typst-editor-1.0.2-macos-arm64.zip'; SHA='6cf95242f480fb0d0457b6f3cf5e443414b15e4067b53cfe03b3b475f1ac0e20' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/typst-editor-v1.0.2/typst-editor-1.0.2-macos-x64.zip'; SHA='2c5eb091549fbb3cc7b2a33b5075e18c9cde363ce48c8a4d9e1fdf45fb6417e7' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/typst-editor-v1.0.2/typst-editor-1.0.2-linux-x64.zip'; SHA='bdd5aeec5d1a9e135c659b960420aa61e51ccaadded76c7d18abd79ae952b9a3' ;;
+  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/typst-editor-v1.0.2/typst-editor-1.0.2-linux-arm64.zip'; SHA='cae9539017d15087a9b6de1e65982ea9184ce71ba784a9649e9f39206872df29' ;;
 esac
 
 if [ "$KIND" = docker ]; then
@@ -67,7 +67,7 @@ if [ "$KIND" = docker ]; then
   cat > "$STAGE/$CMD" <<'EOF'
 #!/usr/bin/env bash
 set -euo pipefail
-slug='typst-editor'; cmd="localtools-$slug"; image=':1.0.1'
+slug='typst-editor'; cmd="localtools-$slug"; image=':1.0.2'
 self="${BASH_SOURCE[0]}"
 while [ -L "$self" ]; do
   parent="$(cd -P "$(dirname "$self")" && pwd)"; self="$(readlink "$self")"
@@ -103,7 +103,7 @@ if $serve; then
   own() { curl -fsS --max-time 1 "$url/api/health" 2>/dev/null | grep -q '"tool": *"'"$slug"'"'; }
   if own; then echo "$cmd already running at $url"; [ "$no_open" = 1 ] || browser; exit 0; fi
   if [ "$no_open" != 1 ]; then (for _ in $(seq 90); do if own; then browser; break; fi; sleep 1; done) & fi
-  echo "$cmd 1.0.1 running at $url  (Ctrl+C to stop; choose --port N for another port)"
+  echo "$cmd 1.0.2 running at $url  (Ctrl+C to stop; choose --port N for another port)"
   exec docker run --rm --name "$cmd-$port" --label "localtools.install=$dir" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -p "127.0.0.1:$port:$port" "$image" serve --no-open --port "$port"
 fi
 exec docker run --rm -i --network none --user "$(id -u):$(id -g)" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -v "$PWD:/work" -w /work "$image" "$@"
