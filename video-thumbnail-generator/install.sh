@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for Video Thumbnail Generator (video-thumbnail-generator 1.0.0). macOS / Linux, no sudo.
+# localtools installer for Video Thumbnail Generator (video-thumbnail-generator 1.0.1). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/video-thumbnail-generator/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='video-thumbnail-generator'; NAME='Video Thumbnail Generator'; VERSION='1.0.0'; PORT='47123'; KIND='bin'; IMAGE=''
+SLUG='video-thumbnail-generator'; NAME='Video Thumbnail Generator'; VERSION='1.0.1'; PORT='47123'; KIND='bin'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -38,10 +38,10 @@ fi
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/video-thumbnail-generator-v1.0.0/video-thumbnail-generator-1.0.0-linux-arm64.zip'; SHA='a89620e8b4c69dfaa23a638fe5246b64d3a9cfca4728d752fd365653f9597c8c' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/video-thumbnail-generator-v1.0.0/video-thumbnail-generator-1.0.0-linux-x64.zip'; SHA='6c78ede0412da6dc3081915d1bc337586f30417412b812d673c7d74ef975ff12' ;;
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/video-thumbnail-generator-v1.0.0/video-thumbnail-generator-1.0.0-macos-arm64.zip'; SHA='ec9583c84e223315bbde762a4b8e3da19039e710154a1cba0562c624b4b335d8' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/video-thumbnail-generator-v1.0.0/video-thumbnail-generator-1.0.0-macos-x64.zip'; SHA='35fb9e099a5938a9f8c9fdc9c8489a8d5926b8b7fb9f3c89de2f1f289b64de8f' ;;
+  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/video-thumbnail-generator-v1.0.1/video-thumbnail-generator-1.0.1-linux-arm64.zip'; SHA='ae100b89fe297675d731b700d1e43de4aa89bd50d29840338565170f603e7913' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/video-thumbnail-generator-v1.0.1/video-thumbnail-generator-1.0.1-linux-x64.zip'; SHA='e3cd2d3a1046f6a67723d6384a053b655a05d26b2e952c7039f9d42e1d8bb44c' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/video-thumbnail-generator-v1.0.1/video-thumbnail-generator-1.0.1-macos-arm64.zip'; SHA='c559e2fb753a5c758b5c9e4f9dc2fabc4d1236c59fdb0c90dde7d017b9e9bb9a' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/video-thumbnail-generator-v1.0.1/video-thumbnail-generator-1.0.1-macos-x64.zip'; SHA='94ac7edc8a182b8f232f55844f944b34db42697d186d4c56836d4bcb45dcc2c5' ;;
 esac
 
 if [ "$KIND" = docker ]; then
@@ -67,7 +67,7 @@ if [ "$KIND" = docker ]; then
   cat > "$STAGE/$CMD" <<'EOF'
 #!/usr/bin/env bash
 set -euo pipefail
-slug='video-thumbnail-generator'; cmd="localtools-$slug"; image=':1.0.0'
+slug='video-thumbnail-generator'; cmd="localtools-$slug"; image=':1.0.1'
 self="${BASH_SOURCE[0]}"
 while [ -L "$self" ]; do
   parent="$(cd -P "$(dirname "$self")" && pwd)"; self="$(readlink "$self")"
@@ -103,7 +103,7 @@ if $serve; then
   own() { curl -fsS --max-time 1 "$url/api/health" 2>/dev/null | grep -q '"tool": *"'"$slug"'"'; }
   if own; then echo "$cmd already running at $url"; [ "$no_open" = 1 ] || browser; exit 0; fi
   if [ "$no_open" != 1 ]; then (for _ in $(seq 90); do if own; then browser; break; fi; sleep 1; done) & fi
-  echo "$cmd 1.0.0 running at $url  (Ctrl+C to stop; choose --port N for another port)"
+  echo "$cmd 1.0.1 running at $url  (Ctrl+C to stop; choose --port N for another port)"
   exec docker run --rm --name "$cmd-$port" --label "localtools.install=$dir" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -p "127.0.0.1:$port:$port" "$image" serve --no-open --port "$port"
 fi
 exec docker run --rm -i --network none --user "$(id -u):$(id -g)" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -v "$PWD:/work" -w /work "$image" "$@"

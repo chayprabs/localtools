@@ -1,4 +1,4 @@
-# localtools installer for Video Thumbnail Generator (video-thumbnail-generator 1.0.0). Windows PowerShell 5.1+, no admin.
+# localtools installer for Video Thumbnail Generator (video-thumbnail-generator 1.0.1). Windows PowerShell 5.1+, no admin.
 # Usage: irm https://raw.githubusercontent.com/chayprabs/localtools/main/video-thumbnail-generator/install.ps1 | iex
 # Re-running updates. Set $env:LOCALTOOLS_NO_OPEN='1' to skip launching the tool afterwards.
 # Wrapped in a script block so `irm | iex` never leaks settings into, or exits, the caller's session.
@@ -7,8 +7,8 @@ $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 
-$Slug = 'video-thumbnail-generator'; $Name = 'Video Thumbnail Generator'; $Version = '1.0.0'; $Port = 47123; $Kind = 'bin'
-$Url = 'https://github.com/chayprabs/localtools/releases/download/video-thumbnail-generator-v1.0.0/video-thumbnail-generator-1.0.0-windows-x64.zip'; $Sha = 'ecfda1194dc19feb8e892026c10c55dd0e7cfd62d453d339c5bfb381e7e973e1'; $Image = ''
+$Slug = 'video-thumbnail-generator'; $Name = 'Video Thumbnail Generator'; $Version = '1.0.1'; $Port = 47123; $Kind = 'bin'
+$Url = 'https://github.com/chayprabs/localtools/releases/download/video-thumbnail-generator-v1.0.1/video-thumbnail-generator-1.0.1-windows-x64.zip'; $Sha = '1d579d152de3d6636952c8c12d56888138b10c5f40b7ff150262786f8ba6df56'; $Image = ''
 $Cmd = "localtools-$Slug"
 $Root = if ($env:LOCALTOOLS_HOME) { $env:LOCALTOOLS_HOME } else { Join-Path $env:USERPROFILE '.localtools' }
 $Dir = Join-Path $Root $Slug
@@ -45,7 +45,7 @@ try {
 $ErrorActionPreference = 'Continue'
 $a = @($args); $first = if ($a.Count) { [string]$a[0] } else { 'serve' }
 $dir = $PSScriptRoot; $root = Split-Path -Parent $dir
-$cmd = 'localtools-video-thumbnail-generator'; $image = ':1.0.0'
+$cmd = 'localtools-video-thumbnail-generator'; $image = ':1.0.1'
 if ($first -in @('update','uninstall')) {
   $shim = Join-Path (Join-Path $root 'bin') "$cmd.cmd"
   if (-not (Test-Path (Join-Path $dir 'installed.txt')) -or -not (Test-Path $shim) -or -not ((Get-Content -Raw $shim).Contains((Join-Path $dir "$cmd.cmd")))) {
@@ -74,7 +74,7 @@ if ($first -match '^(serve|--no-open|--port(?:=.*)?)$') {
   if (-not $noOpen) {
     Start-Job -ArgumentList $url { param($url) for ($i=0; $i -lt 90; $i++) { try { $h=Invoke-RestMethod "$url/api/health" -TimeoutSec 1; if ($h.tool -eq 'video-thumbnail-generator') { Start-Process "$url/"; return } } catch {}; Start-Sleep 1 } } | Out-Null
   }
-  Write-Host "$cmd 1.0.0 running at $url  (Ctrl+C to stop; choose --port N for another port)"
+  Write-Host "$cmd 1.0.1 running at $url  (Ctrl+C to stop; choose --port N for another port)"
   & docker run --rm --name "$cmd-$port" --label "localtools.install=$dir" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -p "127.0.0.1:${port}:$port" $image serve --no-open --port $port
   exit $LASTEXITCODE
 }

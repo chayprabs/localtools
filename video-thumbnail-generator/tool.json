@@ -2,7 +2,7 @@
   "slug": "video-thumbnail-generator",
   "name": "Video Thumbnail Generator",
   "command": "localtools-video-thumbnail-generator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "port": 47123,
   "kind": "bin",
   "registries": {
