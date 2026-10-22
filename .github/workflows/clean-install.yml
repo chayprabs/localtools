@@ -197,8 +197,6 @@ jobs:
     env:
       SLUG: ${{ matrix.slug }}
       LOCALTOOLS_NO_OPEN: "1"
-      PIPX_HOME: ${{ runner.temp }}/pipx-home
-      PIPX_BIN_DIR: ${{ runner.temp }}/pipx-bin
     steps:
       - uses: actions/checkout@v4
         with:
@@ -207,6 +205,7 @@ jobs:
         run: |
           jq() { command jq "$@" | tr -d '\r'; }
           # not BREW/SCOOP: the Scoop installer reads $env:SCOOP as its install directory
+          { echo "PIPX_HOME=$RUNNER_TEMP/pipx-home"; echo "PIPX_BIN_DIR=$RUNNER_TEMP/pipx-bin"; } >> "$GITHUB_ENV"
           { echo "HAS_BREW=$(jq -r .registries.brew "$SLUG/tool.json")"; echo "HAS_SCOOP=$(jq -r .registries.scoop "$SLUG/tool.json")"
             echo "PYPI_PACKAGE=$(jq -r .registries.pypi "$SLUG/tool.json")"
             echo "VERSION=$(jq -r .version "$SLUG/tool.json")"; } >> "$GITHUB_ENV"
