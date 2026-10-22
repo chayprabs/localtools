@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for EPUB Validator (epub-validator 1.0.1). macOS / Linux, no sudo.
+# localtools installer for EPUB Validator (epub-validator 1.0.2). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/epub-validator/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='epub-validator'; NAME='EPUB Validator'; VERSION='1.0.1'; PORT='47136'; KIND='bin'; IMAGE=''
+SLUG='epub-validator'; NAME='EPUB Validator'; VERSION='1.0.2'; PORT='47136'; KIND='bin'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -38,10 +38,10 @@ fi
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/epub-validator-v1.0.1/epub-validator-1.0.1-linux-arm64.zip'; SHA='e6347c2bd96c8faf3ba3032dd09b1a8810c56625c6d05a8d017e2e46f1a67894' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/epub-validator-v1.0.1/epub-validator-1.0.1-linux-x64.zip'; SHA='688da5a063f7258adb7f4122dc54677af98b26546750b85515e8b29af2aadccd' ;;
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/epub-validator-v1.0.1/epub-validator-1.0.1-macos-arm64.zip'; SHA='a094c37892d211c7445a85c686149edd3898af3d0a06a2262299b35e53fa19f9' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/epub-validator-v1.0.1/epub-validator-1.0.1-macos-x64.zip'; SHA='06fb0ee7ddd5c5e90adf520af5da57a571bc75fec23fa4e689fb80f94faf993d' ;;
+  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/epub-validator-v1.0.2/epub-validator-1.0.2-linux-arm64.zip'; SHA='3fc30dc397ac594d5f89cfab1d8256f1e635c38aabbbeb79e8183480c2da8670' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/epub-validator-v1.0.2/epub-validator-1.0.2-linux-x64.zip'; SHA='398cbd183d3361daa26813c68c190a42864c03d9c0faed4519f6fa15327b94b4' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/epub-validator-v1.0.2/epub-validator-1.0.2-macos-arm64.zip'; SHA='cdd56d52e00375b9463ad62ea40a2bf47e0cba985b0f1f55b769f7d7071ae9eb' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/epub-validator-v1.0.2/epub-validator-1.0.2-macos-x64.zip'; SHA='31aff129995abdda083bc1e5956f7d4a6245e92273bf9ce2793364b6b6de763d' ;;
 esac
 
 if [ "$KIND" = docker ]; then
@@ -67,7 +67,7 @@ if [ "$KIND" = docker ]; then
   cat > "$STAGE/$CMD" <<'EOF'
 #!/usr/bin/env bash
 set -euo pipefail
-slug='epub-validator'; cmd="localtools-$slug"; image=':1.0.1'
+slug='epub-validator'; cmd="localtools-$slug"; image=':1.0.2'
 self="${BASH_SOURCE[0]}"
 while [ -L "$self" ]; do
   parent="$(cd -P "$(dirname "$self")" && pwd)"; self="$(readlink "$self")"
@@ -103,7 +103,7 @@ if $serve; then
   own() { curl -fsS --max-time 1 "$url/api/health" 2>/dev/null | grep -q '"tool": *"'"$slug"'"'; }
   if own; then echo "$cmd already running at $url"; [ "$no_open" = 1 ] || browser; exit 0; fi
   if [ "$no_open" != 1 ]; then (for _ in $(seq 90); do if own; then browser; break; fi; sleep 1; done) & fi
-  echo "$cmd 1.0.1 running at $url  (Ctrl+C to stop; choose --port N for another port)"
+  echo "$cmd 1.0.2 running at $url  (Ctrl+C to stop; choose --port N for another port)"
   exec docker run --rm --name "$cmd-$port" --label "localtools.install=$dir" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -p "127.0.0.1:$port:$port" "$image" serve --no-open --port "$port"
 fi
 exec docker run --rm -i --network none --user "$(id -u):$(id -g)" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -v "$PWD:/work" -w /work "$image" "$@"
