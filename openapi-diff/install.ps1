@@ -1,4 +1,4 @@
-# localtools installer for OpenAPI Diff (openapi-diff 1.0.3). Windows PowerShell 5.1+, no admin.
+# localtools installer for OpenAPI Diff (openapi-diff 1.0.4). Windows PowerShell 5.1+, no admin.
 # Usage: irm https://raw.githubusercontent.com/chayprabs/localtools/main/openapi-diff/install.ps1 | iex
 # Re-running updates. Set $env:LOCALTOOLS_NO_OPEN='1' to skip launching the tool afterwards.
 # Wrapped in a script block so `irm | iex` never leaks settings into, or exits, the caller's session.
@@ -7,8 +7,8 @@ $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 
-$Slug = 'openapi-diff'; $Name = 'OpenAPI Diff'; $Version = '1.0.3'; $Port = 47111; $Kind = 'bin'
-$Url = 'https://github.com/chayprabs/localtools/releases/download/openapi-diff-v1.0.3/openapi-diff-1.0.3-windows-x64.zip'; $Sha = '0a921f206e26b768ce062afd553083a8071b26155b7ca0739ed2bb88333c482f'; $Image = ''
+$Slug = 'openapi-diff'; $Name = 'OpenAPI Diff'; $Version = '1.0.4'; $Port = 47111; $Kind = 'bin'
+$Url = 'https://github.com/chayprabs/localtools/releases/download/openapi-diff-v1.0.4/openapi-diff-1.0.4-windows-x64.zip'; $Sha = 'a1147aa0dddc1e3722588760c52800739733fc9ef570519f1fd619c06a88ae03'; $Image = ''
 $Cmd = "localtools-$Slug"
 $Root = if ($env:LOCALTOOLS_HOME) { $env:LOCALTOOLS_HOME } else { Join-Path $env:USERPROFILE '.localtools' }
 $Dir = Join-Path $Root $Slug
@@ -45,7 +45,7 @@ try {
 $ErrorActionPreference = 'Continue'
 $a = @($args); $first = if ($a.Count) { [string]$a[0] } else { 'serve' }
 $dir = $PSScriptRoot; $root = Split-Path -Parent $dir
-$cmd = 'localtools-openapi-diff'; $image = ':1.0.3'
+$cmd = 'localtools-openapi-diff'; $image = ':1.0.4'
 if ($first -in @('update','uninstall')) {
   $shim = Join-Path (Join-Path $root 'bin') "$cmd.cmd"
   if (-not (Test-Path (Join-Path $dir 'installed.txt')) -or -not (Test-Path $shim) -or -not ((Get-Content -Raw $shim).Contains((Join-Path $dir "$cmd.cmd")))) {
@@ -74,7 +74,7 @@ if ($first -match '^(serve|--no-open|--port(?:=.*)?)$') {
   if (-not $noOpen) {
     Start-Job -ArgumentList $url { param($url) for ($i=0; $i -lt 90; $i++) { try { $h=Invoke-RestMethod "$url/api/health" -TimeoutSec 1; if ($h.tool -eq 'openapi-diff') { Start-Process "$url/"; return } } catch {}; Start-Sleep 1 } } | Out-Null
   }
-  Write-Host "$cmd 1.0.3 running at $url  (Ctrl+C to stop; choose --port N for another port)"
+  Write-Host "$cmd 1.0.4 running at $url  (Ctrl+C to stop; choose --port N for another port)"
   & docker run --rm --name "$cmd-$port" --label "localtools.install=$dir" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -p "127.0.0.1:${port}:$port" $image serve --no-open --port $port
   exit $LASTEXITCODE
 }

@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for OpenAPI Diff (openapi-diff 1.0.3). macOS / Linux, no sudo.
+# localtools installer for OpenAPI Diff (openapi-diff 1.0.4). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/openapi-diff/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='openapi-diff'; NAME='OpenAPI Diff'; VERSION='1.0.3'; PORT='47111'; KIND='bin'; IMAGE=''
+SLUG='openapi-diff'; NAME='OpenAPI Diff'; VERSION='1.0.4'; PORT='47111'; KIND='bin'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -38,10 +38,10 @@ fi
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/openapi-diff-v1.0.3/openapi-diff-1.0.3-linux-arm64.zip'; SHA='e83d6dccd6db4d1d64884bc326af22b3ca606b57f707c4cea9a6b3047f5863e3' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/openapi-diff-v1.0.3/openapi-diff-1.0.3-linux-x64.zip'; SHA='ffd04dc68f4a7aab6e2721cd3cf697ee0357c146acda4040e3afb0342012eec2' ;;
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/openapi-diff-v1.0.3/openapi-diff-1.0.3-macos-arm64.zip'; SHA='9e7b2ffc8d77a1452fd602e374910ff5d78d92269dccbda447ed191d31f20a1f' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/openapi-diff-v1.0.3/openapi-diff-1.0.3-macos-x64.zip'; SHA='59361976ab04bbe6128dcd3f29cf3c880086a255339b428d9c8a3760871407d1' ;;
+  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/openapi-diff-v1.0.4/openapi-diff-1.0.4-linux-arm64.zip'; SHA='a7f0b2cdd62692b73f30ba8f94c2e93b0d27480609df7fc088761239c9b7d9a9' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/openapi-diff-v1.0.4/openapi-diff-1.0.4-linux-x64.zip'; SHA='8773e1012dd64de328b1a5b14012fb153c0ca019aa40fd98343874d9467eb6ef' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/openapi-diff-v1.0.4/openapi-diff-1.0.4-macos-arm64.zip'; SHA='2c9888a4e8000612e1a01c1af7696902c8281ff3cb02f025e672fe40411df09f' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/openapi-diff-v1.0.4/openapi-diff-1.0.4-macos-x64.zip'; SHA='52689de016e96f4ee138ab3f72b9bce4e7abcc7d1b6c24d8d83797f605074729' ;;
 esac
 
 if [ "$KIND" = docker ]; then
@@ -67,7 +67,7 @@ if [ "$KIND" = docker ]; then
   cat > "$STAGE/$CMD" <<'EOF'
 #!/usr/bin/env bash
 set -euo pipefail
-slug='openapi-diff'; cmd="localtools-$slug"; image=':1.0.3'
+slug='openapi-diff'; cmd="localtools-$slug"; image=':1.0.4'
 self="${BASH_SOURCE[0]}"
 while [ -L "$self" ]; do
   parent="$(cd -P "$(dirname "$self")" && pwd)"; self="$(readlink "$self")"
@@ -103,7 +103,7 @@ if $serve; then
   own() { curl -fsS --max-time 1 "$url/api/health" 2>/dev/null | grep -q '"tool": *"'"$slug"'"'; }
   if own; then echo "$cmd already running at $url"; [ "$no_open" = 1 ] || browser; exit 0; fi
   if [ "$no_open" != 1 ]; then (for _ in $(seq 90); do if own; then browser; break; fi; sleep 1; done) & fi
-  echo "$cmd 1.0.3 running at $url  (Ctrl+C to stop; choose --port N for another port)"
+  echo "$cmd 1.0.4 running at $url  (Ctrl+C to stop; choose --port N for another port)"
   exec docker run --rm --name "$cmd-$port" --label "localtools.install=$dir" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -p "127.0.0.1:$port:$port" "$image" serve --no-open --port "$port"
 fi
 exec docker run --rm -i --network none --user "$(id -u):$(id -g)" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -v "$PWD:/work" -w /work "$image" "$@"

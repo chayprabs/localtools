@@ -2,7 +2,7 @@
   "slug": "openapi-diff",
   "name": "OpenAPI Diff",
   "command": "localtools-openapi-diff",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "port": 47111,
   "kind": "bin",
   "registries": {
