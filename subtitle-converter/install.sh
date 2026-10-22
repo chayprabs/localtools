@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for Subtitle Converter (subtitle-converter 1.0.5). macOS / Linux, no sudo.
+# localtools installer for Subtitle Converter (subtitle-converter 1.0.6). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/subtitle-converter/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='subtitle-converter'; NAME='Subtitle Converter'; VERSION='1.0.5'; PORT='47125'; KIND='bin'; IMAGE=''
+SLUG='subtitle-converter'; NAME='Subtitle Converter'; VERSION='1.0.6'; PORT='47125'; KIND='bin'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -38,10 +38,10 @@ fi
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/subtitle-converter-v1.0.5/subtitle-converter-1.0.5-linux-arm64.zip'; SHA='0eea67b27b269e1f5c098b20ff9d0ecf456ceaed331e9fda460e76523558c5be' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/subtitle-converter-v1.0.5/subtitle-converter-1.0.5-linux-x64.zip'; SHA='c10a23a0ab8b99a497e9a44cee67c08f395fffb0e511fec3120c37678d872301' ;;
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/subtitle-converter-v1.0.5/subtitle-converter-1.0.5-macos-arm64.zip'; SHA='b561318cf47d7dea1d85795248bf77dec70d4325c8ede08f5096c7f6c7786588' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/subtitle-converter-v1.0.5/subtitle-converter-1.0.5-macos-x64.zip'; SHA='8e75659c0282198878aa2c14549126b64895e8356b0a485cc10169e1922ef54a' ;;
+  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/subtitle-converter-v1.0.6/subtitle-converter-1.0.6-linux-arm64.zip'; SHA='aadef55a37d52a3dcaf6471ec4a62a60215620240b9b3025ca43175994c6ba3a' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/subtitle-converter-v1.0.6/subtitle-converter-1.0.6-linux-x64.zip'; SHA='b7fc4c4888a3d12d4665b8a70276c4a999ba3a15a47f85ae0c8fe1c18d554713' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/subtitle-converter-v1.0.6/subtitle-converter-1.0.6-macos-arm64.zip'; SHA='7676990064009c06a247d958962692115cfcea52a60b6f2eb0fe232de91e4260' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/subtitle-converter-v1.0.6/subtitle-converter-1.0.6-macos-x64.zip'; SHA='28a0e7dbb81982c47907e7c767bbb4fae1fe0bd5d2b1ae0323d47738b7fddb49' ;;
 esac
 
 if [ "$KIND" = docker ]; then
@@ -67,7 +67,7 @@ if [ "$KIND" = docker ]; then
   cat > "$STAGE/$CMD" <<'EOF'
 #!/usr/bin/env bash
 set -euo pipefail
-slug='subtitle-converter'; cmd="localtools-$slug"; image=':1.0.5'
+slug='subtitle-converter'; cmd="localtools-$slug"; image=':1.0.6'
 self="${BASH_SOURCE[0]}"
 while [ -L "$self" ]; do
   parent="$(cd -P "$(dirname "$self")" && pwd)"; self="$(readlink "$self")"
@@ -103,7 +103,7 @@ if $serve; then
   own() { curl -fsS --max-time 1 "$url/api/health" 2>/dev/null | grep -q '"tool": *"'"$slug"'"'; }
   if own; then echo "$cmd already running at $url"; [ "$no_open" = 1 ] || browser; exit 0; fi
   if [ "$no_open" != 1 ]; then (for _ in $(seq 90); do if own; then browser; break; fi; sleep 1; done) & fi
-  echo "$cmd 1.0.5 running at $url  (Ctrl+C to stop; choose --port N for another port)"
+  echo "$cmd 1.0.6 running at $url  (Ctrl+C to stop; choose --port N for another port)"
   exec docker run --rm --name "$cmd-$port" --label "localtools.install=$dir" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -p "127.0.0.1:$port:$port" "$image" serve --no-open --port "$port"
 fi
 exec docker run --rm -i --network none --user "$(id -u):$(id -g)" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -v "$PWD:/work" -w /work "$image" "$@"

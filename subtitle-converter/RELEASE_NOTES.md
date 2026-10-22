@@ -19,3 +19,7 @@ Fixes: Latin code pages chosen by per-language alphabet scoring (Icelandic/Faroe
 ## 1.0.5 (2026-10-22)
 
 Fixes: Latin code-page detection scores letters only (symbols like £ º ¿ keep windows-1252; short Polish still windows-1250); any malformed --> timing line is skipped with a warning instead of merging into the previous cue.
+
+## 1.0.6 (2026-10-22)
+
+Minor sweep: Latin code-page ties stay windows-1252 again, so Western text whose accents also read as Czech/Slovak letters in windows-1250 (Italian "Sì, è così", Dutch "hè", Catalan "Què", Danish "så", English "Naïve") is no longer decoded as windows-1250; short Polish text still detects windows-1250 because French no longer scores æ. 68/68 saved language cases and the real windows-1250/1251 sample files decode as before. Runtime refreshed.

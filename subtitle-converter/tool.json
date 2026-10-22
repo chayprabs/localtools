@@ -2,7 +2,7 @@
   "slug": "subtitle-converter",
   "name": "Subtitle Converter",
   "command": "localtools-subtitle-converter",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "port": 47125,
   "kind": "bin",
   "registries": {
