@@ -45,7 +45,7 @@ Package-manager installs are updated by that package manager; `localtools-office
 ## Requirements
 
 - Windows 10/11, macOS 12+, Linux (glibc)
-- About 1200 MB of disk
+- About 1500 MB of disk
 - Docker (Docker Desktop on Windows/macOS) with Linux containers
 - No account, no internet after install.
 
