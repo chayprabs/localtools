@@ -27,3 +27,7 @@ Non-Latin form values are never drawn as "?": unchanged fields and CID-font appe
 ## 1.0.6 (2026-10-22)
 
 Flatten keeps a stored field appearance only when its decoded text (ToUnicode/CID included) equals the value; otherwise it is redrawn, or, for characters Helvetica cannot draw, the field stays fillable with a warning. Stale, blank and garbled appearances are never baked.
+
+## 1.0.7 (2026-10-22)
+
+Flatten bakes what a viewer shows: unchanged fields keep their stored appearance (including Acrobat number/percent/SSN/date formats); format-script fields are never redrawn raw (left fillable with a warning); combos and lists draw option display text.
