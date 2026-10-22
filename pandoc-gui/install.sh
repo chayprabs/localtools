@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for Pandoc GUI (pandoc-gui 1.0.2). macOS / Linux, no sudo.
+# localtools installer for Pandoc GUI (pandoc-gui 1.0.3). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/pandoc-gui/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='pandoc-gui'; NAME='Pandoc GUI'; VERSION='1.0.2'; PORT='47130'; KIND='bin'; IMAGE=''
+SLUG='pandoc-gui'; NAME='Pandoc GUI'; VERSION='1.0.3'; PORT='47130'; KIND='bin'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -38,10 +38,10 @@ fi
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/pandoc-gui-v1.0.2/pandoc-gui-1.0.2-linux-arm64.zip'; SHA='2301ebdcab522899b34beeb406b0417780e51c5af098270c78895f90c0264a8d' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/pandoc-gui-v1.0.2/pandoc-gui-1.0.2-linux-x64.zip'; SHA='54404ad51991cda6e68073d7e33ebc16e04e4074a00da71e5e5c782f43009187' ;;
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/pandoc-gui-v1.0.2/pandoc-gui-1.0.2-macos-arm64.zip'; SHA='932f6e45a67ccd95b0a588d7be3f981a838573e51e6a3d249f52cd4b334be52f' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/pandoc-gui-v1.0.2/pandoc-gui-1.0.2-macos-x64.zip'; SHA='931a02e8866b92563a24c13a7ce2b202d6a194e1982703f7e866bf3f20f264d9' ;;
+  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/pandoc-gui-v1.0.3/pandoc-gui-1.0.3-linux-arm64.zip'; SHA='4f60d8ccf630d9a5b157be62ac8d7f26bebf6f28a0915a15e70488b82650b681' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/pandoc-gui-v1.0.3/pandoc-gui-1.0.3-linux-x64.zip'; SHA='e29e71ee840c367753fe982157059d054aa4d107cd6ed896015ed8d2d023038a' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/pandoc-gui-v1.0.3/pandoc-gui-1.0.3-macos-arm64.zip'; SHA='fc0d7fd221824f7124bf90cad34ddf23df856021f66f2b8f6ff68e0153cba11d' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/pandoc-gui-v1.0.3/pandoc-gui-1.0.3-macos-x64.zip'; SHA='5c570520d57a1491bbbdef6df1cb5555469d15d59a63601b3a3a265cc9eb86e6' ;;
 esac
 
 if [ "$KIND" = docker ]; then
@@ -67,7 +67,7 @@ if [ "$KIND" = docker ]; then
   cat > "$STAGE/$CMD" <<'EOF'
 #!/usr/bin/env bash
 set -euo pipefail
-slug='pandoc-gui'; cmd="localtools-$slug"; image=':1.0.2'
+slug='pandoc-gui'; cmd="localtools-$slug"; image=':1.0.3'
 self="${BASH_SOURCE[0]}"
 while [ -L "$self" ]; do
   parent="$(cd -P "$(dirname "$self")" && pwd)"; self="$(readlink "$self")"
@@ -103,7 +103,7 @@ if $serve; then
   own() { curl -fsS --max-time 1 "$url/api/health" 2>/dev/null | grep -q '"tool": *"'"$slug"'"'; }
   if own; then echo "$cmd already running at $url"; [ "$no_open" = 1 ] || browser; exit 0; fi
   if [ "$no_open" != 1 ]; then (for _ in $(seq 90); do if own; then browser; break; fi; sleep 1; done) & fi
-  echo "$cmd 1.0.2 running at $url  (Ctrl+C to stop; choose --port N for another port)"
+  echo "$cmd 1.0.3 running at $url  (Ctrl+C to stop; choose --port N for another port)"
   exec docker run --rm --name "$cmd-$port" --label "localtools.install=$dir" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -p "127.0.0.1:$port:$port" "$image" serve --no-open --port "$port"
 fi
 exec docker run --rm -i --network none --user "$(id -u):$(id -g)" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -v "$PWD:/work" -w /work "$image" "$@"

@@ -2,7 +2,7 @@
   "slug": "pandoc-gui",
   "name": "Pandoc GUI",
   "command": "localtools-pandoc-gui",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "port": 47130,
   "kind": "bin",
   "registries": {
