@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for EXIF Remover (exif-remover 1.0.3). macOS / Linux, no sudo.
+# localtools installer for EXIF Remover (exif-remover 1.0.4). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/exif-remover/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='exif-remover'; NAME='EXIF Remover'; VERSION='1.0.3'; PORT='47126'; KIND='bin'; IMAGE=''
+SLUG='exif-remover'; NAME='EXIF Remover'; VERSION='1.0.4'; PORT='47126'; KIND='bin'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -38,10 +38,10 @@ fi
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/exif-remover-v1.0.3/exif-remover-1.0.3-linux-arm64.zip'; SHA='a7fbb37b1b2ec24b525e19643ded3e2461900c53e3740569e73d7de83cf1be59' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/exif-remover-v1.0.3/exif-remover-1.0.3-linux-x64.zip'; SHA='1bde92ec7cff11e00b2d713cd61e8167966a20dfb04b9e53b4831b37ca6219e5' ;;
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/exif-remover-v1.0.3/exif-remover-1.0.3-macos-arm64.zip'; SHA='b2984779f612f2ab757b9c647d1cf44b7c5d3d68b2a5b3016e709c431ba08dec' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/exif-remover-v1.0.3/exif-remover-1.0.3-macos-x64.zip'; SHA='eb8a28f3945e3a2792b4e5712e3844dcdc7672768048e7ce3621dd9fc9860171' ;;
+  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/exif-remover-v1.0.4/exif-remover-1.0.4-linux-arm64.zip'; SHA='89226f21c9fb966ff5f4696fcb49093fff850f1b9de6fa19e8e7409efaeb78a0' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/exif-remover-v1.0.4/exif-remover-1.0.4-linux-x64.zip'; SHA='451a6478e459b0e2a779e034dde0bc12915e8b3c8c3d442e910209c43a3a9cf9' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/exif-remover-v1.0.4/exif-remover-1.0.4-macos-arm64.zip'; SHA='e86908ac985f98c5bd57759ab0290fe1d2a06b9487db5035ab4b78f8dadb7402' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/exif-remover-v1.0.4/exif-remover-1.0.4-macos-x64.zip'; SHA='f90d87ce7d8287709a978c732e4ca26f5355cc2c5478a58318546788114bef25' ;;
 esac
 
 if [ "$KIND" = docker ]; then
@@ -67,7 +67,7 @@ if [ "$KIND" = docker ]; then
   cat > "$STAGE/$CMD" <<'EOF'
 #!/usr/bin/env bash
 set -euo pipefail
-slug='exif-remover'; cmd="localtools-$slug"; image=':1.0.3'
+slug='exif-remover'; cmd="localtools-$slug"; image=':1.0.4'
 self="${BASH_SOURCE[0]}"
 while [ -L "$self" ]; do
   parent="$(cd -P "$(dirname "$self")" && pwd)"; self="$(readlink "$self")"
@@ -103,7 +103,7 @@ if $serve; then
   own() { curl -fsS --max-time 1 "$url/api/health" 2>/dev/null | grep -q '"tool": *"'"$slug"'"'; }
   if own; then echo "$cmd already running at $url"; [ "$no_open" = 1 ] || browser; exit 0; fi
   if [ "$no_open" != 1 ]; then (for _ in $(seq 90); do if own; then browser; break; fi; sleep 1; done) & fi
-  echo "$cmd 1.0.3 running at $url  (Ctrl+C to stop; choose --port N for another port)"
+  echo "$cmd 1.0.4 running at $url  (Ctrl+C to stop; choose --port N for another port)"
   exec docker run --rm --name "$cmd-$port" --label "localtools.install=$dir" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -p "127.0.0.1:$port:$port" "$image" serve --no-open --port "$port"
 fi
 exec docker run --rm -i --network none --user "$(id -u):$(id -g)" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -v "$PWD:/work" -w /work "$image" "$@"
