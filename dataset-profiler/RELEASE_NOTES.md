@@ -11,3 +11,7 @@ Fixes: NaN/Inf/near-1e308 floats no longer abort a profile (finite stats plus no
 ## 1.0.2 (2026-10-18)
 
 Fixes: big-integer CSV columns use DuckDB header names (BOM, padded, duplicate and case-colliding headers work); approximate quantiles stay within min/max; Markdown/HTML exports include NaN/Inf counts; faster on wide files.
+
+## 1.0.3 (2026-10-22)
+
+Maintenance: shared UI kit refreshed (font ligatures off on every element, so operators like >= and != show as typed) and runtime refreshed (uploads are drained before early rejections, so Connection: close clients get the JSON error). No behaviour change in profiling.

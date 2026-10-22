@@ -2,7 +2,7 @@
   "slug": "dataset-profiler",
   "name": "Dataset Profiler",
   "command": "localtools-dataset-profiler",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "port": 47107,
   "kind": "bin",
   "registries": {

@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for Dataset Profiler (dataset-profiler 1.0.2). macOS / Linux, no sudo.
+# localtools installer for Dataset Profiler (dataset-profiler 1.0.3). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/dataset-profiler/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='dataset-profiler'; NAME='Dataset Profiler'; VERSION='1.0.2'; PORT='47107'; KIND='bin'; IMAGE=''
+SLUG='dataset-profiler'; NAME='Dataset Profiler'; VERSION='1.0.3'; PORT='47107'; KIND='bin'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -38,10 +38,10 @@ fi
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/dataset-profiler-v1.0.2/dataset-profiler-1.0.2-macos-arm64.zip'; SHA='f17d01745beb376f19c4bab25309c9bfc51f55ad9224a9ef35a92964426b3aaf' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/dataset-profiler-v1.0.2/dataset-profiler-1.0.2-macos-x64.zip'; SHA='38b2aff53b9acdfda2cab01ea84559ee73d3da9da0cfe063ccb92af82842262f' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/dataset-profiler-v1.0.2/dataset-profiler-1.0.2-linux-x64.zip'; SHA='3d07176af72b666845f80043b2a39d413fd196659c2fe85897c12d2770bc21a8' ;;
-  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/dataset-profiler-v1.0.2/dataset-profiler-1.0.2-linux-arm64.zip'; SHA='152df16de32a6e1056724e32e14cb074497dce75d00af8c5f482b1dfc9bc2c3a' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/dataset-profiler-v1.0.3/dataset-profiler-1.0.3-macos-arm64.zip'; SHA='6bf44d8340f586b153f39748c3b4d814dd63c2a247931e4e75ab6ec8a129c055' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/dataset-profiler-v1.0.3/dataset-profiler-1.0.3-macos-x64.zip'; SHA='0a268df34fa235ee1d22cb665990a7f2aed027699d4adf386c6dbe2e348f0f3f' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/dataset-profiler-v1.0.3/dataset-profiler-1.0.3-linux-x64.zip'; SHA='4601928170ebeb1223f94be7891767bc5ab85481b29870e5a76708f8fd09e795' ;;
+  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/dataset-profiler-v1.0.3/dataset-profiler-1.0.3-linux-arm64.zip'; SHA='d02b699c44f991b47f7cabfd8afda7ff5f153abbfa3a32e9be0c7991aea034aa' ;;
 esac
 
 if [ "$KIND" = docker ]; then
@@ -67,7 +67,7 @@ if [ "$KIND" = docker ]; then
   cat > "$STAGE/$CMD" <<'EOF'
 #!/usr/bin/env bash
 set -euo pipefail
-slug='dataset-profiler'; cmd="localtools-$slug"; image=':1.0.2'
+slug='dataset-profiler'; cmd="localtools-$slug"; image=':1.0.3'
 self="${BASH_SOURCE[0]}"
 while [ -L "$self" ]; do
   parent="$(cd -P "$(dirname "$self")" && pwd)"; self="$(readlink "$self")"
@@ -103,7 +103,7 @@ if $serve; then
   own() { curl -fsS --max-time 1 "$url/api/health" 2>/dev/null | grep -q '"tool": *"'"$slug"'"'; }
   if own; then echo "$cmd already running at $url"; [ "$no_open" = 1 ] || browser; exit 0; fi
   if [ "$no_open" != 1 ]; then (for _ in $(seq 90); do if own; then browser; break; fi; sleep 1; done) & fi
-  echo "$cmd 1.0.2 running at $url  (Ctrl+C to stop; choose --port N for another port)"
+  echo "$cmd 1.0.3 running at $url  (Ctrl+C to stop; choose --port N for another port)"
   exec docker run --rm --name "$cmd-$port" --label "localtools.install=$dir" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -p "127.0.0.1:$port:$port" "$image" serve --no-open --port "$port"
 fi
 exec docker run --rm -i --network none --user "$(id -u):$(id -g)" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -v "$PWD:/work" -w /work "$image" "$@"
