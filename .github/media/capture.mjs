@@ -22,6 +22,7 @@ async function play(page) {
       case "fill": await page.fill(arg.selector, arg.text); break;
       case "setInputFiles": await page.setInputFiles(arg.selector, [].concat(arg.files).map(smoke)); break;
       case "click": await page.click(arg); break;
+      case "select": await page.selectOption(arg.selector, arg.value); break;
       case "waitFor":
         if (arg.selector) await page.waitForSelector(arg.selector, { state: "visible", timeout: 60000 });
         else await page.getByText(arg.text).first().waitFor({ timeout: 60000 });

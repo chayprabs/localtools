@@ -1,0 +1,16 @@
+{
+  "slug": "office-converter",
+  "name": "Office Converter",
+  "command": "localtools-office-converter",
+  "version": "1.0.1",
+  "port": 47135,
+  "kind": "docker",
+  "registries": {
+    "brew": false,
+    "scoop": false,
+    "winget": false,
+    "npm": null,
+    "pypi": null,
+    "ghcr": "ghcr.io/chayprabs/localtools-office-converter"
+  }
+}

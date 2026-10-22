@@ -1,0 +1,8 @@
+[
+  {"goto": "/"},
+  {"setInputFiles": {"selector": "#file", "files": ["sample.pptx"]}, "pause": 600},
+  {"select": {"selector": "#to", "value": "png"}, "pause": 500},
+  {"click": "#go"},
+  {"waitFor": {"selector": "#preview img"}, "pause": 800},
+  {"scrollIntoView": "#preview", "pause": 2000}
+]
