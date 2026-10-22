@@ -23,3 +23,7 @@ Fixes from review: - Spec images (PNG, JPEG, GIF) work in the shipped binary (de
 ## 1.0.5 (2026-10-21)
 
 - Conditional-format formulas (including time_period) on multi-area ranges are anchored at the leftmost, then topmost area, as Excel and LibreOffice evaluate them. - Whole columns (C:C) and rows (2:2) are accepted as rule ranges. - Spec sheets of array rows without columns preview with column letters and the right row count.
+
+## 1.0.6 (2026-10-22)
+
+Minor sweep: spec-mode numeric types keep integers with more than 15 digits exact (written as text with a warning) instead of rounding them; merged ranges are capped at 10,000 per sheet with a clear error (excelize's overlap check is quadratic). SPEC.md documents both and notes that type-error paths omit array indices (line/column locate the item). Runtime refreshed.

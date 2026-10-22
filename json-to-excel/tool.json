@@ -2,7 +2,7 @@
   "slug": "json-to-excel",
   "name": "JSON to Excel",
   "command": "localtools-json-to-excel",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "port": 47108,
   "kind": "bin",
   "registries": {
