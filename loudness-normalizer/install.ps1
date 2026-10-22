@@ -1,4 +1,4 @@
-# localtools installer for Loudness Normalizer (loudness-normalizer 1.0.1). Windows PowerShell 5.1+, no admin.
+# localtools installer for Loudness Normalizer (loudness-normalizer 1.0.2). Windows PowerShell 5.1+, no admin.
 # Usage: irm https://raw.githubusercontent.com/chayprabs/localtools/main/loudness-normalizer/install.ps1 | iex
 # Re-running updates. Set $env:LOCALTOOLS_NO_OPEN='1' to skip launching the tool afterwards.
 # Wrapped in a script block so `irm | iex` never leaks settings into, or exits, the caller's session.
@@ -7,8 +7,8 @@ $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 
-$Slug = 'loudness-normalizer'; $Name = 'Loudness Normalizer'; $Version = '1.0.1'; $Port = 47124; $Kind = 'bin'
-$Url = 'https://github.com/chayprabs/localtools/releases/download/loudness-normalizer-v1.0.1/loudness-normalizer-1.0.1-windows-x64.zip'; $Sha = 'b82f788799231ea28594b64d5c47f2f17113f46025d5d58fe8f80e935683e62c'; $Image = ''
+$Slug = 'loudness-normalizer'; $Name = 'Loudness Normalizer'; $Version = '1.0.2'; $Port = 47124; $Kind = 'bin'
+$Url = 'https://github.com/chayprabs/localtools/releases/download/loudness-normalizer-v1.0.2/loudness-normalizer-1.0.2-windows-x64.zip'; $Sha = '9c246223fa7e652ef6f3fde2d64d4dc3edfeeb63443ad48eaa7b3334315d76b6'; $Image = ''
 $Cmd = "localtools-$Slug"
 $Root = if ($env:LOCALTOOLS_HOME) { $env:LOCALTOOLS_HOME } else { Join-Path $env:USERPROFILE '.localtools' }
 $Dir = Join-Path $Root $Slug
@@ -45,7 +45,7 @@ try {
 $ErrorActionPreference = 'Continue'
 $a = @($args); $first = if ($a.Count) { [string]$a[0] } else { 'serve' }
 $dir = $PSScriptRoot; $root = Split-Path -Parent $dir
-$cmd = 'localtools-loudness-normalizer'; $image = ':1.0.1'
+$cmd = 'localtools-loudness-normalizer'; $image = ':1.0.2'
 if ($first -in @('update','uninstall')) {
   $shim = Join-Path (Join-Path $root 'bin') "$cmd.cmd"
   if (-not (Test-Path (Join-Path $dir 'installed.txt')) -or -not (Test-Path $shim) -or -not ((Get-Content -Raw $shim).Contains((Join-Path $dir "$cmd.cmd")))) {
@@ -74,7 +74,7 @@ if ($first -match '^(serve|--no-open|--port(?:=.*)?)$') {
   if (-not $noOpen) {
     Start-Job -ArgumentList $url { param($url) for ($i=0; $i -lt 90; $i++) { try { $h=Invoke-RestMethod "$url/api/health" -TimeoutSec 1; if ($h.tool -eq 'loudness-normalizer') { Start-Process "$url/"; return } } catch {}; Start-Sleep 1 } } | Out-Null
   }
-  Write-Host "$cmd 1.0.1 running at $url  (Ctrl+C to stop; choose --port N for another port)"
+  Write-Host "$cmd 1.0.2 running at $url  (Ctrl+C to stop; choose --port N for another port)"
   & docker run --rm --name "$cmd-$port" --label "localtools.install=$dir" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -p "127.0.0.1:${port}:$port" $image serve --no-open --port $port
   exit $LASTEXITCODE
 }

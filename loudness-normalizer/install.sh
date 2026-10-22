@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for Loudness Normalizer (loudness-normalizer 1.0.1). macOS / Linux, no sudo.
+# localtools installer for Loudness Normalizer (loudness-normalizer 1.0.2). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/loudness-normalizer/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='loudness-normalizer'; NAME='Loudness Normalizer'; VERSION='1.0.1'; PORT='47124'; KIND='bin'; IMAGE=''
+SLUG='loudness-normalizer'; NAME='Loudness Normalizer'; VERSION='1.0.2'; PORT='47124'; KIND='bin'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -38,9 +38,9 @@ fi
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/loudness-normalizer-v1.0.1/loudness-normalizer-1.0.1-linux-x64.zip'; SHA='9d729f9463a6fdf0656d8104f0c6a82a6a13dc6b472c5e9275151041da438eb4' ;;
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/loudness-normalizer-v1.0.1/loudness-normalizer-1.0.1-macos-arm64.zip'; SHA='b017c358d26d7ebbec205ea35673123935137b572e780567799669216c8581e4' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/loudness-normalizer-v1.0.1/loudness-normalizer-1.0.1-macos-x64.zip'; SHA='1273563e4c8732a2983e97055baf2bd9c22cf27c774eed6a6540806cf3947029' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/loudness-normalizer-v1.0.2/loudness-normalizer-1.0.2-linux-x64.zip'; SHA='f3a7eae38ae3d9f0b886caa11b39b198c2fdc012c51818a3784e1964273b251b' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/loudness-normalizer-v1.0.2/loudness-normalizer-1.0.2-macos-arm64.zip'; SHA='0c40fb2096371d96b34efcfc366a38df11e7cb185a5d5fc8d37f68c7296f5565' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/loudness-normalizer-v1.0.2/loudness-normalizer-1.0.2-macos-x64.zip'; SHA='27ba71ccb4a97dd444db73bcd279dc3c557b0dc11aa54ba0f63c6d88df4fe9e8' ;;
 esac
 
 if [ "$KIND" = docker ]; then
@@ -66,7 +66,7 @@ if [ "$KIND" = docker ]; then
   cat > "$STAGE/$CMD" <<'EOF'
 #!/usr/bin/env bash
 set -euo pipefail
-slug='loudness-normalizer'; cmd="localtools-$slug"; image=':1.0.1'
+slug='loudness-normalizer'; cmd="localtools-$slug"; image=':1.0.2'
 self="${BASH_SOURCE[0]}"
 while [ -L "$self" ]; do
   parent="$(cd -P "$(dirname "$self")" && pwd)"; self="$(readlink "$self")"
@@ -102,7 +102,7 @@ if $serve; then
   own() { curl -fsS --max-time 1 "$url/api/health" 2>/dev/null | grep -q '"tool": *"'"$slug"'"'; }
   if own; then echo "$cmd already running at $url"; [ "$no_open" = 1 ] || browser; exit 0; fi
   if [ "$no_open" != 1 ]; then (for _ in $(seq 90); do if own; then browser; break; fi; sleep 1; done) & fi
-  echo "$cmd 1.0.1 running at $url  (Ctrl+C to stop; choose --port N for another port)"
+  echo "$cmd 1.0.2 running at $url  (Ctrl+C to stop; choose --port N for another port)"
   exec docker run --rm --name "$cmd-$port" --label "localtools.install=$dir" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -p "127.0.0.1:$port:$port" "$image" serve --no-open --port "$port"
 fi
 exec docker run --rm -i --network none --user "$(id -u):$(id -g)" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -v "$PWD:/work" -w /work "$image" "$@"
