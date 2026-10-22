@@ -2,7 +2,7 @@
   "slug": "pdf-diff",
   "name": "PDF Diff",
   "command": "localtools-pdf-diff",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "port": 47103,
   "kind": "py",
   "registries": {

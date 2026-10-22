@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for PDF Diff (pdf-diff 1.0.1). macOS / Linux, no sudo.
+# localtools installer for PDF Diff (pdf-diff 1.0.2). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/pdf-diff/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='pdf-diff'; NAME='PDF Diff'; VERSION='1.0.1'; PORT='47103'; KIND='py'; IMAGE=''
+SLUG='pdf-diff'; NAME='PDF Diff'; VERSION='1.0.2'; PORT='47103'; KIND='py'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -38,9 +38,9 @@ fi
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/pdf-diff-v1.0.1/pdf-diff-1.0.1-linux-x64.zip'; SHA='8a0aebca7e09544bb15bbcdd8ade1430fb5e248a97d1a717a2ab70c266c31886' ;;
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/pdf-diff-v1.0.1/pdf-diff-1.0.1-macos-arm64.zip'; SHA='d9831ca812bad2f39cad847923b67c53affb31e7f406269ec7a64be61ab1e469' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/pdf-diff-v1.0.1/pdf-diff-1.0.1-macos-x64.zip'; SHA='cc01bab375ada0f54f2e07ae917528282be69055db6166daafe06f331ed6f95e' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/pdf-diff-v1.0.2/pdf-diff-1.0.2-linux-x64.zip'; SHA='34c249219a7f3df0822d3b88df1571ccf3fdd2887e22d39be656bf3fc3f29893' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/pdf-diff-v1.0.2/pdf-diff-1.0.2-macos-arm64.zip'; SHA='4b173bcc9245415339dbb8cf98ec1f2fd019e8432e597abde5e7cc03d36e8eed' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/pdf-diff-v1.0.2/pdf-diff-1.0.2-macos-x64.zip'; SHA='736de9c2972d32f9828f08b3d2d7470a398f5595a7ae3f6301c5d3b9cedcef03' ;;
 esac
 
 if [ "$KIND" = docker ]; then
@@ -66,7 +66,7 @@ if [ "$KIND" = docker ]; then
   cat > "$STAGE/$CMD" <<'EOF'
 #!/usr/bin/env bash
 set -euo pipefail
-slug='pdf-diff'; cmd="localtools-$slug"; image=':1.0.1'
+slug='pdf-diff'; cmd="localtools-$slug"; image=':1.0.2'
 self="${BASH_SOURCE[0]}"
 while [ -L "$self" ]; do
   parent="$(cd -P "$(dirname "$self")" && pwd)"; self="$(readlink "$self")"
@@ -102,7 +102,7 @@ if $serve; then
   own() { curl -fsS --max-time 1 "$url/api/health" 2>/dev/null | grep -q '"tool": *"'"$slug"'"'; }
   if own; then echo "$cmd already running at $url"; [ "$no_open" = 1 ] || browser; exit 0; fi
   if [ "$no_open" != 1 ]; then (for _ in $(seq 90); do if own; then browser; break; fi; sleep 1; done) & fi
-  echo "$cmd 1.0.1 running at $url  (Ctrl+C to stop; choose --port N for another port)"
+  echo "$cmd 1.0.2 running at $url  (Ctrl+C to stop; choose --port N for another port)"
   exec docker run --rm --name "$cmd-$port" --label "localtools.install=$dir" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -p "127.0.0.1:$port:$port" "$image" serve --no-open --port "$port"
 fi
 exec docker run --rm -i --network none --user "$(id -u):$(id -g)" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -v "$PWD:/work" -w /work "$image" "$@"
