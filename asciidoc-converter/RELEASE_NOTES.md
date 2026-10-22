@@ -15,3 +15,7 @@ The CLI no longer rewrites document text when the document folder path is short 
 ## 1.0.3 (2026-10-21)
 
 include::{docdir}/... inside included files resolves again (Asciidoctor keeps its real docdir; only the server temp path is hidden where printed). With a zip project, opening an included file from a diagnostic keeps converting the main document. DocBook hyperlinks no longer trigger the remote-media warning, and a Google Fonts @import written in a listing block is kept.
+
+## 1.0.4 (2026-10-22)
+
+Uploads drained before 403 so Connection: close clients get the JSON error.
