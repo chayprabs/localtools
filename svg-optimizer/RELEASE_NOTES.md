@@ -15,3 +15,7 @@ Safe keeps <symbol> sprites, defs and ids; sanitize decodes CSS escapes before c
 ## 1.0.3 (2026-10-17)
 
 Security: a <style> sheet that fails the check is dropped whole and the final output is sanitized again; only xlink:/xml: prefixes; SMIL may not animate href/style/on*/base. Safe keeps empty elements with ids. Results table fits phone screens.
+
+## 1.0.4 (2026-10-22)
+
+Ligatures off in all text; uploads drained before 403; exact big integers in JSON replies.

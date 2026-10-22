@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for SVG Optimizer (svg-optimizer 1.0.3). macOS / Linux, no sudo.
+# localtools installer for SVG Optimizer (svg-optimizer 1.0.4). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/svg-optimizer/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='svg-optimizer'; NAME='SVG Optimizer'; VERSION='1.0.3'; PORT='47127'; KIND='js'; IMAGE=''
+SLUG='svg-optimizer'; NAME='SVG Optimizer'; VERSION='1.0.4'; PORT='47127'; KIND='js'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -38,10 +38,10 @@ fi
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/svg-optimizer-v1.0.3/svg-optimizer-1.0.3-macos-arm64.zip'; SHA='83249d359aefdf9a8841ddb3954bb7b45a134335cfbb35c7958d4b10565f9bbe' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/svg-optimizer-v1.0.3/svg-optimizer-1.0.3-macos-x64.zip'; SHA='5c082a0e8db79c3441311c285bffbc770dee85e3cd4eeab33a127cecfe6e5e7d' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/svg-optimizer-v1.0.3/svg-optimizer-1.0.3-linux-x64.zip'; SHA='4fa8cf3aa4afcf41a339c6bd51f53db61e3a30f88b595c02967d29a835669c9e' ;;
-  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/svg-optimizer-v1.0.3/svg-optimizer-1.0.3-linux-arm64.zip'; SHA='cbb6a549b431d0049e25d685ba1fe19869bc02ab1bbb403b73dbfc7f86d7614b' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/svg-optimizer-v1.0.4/svg-optimizer-1.0.4-macos-arm64.zip'; SHA='58956128ee1bdb9024b3dc0123d6fa52f8c95eaeec573a801f852a2f79d7c244' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/svg-optimizer-v1.0.4/svg-optimizer-1.0.4-macos-x64.zip'; SHA='2648d30f9bacad7d3953ba7fd8c952118f9a63aa2d582eaccc88730edcabfc02' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/svg-optimizer-v1.0.4/svg-optimizer-1.0.4-linux-x64.zip'; SHA='b582ed39b40dbf47cdd16a8c0f8de48902ad21b46fa13a361a68fcd3d44e1350' ;;
+  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/svg-optimizer-v1.0.4/svg-optimizer-1.0.4-linux-arm64.zip'; SHA='cb2981b4056736c2d495420de7e4ae492c09371f51067c7bb03dfd8da16ba5e7' ;;
 esac
 
 if [ "$KIND" = docker ]; then
@@ -67,7 +67,7 @@ if [ "$KIND" = docker ]; then
   cat > "$STAGE/$CMD" <<'EOF'
 #!/usr/bin/env bash
 set -euo pipefail
-slug='svg-optimizer'; cmd="localtools-$slug"; image=':1.0.3'
+slug='svg-optimizer'; cmd="localtools-$slug"; image=':1.0.4'
 self="${BASH_SOURCE[0]}"
 while [ -L "$self" ]; do
   parent="$(cd -P "$(dirname "$self")" && pwd)"; self="$(readlink "$self")"
@@ -103,7 +103,7 @@ if $serve; then
   own() { curl -fsS --max-time 1 "$url/api/health" 2>/dev/null | grep -q '"tool": *"'"$slug"'"'; }
   if own; then echo "$cmd already running at $url"; [ "$no_open" = 1 ] || browser; exit 0; fi
   if [ "$no_open" != 1 ]; then (for _ in $(seq 90); do if own; then browser; break; fi; sleep 1; done) & fi
-  echo "$cmd 1.0.3 running at $url  (Ctrl+C to stop; choose --port N for another port)"
+  echo "$cmd 1.0.4 running at $url  (Ctrl+C to stop; choose --port N for another port)"
   exec docker run --rm --name "$cmd-$port" --label "localtools.install=$dir" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -p "127.0.0.1:$port:$port" "$image" serve --no-open --port "$port"
 fi
 exec docker run --rm -i --network none --user "$(id -u):$(id -g)" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -v "$PWD:/work" -w /work "$image" "$@"

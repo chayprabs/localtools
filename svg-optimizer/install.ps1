@@ -1,4 +1,4 @@
-# localtools installer for SVG Optimizer (svg-optimizer 1.0.3). Windows PowerShell 5.1+, no admin.
+# localtools installer for SVG Optimizer (svg-optimizer 1.0.4). Windows PowerShell 5.1+, no admin.
 # Usage: irm https://raw.githubusercontent.com/chayprabs/localtools/main/svg-optimizer/install.ps1 | iex
 # Re-running updates. Set $env:LOCALTOOLS_NO_OPEN='1' to skip launching the tool afterwards.
 # Wrapped in a script block so `irm | iex` never leaks settings into, or exits, the caller's session.
@@ -7,8 +7,8 @@ $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 
-$Slug = 'svg-optimizer'; $Name = 'SVG Optimizer'; $Version = '1.0.3'; $Port = 47127; $Kind = 'js'
-$Url = 'https://github.com/chayprabs/localtools/releases/download/svg-optimizer-v1.0.3/svg-optimizer-1.0.3-windows-x64.zip'; $Sha = '254f5dd6b5e436e598ad364eaff0765e5653202f494f3f86edc4648d32481c93'; $Image = ''
+$Slug = 'svg-optimizer'; $Name = 'SVG Optimizer'; $Version = '1.0.4'; $Port = 47127; $Kind = 'js'
+$Url = 'https://github.com/chayprabs/localtools/releases/download/svg-optimizer-v1.0.4/svg-optimizer-1.0.4-windows-x64.zip'; $Sha = '4c188044b173cbb0edbd87347d3e1c7af186069fadde2da5a33cb20f461eb5ba'; $Image = ''
 $Cmd = "localtools-$Slug"
 $Root = if ($env:LOCALTOOLS_HOME) { $env:LOCALTOOLS_HOME } else { Join-Path $env:USERPROFILE '.localtools' }
 $Dir = Join-Path $Root $Slug
@@ -45,7 +45,7 @@ try {
 $ErrorActionPreference = 'Continue'
 $a = @($args); $first = if ($a.Count) { [string]$a[0] } else { 'serve' }
 $dir = $PSScriptRoot; $root = Split-Path -Parent $dir
-$cmd = 'localtools-svg-optimizer'; $image = ':1.0.3'
+$cmd = 'localtools-svg-optimizer'; $image = ':1.0.4'
 if ($first -in @('update','uninstall')) {
   $shim = Join-Path (Join-Path $root 'bin') "$cmd.cmd"
   if (-not (Test-Path (Join-Path $dir 'installed.txt')) -or -not (Test-Path $shim) -or -not ((Get-Content -Raw $shim).Contains((Join-Path $dir "$cmd.cmd")))) {
@@ -74,7 +74,7 @@ if ($first -match '^(serve|--no-open|--port(?:=.*)?)$') {
   if (-not $noOpen) {
     Start-Job -ArgumentList $url { param($url) for ($i=0; $i -lt 90; $i++) { try { $h=Invoke-RestMethod "$url/api/health" -TimeoutSec 1; if ($h.tool -eq 'svg-optimizer') { Start-Process "$url/"; return } } catch {}; Start-Sleep 1 } } | Out-Null
   }
-  Write-Host "$cmd 1.0.3 running at $url  (Ctrl+C to stop; choose --port N for another port)"
+  Write-Host "$cmd 1.0.4 running at $url  (Ctrl+C to stop; choose --port N for another port)"
   & docker run --rm --name "$cmd-$port" --label "localtools.install=$dir" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -p "127.0.0.1:${port}:$port" $image serve --no-open --port $port
   exit $LASTEXITCODE
 }
