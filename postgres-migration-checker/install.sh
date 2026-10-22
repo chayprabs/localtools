@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for Postgres Migration Checker (postgres-migration-checker 1.0.3). macOS / Linux, no sudo.
+# localtools installer for Postgres Migration Checker (postgres-migration-checker 1.0.4). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/postgres-migration-checker/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='postgres-migration-checker'; NAME='Postgres Migration Checker'; VERSION='1.0.3'; PORT='47116'; KIND='py'; IMAGE=''
+SLUG='postgres-migration-checker'; NAME='Postgres Migration Checker'; VERSION='1.0.4'; PORT='47116'; KIND='py'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -38,9 +38,9 @@ fi
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/postgres-migration-checker-v1.0.3/postgres-migration-checker-1.0.3-macos-arm64.zip'; SHA='d832f761c5935022c7ab6a7315b7aa4881c1f8286b68a2f27219175eed7ce047' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/postgres-migration-checker-v1.0.3/postgres-migration-checker-1.0.3-macos-x64.zip'; SHA='72269ee9eb1a6c949ca0bec0f3aea05a3435f4646d18523ca8505944a1ac3c24' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/postgres-migration-checker-v1.0.3/postgres-migration-checker-1.0.3-linux-x64.zip'; SHA='f9ff4e24748807e554656f5327bc7fa07a562154294ae7db7b233fa9c25f281e' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/postgres-migration-checker-v1.0.4/postgres-migration-checker-1.0.4-macos-arm64.zip'; SHA='c8a89bafc68ceb45d3beee1ef59a2e92dfe7ff11cbc7016ba60c4d731a21b95e' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/postgres-migration-checker-v1.0.4/postgres-migration-checker-1.0.4-macos-x64.zip'; SHA='c05f270d9586cc90ed9d11d2a698e5669d24e7ccbb340d78337de1f72bac1ca1' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/postgres-migration-checker-v1.0.4/postgres-migration-checker-1.0.4-linux-x64.zip'; SHA='a33df52e0e0283993bb490317f3e39daf79327f2f5f481e0db02af4f86034bbb' ;;
 esac
 
 if [ "$KIND" = docker ]; then
@@ -66,7 +66,7 @@ if [ "$KIND" = docker ]; then
   cat > "$STAGE/$CMD" <<'EOF'
 #!/usr/bin/env bash
 set -euo pipefail
-slug='postgres-migration-checker'; cmd="localtools-$slug"; image=':1.0.3'
+slug='postgres-migration-checker'; cmd="localtools-$slug"; image=':1.0.4'
 self="${BASH_SOURCE[0]}"
 while [ -L "$self" ]; do
   parent="$(cd -P "$(dirname "$self")" && pwd)"; self="$(readlink "$self")"
@@ -102,7 +102,7 @@ if $serve; then
   own() { curl -fsS --max-time 1 "$url/api/health" 2>/dev/null | grep -q '"tool": *"'"$slug"'"'; }
   if own; then echo "$cmd already running at $url"; [ "$no_open" = 1 ] || browser; exit 0; fi
   if [ "$no_open" != 1 ]; then (for _ in $(seq 90); do if own; then browser; break; fi; sleep 1; done) & fi
-  echo "$cmd 1.0.3 running at $url  (Ctrl+C to stop; choose --port N for another port)"
+  echo "$cmd 1.0.4 running at $url  (Ctrl+C to stop; choose --port N for another port)"
   exec docker run --rm --name "$cmd-$port" --label "localtools.install=$dir" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -p "127.0.0.1:$port:$port" "$image" serve --no-open --port "$port"
 fi
 exec docker run --rm -i --network none --user "$(id -u):$(id -g)" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -v "$PWD:/work" -w /work "$image" "$@"

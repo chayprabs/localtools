@@ -1,4 +1,4 @@
-# localtools installer for Postgres Migration Checker (postgres-migration-checker 1.0.3). Windows PowerShell 5.1+, no admin.
+# localtools installer for Postgres Migration Checker (postgres-migration-checker 1.0.4). Windows PowerShell 5.1+, no admin.
 # Usage: irm https://raw.githubusercontent.com/chayprabs/localtools/main/postgres-migration-checker/install.ps1 | iex
 # Re-running updates. Set $env:LOCALTOOLS_NO_OPEN='1' to skip launching the tool afterwards.
 # Wrapped in a script block so `irm | iex` never leaks settings into, or exits, the caller's session.
@@ -7,8 +7,8 @@ $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 
-$Slug = 'postgres-migration-checker'; $Name = 'Postgres Migration Checker'; $Version = '1.0.3'; $Port = 47116; $Kind = 'py'
-$Url = 'https://github.com/chayprabs/localtools/releases/download/postgres-migration-checker-v1.0.3/postgres-migration-checker-1.0.3-windows-x64.zip'; $Sha = 'e9ee839ef08bc25124e6bee232dace1f7dcc234da28769e3714141da29a806da'; $Image = ''
+$Slug = 'postgres-migration-checker'; $Name = 'Postgres Migration Checker'; $Version = '1.0.4'; $Port = 47116; $Kind = 'py'
+$Url = 'https://github.com/chayprabs/localtools/releases/download/postgres-migration-checker-v1.0.4/postgres-migration-checker-1.0.4-windows-x64.zip'; $Sha = 'dc6deaaba44e95fba4c927c81338fe9bffe3f20daeda30202813f36bf28401f6'; $Image = ''
 $Cmd = "localtools-$Slug"
 $Root = if ($env:LOCALTOOLS_HOME) { $env:LOCALTOOLS_HOME } else { Join-Path $env:USERPROFILE '.localtools' }
 $Dir = Join-Path $Root $Slug
@@ -45,7 +45,7 @@ try {
 $ErrorActionPreference = 'Continue'
 $a = @($args); $first = if ($a.Count) { [string]$a[0] } else { 'serve' }
 $dir = $PSScriptRoot; $root = Split-Path -Parent $dir
-$cmd = 'localtools-postgres-migration-checker'; $image = ':1.0.3'
+$cmd = 'localtools-postgres-migration-checker'; $image = ':1.0.4'
 if ($first -in @('update','uninstall')) {
   $shim = Join-Path (Join-Path $root 'bin') "$cmd.cmd"
   if (-not (Test-Path (Join-Path $dir 'installed.txt')) -or -not (Test-Path $shim) -or -not ((Get-Content -Raw $shim).Contains((Join-Path $dir "$cmd.cmd")))) {
@@ -74,7 +74,7 @@ if ($first -match '^(serve|--no-open|--port(?:=.*)?)$') {
   if (-not $noOpen) {
     Start-Job -ArgumentList $url { param($url) for ($i=0; $i -lt 90; $i++) { try { $h=Invoke-RestMethod "$url/api/health" -TimeoutSec 1; if ($h.tool -eq 'postgres-migration-checker') { Start-Process "$url/"; return } } catch {}; Start-Sleep 1 } } | Out-Null
   }
-  Write-Host "$cmd 1.0.3 running at $url  (Ctrl+C to stop; choose --port N for another port)"
+  Write-Host "$cmd 1.0.4 running at $url  (Ctrl+C to stop; choose --port N for another port)"
   & docker run --rm --name "$cmd-$port" --label "localtools.install=$dir" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -p "127.0.0.1:${port}:$port" $image serve --no-open --port $port
   exit $LASTEXITCODE
 }

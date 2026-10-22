@@ -15,3 +15,7 @@ Safer CHECK and foreign-key SQL keeps quotes on reserved constraint names. A bin
 ## 1.0.3 (2026-10-18)
 
 CREATE TABLE IF NOT EXISTS no longer hides later heavy DDL on a table that may already exist. ALTER TYPE follows the full binary-coercible cast set (text to varchar, xml to text, int4/oid, wider precision); timestamp to timestamptz is flagged as UTC-only. SET (user_catalog_table) takes ACCESS EXCLUSIVE. Flyway files with only non-transactional statements run without a transaction. Placeholder snippets are commented out. UI: unclipped transaction select, padded results.
+
+## 1.0.4 (2026-10-22)
+
+No false rewrite findings for timestamp/time to precision 6, dropped interval field restrictions or array element relabels (varchar[] to text[]); browser disconnects no longer print a traceback; reproducible Intel macOS build.
