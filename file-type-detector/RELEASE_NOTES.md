@@ -15,3 +15,7 @@ Detects ISO 9660/UDF, DMG, VHD/VHDX, VMDK and QCOW images; archive entries that 
 ## 1.0.3 (2026-10-21)
 
 Preserve text, JSON and JPEG primary types when PDF headers occur inside content; accept primary PDF headers only at offset zero or after a UTF-8 BOM and line breaks. Report internal PDF signatures as possible-polyglot warnings without claiming validation. Catch U+2800/U+3164 blank padding in loose files and ZIP entries. Refresh shared kit assets, add selected-file removal and clear stale results on changed input.
+
+## 1.0.4 (2026-10-22)
+
+Minor sweep: every invisible padding character class (Unicode White_Space, default-ignorable, format characters such as U+FFA0, U+115F, U+180E, U+00AD, U+034F) now triggers double-extension/padded-name findings in files and archive entries. PDF polyglots are reported (risk) only when a versioned %PDF-x.y header in the first 1 KiB is matched by a PDF trailer at the end; text that merely quotes %PDF- gets no finding. PDFs with leading spaces/tabs are typed as PDF. File list: aligned size column and a Clear all button beyond 50 files. Runtime and kit refreshed.

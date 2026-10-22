@@ -1,4 +1,4 @@
-# localtools installer for File Type Detector (file-type-detector 1.0.3). Windows PowerShell 5.1+, no admin.
+# localtools installer for File Type Detector (file-type-detector 1.0.4). Windows PowerShell 5.1+, no admin.
 # Usage: irm https://raw.githubusercontent.com/chayprabs/localtools/main/file-type-detector/install.ps1 | iex
 # Re-running updates. Set $env:LOCALTOOLS_NO_OPEN='1' to skip launching the tool afterwards.
 # Wrapped in a script block so `irm | iex` never leaks settings into, or exits, the caller's session.
@@ -7,8 +7,8 @@ $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 
-$Slug = 'file-type-detector'; $Name = 'File Type Detector'; $Version = '1.0.3'; $Port = 47101; $Kind = 'bin'
-$Url = 'https://github.com/chayprabs/localtools/releases/download/file-type-detector-v1.0.3/file-type-detector-1.0.3-windows-x64.zip'; $Sha = '9f46c95f3d1b0363fda279e14a4bdb3bc0efc172c17f8e5481254806ba115cf4'; $Image = ''
+$Slug = 'file-type-detector'; $Name = 'File Type Detector'; $Version = '1.0.4'; $Port = 47101; $Kind = 'bin'
+$Url = 'https://github.com/chayprabs/localtools/releases/download/file-type-detector-v1.0.4/file-type-detector-1.0.4-windows-x64.zip'; $Sha = '15a40ea307e187f7b0c18fe76a8ddcbc1d2ef8b229a9470f8bd7a1720c170e6b'; $Image = ''
 $Cmd = "localtools-$Slug"
 $Root = if ($env:LOCALTOOLS_HOME) { $env:LOCALTOOLS_HOME } else { Join-Path $env:USERPROFILE '.localtools' }
 $Dir = Join-Path $Root $Slug
@@ -45,7 +45,7 @@ try {
 $ErrorActionPreference = 'Continue'
 $a = @($args); $first = if ($a.Count) { [string]$a[0] } else { 'serve' }
 $dir = $PSScriptRoot; $root = Split-Path -Parent $dir
-$cmd = 'localtools-file-type-detector'; $image = ':1.0.3'
+$cmd = 'localtools-file-type-detector'; $image = ':1.0.4'
 if ($first -in @('update','uninstall')) {
   $shim = Join-Path (Join-Path $root 'bin') "$cmd.cmd"
   if (-not (Test-Path (Join-Path $dir 'installed.txt')) -or -not (Test-Path $shim) -or -not ((Get-Content -Raw $shim).Contains((Join-Path $dir "$cmd.cmd")))) {
@@ -74,7 +74,7 @@ if ($first -match '^(serve|--no-open|--port(?:=.*)?)$') {
   if (-not $noOpen) {
     Start-Job -ArgumentList $url { param($url) for ($i=0; $i -lt 90; $i++) { try { $h=Invoke-RestMethod "$url/api/health" -TimeoutSec 1; if ($h.tool -eq 'file-type-detector') { Start-Process "$url/"; return } } catch {}; Start-Sleep 1 } } | Out-Null
   }
-  Write-Host "$cmd 1.0.3 running at $url  (Ctrl+C to stop; choose --port N for another port)"
+  Write-Host "$cmd 1.0.4 running at $url  (Ctrl+C to stop; choose --port N for another port)"
   & docker run --rm --name "$cmd-$port" --label "localtools.install=$dir" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -p "127.0.0.1:${port}:$port" $image serve --no-open --port $port
   exit $LASTEXITCODE
 }

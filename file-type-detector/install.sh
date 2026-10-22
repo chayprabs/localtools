@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for File Type Detector (file-type-detector 1.0.3). macOS / Linux, no sudo.
+# localtools installer for File Type Detector (file-type-detector 1.0.4). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/file-type-detector/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='file-type-detector'; NAME='File Type Detector'; VERSION='1.0.3'; PORT='47101'; KIND='bin'; IMAGE=''
+SLUG='file-type-detector'; NAME='File Type Detector'; VERSION='1.0.4'; PORT='47101'; KIND='bin'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -38,10 +38,10 @@ fi
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/file-type-detector-v1.0.3/file-type-detector-1.0.3-linux-arm64.zip'; SHA='8163f54f86a917789ffefde4ccaacef23d8505dd3158723634a1941ebf397c2c' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/file-type-detector-v1.0.3/file-type-detector-1.0.3-linux-x64.zip'; SHA='5b6cbd593676229c6b45b6ee70c6bfcf76afc80303bb5df09b4331808e5f8f1c' ;;
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/file-type-detector-v1.0.3/file-type-detector-1.0.3-macos-arm64.zip'; SHA='82e71e89bb6f2f0c87372acafc511cbe192f57d7d2fa52bc2f2d3ec05d0e587d' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/file-type-detector-v1.0.3/file-type-detector-1.0.3-macos-x64.zip'; SHA='e0b4fd531940724715f141bc39fbeddd1766905f333cf3407d22bc0630b2a867' ;;
+  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/file-type-detector-v1.0.4/file-type-detector-1.0.4-linux-arm64.zip'; SHA='059ae1ab88a6002a73d4aad6134b800916320c1ec139b54ccdd3670683252d95' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/file-type-detector-v1.0.4/file-type-detector-1.0.4-linux-x64.zip'; SHA='e08d40ab188da67a8f5fd7a8d735422b0f93b008cc5ee8f2885bbab76380d8a1' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/file-type-detector-v1.0.4/file-type-detector-1.0.4-macos-arm64.zip'; SHA='cffce5fe13a653ee170375b2ac25f9abc2ae4281fe573580c881136fca28690b' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/file-type-detector-v1.0.4/file-type-detector-1.0.4-macos-x64.zip'; SHA='284f5b34053ba7c8c71bd6be86a4fb3c5b72e27b70715122fc9081734bc2f96d' ;;
 esac
 
 if [ "$KIND" = docker ]; then
@@ -67,7 +67,7 @@ if [ "$KIND" = docker ]; then
   cat > "$STAGE/$CMD" <<'EOF'
 #!/usr/bin/env bash
 set -euo pipefail
-slug='file-type-detector'; cmd="localtools-$slug"; image=':1.0.3'
+slug='file-type-detector'; cmd="localtools-$slug"; image=':1.0.4'
 self="${BASH_SOURCE[0]}"
 while [ -L "$self" ]; do
   parent="$(cd -P "$(dirname "$self")" && pwd)"; self="$(readlink "$self")"
@@ -103,7 +103,7 @@ if $serve; then
   own() { curl -fsS --max-time 1 "$url/api/health" 2>/dev/null | grep -q '"tool": *"'"$slug"'"'; }
   if own; then echo "$cmd already running at $url"; [ "$no_open" = 1 ] || browser; exit 0; fi
   if [ "$no_open" != 1 ]; then (for _ in $(seq 90); do if own; then browser; break; fi; sleep 1; done) & fi
-  echo "$cmd 1.0.3 running at $url  (Ctrl+C to stop; choose --port N for another port)"
+  echo "$cmd 1.0.4 running at $url  (Ctrl+C to stop; choose --port N for another port)"
   exec docker run --rm --name "$cmd-$port" --label "localtools.install=$dir" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -p "127.0.0.1:$port:$port" "$image" serve --no-open --port "$port"
 fi
 exec docker run --rm -i --network none --user "$(id -u):$(id -g)" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -v "$PWD:/work" -w /work "$image" "$@"
