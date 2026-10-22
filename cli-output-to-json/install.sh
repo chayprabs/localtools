@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for CLI Output to JSON (cli-output-to-json 1.0.1). macOS / Linux, no sudo.
+# localtools installer for CLI Output to JSON (cli-output-to-json 1.0.2). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/cli-output-to-json/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='cli-output-to-json'; NAME='CLI Output to JSON'; VERSION='1.0.1'; PORT='47119'; KIND='py'; IMAGE=''
+SLUG='cli-output-to-json'; NAME='CLI Output to JSON'; VERSION='1.0.2'; PORT='47119'; KIND='py'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -38,9 +38,9 @@ fi
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/cli-output-to-json-v1.0.1/cli-output-to-json-1.0.1-macos-arm64.zip'; SHA='d471961e22f7c728b5b592abc47cd5966bd4f7c5d8e9dd47dd1de26bd3d6a0d0' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/cli-output-to-json-v1.0.1/cli-output-to-json-1.0.1-macos-x64.zip'; SHA='a677d299755a135c6de1464148589655e3a91ebc3f3555c0e07d320a70f77a24' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/cli-output-to-json-v1.0.1/cli-output-to-json-1.0.1-linux-x64.zip'; SHA='d0029614e9fa7fa8135a227387f552f7708d2446d14601c559b6d4350ccb658e' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/cli-output-to-json-v1.0.2/cli-output-to-json-1.0.2-macos-arm64.zip'; SHA='9652a19bd732961bac6a11f5764ed2031f0a685edcd6cc3a10cc382d8180b2ce' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/cli-output-to-json-v1.0.2/cli-output-to-json-1.0.2-macos-x64.zip'; SHA='e90ca9492c59734cfcc5d8d9f427110942176e0c49bbd967d4ed770971413f47' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/cli-output-to-json-v1.0.2/cli-output-to-json-1.0.2-linux-x64.zip'; SHA='24072f52b6d5ab14bee5cf74d9091c4012a3873307227ae8ddaba256caa4255b' ;;
 esac
 
 if [ "$KIND" = docker ]; then
@@ -66,7 +66,7 @@ if [ "$KIND" = docker ]; then
   cat > "$STAGE/$CMD" <<'EOF'
 #!/usr/bin/env bash
 set -euo pipefail
-slug='cli-output-to-json'; cmd="localtools-$slug"; image=':1.0.1'
+slug='cli-output-to-json'; cmd="localtools-$slug"; image=':1.0.2'
 self="${BASH_SOURCE[0]}"
 while [ -L "$self" ]; do
   parent="$(cd -P "$(dirname "$self")" && pwd)"; self="$(readlink "$self")"
@@ -102,7 +102,7 @@ if $serve; then
   own() { curl -fsS --max-time 1 "$url/api/health" 2>/dev/null | grep -q '"tool": *"'"$slug"'"'; }
   if own; then echo "$cmd already running at $url"; [ "$no_open" = 1 ] || browser; exit 0; fi
   if [ "$no_open" != 1 ]; then (for _ in $(seq 90); do if own; then browser; break; fi; sleep 1; done) & fi
-  echo "$cmd 1.0.1 running at $url  (Ctrl+C to stop; choose --port N for another port)"
+  echo "$cmd 1.0.2 running at $url  (Ctrl+C to stop; choose --port N for another port)"
   exec docker run --rm --name "$cmd-$port" --label "localtools.install=$dir" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -p "127.0.0.1:$port:$port" "$image" serve --no-open --port "$port"
 fi
 exec docker run --rm -i --network none --user "$(id -u):$(id -g)" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -v "$PWD:/work" -w /work "$image" "$@"

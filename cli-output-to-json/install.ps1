@@ -1,4 +1,4 @@
-# localtools installer for CLI Output to JSON (cli-output-to-json 1.0.1). Windows PowerShell 5.1+, no admin.
+# localtools installer for CLI Output to JSON (cli-output-to-json 1.0.2). Windows PowerShell 5.1+, no admin.
 # Usage: irm https://raw.githubusercontent.com/chayprabs/localtools/main/cli-output-to-json/install.ps1 | iex
 # Re-running updates. Set $env:LOCALTOOLS_NO_OPEN='1' to skip launching the tool afterwards.
 # Wrapped in a script block so `irm | iex` never leaks settings into, or exits, the caller's session.
@@ -7,8 +7,8 @@ $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 
-$Slug = 'cli-output-to-json'; $Name = 'CLI Output to JSON'; $Version = '1.0.1'; $Port = 47119; $Kind = 'py'
-$Url = 'https://github.com/chayprabs/localtools/releases/download/cli-output-to-json-v1.0.1/cli-output-to-json-1.0.1-windows-x64.zip'; $Sha = 'a1bf9d432f71e3d8147914dcf7b801c56fcfa3504d44597e32b42684a538e415'; $Image = ''
+$Slug = 'cli-output-to-json'; $Name = 'CLI Output to JSON'; $Version = '1.0.2'; $Port = 47119; $Kind = 'py'
+$Url = 'https://github.com/chayprabs/localtools/releases/download/cli-output-to-json-v1.0.2/cli-output-to-json-1.0.2-windows-x64.zip'; $Sha = '6ba49450f0283636d0fa9459db20ec9812b5f218f2845403789f25ace307d0e9'; $Image = ''
 $Cmd = "localtools-$Slug"
 $Root = if ($env:LOCALTOOLS_HOME) { $env:LOCALTOOLS_HOME } else { Join-Path $env:USERPROFILE '.localtools' }
 $Dir = Join-Path $Root $Slug
@@ -45,7 +45,7 @@ try {
 $ErrorActionPreference = 'Continue'
 $a = @($args); $first = if ($a.Count) { [string]$a[0] } else { 'serve' }
 $dir = $PSScriptRoot; $root = Split-Path -Parent $dir
-$cmd = 'localtools-cli-output-to-json'; $image = ':1.0.1'
+$cmd = 'localtools-cli-output-to-json'; $image = ':1.0.2'
 if ($first -in @('update','uninstall')) {
   $shim = Join-Path (Join-Path $root 'bin') "$cmd.cmd"
   if (-not (Test-Path (Join-Path $dir 'installed.txt')) -or -not (Test-Path $shim) -or -not ((Get-Content -Raw $shim).Contains((Join-Path $dir "$cmd.cmd")))) {
@@ -74,7 +74,7 @@ if ($first -match '^(serve|--no-open|--port(?:=.*)?)$') {
   if (-not $noOpen) {
     Start-Job -ArgumentList $url { param($url) for ($i=0; $i -lt 90; $i++) { try { $h=Invoke-RestMethod "$url/api/health" -TimeoutSec 1; if ($h.tool -eq 'cli-output-to-json') { Start-Process "$url/"; return } } catch {}; Start-Sleep 1 } } | Out-Null
   }
-  Write-Host "$cmd 1.0.1 running at $url  (Ctrl+C to stop; choose --port N for another port)"
+  Write-Host "$cmd 1.0.2 running at $url  (Ctrl+C to stop; choose --port N for another port)"
   & docker run --rm --name "$cmd-$port" --label "localtools.install=$dir" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -p "127.0.0.1:${port}:$port" $image serve --no-open --port $port
   exit $LASTEXITCODE
 }

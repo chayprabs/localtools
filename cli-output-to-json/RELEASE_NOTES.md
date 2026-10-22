@@ -7,3 +7,7 @@ First release. Paste or upload command output and parse it offline with jc 1.26.
 ## 1.0.1 (2026-10-18)
 
 macOS parses again. Setting the 768 MiB address-space cap raised on macOS and the worker exited before writing a result, so POST /api/parse returned 422. That call is ignored when the OS refuses it. Linux still applies the cap.
+
+## 1.0.2 (2026-10-22)
+
+Suggestion buttons wrap on narrow screens instead of widening the page; font ligatures are off for all user text and code; rejected uploads are drained before the reply.
