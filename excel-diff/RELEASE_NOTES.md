@@ -30,3 +30,7 @@
 
 - Many scattered row inserts or deletions align exactly even when a column changed in every row.
 - Positional fallbacks are flagged: "approximate": true with a reason in JSON, a CLI warning and a UI banner suggesting key columns.
+
+## 1.0.5 (2026-10-22)
+
+Minor sweep: when several columns are equally filled, row alignment checks the most distinct columns first, so Y/N flag columns placed before an ID column no longer mis-pair an inserted row. README documents that a deleted row directly next to an inserted row is shown as one modified row (use --key when row identity matters). Runtime refreshed.
