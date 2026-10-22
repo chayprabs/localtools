@@ -2,7 +2,7 @@
   "slug": "graphql-diff",
   "name": "GraphQL Diff",
   "command": "localtools-graphql-diff",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "port": 47112,
   "kind": "js",
   "registries": {

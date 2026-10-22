@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for GraphQL Diff (graphql-diff 1.0.1). macOS / Linux, no sudo.
+# localtools installer for GraphQL Diff (graphql-diff 1.0.2). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/graphql-diff/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='graphql-diff'; NAME='GraphQL Diff'; VERSION='1.0.1'; PORT='47112'; KIND='js'; IMAGE=''
+SLUG='graphql-diff'; NAME='GraphQL Diff'; VERSION='1.0.2'; PORT='47112'; KIND='js'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -38,10 +38,10 @@ fi
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/graphql-diff-v1.0.1/graphql-diff-1.0.1-macos-arm64.zip'; SHA='fc2ddb00ac14709ec77144557380baeb3a0452ceb61e96a4cbcf92741ab9a415' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/graphql-diff-v1.0.1/graphql-diff-1.0.1-macos-x64.zip'; SHA='bb1215e001bed813f3945fe31772181be4d80ac65f08a830a2c9f87e3eafe707' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/graphql-diff-v1.0.1/graphql-diff-1.0.1-linux-x64.zip'; SHA='43f579e930223d736d0dcdc49876c47f308f96e60bad34623484b0cf6515ae66' ;;
-  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/graphql-diff-v1.0.1/graphql-diff-1.0.1-linux-arm64.zip'; SHA='5a2a8789a7ae55a9d1994a9306f390c395ecdf5a9cbf1805056c95ae2f78c8be' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/graphql-diff-v1.0.2/graphql-diff-1.0.2-macos-arm64.zip'; SHA='efaac7ad985043dc57c8ebe3dbe0181f4d1d31f227f8e889a93a44a4868b81da' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/graphql-diff-v1.0.2/graphql-diff-1.0.2-macos-x64.zip'; SHA='a109a64601b07fa96e641289e98b8c8df621cc47a41ba7f876d99c14c11b0617' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/graphql-diff-v1.0.2/graphql-diff-1.0.2-linux-x64.zip'; SHA='8a3e7c88d61bb070133b774256b287c9dbd09eec973e7d308c467ac7b54aae4a' ;;
+  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/graphql-diff-v1.0.2/graphql-diff-1.0.2-linux-arm64.zip'; SHA='160ec1d2b5f25397b80528360f5ca51b2a4911ac9b73ab8f70c8c403081a8de5' ;;
 esac
 
 if [ "$KIND" = docker ]; then
@@ -67,7 +67,7 @@ if [ "$KIND" = docker ]; then
   cat > "$STAGE/$CMD" <<'EOF'
 #!/usr/bin/env bash
 set -euo pipefail
-slug='graphql-diff'; cmd="localtools-$slug"; image=':1.0.1'
+slug='graphql-diff'; cmd="localtools-$slug"; image=':1.0.2'
 self="${BASH_SOURCE[0]}"
 while [ -L "$self" ]; do
   parent="$(cd -P "$(dirname "$self")" && pwd)"; self="$(readlink "$self")"
@@ -103,7 +103,7 @@ if $serve; then
   own() { curl -fsS --max-time 1 "$url/api/health" 2>/dev/null | grep -q '"tool": *"'"$slug"'"'; }
   if own; then echo "$cmd already running at $url"; [ "$no_open" = 1 ] || browser; exit 0; fi
   if [ "$no_open" != 1 ]; then (for _ in $(seq 90); do if own; then browser; break; fi; sleep 1; done) & fi
-  echo "$cmd 1.0.1 running at $url  (Ctrl+C to stop; choose --port N for another port)"
+  echo "$cmd 1.0.2 running at $url  (Ctrl+C to stop; choose --port N for another port)"
   exec docker run --rm --name "$cmd-$port" --label "localtools.install=$dir" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -p "127.0.0.1:$port:$port" "$image" serve --no-open --port "$port"
 fi
 exec docker run --rm -i --network none --user "$(id -u):$(id -g)" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -v "$PWD:/work" -w /work "$image" "$@"
