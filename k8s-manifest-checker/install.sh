@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for Kubernetes Manifest Checker (k8s-manifest-checker 1.0.1). macOS / Linux, no sudo.
+# localtools installer for Kubernetes Manifest Checker (k8s-manifest-checker 1.0.2). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/k8s-manifest-checker/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='k8s-manifest-checker'; NAME='Kubernetes Manifest Checker'; VERSION='1.0.1'; PORT='47114'; KIND='bin'; IMAGE=''
+SLUG='k8s-manifest-checker'; NAME='Kubernetes Manifest Checker'; VERSION='1.0.2'; PORT='47114'; KIND='bin'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -38,10 +38,10 @@ fi
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/k8s-manifest-checker-v1.0.1/k8s-manifest-checker-1.0.1-macos-arm64.zip'; SHA='f9c0ebeae2b632ab90bc38e9b7c96dac9a6aa1d5d1bdebb5980ff29446afbbd2' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/k8s-manifest-checker-v1.0.1/k8s-manifest-checker-1.0.1-macos-x64.zip'; SHA='bf137f7a23649be927849515068d6b119f78024cac1656ebf7d76abdce8a7545' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/k8s-manifest-checker-v1.0.1/k8s-manifest-checker-1.0.1-linux-x64.zip'; SHA='52ed5e48afa89d8f607984ed8d34fb794fac325f3c53b06df975d73b0cd7d3ec' ;;
-  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/k8s-manifest-checker-v1.0.1/k8s-manifest-checker-1.0.1-linux-arm64.zip'; SHA='76b443f7675393a834e4cccad99a5cdec2664dff6492c71391421549ef93ad97' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/k8s-manifest-checker-v1.0.2/k8s-manifest-checker-1.0.2-macos-arm64.zip'; SHA='1e173d98770d230493804174f013e0de1bd315b13812d5c231b767163302fe60' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/k8s-manifest-checker-v1.0.2/k8s-manifest-checker-1.0.2-macos-x64.zip'; SHA='a9f50aaa5c1b70bd4afab1f6d107db24997539c2e976feac8fab96ec494b85ee' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/k8s-manifest-checker-v1.0.2/k8s-manifest-checker-1.0.2-linux-x64.zip'; SHA='e82ef17b1b28b3126fa66425d6cf0ac41f73e11934096a4ebe02d7231d25fee1' ;;
+  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/k8s-manifest-checker-v1.0.2/k8s-manifest-checker-1.0.2-linux-arm64.zip'; SHA='96ab88f0549706c6328efc24b53d9189aac1f170b284fd651d961bd0cf879a92' ;;
 esac
 
 if [ "$KIND" = docker ]; then
@@ -67,7 +67,7 @@ if [ "$KIND" = docker ]; then
   cat > "$STAGE/$CMD" <<'EOF'
 #!/usr/bin/env bash
 set -euo pipefail
-slug='k8s-manifest-checker'; cmd="localtools-$slug"; image=':1.0.1'
+slug='k8s-manifest-checker'; cmd="localtools-$slug"; image=':1.0.2'
 self="${BASH_SOURCE[0]}"
 while [ -L "$self" ]; do
   parent="$(cd -P "$(dirname "$self")" && pwd)"; self="$(readlink "$self")"
@@ -103,7 +103,7 @@ if $serve; then
   own() { curl -fsS --max-time 1 "$url/api/health" 2>/dev/null | grep -q '"tool": *"'"$slug"'"'; }
   if own; then echo "$cmd already running at $url"; [ "$no_open" = 1 ] || browser; exit 0; fi
   if [ "$no_open" != 1 ]; then (for _ in $(seq 90); do if own; then browser; break; fi; sleep 1; done) & fi
-  echo "$cmd 1.0.1 running at $url  (Ctrl+C to stop; choose --port N for another port)"
+  echo "$cmd 1.0.2 running at $url  (Ctrl+C to stop; choose --port N for another port)"
   exec docker run --rm --name "$cmd-$port" --label "localtools.install=$dir" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -p "127.0.0.1:$port:$port" "$image" serve --no-open --port "$port"
 fi
 exec docker run --rm -i --network none --user "$(id -u):$(id -g)" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -v "$PWD:/work" -w /work "$image" "$@"

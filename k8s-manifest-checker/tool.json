@@ -2,7 +2,7 @@
   "slug": "k8s-manifest-checker",
   "name": "Kubernetes Manifest Checker",
   "command": "localtools-k8s-manifest-checker",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "port": 47114,
   "kind": "bin",
   "registries": {
