@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for Terraform Plan Viewer (terraform-plan-viewer 1.0.2). macOS / Linux, no sudo.
+# localtools installer for Terraform Plan Viewer (terraform-plan-viewer 1.0.3). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/terraform-plan-viewer/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='terraform-plan-viewer'; NAME='Terraform Plan Viewer'; VERSION='1.0.2'; PORT='47115'; KIND='bin'; IMAGE=''
+SLUG='terraform-plan-viewer'; NAME='Terraform Plan Viewer'; VERSION='1.0.3'; PORT='47115'; KIND='bin'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -38,10 +38,10 @@ fi
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/terraform-plan-viewer-v1.0.2/terraform-plan-viewer-1.0.2-linux-arm64.zip'; SHA='40a5e233485d20b9a08f5b18cb3d11aa47f985339a2f8b3a2789aee89eaec64f' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/terraform-plan-viewer-v1.0.2/terraform-plan-viewer-1.0.2-linux-x64.zip'; SHA='a74f17a0a1a7246f26851d76b7eb65218a4ae4029f54c0260b0e4393f7a2af08' ;;
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/terraform-plan-viewer-v1.0.2/terraform-plan-viewer-1.0.2-macos-arm64.zip'; SHA='1acee41c20a129274c44953790aa5b5fc9af15bea4a748a50d8b105b4d47783b' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/terraform-plan-viewer-v1.0.2/terraform-plan-viewer-1.0.2-macos-x64.zip'; SHA='a5d0c75b8cc64c630e86cc58747b5d2c9fe08ec9c4f4fcd2283b60ee4b22e754' ;;
+  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/terraform-plan-viewer-v1.0.3/terraform-plan-viewer-1.0.3-linux-arm64.zip'; SHA='dddb61851abf3a000e0485c7b72e87b54ec4e16ba7d82c371a20eabc39920056' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/terraform-plan-viewer-v1.0.3/terraform-plan-viewer-1.0.3-linux-x64.zip'; SHA='ac002bdfd61863e75c4b983ed83550ed0f055171301c704a1dc7c5d023550c44' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/terraform-plan-viewer-v1.0.3/terraform-plan-viewer-1.0.3-macos-arm64.zip'; SHA='6f9be3d1d28460564b5029c00523689ed7702b41e256057805697bbec5ec7e87' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/terraform-plan-viewer-v1.0.3/terraform-plan-viewer-1.0.3-macos-x64.zip'; SHA='2c1c1c713e834c015c4ad377747b071c9efeb39a0220205d5814a7e2b605da1a' ;;
 esac
 
 if [ "$KIND" = docker ]; then
@@ -67,7 +67,7 @@ if [ "$KIND" = docker ]; then
   cat > "$STAGE/$CMD" <<'EOF'
 #!/usr/bin/env bash
 set -euo pipefail
-slug='terraform-plan-viewer'; cmd="localtools-$slug"; image=':1.0.2'
+slug='terraform-plan-viewer'; cmd="localtools-$slug"; image=':1.0.3'
 self="${BASH_SOURCE[0]}"
 while [ -L "$self" ]; do
   parent="$(cd -P "$(dirname "$self")" && pwd)"; self="$(readlink "$self")"
@@ -103,7 +103,7 @@ if $serve; then
   own() { curl -fsS --max-time 1 "$url/api/health" 2>/dev/null | grep -q '"tool": *"'"$slug"'"'; }
   if own; then echo "$cmd already running at $url"; [ "$no_open" = 1 ] || browser; exit 0; fi
   if [ "$no_open" != 1 ]; then (for _ in $(seq 90); do if own; then browser; break; fi; sleep 1; done) & fi
-  echo "$cmd 1.0.2 running at $url  (Ctrl+C to stop; choose --port N for another port)"
+  echo "$cmd 1.0.3 running at $url  (Ctrl+C to stop; choose --port N for another port)"
   exec docker run --rm --name "$cmd-$port" --label "localtools.install=$dir" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -p "127.0.0.1:$port:$port" "$image" serve --no-open --port "$port"
 fi
 exec docker run --rm -i --network none --user "$(id -u):$(id -g)" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -v "$PWD:/work" -w /work "$image" "$@"

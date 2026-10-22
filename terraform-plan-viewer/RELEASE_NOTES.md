@@ -11,3 +11,7 @@ Fail-closed redaction of sensitive values (type changes, unknown aggregates, dee
 ## 1.0.2 (2026-10-18)
 
 The sensitive-equality guard no longer hides ordinary values: only marked strings of 8+ bytes (any length within the same resource), never bools, numbers or short strings; hidden values are labelled (matches a sensitive value). Import IDs and check messages pass through the guard. Untraced blast radii past the graph limit say unknown.
+
+## 1.0.3 (2026-10-22)
+
+The sensitive-equality guard no longer hides ordinary values: only marked strings of 8+ bytes (any length within the same resource), never bools, numbers or short strings; hidden values are labelled (matches a sensitive value). Import IDs and check messages pass through the guard. Untraced blast radii past the graph limit say unknown.
