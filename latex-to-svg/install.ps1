@@ -1,4 +1,4 @@
-# localtools installer for LaTeX to SVG (latex-to-svg 1.0.2). Windows PowerShell 5.1+, no admin.
+# localtools installer for LaTeX to SVG (latex-to-svg 1.0.3). Windows PowerShell 5.1+, no admin.
 # Usage: irm https://raw.githubusercontent.com/chayprabs/localtools/main/latex-to-svg/install.ps1 | iex
 # Re-running updates. Set $env:LOCALTOOLS_NO_OPEN='1' to skip launching the tool afterwards.
 # Wrapped in a script block so `irm | iex` never leaks settings into, or exits, the caller's session.
@@ -7,8 +7,8 @@ $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 
-$Slug = 'latex-to-svg'; $Name = 'LaTeX to SVG'; $Version = '1.0.2'; $Port = 47133; $Kind = 'js'
-$Url = 'https://github.com/chayprabs/localtools/releases/download/latex-to-svg-v1.0.2/latex-to-svg-1.0.2-windows-x64.zip'; $Sha = '6e10a3d6ae02dde59146ccbe9a067e2481504138aa59aec950a8fa7c92962b21'; $Image = ''
+$Slug = 'latex-to-svg'; $Name = 'LaTeX to SVG'; $Version = '1.0.3'; $Port = 47133; $Kind = 'js'
+$Url = 'https://github.com/chayprabs/localtools/releases/download/latex-to-svg-v1.0.3/latex-to-svg-1.0.3-windows-x64.zip'; $Sha = '0b9673ec7e5b9859cbe28667a56f4f3a04ceb0017517a87948877ac1d241f116'; $Image = ''
 $Cmd = "localtools-$Slug"
 $Root = if ($env:LOCALTOOLS_HOME) { $env:LOCALTOOLS_HOME } else { Join-Path $env:USERPROFILE '.localtools' }
 $Dir = Join-Path $Root $Slug
@@ -45,7 +45,7 @@ try {
 $ErrorActionPreference = 'Continue'
 $a = @($args); $first = if ($a.Count) { [string]$a[0] } else { 'serve' }
 $dir = $PSScriptRoot; $root = Split-Path -Parent $dir
-$cmd = 'localtools-latex-to-svg'; $image = ':1.0.2'
+$cmd = 'localtools-latex-to-svg'; $image = ':1.0.3'
 if ($first -in @('update','uninstall')) {
   $shim = Join-Path (Join-Path $root 'bin') "$cmd.cmd"
   if (-not (Test-Path (Join-Path $dir 'installed.txt')) -or -not (Test-Path $shim) -or -not ((Get-Content -Raw $shim).Contains((Join-Path $dir "$cmd.cmd")))) {
@@ -74,7 +74,7 @@ if ($first -match '^(serve|--no-open|--port(?:=.*)?)$') {
   if (-not $noOpen) {
     Start-Job -ArgumentList $url { param($url) for ($i=0; $i -lt 90; $i++) { try { $h=Invoke-RestMethod "$url/api/health" -TimeoutSec 1; if ($h.tool -eq 'latex-to-svg') { Start-Process "$url/"; return } } catch {}; Start-Sleep 1 } } | Out-Null
   }
-  Write-Host "$cmd 1.0.2 running at $url  (Ctrl+C to stop; choose --port N for another port)"
+  Write-Host "$cmd 1.0.3 running at $url  (Ctrl+C to stop; choose --port N for another port)"
   & docker run --rm --name "$cmd-$port" --label "localtools.install=$dir" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -p "127.0.0.1:${port}:$port" $image serve --no-open --port $port
   exit $LASTEXITCODE
 }

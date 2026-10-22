@@ -11,3 +11,7 @@ Sanitize SVG/MathML/batch exports, bundle named MathML entities, parse multiline
 ## 1.0.2 (2026-10-20)
 
 Warm workers no longer hang after switching input type or glyph mode (every font range is set up for every MathJax document). .tex batches follow LaTeX rules by extension, Markdown by .md or markers. Colour attributes accept colour tokens only; MathJax internal errors become human messages; \newcommand* accepted.
+
+## 1.0.3 (2026-10-22)
+
+MathML 1 color/background attributes drawn; flat-chain time limit documented; uploads drained before 403.

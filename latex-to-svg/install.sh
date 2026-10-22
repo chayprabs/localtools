@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# localtools installer for LaTeX to SVG (latex-to-svg 1.0.2). macOS / Linux, no sudo.
+# localtools installer for LaTeX to SVG (latex-to-svg 1.0.3). macOS / Linux, no sudo.
 # Usage: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/latex-to-svg/install.sh | bash
 # Re-running updates. LOCALTOOLS_NO_OPEN=1 skips launching the tool afterwards.
 set -euo pipefail
 
-SLUG='latex-to-svg'; NAME='LaTeX to SVG'; VERSION='1.0.2'; PORT='47133'; KIND='js'; IMAGE=''
+SLUG='latex-to-svg'; NAME='LaTeX to SVG'; VERSION='1.0.3'; PORT='47133'; KIND='js'; IMAGE=''
 CMD="localtools-$SLUG"
 ROOT="${LOCALTOOLS_HOME:-$HOME/.localtools}"
 DIR="$ROOT/$SLUG"
@@ -38,10 +38,10 @@ fi
 
 URL=''; SHA=''
 case "$OS-$ARCH" in
-  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/latex-to-svg-v1.0.2/latex-to-svg-1.0.2-macos-arm64.zip'; SHA='81e729e22377bd04993c5c0b382be3e15fa475424cade0ff8583041d5478e8cc' ;;
-  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/latex-to-svg-v1.0.2/latex-to-svg-1.0.2-macos-x64.zip'; SHA='8383d8750d21e1ec9c71feb236c29e42ba63c618cee47aa40713be3fe0dfd697' ;;
-  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/latex-to-svg-v1.0.2/latex-to-svg-1.0.2-linux-x64.zip'; SHA='f1dee7d9ef13c6ead70838a3c28f9bd20eca47c542056d43cbe0103472e91c6c' ;;
-  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/latex-to-svg-v1.0.2/latex-to-svg-1.0.2-linux-arm64.zip'; SHA='77b87fdb47657f0c718bbabc505dd443b3d6b1a1bf316b61ad9f439eda689fa8' ;;
+  macos-arm64) URL='https://github.com/chayprabs/localtools/releases/download/latex-to-svg-v1.0.3/latex-to-svg-1.0.3-macos-arm64.zip'; SHA='fa6662cd3b94ef2121831402428334e96bb235bbb8346de430f19924ae3d7af6' ;;
+  macos-x64) URL='https://github.com/chayprabs/localtools/releases/download/latex-to-svg-v1.0.3/latex-to-svg-1.0.3-macos-x64.zip'; SHA='c6289b18da89e3382a20abf9b7aad2d7e9df1733f88cd14b1dade1a8c00f2b16' ;;
+  linux-x64) URL='https://github.com/chayprabs/localtools/releases/download/latex-to-svg-v1.0.3/latex-to-svg-1.0.3-linux-x64.zip'; SHA='b7d42d148f6c03b5dfa1f4d9df2678f50d67c80ddb167d4c200ba44ad777d800' ;;
+  linux-arm64) URL='https://github.com/chayprabs/localtools/releases/download/latex-to-svg-v1.0.3/latex-to-svg-1.0.3-linux-arm64.zip'; SHA='e2f0453a84ea96e8c819ccaf366722a266196696b4fd9ffe44dd9a815ae7420c' ;;
 esac
 
 if [ "$KIND" = docker ]; then
@@ -67,7 +67,7 @@ if [ "$KIND" = docker ]; then
   cat > "$STAGE/$CMD" <<'EOF'
 #!/usr/bin/env bash
 set -euo pipefail
-slug='latex-to-svg'; cmd="localtools-$slug"; image=':1.0.2'
+slug='latex-to-svg'; cmd="localtools-$slug"; image=':1.0.3'
 self="${BASH_SOURCE[0]}"
 while [ -L "$self" ]; do
   parent="$(cd -P "$(dirname "$self")" && pwd)"; self="$(readlink "$self")"
@@ -103,7 +103,7 @@ if $serve; then
   own() { curl -fsS --max-time 1 "$url/api/health" 2>/dev/null | grep -q '"tool": *"'"$slug"'"'; }
   if own; then echo "$cmd already running at $url"; [ "$no_open" = 1 ] || browser; exit 0; fi
   if [ "$no_open" != 1 ]; then (for _ in $(seq 90); do if own; then browser; break; fi; sleep 1; done) & fi
-  echo "$cmd 1.0.2 running at $url  (Ctrl+C to stop; choose --port N for another port)"
+  echo "$cmd 1.0.3 running at $url  (Ctrl+C to stop; choose --port N for another port)"
   exec docker run --rm --name "$cmd-$port" --label "localtools.install=$dir" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -p "127.0.0.1:$port:$port" "$image" serve --no-open --port "$port"
 fi
 exec docker run --rm -i --network none --user "$(id -u):$(id -g)" --read-only --tmpfs /worktemp:rw,nosuid,nodev,size=384m,mode=1777 --cap-drop ALL --security-opt no-new-privileges -v "$PWD:/work" -w /work "$image" "$@"
