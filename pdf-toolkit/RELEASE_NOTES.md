@@ -23,3 +23,7 @@ Flatten keeps a stored field appearance only when its shown text matches the com
 ## 1.0.5 (2026-10-22)
 
 Non-Latin form values are never drawn as "?": unchanged fields and CID-font appearances are kept byte for byte; a changed value Helvetica cannot draw stays fillable (not flattened) with a warning naming the field; list boxes keep their scroll position.
+
+## 1.0.6 (2026-10-22)
+
+Flatten keeps a stored field appearance only when its decoded text (ToUnicode/CID included) equals the value; otherwise it is redrawn, or, for characters Helvetica cannot draw, the field stays fillable with a warning. Stale, blank and garbled appearances are never baked.
