@@ -21,6 +21,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
+          persist-credentials: false
           fetch-depth: 0
       - id: d
         env:
@@ -63,6 +64,8 @@ jobs:
         shell: bash
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - name: read tool.json
         run: |
           jq() { command jq "$@" | tr -d '\r'; } # jq on Windows prints CRLF
@@ -76,6 +79,12 @@ jobs:
         if: runner.os == 'Windows' && env.FULL == 'true'
         shell: powershell
         run: irm https://raw.githubusercontent.com/chayprabs/localtools/main/${{ matrix.slug }}/install.ps1 | iex
+      - name: anonymous Docker image pull
+        if: runner.os == 'Linux' && env.KIND == 'docker'
+        run: |
+          image=$(jq -r .registries.ghcr "$SLUG/tool.json")
+          # Fresh credential directory proves the public path rather than runner login state.
+          DOCKER_CONFIG=$(mktemp -d) docker pull "$image:$VERSION"
       - name: install (bash)
         if: runner.os != 'Windows' && env.FULL == 'true'
         run: curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/${{ matrix.slug }}/install.sh | bash
@@ -146,6 +155,36 @@ jobs:
           for p in "$R/$SLUG" "$R/bin/$T" "$L"; do [ ! -e "$p" ] || { echo "left behind: $p"; exit 1; }; done
           if onpath; then echo "PATH entry left behind"; exit 1; fi; echo "uninstall ok"
 
+      - name: Docker port forwarding, custom prefix, update and uninstall
+        if: runner.os == 'Linux' && env.KIND == 'docker'
+        run: |
+          export LOCALTOOLS_HOME="$RUNNER_TEMP/office custom prefix"
+          curl -fsSL "https://raw.githubusercontent.com/chayprabs/localtools/main/$SLUG/install.sh" | bash
+          prefix="$LOCALTOOLS_HOME"; T="$prefix/bin/localtools-$SLUG"
+          "$T" --version | grep -F "$VERSION"
+          check_port() {
+            port="$1"
+            for _ in $(seq 90); do curl -fsS "http://127.0.0.1:$port/api/health" | grep -q 'office-converter' && return 0; sleep 1; done
+            cat "$RUNNER_TEMP/office-custom.log"; return 1
+          }
+          LOCALTOOLS_PORT=48135 "$T" --no-open > "$RUNNER_TEMP/office-custom.log" 2>&1 &
+          check_port 48135
+          "$T" --no-open --port 48135 | grep -q 'already running'
+          docker ps -aq --filter "label=localtools.install=$prefix/$SLUG" | xargs -r docker rm -f
+          "$T" serve --port 48136 --no-open > "$RUNNER_TEMP/office-custom.log" 2>&1 &
+          check_port 48136
+          docker ps -aq --filter "label=localtools.install=$prefix/$SLUG" | xargs -r docker rm -f
+          mkdir -p "$RUNNER_TEMP/copied-office-wrapper"
+          cp "$prefix/$SLUG/localtools-$SLUG" "$RUNNER_TEMP/copied-office-wrapper/entry"
+          "$RUNNER_TEMP/copied-office-wrapper/entry" uninstall | grep -q 'not installed by the localtools script'
+          before=$(cat "$prefix/$SLUG/installed.txt")
+          unset LOCALTOOLS_HOME
+          "$T" update
+          test "$(cat "$prefix/$SLUG/installed.txt")" != "$before"
+          "$T" uninstall
+          test ! -e "$prefix/$SLUG"; test ! -e "$T"
+
+
   registries:
     needs: detect
     if: needs.detect.outputs.slugs != '[]'
@@ -157,14 +196,34 @@ jobs:
     runs-on: ${{ matrix.os }}
     env:
       SLUG: ${{ matrix.slug }}
+      LOCALTOOLS_NO_OPEN: "1"
+      PIPX_HOME: ${{ runner.temp }}/pipx-home
+      PIPX_BIN_DIR: ${{ runner.temp }}/pipx-bin
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - shell: bash
         run: |
           jq() { command jq "$@" | tr -d '\r'; }
           # not BREW/SCOOP: the Scoop installer reads $env:SCOOP as its install directory
           { echo "HAS_BREW=$(jq -r .registries.brew "$SLUG/tool.json")"; echo "HAS_SCOOP=$(jq -r .registries.scoop "$SLUG/tool.json")"
+            echo "PYPI_PACKAGE=$(jq -r .registries.pypi "$SLUG/tool.json")"
             echo "VERSION=$(jq -r .version "$SLUG/tool.json")"; } >> "$GITHUB_ENV"
+      - uses: actions/setup-python@v5
+        if: env.PYPI_PACKAGE != 'null'
+        with: { python-version: "3.13" }
+      - name: anonymous exact-version PyPI pipx install and real smoke
+        if: env.PYPI_PACKAGE != 'null'
+        shell: bash
+        run: |
+          unset GH_TOKEN GITHUB_TOKEN PIP_INDEX_URL PIP_EXTRA_INDEX_URL PIP_FIND_LINKS
+          python -m pip --isolated install --disable-pip-version-check --index-url https://pypi.org/simple pipx
+          python -m pipx install --python "$(python -c 'import sys; print(sys.executable)')" "$PYPI_PACKAGE==$VERSION" --pip-args="--isolated --no-cache-dir --index-url https://pypi.org/simple"
+          entry="$PIPX_BIN_DIR/localtools-$SLUG"
+          [ "$RUNNER_OS" != Windows ] || entry="$entry.exe"
+          python .github/pypi-smoke.py "$SLUG" "$VERSION" "$entry" || { cat pypi-server.log; exit 1; }
+          python -m pipx uninstall "$PYPI_PACKAGE"
       - name: brew install
         if: runner.os != 'Windows' && env.HAS_BREW == 'true'
         shell: bash
@@ -174,7 +233,7 @@ jobs:
           "localtools-$SLUG" --version | grep -F "$VERSION"
           for a in update uninstall; do
             out=$("localtools-$SLUG" $a); echo "$out"
-            grep -q "was installed with brew" <<<"$out" || echo "::warning::$a has no package-manager guard (older build)"
+            grep -q "was installed with brew" <<<"$out" || { echo "::error::$a has no package-manager guard"; exit 1; }
             if grep -q "installed with" <<<"$out"; then grep -q "brew $([ $a = update ] && echo upgrade || echo uninstall) localtools-$SLUG" <<<"$out"; fi
           done
           "localtools-$SLUG" --version | grep -F "$VERSION" # still installed: the guard must not have touched it
@@ -193,6 +252,6 @@ jobs:
             if ($out -match 'installed with') {
               $want = if ($a -eq 'update') { "scoop update localtools-$env:SLUG" } else { "scoop uninstall localtools-$env:SLUG" }
               if (-not $out.Contains($want)) { throw "guard printed the wrong command" }
-            } else { Write-Host "::warning::$a has no package-manager guard (older build)" }
+            } else { throw "$a has no package-manager guard" }
           }
           if (-not ((& "localtools-$env:SLUG" --version) -match [regex]::Escape($env:VERSION))) { throw "guard removed the install" }
