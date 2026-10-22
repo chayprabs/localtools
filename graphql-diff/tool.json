@@ -9,7 +9,7 @@
     "brew": true,
     "scoop": true,
     "winget": true,
-    "npm": null,
+    "npm": "localtools-graphql-diff",
     "pypi": null,
     "ghcr": null
   }

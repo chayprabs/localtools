@@ -41,6 +41,7 @@ Or re-run the install command (it updates in place), or run the uninstall script
 | Homebrew (macOS, Linux) | `brew install chayprabs/localtools/localtools-graphql-diff` | `brew upgrade localtools-graphql-diff` | `brew uninstall localtools-graphql-diff` |
 | Scoop (Windows) | `scoop bucket add localtools https://github.com/chayprabs/scoop-localtools; scoop install localtools-graphql-diff` | `scoop update localtools-graphql-diff` | `scoop uninstall localtools-graphql-diff` |
 | winget (Windows) | `winget install localtools.GraphqlDiff` | `winget upgrade localtools.GraphqlDiff` | `winget uninstall localtools.GraphqlDiff` |
+| npm | `npm i -g localtools-graphql-diff` | `npm i -g localtools-graphql-diff@latest` | `npm rm -g localtools-graphql-diff` |
 
 Package-manager installs are updated by that package manager; `localtools-graphql-diff update` is for script installs.
 

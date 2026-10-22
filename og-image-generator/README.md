@@ -41,6 +41,7 @@ Or re-run the install command (it updates in place), or run the uninstall script
 | Homebrew (macOS, Linux) | `brew install chayprabs/localtools/localtools-og-image-generator` | `brew upgrade localtools-og-image-generator` | `brew uninstall localtools-og-image-generator` |
 | Scoop (Windows) | `scoop bucket add localtools https://github.com/chayprabs/scoop-localtools; scoop install localtools-og-image-generator` | `scoop update localtools-og-image-generator` | `scoop uninstall localtools-og-image-generator` |
 | winget (Windows) | `winget install localtools.OgImageGenerator` | `winget upgrade localtools.OgImageGenerator` | `winget uninstall localtools.OgImageGenerator` |
+| npm | `npm i -g localtools-og-image-generator` | `npm i -g localtools-og-image-generator@latest` | `npm rm -g localtools-og-image-generator` |
 
 Package-manager installs are updated by that package manager; `localtools-og-image-generator update` is for script installs.
 

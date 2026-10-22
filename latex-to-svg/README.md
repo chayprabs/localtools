@@ -41,6 +41,7 @@ Or re-run the install command (it updates in place), or run the uninstall script
 | Homebrew (macOS, Linux) | `brew install chayprabs/localtools/localtools-latex-to-svg` | `brew upgrade localtools-latex-to-svg` | `brew uninstall localtools-latex-to-svg` |
 | Scoop (Windows) | `scoop bucket add localtools https://github.com/chayprabs/scoop-localtools; scoop install localtools-latex-to-svg` | `scoop update localtools-latex-to-svg` | `scoop uninstall localtools-latex-to-svg` |
 | winget (Windows) | `winget install localtools.LatexToSvg` | `winget upgrade localtools.LatexToSvg` | `winget uninstall localtools.LatexToSvg` |
+| npm | `npm i -g localtools-latex-to-svg` | `npm i -g localtools-latex-to-svg@latest` | `npm rm -g localtools-latex-to-svg` |
 
 Package-manager installs are updated by that package manager; `localtools-latex-to-svg update` is for script installs.
 

@@ -41,6 +41,7 @@ Or re-run the install command (it updates in place), or run the uninstall script
 | Homebrew (macOS, Linux) | `brew install chayprabs/localtools/localtools-svg-optimizer` | `brew upgrade localtools-svg-optimizer` | `brew uninstall localtools-svg-optimizer` |
 | Scoop (Windows) | `scoop bucket add localtools https://github.com/chayprabs/scoop-localtools; scoop install localtools-svg-optimizer` | `scoop update localtools-svg-optimizer` | `scoop uninstall localtools-svg-optimizer` |
 | winget (Windows) | `winget install localtools.SvgOptimizer` | `winget upgrade localtools.SvgOptimizer` | `winget uninstall localtools.SvgOptimizer` |
+| npm | `npm i -g localtools-svg-optimizer` | `npm i -g localtools-svg-optimizer@latest` | `npm rm -g localtools-svg-optimizer` |
 
 Package-manager installs are updated by that package manager; `localtools-svg-optimizer update` is for script installs.
 
