@@ -39,7 +39,7 @@ Or re-run the install command (it updates in place), or run the uninstall script
 | | install | update | uninstall |
 |---|---|---|---|
 | Homebrew (macOS, Linux) | `brew install chayprabs/localtools/localtools-k8s-manifest-checker` | `brew upgrade localtools-k8s-manifest-checker` | `brew uninstall localtools-k8s-manifest-checker` |
-| Scoop (Windows) | `scoop bucket add localtools https://github.com/chayprabs/scoop-localtools; scoop install localtools-k8s-manifest-checker` | `scoop update localtools-k8s-manifest-checker` | `scoop uninstall localtools-k8s-manifest-checker` |
+| Scoop (Windows) | `scoop bucket add localtools https://github.com/chayprabs/homebrew-localtools; scoop install localtools-k8s-manifest-checker` | `scoop update localtools-k8s-manifest-checker` | `scoop uninstall localtools-k8s-manifest-checker` |
 | winget (Windows) | `winget install localtools.K8sManifestChecker` | `winget upgrade localtools.K8sManifestChecker` | `winget uninstall localtools.K8sManifestChecker` |
 
 Package-manager installs are updated by that package manager; `localtools-k8s-manifest-checker update` is for script installs.

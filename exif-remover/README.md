@@ -39,7 +39,7 @@ Or re-run the install command (it updates in place), or run the uninstall script
 | | install | update | uninstall |
 |---|---|---|---|
 | Homebrew (macOS, Linux) | `brew install chayprabs/localtools/localtools-exif-remover` | `brew upgrade localtools-exif-remover` | `brew uninstall localtools-exif-remover` |
-| Scoop (Windows) | `scoop bucket add localtools https://github.com/chayprabs/scoop-localtools; scoop install localtools-exif-remover` | `scoop update localtools-exif-remover` | `scoop uninstall localtools-exif-remover` |
+| Scoop (Windows) | `scoop bucket add localtools https://github.com/chayprabs/homebrew-localtools; scoop install localtools-exif-remover` | `scoop update localtools-exif-remover` | `scoop uninstall localtools-exif-remover` |
 | winget (Windows) | `winget install localtools.ExifRemover` | `winget upgrade localtools.ExifRemover` | `winget uninstall localtools.ExifRemover` |
 
 Package-manager installs are updated by that package manager; `localtools-exif-remover update` is for script installs.

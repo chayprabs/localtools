@@ -39,7 +39,7 @@ Or re-run the install command (it updates in place), or run the uninstall script
 | | install | update | uninstall |
 |---|---|---|---|
 | Homebrew (macOS, Linux) | `brew install chayprabs/localtools/localtools-subtitle-converter` | `brew upgrade localtools-subtitle-converter` | `brew uninstall localtools-subtitle-converter` |
-| Scoop (Windows) | `scoop bucket add localtools https://github.com/chayprabs/scoop-localtools; scoop install localtools-subtitle-converter` | `scoop update localtools-subtitle-converter` | `scoop uninstall localtools-subtitle-converter` |
+| Scoop (Windows) | `scoop bucket add localtools https://github.com/chayprabs/homebrew-localtools; scoop install localtools-subtitle-converter` | `scoop update localtools-subtitle-converter` | `scoop uninstall localtools-subtitle-converter` |
 | winget (Windows) | `winget install localtools.SubtitleConverter` | `winget upgrade localtools.SubtitleConverter` | `winget uninstall localtools.SubtitleConverter` |
 
 Package-manager installs are updated by that package manager; `localtools-subtitle-converter update` is for script installs.

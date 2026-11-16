@@ -241,7 +241,7 @@ jobs:
         shell: powershell
         run: |
           iex "& {$(irm get.scoop.sh)} -RunAsAdmin"
-          scoop bucket add localtools https://github.com/chayprabs/scoop-localtools
+          scoop bucket add localtools https://github.com/chayprabs/homebrew-localtools
           scoop install "localtools-$env:SLUG"
           $v = & "localtools-$env:SLUG" --version
           "version: $v"

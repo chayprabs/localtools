@@ -39,7 +39,7 @@ Or re-run the install command (it updates in place), or run the uninstall script
 | | install | update | uninstall |
 |---|---|---|---|
 | Homebrew (macOS, Linux) | `brew install chayprabs/localtools/localtools-csv-json-transform` | `brew upgrade localtools-csv-json-transform` | `brew uninstall localtools-csv-json-transform` |
-| Scoop (Windows) | `scoop bucket add localtools https://github.com/chayprabs/scoop-localtools; scoop install localtools-csv-json-transform` | `scoop update localtools-csv-json-transform` | `scoop uninstall localtools-csv-json-transform` |
+| Scoop (Windows) | `scoop bucket add localtools https://github.com/chayprabs/homebrew-localtools; scoop install localtools-csv-json-transform` | `scoop update localtools-csv-json-transform` | `scoop uninstall localtools-csv-json-transform` |
 | winget (Windows) | `winget install localtools.CsvJsonTransform` | `winget upgrade localtools.CsvJsonTransform` | `winget uninstall localtools.CsvJsonTransform` |
 
 Package-manager installs are updated by that package manager; `localtools-csv-json-transform update` is for script installs.

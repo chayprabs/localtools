@@ -39,7 +39,7 @@ Or re-run the install command (it updates in place), or run the uninstall script
 | | install | update | uninstall |
 |---|---|---|---|
 | Homebrew (macOS, Linux) | `brew install chayprabs/localtools/localtools-archive-inspector` | `brew upgrade localtools-archive-inspector` | `brew uninstall localtools-archive-inspector` |
-| Scoop (Windows) | `scoop bucket add localtools https://github.com/chayprabs/scoop-localtools; scoop install localtools-archive-inspector` | `scoop update localtools-archive-inspector` | `scoop uninstall localtools-archive-inspector` |
+| Scoop (Windows) | `scoop bucket add localtools https://github.com/chayprabs/homebrew-localtools; scoop install localtools-archive-inspector` | `scoop update localtools-archive-inspector` | `scoop uninstall localtools-archive-inspector` |
 | winget (Windows) | `winget install localtools.ArchiveInspector` | `winget upgrade localtools.ArchiveInspector` | `winget uninstall localtools.ArchiveInspector` |
 
 Package-manager installs are updated by that package manager; `localtools-archive-inspector update` is for script installs.

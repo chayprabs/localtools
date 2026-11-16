@@ -39,7 +39,7 @@ Or re-run the install command (it updates in place), or run the uninstall script
 | | install | update | uninstall |
 |---|---|---|---|
 | Homebrew (macOS, Linux) | `brew install chayprabs/localtools/localtools-epub-validator` | `brew upgrade localtools-epub-validator` | `brew uninstall localtools-epub-validator` |
-| Scoop (Windows) | `scoop bucket add localtools https://github.com/chayprabs/scoop-localtools; scoop install localtools-epub-validator` | `scoop update localtools-epub-validator` | `scoop uninstall localtools-epub-validator` |
+| Scoop (Windows) | `scoop bucket add localtools https://github.com/chayprabs/homebrew-localtools; scoop install localtools-epub-validator` | `scoop update localtools-epub-validator` | `scoop uninstall localtools-epub-validator` |
 | winget (Windows) | `winget install localtools.EpubValidator` | `winget upgrade localtools.EpubValidator` | `winget uninstall localtools.EpubValidator` |
 
 Package-manager installs are updated by that package manager; `localtools-epub-validator update` is for script installs.

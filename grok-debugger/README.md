@@ -39,7 +39,7 @@ Or re-run the install command (it updates in place), or run the uninstall script
 | | install | update | uninstall |
 |---|---|---|---|
 | Homebrew (macOS, Linux) | `brew install chayprabs/localtools/localtools-grok-debugger` | `brew upgrade localtools-grok-debugger` | `brew uninstall localtools-grok-debugger` |
-| Scoop (Windows) | `scoop bucket add localtools https://github.com/chayprabs/scoop-localtools; scoop install localtools-grok-debugger` | `scoop update localtools-grok-debugger` | `scoop uninstall localtools-grok-debugger` |
+| Scoop (Windows) | `scoop bucket add localtools https://github.com/chayprabs/homebrew-localtools; scoop install localtools-grok-debugger` | `scoop update localtools-grok-debugger` | `scoop uninstall localtools-grok-debugger` |
 | winget (Windows) | `winget install localtools.GrokDebugger` | `winget upgrade localtools.GrokDebugger` | `winget uninstall localtools.GrokDebugger` |
 
 Package-manager installs are updated by that package manager; `localtools-grok-debugger update` is for script installs.

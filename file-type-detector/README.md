@@ -39,7 +39,7 @@ Or re-run the install command (it updates in place), or run the uninstall script
 | | install | update | uninstall |
 |---|---|---|---|
 | Homebrew (macOS, Linux) | `brew install chayprabs/localtools/localtools-file-type-detector` | `brew upgrade localtools-file-type-detector` | `brew uninstall localtools-file-type-detector` |
-| Scoop (Windows) | `scoop bucket add localtools https://github.com/chayprabs/scoop-localtools; scoop install localtools-file-type-detector` | `scoop update localtools-file-type-detector` | `scoop uninstall localtools-file-type-detector` |
+| Scoop (Windows) | `scoop bucket add localtools https://github.com/chayprabs/homebrew-localtools; scoop install localtools-file-type-detector` | `scoop update localtools-file-type-detector` | `scoop uninstall localtools-file-type-detector` |
 | winget (Windows) | `winget install localtools.FileTypeDetector` | `winget upgrade localtools.FileTypeDetector` | `winget uninstall localtools.FileTypeDetector` |
 
 Package-manager installs are updated by that package manager; `localtools-file-type-detector update` is for script installs.

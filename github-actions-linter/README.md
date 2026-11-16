@@ -39,7 +39,7 @@ Or re-run the install command (it updates in place), or run the uninstall script
 | | install | update | uninstall |
 |---|---|---|---|
 | Homebrew (macOS, Linux) | `brew install chayprabs/localtools/localtools-github-actions-linter` | `brew upgrade localtools-github-actions-linter` | `brew uninstall localtools-github-actions-linter` |
-| Scoop (Windows) | `scoop bucket add localtools https://github.com/chayprabs/scoop-localtools; scoop install localtools-github-actions-linter` | `scoop update localtools-github-actions-linter` | `scoop uninstall localtools-github-actions-linter` |
+| Scoop (Windows) | `scoop bucket add localtools https://github.com/chayprabs/homebrew-localtools; scoop install localtools-github-actions-linter` | `scoop update localtools-github-actions-linter` | `scoop uninstall localtools-github-actions-linter` |
 | winget (Windows) | `winget install localtools.GithubActionsLinter` | `winget upgrade localtools.GithubActionsLinter` | `winget uninstall localtools.GithubActionsLinter` |
 
 Package-manager installs are updated by that package manager; `localtools-github-actions-linter update` is for script installs.

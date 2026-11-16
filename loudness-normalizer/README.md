@@ -39,7 +39,7 @@ Or re-run the install command (it updates in place), or run the uninstall script
 | | install | update | uninstall |
 |---|---|---|---|
 | Homebrew (macOS, Linux) | `brew install chayprabs/localtools/localtools-loudness-normalizer` | `brew upgrade localtools-loudness-normalizer` | `brew uninstall localtools-loudness-normalizer` |
-| Scoop (Windows) | `scoop bucket add localtools https://github.com/chayprabs/scoop-localtools; scoop install localtools-loudness-normalizer` | `scoop update localtools-loudness-normalizer` | `scoop uninstall localtools-loudness-normalizer` |
+| Scoop (Windows) | `scoop bucket add localtools https://github.com/chayprabs/homebrew-localtools; scoop install localtools-loudness-normalizer` | `scoop update localtools-loudness-normalizer` | `scoop uninstall localtools-loudness-normalizer` |
 | winget (Windows) | `winget install localtools.LoudnessNormalizer` | `winget upgrade localtools.LoudnessNormalizer` | `winget uninstall localtools.LoudnessNormalizer` |
 
 Package-manager installs are updated by that package manager; `localtools-loudness-normalizer update` is for script installs.

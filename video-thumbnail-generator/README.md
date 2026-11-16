@@ -39,7 +39,7 @@ Or re-run the install command (it updates in place), or run the uninstall script
 | | install | update | uninstall |
 |---|---|---|---|
 | Homebrew (macOS, Linux) | `brew install chayprabs/localtools/localtools-video-thumbnail-generator` | `brew upgrade localtools-video-thumbnail-generator` | `brew uninstall localtools-video-thumbnail-generator` |
-| Scoop (Windows) | `scoop bucket add localtools https://github.com/chayprabs/scoop-localtools; scoop install localtools-video-thumbnail-generator` | `scoop update localtools-video-thumbnail-generator` | `scoop uninstall localtools-video-thumbnail-generator` |
+| Scoop (Windows) | `scoop bucket add localtools https://github.com/chayprabs/homebrew-localtools; scoop install localtools-video-thumbnail-generator` | `scoop update localtools-video-thumbnail-generator` | `scoop uninstall localtools-video-thumbnail-generator` |
 | winget (Windows) | `winget install localtools.VideoThumbnailGenerator` | `winget upgrade localtools.VideoThumbnailGenerator` | `winget uninstall localtools.VideoThumbnailGenerator` |
 
 Package-manager installs are updated by that package manager; `localtools-video-thumbnail-generator update` is for script installs.

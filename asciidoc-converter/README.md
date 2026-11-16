@@ -39,7 +39,7 @@ Or re-run the install command (it updates in place), or run the uninstall script
 | | install | update | uninstall |
 |---|---|---|---|
 | Homebrew (macOS, Linux) | `brew install chayprabs/localtools/localtools-asciidoc-converter` | `brew upgrade localtools-asciidoc-converter` | `brew uninstall localtools-asciidoc-converter` |
-| Scoop (Windows) | `scoop bucket add localtools https://github.com/chayprabs/scoop-localtools; scoop install localtools-asciidoc-converter` | `scoop update localtools-asciidoc-converter` | `scoop uninstall localtools-asciidoc-converter` |
+| Scoop (Windows) | `scoop bucket add localtools https://github.com/chayprabs/homebrew-localtools; scoop install localtools-asciidoc-converter` | `scoop update localtools-asciidoc-converter` | `scoop uninstall localtools-asciidoc-converter` |
 | winget (Windows) | `winget install localtools.AsciidocConverter` | `winget upgrade localtools.AsciidocConverter` | `winget uninstall localtools.AsciidocConverter` |
 | npm | `npm i -g localtools-asciidoc-converter` | `npm i -g localtools-asciidoc-converter@latest` | `npm rm -g localtools-asciidoc-converter` |
 

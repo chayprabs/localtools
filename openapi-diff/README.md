@@ -39,7 +39,7 @@ Or re-run the install command (it updates in place), or run the uninstall script
 | | install | update | uninstall |
 |---|---|---|---|
 | Homebrew (macOS, Linux) | `brew install chayprabs/localtools/localtools-openapi-diff` | `brew upgrade localtools-openapi-diff` | `brew uninstall localtools-openapi-diff` |
-| Scoop (Windows) | `scoop bucket add localtools https://github.com/chayprabs/scoop-localtools; scoop install localtools-openapi-diff` | `scoop update localtools-openapi-diff` | `scoop uninstall localtools-openapi-diff` |
+| Scoop (Windows) | `scoop bucket add localtools https://github.com/chayprabs/homebrew-localtools; scoop install localtools-openapi-diff` | `scoop update localtools-openapi-diff` | `scoop uninstall localtools-openapi-diff` |
 | winget (Windows) | `winget install localtools.OpenapiDiff` | `winget upgrade localtools.OpenapiDiff` | `winget uninstall localtools.OpenapiDiff` |
 
 Package-manager installs are updated by that package manager; `localtools-openapi-diff update` is for script installs.
