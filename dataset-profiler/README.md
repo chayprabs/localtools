@@ -39,7 +39,7 @@ Or re-run the install command (it updates in place), or run the uninstall script
 | | install | update | uninstall |
 |---|---|---|---|
 | Homebrew (macOS, Linux) | `brew install chayprabs/localtools/localtools-dataset-profiler` | `brew upgrade localtools-dataset-profiler` | `brew uninstall localtools-dataset-profiler` |
-| Scoop (Windows) | `scoop bucket add localtools https://github.com/chayprabs/scoop-localtools; scoop install localtools-dataset-profiler` | `scoop update localtools-dataset-profiler` | `scoop uninstall localtools-dataset-profiler` |
+| Scoop (Windows) | `scoop bucket add localtools https://github.com/chayprabs/homebrew-localtools; scoop install localtools-dataset-profiler` | `scoop update localtools-dataset-profiler` | `scoop uninstall localtools-dataset-profiler` |
 | winget (Windows) | `winget install localtools.DatasetProfiler` | `winget upgrade localtools.DatasetProfiler` | `winget uninstall localtools.DatasetProfiler` |
 
 Package-manager installs are updated by that package manager; `localtools-dataset-profiler update` is for script installs.

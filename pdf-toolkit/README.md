@@ -39,7 +39,7 @@ Or re-run the install command (it updates in place), or run the uninstall script
 | | install | update | uninstall |
 |---|---|---|---|
 | Homebrew (macOS, Linux) | `brew install chayprabs/localtools/localtools-pdf-toolkit` | `brew upgrade localtools-pdf-toolkit` | `brew uninstall localtools-pdf-toolkit` |
-| Scoop (Windows) | `scoop bucket add localtools https://github.com/chayprabs/scoop-localtools; scoop install localtools-pdf-toolkit` | `scoop update localtools-pdf-toolkit` | `scoop uninstall localtools-pdf-toolkit` |
+| Scoop (Windows) | `scoop bucket add localtools https://github.com/chayprabs/homebrew-localtools; scoop install localtools-pdf-toolkit` | `scoop update localtools-pdf-toolkit` | `scoop uninstall localtools-pdf-toolkit` |
 | winget (Windows) | `winget install localtools.PdfToolkit` | `winget upgrade localtools.PdfToolkit` | `winget uninstall localtools.PdfToolkit` |
 
 Package-manager installs are updated by that package manager; `localtools-pdf-toolkit update` is for script installs.

@@ -40,7 +40,7 @@ Or re-run the install command (it updates in place), or run the uninstall script
 | | install | update | uninstall |
 |---|---|---|---|
 | Homebrew (macOS, Linux) | `brew install chayprabs/localtools/localtools-json-to-excel` | `brew upgrade localtools-json-to-excel` | `brew uninstall localtools-json-to-excel` |
-| Scoop (Windows) | `scoop bucket add localtools https://github.com/chayprabs/scoop-localtools; scoop install localtools-json-to-excel` | `scoop update localtools-json-to-excel` | `scoop uninstall localtools-json-to-excel` |
+| Scoop (Windows) | `scoop bucket add localtools https://github.com/chayprabs/homebrew-localtools; scoop install localtools-json-to-excel` | `scoop update localtools-json-to-excel` | `scoop uninstall localtools-json-to-excel` |
 | winget (Windows) | `winget install localtools.JsonToExcel` | `winget upgrade localtools.JsonToExcel` | `winget uninstall localtools.JsonToExcel` |
 
 Package-manager installs are updated by that package manager; `localtools-json-to-excel update` is for script installs.

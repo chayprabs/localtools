@@ -39,7 +39,7 @@ Or re-run the install command (it updates in place), or run the uninstall script
 | | install | update | uninstall |
 |---|---|---|---|
 | Homebrew (macOS, Linux) | `brew install chayprabs/localtools/localtools-pandoc-gui` | `brew upgrade localtools-pandoc-gui` | `brew uninstall localtools-pandoc-gui` |
-| Scoop (Windows) | `scoop bucket add localtools https://github.com/chayprabs/scoop-localtools; scoop install localtools-pandoc-gui` | `scoop update localtools-pandoc-gui` | `scoop uninstall localtools-pandoc-gui` |
+| Scoop (Windows) | `scoop bucket add localtools https://github.com/chayprabs/homebrew-localtools; scoop install localtools-pandoc-gui` | `scoop update localtools-pandoc-gui` | `scoop uninstall localtools-pandoc-gui` |
 | winget (Windows) | `winget install localtools.PandocGui` | `winget upgrade localtools.PandocGui` | `winget uninstall localtools.PandocGui` |
 
 Package-manager installs are updated by that package manager; `localtools-pandoc-gui update` is for script installs.

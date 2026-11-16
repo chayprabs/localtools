@@ -40,7 +40,7 @@ Or re-run the install command (it updates in place), or run the uninstall script
 | | install | update | uninstall |
 |---|---|---|---|
 | Homebrew (macOS, Linux) | `brew install chayprabs/localtools/localtools-html-extractor` | `brew upgrade localtools-html-extractor` | `brew uninstall localtools-html-extractor` |
-| Scoop (Windows) | `scoop bucket add localtools https://github.com/chayprabs/scoop-localtools; scoop install localtools-html-extractor` | `scoop update localtools-html-extractor` | `scoop uninstall localtools-html-extractor` |
+| Scoop (Windows) | `scoop bucket add localtools https://github.com/chayprabs/homebrew-localtools; scoop install localtools-html-extractor` | `scoop update localtools-html-extractor` | `scoop uninstall localtools-html-extractor` |
 | winget (Windows) | `winget install localtools.HtmlExtractor` | `winget upgrade localtools.HtmlExtractor` | `winget uninstall localtools.HtmlExtractor` |
 
 Package-manager installs are updated by that package manager; `localtools-html-extractor update` is for script installs.

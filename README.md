@@ -70,8 +70,9 @@ app menu) and opens the tool. Re-running it updates. `localtools-<tool> update` 
 the same from the command line. Set `LOCALTOOLS_NO_OPEN=1` to install without opening the browser.
 
 Package managers, where a tool supports them:
-[Homebrew](https://github.com/chayprabs/homebrew-localtools) (`brew install chayprabs/localtools/localtools-<tool>`),
-[Scoop](https://github.com/chayprabs/scoop-localtools), winget (`localtools.<Tool>`), npm and PyPI (`localtools-<tool>`),
+Homebrew (`brew install chayprabs/localtools/localtools-<tool>`) and Scoop
+(`scoop bucket add localtools https://github.com/chayprabs/homebrew-localtools`), both served from
+[homebrew-localtools](https://github.com/chayprabs/homebrew-localtools), winget (`localtools.<Tool>`), npm and PyPI (`localtools-<tool>`),
 and Docker images on `ghcr.io/chayprabs/localtools-<tool>`. Each tool's README lists which apply.
 
 Every install is tested from scratch on Windows (PowerShell 5.1), macOS and Ubuntu by the

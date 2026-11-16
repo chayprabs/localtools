@@ -39,7 +39,7 @@ Or re-run the install command (it updates in place), or run the uninstall script
 | | install | update | uninstall |
 |---|---|---|---|
 | Homebrew (macOS, Linux) | `brew install chayprabs/localtools/localtools-ssl-checker` | `brew upgrade localtools-ssl-checker` | `brew uninstall localtools-ssl-checker` |
-| Scoop (Windows) | `scoop bucket add localtools https://github.com/chayprabs/scoop-localtools; scoop install localtools-ssl-checker` | `scoop update localtools-ssl-checker` | `scoop uninstall localtools-ssl-checker` |
+| Scoop (Windows) | `scoop bucket add localtools https://github.com/chayprabs/homebrew-localtools; scoop install localtools-ssl-checker` | `scoop update localtools-ssl-checker` | `scoop uninstall localtools-ssl-checker` |
 | winget (Windows) | `winget install localtools.SslChecker` | `winget upgrade localtools.SslChecker` | `winget uninstall localtools.SslChecker` |
 
 Package-manager installs are updated by that package manager; `localtools-ssl-checker update` is for script installs.

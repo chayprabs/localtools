@@ -39,7 +39,7 @@ Or re-run the install command (it updates in place), or run the uninstall script
 | | install | update | uninstall |
 |---|---|---|---|
 | Homebrew (macOS, Linux) | `brew install chayprabs/localtools/localtools-yaml-json-query` | `brew upgrade localtools-yaml-json-query` | `brew uninstall localtools-yaml-json-query` |
-| Scoop (Windows) | `scoop bucket add localtools https://github.com/chayprabs/scoop-localtools; scoop install localtools-yaml-json-query` | `scoop update localtools-yaml-json-query` | `scoop uninstall localtools-yaml-json-query` |
+| Scoop (Windows) | `scoop bucket add localtools https://github.com/chayprabs/homebrew-localtools; scoop install localtools-yaml-json-query` | `scoop update localtools-yaml-json-query` | `scoop uninstall localtools-yaml-json-query` |
 | winget (Windows) | `winget install localtools.YamlJsonQuery` | `winget upgrade localtools.YamlJsonQuery` | `winget uninstall localtools.YamlJsonQuery` |
 
 Package-manager installs are updated by that package manager; `localtools-yaml-json-query update` is for script installs.

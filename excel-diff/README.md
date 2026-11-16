@@ -39,7 +39,7 @@ Or re-run the install command (it updates in place), or run the uninstall script
 | | install | update | uninstall |
 |---|---|---|---|
 | Homebrew (macOS, Linux) | `brew install chayprabs/localtools/localtools-excel-diff` | `brew upgrade localtools-excel-diff` | `brew uninstall localtools-excel-diff` |
-| Scoop (Windows) | `scoop bucket add localtools https://github.com/chayprabs/scoop-localtools; scoop install localtools-excel-diff` | `scoop update localtools-excel-diff` | `scoop uninstall localtools-excel-diff` |
+| Scoop (Windows) | `scoop bucket add localtools https://github.com/chayprabs/homebrew-localtools; scoop install localtools-excel-diff` | `scoop update localtools-excel-diff` | `scoop uninstall localtools-excel-diff` |
 | winget (Windows) | `winget install localtools.ExcelDiff` | `winget upgrade localtools.ExcelDiff` | `winget uninstall localtools.ExcelDiff` |
 
 Package-manager installs are updated by that package manager; `localtools-excel-diff update` is for script installs.

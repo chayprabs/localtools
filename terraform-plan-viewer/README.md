@@ -39,7 +39,7 @@ Or re-run the install command (it updates in place), or run the uninstall script
 | | install | update | uninstall |
 |---|---|---|---|
 | Homebrew (macOS, Linux) | `brew install chayprabs/localtools/localtools-terraform-plan-viewer` | `brew upgrade localtools-terraform-plan-viewer` | `brew uninstall localtools-terraform-plan-viewer` |
-| Scoop (Windows) | `scoop bucket add localtools https://github.com/chayprabs/scoop-localtools; scoop install localtools-terraform-plan-viewer` | `scoop update localtools-terraform-plan-viewer` | `scoop uninstall localtools-terraform-plan-viewer` |
+| Scoop (Windows) | `scoop bucket add localtools https://github.com/chayprabs/homebrew-localtools; scoop install localtools-terraform-plan-viewer` | `scoop update localtools-terraform-plan-viewer` | `scoop uninstall localtools-terraform-plan-viewer` |
 | winget (Windows) | `winget install localtools.TerraformPlanViewer` | `winget upgrade localtools.TerraformPlanViewer` | `winget uninstall localtools.TerraformPlanViewer` |
 
 Package-manager installs are updated by that package manager; `localtools-terraform-plan-viewer update` is for script installs.

@@ -39,7 +39,7 @@ Or re-run the install command (it updates in place), or run the uninstall script
 | | install | update | uninstall |
 |---|---|---|---|
 | Homebrew (macOS, Linux) | `brew install chayprabs/localtools/localtools-csv-sql-query` | `brew upgrade localtools-csv-sql-query` | `brew uninstall localtools-csv-sql-query` |
-| Scoop (Windows) | `scoop bucket add localtools https://github.com/chayprabs/scoop-localtools; scoop install localtools-csv-sql-query` | `scoop update localtools-csv-sql-query` | `scoop uninstall localtools-csv-sql-query` |
+| Scoop (Windows) | `scoop bucket add localtools https://github.com/chayprabs/homebrew-localtools; scoop install localtools-csv-sql-query` | `scoop update localtools-csv-sql-query` | `scoop uninstall localtools-csv-sql-query` |
 | winget (Windows) | `winget install localtools.CsvSqlQuery` | `winget upgrade localtools.CsvSqlQuery` | `winget uninstall localtools.CsvSqlQuery` |
 
 Package-manager installs are updated by that package manager; `localtools-csv-sql-query update` is for script installs.

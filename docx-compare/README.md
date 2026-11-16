@@ -39,7 +39,7 @@ Or re-run the install command (it updates in place), or run the uninstall script
 | | install | update | uninstall |
 |---|---|---|---|
 | Homebrew (macOS, Linux) | `brew install chayprabs/localtools/localtools-docx-compare` | `brew upgrade localtools-docx-compare` | `brew uninstall localtools-docx-compare` |
-| Scoop (Windows) | `scoop bucket add localtools https://github.com/chayprabs/scoop-localtools; scoop install localtools-docx-compare` | `scoop update localtools-docx-compare` | `scoop uninstall localtools-docx-compare` |
+| Scoop (Windows) | `scoop bucket add localtools https://github.com/chayprabs/homebrew-localtools; scoop install localtools-docx-compare` | `scoop update localtools-docx-compare` | `scoop uninstall localtools-docx-compare` |
 | winget (Windows) | `winget install localtools.DocxCompare` | `winget upgrade localtools.DocxCompare` | `winget uninstall localtools.DocxCompare` |
 
 Package-manager installs are updated by that package manager; `localtools-docx-compare update` is for script installs.

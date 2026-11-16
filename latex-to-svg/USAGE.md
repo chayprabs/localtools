@@ -10,7 +10,7 @@ machine. One page with a live preview, a CLI and a small HTTP API. Nothing is fe
 | Windows (PowerShell) | `irm https://raw.githubusercontent.com/chayprabs/localtools/main/latex-to-svg/install.ps1 \| iex` |
 | macOS / Linux | `curl -fsSL https://raw.githubusercontent.com/chayprabs/localtools/main/latex-to-svg/install.sh \| bash` |
 | Homebrew | `brew install chayprabs/localtools/localtools-latex-to-svg` |
-| Scoop | `scoop bucket add localtools https://github.com/chayprabs/scoop-localtools; scoop install localtools-latex-to-svg` |
+| Scoop | `scoop bucket add localtools https://github.com/chayprabs/homebrew-localtools; scoop install localtools-latex-to-svg` |
 
 npm (`localtools-latex-to-svg`, Node 22+) is prepared but not published yet.
 

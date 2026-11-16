@@ -39,7 +39,7 @@ Or re-run the install command (it updates in place), or run the uninstall script
 | | install | update | uninstall |
 |---|---|---|---|
 | Homebrew (macOS, Linux) | `brew install chayprabs/localtools/localtools-typst-editor` | `brew upgrade localtools-typst-editor` | `brew uninstall localtools-typst-editor` |
-| Scoop (Windows) | `scoop bucket add localtools https://github.com/chayprabs/scoop-localtools; scoop install localtools-typst-editor` | `scoop update localtools-typst-editor` | `scoop uninstall localtools-typst-editor` |
+| Scoop (Windows) | `scoop bucket add localtools https://github.com/chayprabs/homebrew-localtools; scoop install localtools-typst-editor` | `scoop update localtools-typst-editor` | `scoop uninstall localtools-typst-editor` |
 | winget (Windows) | `winget install localtools.TypstEditor` | `winget upgrade localtools.TypstEditor` | `winget uninstall localtools.TypstEditor` |
 
 Package-manager installs are updated by that package manager; `localtools-typst-editor update` is for script installs.
